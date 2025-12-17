@@ -1,9 +1,9 @@
-# l2s4-projet-2025
+# l2s4-projet-2026
 
 Vous devez *forker* ce projet dans votre espace de travail Gitlab (bouton `Fork`) et vidéo sur le [portail](https://www.fil.univ-lille.fr/portail/index.php?dipl=L&sem=S4&ue=Projet&label=Documents)
 Un unique fork doit être réalisé par équipe.
 
-Une fois cela réalisé, supprimer ces premières lignes et remplissez les noms des membres de votre équipe.
+Une fois cela réalisé, supprimer ces premières lignes et remplir les noms des membres de votre équipe.
 N'oubliez pas d'ajouter les autres membres de votre équipe aux membres du projet, ainsi que votre enseignant·e (statut Maintainer).
 
 # Equipe
@@ -15,11 +15,11 @@ N'oubliez pas d'ajouter les autres membres de votre équipe aux membres du proje
 
 # Sujet
 
-[Le sujet 2025](https://www.fil.univ-lille.fr/~varre/portail/l2s4-projet/sujet2025.pdf)
+[Le sujet 2026](https://www.fil.univ-lille.fr/~varre/portail/l2s4-projet/sujet2026.pdf)
 
 # Livrables
 
-Les paragraphes concernant les livrables doivent être rempli avant la date de rendu du livrable. A chaque fois on décrira l'état du projet par rapport aux objectifs du livrable. Il est attendu un texte de plusieurs lignes qui explique la modélisation choisie, et/ou les algorithmes choisis et/ou les modifications apportées à la modélisation du livrable précédent.
+Les paragraphes concernant les livrables doivent être remplis avant la date de rendu du livrable. A chaque fois on décrira l'état du projet par rapport aux objectifs du livrable. Il est attendu un texte de plusieurs lignes qui explique la modélisation choisie, et/ou les algorithmes choisis et/ou les modifications apportées à la modélisation du livrable précédent.
 
 Un lien vers une image de l'UML doit être fourni (une photo d'un diagramme UML fait à la main est suffisant).
 
@@ -47,9 +47,21 @@ Un lien vers une image de l'UML doit être fourni (une photo d'un diagramme UML 
 
 ### Difficultés restant à résoudre
 
+## Livrable 5
+
+### Atteinte des objectifs
+
+### Difficultés restant à résoudre
+
+## Livrable 6
+
+### Atteinte des objectifs
+
+### Difficultés restant à résoudre
+
 # Journal de bord
 
-Le journal de bord doit être rempli à la fin de chaque séance encadrée, et avant de quitter la salle. 
+Le journal de bord doit être rempli à la fin de chaque séance encadrée, et **avant** de quitter la salle. 
 
 Pour chaque semaine on y trouvera :
 - ce qui a été réalisé, les difficultés rencontrées et comment elles ont été surmontées (on attend du contenu, pas uniquement une phrase du type "tous les objectifs ont été atteints")
@@ -61,7 +73,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 2
 
@@ -69,7 +81,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 3
 
@@ -77,7 +89,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 4
 
@@ -85,7 +97,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 5
 
@@ -93,7 +105,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 6
 
@@ -101,7 +113,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 7
 
@@ -109,7 +121,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 8
 
@@ -117,7 +129,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 9
 
@@ -125,7 +137,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 10
 
@@ -133,7 +145,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 11
 
@@ -141,7 +153,7 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour la semaine
+### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 12
 
@@ -149,4 +161,4 @@ Pour chaque semaine on y trouvera :
 
 ### Difficultés rencontrées
 
-### Objectifs pour finaliser le projet
+### Objectifs pour finaliser le projet et répartition du travail par membre
