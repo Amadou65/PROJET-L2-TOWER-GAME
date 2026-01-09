@@ -20,8 +20,7 @@ Un lien vers une image de l'UML doit être fourni (une photo d'un diagramme UML 
 
 ## Livrable 1
 
-On a commencer l'uml avec les diffèrentes classes, pas encore finit à 100%. 
-Difficultées: Compléter la classe plateau et la création de la classe plateau en java avec les tests. Aussi le calcul du chemin.
+
 
 
 
@@ -65,11 +64,8 @@ Pour chaque semaine on y trouvera :
 
 ## Semaine 1
 
-### Ce qui a été réalisé
-
-### Difficultés rencontrées
-
-### Objectifs pour la semaine et répartition du travail par membre
+On a commencer l'uml avec les diffèrentes classes, pas encore finit à 100%. 
+Difficultées: Compléter la classe plateau et la création de la classe plateau en java avec les tests. Aussi le calcul du chemin.
 
 ## Semaine 2
 
