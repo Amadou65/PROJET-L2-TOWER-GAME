@@ -1,17 +1,12 @@
 # l2s4-projet-2026
 
-Vous devez *forker* ce projet dans votre espace de travail Gitlab (bouton `Fork`) et vidéo sur le [portail](https://www.fil.univ-lille.fr/portail/index.php?dipl=L&sem=S4&ue=Projet&label=Documents)
-Un unique fork doit être réalisé par équipe.
-
-Une fois cela réalisé, supprimer ces premières lignes et remplir les noms des membres de votre équipe.
-N'oubliez pas d'ajouter les autres membres de votre équipe aux membres du projet, ainsi que votre enseignant·e (statut Maintainer).
 
 # Equipe
 
-- prénom1 NOM1
-- prénom2 NOM2
-- prénom3 NOM3
-- prénom4 NOM4
+- Amadou Balde
+- Serhii Ivkin
+- Yassin Daho
+- Habiba Boubakary
 
 # Sujet
 
@@ -25,9 +20,10 @@ Un lien vers une image de l'UML doit être fourni (une photo d'un diagramme UML 
 
 ## Livrable 1
 
-### Atteinte des objectifs
+On a commencer l'uml avec les diffèrentes classes, pas encore finit à 100%. 
+Difficultées: Compléter la classe plateau et la création de la classe plateau en java avec les tests. Aussi le calcul du chemin.
 
-### Difficultés restant à résoudre
+
 
 ## Livrable 2
 
