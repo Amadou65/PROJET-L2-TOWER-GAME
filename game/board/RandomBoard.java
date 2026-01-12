@@ -27,6 +27,25 @@ public class RandomBoard extends Board{
         int size_liste_depart = liste_depart.size();
         int index_pos = randomNumber.nextInt(size_liste_depart);
         Position pos_depart = liste_depart.get(index_pos);
+        // Maintenant qu'on connait la position de depart on peut commencer le parcours du chemin
+        boolean found = false;
+        // on va creer la liste du chemin
+        ArrayList<Position> path = new ArrayList<>();
+        // on va creer aussi la liste des chemins vistées
+        ArrayList<Position> visited = new ArrayList<>();
+        // on ajoute la position de depart a la liste des chemins visités
+        visited.add(pos_depart);
+        while (! found){
+            
+        }
+    }
+
+    /**
+     * methode that give the next cell
+     * @param the current position
+     * @return list of the potential next position
+     */
+    public ArrayList<Position> nextPosition(Position pos){
         
     }
 }
