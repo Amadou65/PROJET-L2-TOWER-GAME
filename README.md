@@ -18,6 +18,7 @@ Les paragraphes concernant les livrables doivent être remplis avant la date de 
 
 Un lien vers une image de l'UML doit être fourni (une photo d'un diagramme UML fait à la main est suffisant).
 
+
 ## Livrable 1
 
 
@@ -69,12 +70,13 @@ Difficultées: Compléter la classe plateau et la création de la classe plateau
 
 ## Semaine 2
 
+
 ### Ce qui a été réalisé
-
+On a complété l'UML et commencé le code des classe Board et RandomBoard, Tower Cell
 ### Difficultés rencontrées
-
+Le calcul du chemin pour le Plateau Random
 ### Objectifs pour la semaine et répartition du travail par membre
-
+Faire le chemin des deux plateaux 
 ## Semaine 3
 
 ### Ce qui a été réalisé
