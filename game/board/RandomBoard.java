@@ -46,6 +46,34 @@ public class RandomBoard extends Board{
      * @return list of the potential next position
      */
     public ArrayList<Position> nextPosition(Position pos){
-        
+        ArrayList<Position> nextPoList = new ArrayList<>();
+        int x = pos.getX();
+        int y = pos.getY();
+        // si on est sur un bord en bas
+        if (x == this.getHeight()){
+            // si on est en bas sur le bord gauche alors on peut aller a droite et en haut
+            if (y == this.getWidth()){
+                nextPoList.add(new Position(x, y + 1));
+                nextPoList.add(new Position(x - 1, y));
+            }
+            // si on est en bas sur le bord droit alors on peut aller a gauche et en haut
+            if (y == 0){
+                nextPoList.add(new Position(x, y -1));
+                nextPoList.add(new Position(x - 1, y));
+            }
+        }
+        // si on est au bord en haut 
+        else if (x == 0){
+            // si on est en haut sur le bord gauche alors on peut aller a droite ou en bas
+            if (y ==0){
+                nextPoList.add(new Position(x, y + 1));
+                nextPoList.add(new Position(x + 1, y));
+            }
+            // si on est en haut sur le bord droit alors on peut aller a gauche ou en bas
+            if (y == this.getWidth()){
+                nextPoList.add(new Position(x, y -1);
+                nextPoList.add(new Position(x +1, y));
+            }
+        }
     }
 }
