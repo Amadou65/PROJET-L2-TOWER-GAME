@@ -36,7 +36,8 @@ public class RandomBoard extends Board{
         // on ajoute la position de depart a la liste des chemins visités
         visited.add(pos_depart);
         while (! found){
-            
+            // si la longueur de la liste visitée n'est pas superieur a 12 et n'est pas sur un bord
+
         }
     }
 
@@ -45,7 +46,7 @@ public class RandomBoard extends Board{
      * @param the current position
      * @return list of the potential next position
      */
-    public ArrayList<Position> nextPosition(Position pos){
+    public ArrayList<Position> nextPositions(Position pos){
         ArrayList<Position> nextPoList = new ArrayList<>();
         int x = pos.getX();
         int y = pos.getY();
@@ -71,9 +72,31 @@ public class RandomBoard extends Board{
             }
             // si on est en haut sur le bord droit alors on peut aller a gauche ou en bas
             if (y == this.getWidth()){
-                nextPoList.add(new Position(x, y -1);
+                nextPoList.add(new Position(x, y -1));
                 nextPoList.add(new Position(x +1, y));
             }
         }
+        else{
+            // si on est pas sur un bord on peut aller dans toutes les directions 
+            nextPoList.add(new Position(x + 1, y));
+            nextPoList.add(new Position(x -1, y));
+            nextPoList.add(new Position(x , y + 1));
+            nextPoList.add(new Position(x , y - 1));
+            
+        }
+        return nextPoList;
     }
+
+    /**
+     * methode that say if a cell is the bord of the grid
+     * @param the position of the cell
+     * @return boolean
+     */
+    public boolean isedge(Position pos){
+        // si c 'est sur un bord on retourne vraie
+        if (pos.getX()== this.getHeight() || pos.getY() == this.getWidth()){
+            return true;
+        }
+    }
+    
 }
