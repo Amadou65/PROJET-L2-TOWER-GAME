@@ -97,6 +97,18 @@ public class RandomBoard extends Board{
         if (pos.getX()== this.getHeight() || pos.getY() == this.getWidth()){
             return true;
         }
+        return false;
     }
-    
+    /**
+     * methode that say if a cell is not at the same side as an another
+     * @param two positions
+     * @return boolean
+     */
+    public boolean isSameSide(Position pos1, Position pos2){
+        if (pos1.getX() == pos2.getX() || pos1.getY() == pos2.getY()){
+            return true;
+        }
+        return false;
+    }
+
 }
