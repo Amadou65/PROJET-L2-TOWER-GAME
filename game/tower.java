@@ -20,6 +20,10 @@ class ProjectileTower extends Tower {
     public void shot() {
         System.out.println("tirer un projectile");
     }
+
+    public void findTarget() {
+        System.out.println("recherche d'une cible spécifique");
+    }
 }
 
 // sous-classes de projectilesTower
