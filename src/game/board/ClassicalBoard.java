@@ -1,8 +1,19 @@
+<<<<<<< HEAD
 import java.util.*;
 
 public class ClassicalBoard extends Board {
     public ClassicalBoard(int height, int width){
         super( height , width);
+=======
+package game.board;
+import java.util.*;
+import game.Position;
+import game.Board;
+
+public class ClassicalBoard extends Board {
+    public ClassicalBoard(){
+        super();
+>>>>>>> eae97a6ff68bad07207159fa380a1aa5928c8da7
     }
 
     /* Returns the list of all boundary cells */
