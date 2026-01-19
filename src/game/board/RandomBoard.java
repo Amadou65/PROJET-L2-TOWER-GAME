@@ -78,16 +78,11 @@ public class RandomBoard extends Board {
         // Quand on finit on peur retourner la liste du chemin
         return path;
     }
-    /**
-     * 
-     * @param pos
-     * @return
-     */
-    /**
+     /*
      * methode that give the next cell
      * 
      * @param the current position
-     * @return list of the potential next position
+     * @return boolean
      */
     public ArrayList<Position> nextPositions(Position pos) {
         ArrayList<Position> nextPoList = new ArrayList<>();
@@ -128,7 +123,24 @@ public class RandomBoard extends Board {
         }
         return nextPoList;
     }
-
+    /**
+     * this method look that the path doesn't make circle
+     * @param path the list of the path
+     * @return boolean that say if the path is doing a circle
+     */
+    
+    public boolean isDoingCircle(ArrayList<Position> path){
+        ArrayList<Position> nexPositions = nextPositions(path.get(path.size() - 1));
+        for(int i =0; i < nexPositions.size(); i ++){
+            for (int j = 0; j < path.size(); j ++){
+                if (nexPositions.get(i) != path.get(j)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    /*
     /**
      * methode that say if a cell is the bord of the grid
      * 
