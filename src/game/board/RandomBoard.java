@@ -48,6 +48,10 @@ public class RandomBoard extends Board {
         // on ajoute la position de depart a la liste des chemins visités
         path.add(pos_depart);
         while (!found) {
+            // Tant que le chemin ne fait pas de rond on peut continuer si il le fait on recommence jusqua ce qu'on obtienne un bon chemin
+            if (! isDoingCircle(path)){
+
+            
             // si la longueur de la liste visitée n'est pas superieur a 12 et n'est pas sur
             // un bord ou si la longueur est > et que on est pas sur un bord
             if (path.size() < 12 || path.size() >= 12 && ! isEdge(path.get(path.size() - 1)) || path.size() >= 12 && isEdge(path.get(path.size() - 1))
@@ -66,6 +70,7 @@ public class RandomBoard extends Board {
 
                 // on ajoute cette case a liste des cases vsités
                 path.add(case_choisi);
+                found = false;
             }
             // on va verifier si la longueur de la liste est superieur a 12 qu'on ait sur un
             // bord et pas sur le meme bord de depart
@@ -74,9 +79,17 @@ public class RandomBoard extends Board {
                 found = true;
             }
 
-        }
+        
+    
         // Quand on finit on peur retourner la liste du chemin
         return path;
+        }
+        
+        else{
+            path = new ArrayList<>();
+            path.add(pos_depart);
+        }
+    }
     }
      /*
      * methode that give the next cell
