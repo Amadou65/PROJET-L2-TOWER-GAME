@@ -82,14 +82,16 @@ public class RandomBoard extends Board {
         
     
         // Quand on finit on peur retourner la liste du chemin
-        return path;
+        
         }
         
         else{
             path = new ArrayList<>();
             path.add(pos_depart);
-        }
+            found = false;
+              }
     }
+        return path;    
     }
      /*
      * methode that give the next cell
