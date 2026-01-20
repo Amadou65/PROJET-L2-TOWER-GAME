@@ -4,7 +4,7 @@ public class Baloon {
     public int speed;
     public int strength;
 
-    public Balloon(int life, int speed, int strength) {
+    public Baloon(int life, int speed, int strength) {
         this.life = life;
         this.speed = speed;
         this.strength = strength;
