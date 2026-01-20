@@ -1,8 +1,9 @@
+import game.board.ClassicalBoard;
+import game.Position;
 import java.util.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import game.board.ClassicalBoard;
-import game.Position;
+
 
 
 public class TestClassicalBoard {
