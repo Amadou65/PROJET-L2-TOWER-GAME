@@ -1,3 +1,4 @@
+package game;
 public class Baloon {
     public int life;
     public int speed;
