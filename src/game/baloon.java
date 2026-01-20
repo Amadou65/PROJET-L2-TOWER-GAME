@@ -1,4 +1,4 @@
-public class Balloon {
+public class Baloon {
     public int life;
     public int speed;
     public int strength;

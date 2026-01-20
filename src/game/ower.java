@@ -1,5 +1,5 @@
 // classe mère
-public class Tower {
+public class tower {
     public Object power; 
     public int scope;
     public int cadence;
