@@ -59,4 +59,13 @@ public class RandomBoardTest {
         assertTrue(liste_depart.contains(new Position(5,0)));
         assertTrue(liste_depart.contains(new Position(5,10)));
     }
+    @Test
+    public void TestisDoingCircle(){
+        ArrayList<Position> path = board.path();
+        ArrayList<Position> visited = new ArrayList<>();
+        for (Position pos : path) {
+            assertFalse(visited.contains(pos), "Le chemin repasse par une case déjà visitée: " + pos);
+            visited.add(pos);
+        }
+    }
 }
