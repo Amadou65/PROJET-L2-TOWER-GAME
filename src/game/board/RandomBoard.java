@@ -12,16 +12,19 @@ public class RandomBoard extends Board {
      * method that create the list of the starting positions
      * @return list of a possible start
      */
-    public ArrayList<Position> creerListeDepart() {
+ public ArrayList<Position> creerListeDepart() {
         ArrayList<Position> liste_depart = new ArrayList<>();
-        for (int i = 0; i < this.getHeight(); i++) {
+        int h = this.getHeight();
+        int w = this.getWidth();
+
+        // Correction : on parcourt tout le périmètre sans oublier de cases
+        for (int i = 0; i < h; i++) {
             liste_depart.add(new Position(i, 0));
-            liste_depart.add(new Position(i, this.getWidth() - 1));
-            
+            liste_depart.add(new Position(i, w - 1));
         }
-        for (int j = 1; j < this.getWidth()-1; j++) {
+        for (int j = 1; j < w - 1; j++) {
             liste_depart.add(new Position(0, j));
-            liste_depart.add(new Position(this.getHeight() - 2, j));
+            liste_depart.add(new Position(h - 1, j)); // Utilisation de h-1 au lieu de h-2
         }
         return liste_depart;
     }
