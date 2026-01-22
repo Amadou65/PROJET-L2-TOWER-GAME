@@ -68,4 +68,14 @@ public class RandomBoardTest {
             visited.add(pos);
         }
     }
+    @Test
+    public void TestPathValidity(){
+        ArrayList<Position> path = board.path();
+        Position start = path.get(0);;
+        Position end = path.get(path.size() - 1);
+        assertTrue(board.isEdge(start), "Le point de départ n'est pas sur le bord.");
+        assertTrue(board.isEdge(end), "Le point d'arrivée n'est pas sur le bord.");
+        assertFalse(board.isSameSide(start, end), "Le point de départ et d'arrivée sont sur le même côté.");
+        assertTrue(path.size() >= 12, "La longueur du chemin est inférieure à 12.");
+    }
 }
