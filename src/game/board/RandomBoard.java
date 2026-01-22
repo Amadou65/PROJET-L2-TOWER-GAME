@@ -118,14 +118,8 @@ public boolean isDoingCircle(ArrayList<Position> path) {
      * @return boolean
      */
     public boolean isEdge(Position pos) {
-        // si c 'est sur un bord on retourne vraie
-        if (pos.getX() == this.getHeight() - 1 || pos.getY() == this.getWidth() - 1) {
-            return true;
-        }
-        else if (pos.getX() == 0 || pos.getY() == 0){
-            return true;
-        }
-        return false;
+        return pos.getX() == 0 || pos.getX() == this.getHeight() - 1 || 
+               pos.getY() == 0 || pos.getY() == this.getWidth() - 1;
     }
 
     /**
