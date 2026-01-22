@@ -104,9 +104,9 @@ public class RandomBoard extends Board {
         int x = pos.getX();
         int y = pos.getY();
         // si on est sur un bord en bas
-        if (x == this.getHeight()) {
+        if (x == this.getHeight() - 1) {
             // si on est en bas sur le bord gauche alors on peut aller a droite et en haut
-            if (y == this.getWidth()) {
+            if (y == this.getWidth() - 1) {
                 nextPoList.add(new Position(x, y + 1));
                 nextPoList.add(new Position(x - 1, y));
             }
@@ -124,7 +124,7 @@ public class RandomBoard extends Board {
                 nextPoList.add(new Position(x + 1, y));
             }
             // si on est en haut sur le bord droit alors on peut aller a gauche ou en bas
-            if (y == this.getWidth()) {
+            if (y == this.getWidth() - 1) {
                 nextPoList.add(new Position(x, y - 1));
                 nextPoList.add(new Position(x + 1, y));
             }
