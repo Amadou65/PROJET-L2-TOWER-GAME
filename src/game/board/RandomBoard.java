@@ -115,6 +115,12 @@ public class RandomBoard extends Board {
                 nextPoList.add(new Position(x, y - 1));
                 nextPoList.add(new Position(x - 1, y));
             }
+            // si non on peut monter aller a gauche et a droite
+            else{
+                nextPoList.add(new Position(x, y - 1));
+                nextPoList.add(new Position(x - 1, y));
+                nextPoList.add(new Position(x, y + 1));
+            }
         }
         // si on est au bord en haut
         else if (x == 0) {
@@ -127,6 +133,12 @@ public class RandomBoard extends Board {
             if (y == this.getWidth() - 1) {
                 nextPoList.add(new Position(x, y - 1));
                 nextPoList.add(new Position(x + 1, y));
+            }
+            // si non on peut descendre aller a gauche et a droite
+            else{
+                nextPoList.add(new Position(x, y - 1));
+                nextPoList.add(new Position(x + 1, y));
+                nextPoList.add(new Position(x, y + 1));
             }
         } else {
             // si on est pas sur un bord on peut aller dans toutes les directions
