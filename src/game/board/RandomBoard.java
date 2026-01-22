@@ -129,9 +129,11 @@ public boolean isDoingCircle(ArrayList<Position> path) {
      * @return boolean
      */
     public boolean isSameSide(Position pos1, Position pos2) {
-        if (pos1.getX() == pos2.getX() || pos1.getY() == pos2.getY()) {
-            return true;
-        }
+        // Vérifie si les deux points sont sur le bord Haut, Bas, Gauche ou Droite
+        if (pos1.getX() == 0 && pos2.getX() == 0) return true;
+        if (pos1.getX() == getHeight() - 1 && pos2.getX() == getHeight() - 1) return true;
+        if (pos1.getY() == 0 && pos2.getY() == 0) return true;
+        if (pos1.getY() == getWidth() - 1 && pos2.getY() == getWidth() - 1) return true;
         return false;
     }
 
