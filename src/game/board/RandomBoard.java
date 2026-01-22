@@ -1,6 +1,6 @@
 package game.board;
 import game.Board;
-import game.Position;
+import game.Position;     
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -164,7 +164,7 @@ public class RandomBoard extends Board {
      */
     public boolean isEdge(Position pos) {
         // si c 'est sur un bord on retourne vraie
-        if (pos.getX() == this.getHeight() || pos.getY() == this.getWidth()) {
+        if (pos.getX() == this.getHeight() || pos.getY() == this.getWidth() - 1) {
             return true;
         }
         return false;
