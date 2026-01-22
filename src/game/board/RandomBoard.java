@@ -56,7 +56,7 @@ public class RandomBoard extends Board {
             // un bord ou si la longueur est > et que on est pas sur un bord
             if (path.size() < 12 || path.size() >= 12 && ! isEdge(path.get(path.size() - 1)) || path.size() >= 12 && isEdge(path.get(path.size() - 1))
                     && !isSameSide(path.get(path.size() - 1), pos_depart) ) {
-                ArrayList<Position> possible_path = this.nextPositions((pos_depart));
+                ArrayList<Position> possible_path = this.nextPositions((path.get(path.size() - 1)));
                 Random choice = new Random();
                 int index_aleatoire = choice.nextInt(possible_path.size());
                 // on verifie que la nouvelle case ne fait pas partie d'une case déja visitée
