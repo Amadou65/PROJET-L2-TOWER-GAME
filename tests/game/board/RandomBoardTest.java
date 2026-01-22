@@ -28,4 +28,11 @@ public class RandomBoardTest {
         assertTrue(board.isEdge(new Position(4, 0)));
         assertTrue(board.isEdge(new Position(4, 4)));
     }
+       @Test
+    public void TestIsEdgeWhenItsNotOk(){
+        assertFalse(board.isEdge(new Position(2, 2)));
+        assertFalse(board.isEdge(new Position(1, 3)));
+        assertFalse(board.isEdge(new Position(3, 1)));
+    }
+
 }
