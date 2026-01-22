@@ -42,4 +42,11 @@ public class RandomBoardTest {
         assertTrue(board.isSameSide(new Position(0, 0), new Position(4, 0)));
         assertTrue(board.isSameSide(new Position(0, 4), new Position(4, 4)));
     }
+    @Test
+    public void TestIsSameSideWhenItsNotOk(){
+        assertFalse(board.isSameSide(new Position(0, 0), new Position(4, 4)));
+        assertFalse(board.isSameSide(new Position(0, 4), new Position(4, 0)));
+        assertFalse(board.isSameSide(new Position(0, 2), new Position(4, 0)));
+        assertFalse(board.isSameSide(new Position(2, 0), new Position(0, 4)));
+    }
 }
