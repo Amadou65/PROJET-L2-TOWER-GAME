@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class RandomBoard extends Board {
+    private Random randomNumber = new Random();
     public RandomBoard() {
         super();
     }
@@ -33,79 +34,45 @@ public class RandomBoard extends Board {
      * method that gives a random path for the grid
      * @return the list of the path
      */
-    public ArrayList<Position> path() {
-        // le chemin doit commencer sur une case du board au hasard
+public ArrayList<Position> path() {
         ArrayList<Position> liste_depart = this.creerListeDepart();
-        // maintenant qu'on a la liste , on peut choisir une postion au hasard pour
-        // debuter
-        // creer un objet random
-        Random randomNumber = new Random();
-        // on va choisir entre 0 et la taile de la lste liste_depart un nombre
-        // aleatoire et on va prendre la position a ce nombre la
         Position pos_depart = liste_depart.get(randomNumber.nextInt(liste_depart.size()));
-        // Maintenant qu'on connait la position de depart on peut commencer le parcours
-        // du chemin
-        boolean found = false;
-        // on va creer la liste du chemin
+        
         ArrayList<Position> path = new ArrayList<>();
-        // on ajoute la position de depart a la liste des chemins visités
         path.add(pos_depart);
+        
+        boolean found = false;
         while (!found) {
-            // Tant que le chemin ne fait pas de rond on peut continuer si il le fait on recommence jusqua ce qu'on obtienne un bon chemin
-            if (! isDoingCircle(path)){
+            Position current = path.get(path.size() - 1);
 
-            
-            // si la longueur de la liste visitée n'est pas superieur a 12 et n'est pas sur
-            // un bord ou si la longueur est > et que on est pas sur un bord
-            if (path.size() < 12 || path.size() >= 12 && ! isEdge(path.get(path.size() - 1)) || path.size() >= 12 && isEdge(path.get(path.size() - 1))
-                    && !isSameSide(path.get(path.size() - 1), pos_depart) ) {
-                ArrayList<Position> possible_path = this.nextPositions((path.get(path.size() - 1)));
-                Random choice = new Random();
-                int index_aleatoire = choice.nextInt(possible_path.size());
-                // on verifie que la nouvelle case ne fait pas partie d'une case déja visitée
-                //for (int i = 0; i < path.size(); i++) {
-                    //if (possible_path.get(index_aleatoire).equals(path.get(i))) {
-                        
-                    //}
-                int i = 0;
-                Position pos = possible_path.get(index_aleatoire);
-                while (i < path.size()){
-                    if (pos.equals(path.get(i))){
-                        pos = possible_path.get(index_aleatoire);
-                        i = 0;
-                    }
-                    i ++;
-                }
-                   
-                // on ajoute cette case a liste des cases vsités
-                path.add(pos);
-                found = false;
-
-                }
-               // Position case_choisi = possible_path.get(index_aleatoire);
-
-                
-            }
-            // on va verifier si la longueur de la liste est superieur a 12 qu'on ait sur un
-            // bord et pas sur le meme bord de depart
-            else if (path.size() > 12 && isEdge(path.get(path.size() - 1))
-                    && !isSameSide(path.get(path.size() - 1), pos_depart)) {
+            // Condition de victoire : longueur > 12, sur un bord, et pas le même côté
+            if (path.size() >= 12 && isEdge(current) && !isSameSide(current, pos_depart)) {
                 found = true;
+            } else {
+                ArrayList<Position> possible_path = this.nextPositions(current);
+                
+                // On filtre pour ne pas repasser sur une case déjà visitée (éviter les cercles)
+                ArrayList<Position> valid_choices = new ArrayList<>();
+                for (Position p : possible_path) {
+                    boolean alreadyVisited = false;
+                    for (Position visited : path) {
+                        if (p.equals(visited)) { alreadyVisited = true; break; }
+                    }
+                    if (!alreadyVisited) { valid_choices.add(p); }
+                }
+
+                if (valid_choices.isEmpty()) {
+                    // Si on est bloqué (cul-de-sac), on recommence tout le chemin
+                    path.clear();
+                    pos_depart = liste_depart.get(randomNumber.nextInt(liste_depart.size()));
+                    path.add(pos_depart);
+                } else {
+                    // On choisit une position au hasard parmi les choix valides
+                    path.add(valid_choices.get(randomNumber.nextInt(valid_choices.size())));
+                }
             }
-
-        
-    
-        // Quand on finit on peur retourner la liste du chemin
-            else{
-            path = new ArrayList<>();
-            path.add(pos_depart);
-            found = false;
-              }
         }
-        
-
-    }
-        return path;    
+        return path;
     }
      /*
      * methode that give the next cell
