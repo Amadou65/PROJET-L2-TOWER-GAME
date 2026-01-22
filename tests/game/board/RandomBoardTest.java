@@ -49,4 +49,14 @@ public class RandomBoardTest {
         assertFalse(board.isSameSide(new Position(0, 2), new Position(4, 0)));
         assertFalse(board.isSameSide(new Position(2, 0), new Position(0, 4)));
     }
+
+    @Test 
+    public void TestCreerListeDepart(){
+        ArrayList<Position> liste_depart = board.creerListeDepart();
+        assertEquals(30, liste_depart.size());
+        assertTrue(liste_depart.contains(new Position(0,0)));
+        assertTrue(liste_depart.contains(new Position(0,10)));
+        assertTrue(liste_depart.contains(new Position(5,0)));
+        assertTrue(liste_depart.contains(new Position(5,10)));
+    }
 }
