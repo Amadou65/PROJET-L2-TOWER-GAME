@@ -102,20 +102,13 @@ public ArrayList<Position> path() {
      * @return boolean that say if the path is doing a circle
      */
     
-    public boolean isDoingCircle(ArrayList<Position> path){
-        ArrayList<Position> nexPositions = this.nextPositions(path.get(path.size() - 1));
-        for(int i =0; i < nexPositions.size(); i ++){
-            for (int j = 0; j < path.size(); j ++){
-           // Dans le bloc pour le bas 
-                if (nexPositions.get(i) != path.get(j)){
-                    return false;
-                }
-                else if (nexPositions.get(i).equals(path.get(j))){
-                    return true;
-                }
-            }
+public boolean isDoingCircle(ArrayList<Position> path) {
+        // Une boucle simple pour vérifier si le dernier élément ajouté existe déjà avant
+        Position last = path.get(path.size() - 1);
+        for (int i = 0; i < path.size() - 1; i++) {
+            if (path.get(i).equals(last)) return true;
         }
-        return true;
+        return false;
     }
     /*
     /**
