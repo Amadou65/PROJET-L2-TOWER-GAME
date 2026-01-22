@@ -84,61 +84,15 @@ public ArrayList<Position> path() {
         ArrayList<Position> nextPoList = new ArrayList<>();
         int x = pos.getX();
         int y = pos.getY();
-        // si on est sur un bord en bas
-        if (x == this.getHeight() - 1) {
-            // si on est en bas sur le bord droit alors on peut aller a droite et en haut
-            if (y == this.getWidth() - 1) {
-                nextPoList.add(new Position(x, y - 1));
-                nextPoList.add(new Position(x - 1, y));
-            }
-            // si on est en bas sur le bord gauche alors on peut aller a gauche et en haut
-            if (y == 0) {
-                nextPoList.add(new Position(x, y + 1));
-                nextPoList.add(new Position(x - 1, y));
-            }
-            // si non on peut monter aller a gauche et a droite
-            else{
-                nextPoList.add(new Position(x, y - 1));
-                nextPoList.add(new Position(x - 1, y));
-                nextPoList.add(new Position(x, y + 1));
-            }
-        }
-        // si on est au bord en haut
-        else if (x == 0) {
-            // si on est en haut sur le bord gauche alors on peut aller a droite ou en bas
-            if (y == 0) {
-                nextPoList.add(new Position(x, y + 1));
-                nextPoList.add(new Position(x + 1, y));
-            }
-            // si on est en haut sur le bord droit alors on peut aller a gauche ou en bas
-            if (y == this.getWidth() - 1) {
-                nextPoList.add(new Position(x, y - 1));
-                nextPoList.add(new Position(x + 1, y));
-            }
-            // si non on peut descendre aller a gauche et a droite
-            else{
-                nextPoList.add(new Position(x, y - 1));
-                nextPoList.add(new Position(x + 1, y));
-                nextPoList.add(new Position(x, y + 1));
-            }
-        // si on est sur le cote gauche
-        else if (x == 0 && y != 0 && y!= getHeight() - 1){
-            nextPoList.add(new Position(x + 1, y));
-            nextPoList.add(new Position(x, y - 1));
-            nextPoList.add(new Position(x, y + 1));
 
-        }
-        else if (y == 0 && x != 0 && x!= getWidth() - 1){
-            nextPoList.add(new Position(x + 1, y));
-            nextPoList.add(new Position(x - 1, y));
-            nextPoList.add(new Position(x, y + 1));
-        } else {
-            // si on est pas sur un bord on peut aller dans toutes les directions
-            nextPoList.add(new Position(x + 1, y));
-            nextPoList.add(new Position(x - 1, y));
-            nextPoList.add(new Position(x, y + 1));
-            nextPoList.add(new Position(x, y - 1));
-
+        // On vérifie les 4 directions et on les ajoute si elles sont dans la grille
+        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        for (int[] d : directions) {
+            int nx = x + d[0];
+            int ny = y + d[1];
+            if (nx >= 0 && nx < getHeight() && ny >= 0 && ny < getWidth()) {
+                nextPoList.add(new Position(nx, ny));
+            }
         }
         return nextPoList;
     }
