@@ -202,7 +202,10 @@ public class RandomBoard extends Board {
      */
     public boolean isEdge(Position pos) {
         // si c 'est sur un bord on retourne vraie
-        if (pos.getX() == this.getHeight() || pos.getY() == this.getWidth() - 1) {
+        if (pos.getX() == this.getHeight() - 1 || pos.getY() == this.getWidth() - 1) {
+            return true;
+        }
+        else if (pos.getX() == 0 || pos.getY() == 0){
             return true;
         }
         return false;
