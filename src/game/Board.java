@@ -1,11 +1,12 @@
 package game;
-public class Board{
+public abstract class Board{
     // The cell of the Board
-    protected Cell cell;
     // 
-    private int height;
-    private int width;
-    private Cell[][] grid;
+    protected int height;
+    protected int width;
+    protected Cell[][] grid;
+
+    
     public Board(){
         this.grid = new Cell[6][11];
         for (int i = 0; i < grid.length; i ++){
