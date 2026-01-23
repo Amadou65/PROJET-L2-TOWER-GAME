@@ -1,4 +1,4 @@
-
+package game;
 /**
  * class that define the cell of the board
  */
