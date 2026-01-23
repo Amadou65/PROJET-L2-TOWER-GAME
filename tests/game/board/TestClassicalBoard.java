@@ -1,4 +1,6 @@
+package game.board;
 import game.board.ClassicalBoard;
+
 import game.Position;
 import java.util.*;
 import org.junit.jupiter.api.Test;

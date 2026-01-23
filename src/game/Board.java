@@ -1,3 +1,4 @@
+package game;
 public class Board{
     // The cell of the Board
     protected Cell cell;
