@@ -20,7 +20,37 @@ Un lien vers une image de l'UML doit être fourni (une photo d'un diagramme UML 
 
 
 ## Livrable 1
+Structure du plateau : Nous avons séparé la logique de positionnement (Position), l'unité de base du plateau (Cell) et la gestion de la grille (Board). Cette séparation permet une plus grande flexibilité pour l'affichage et la gestion des entités.
 
+    Système de Défense (Tours et Projectiles) : Nous avons implémenté une structure hiérarchique pour les tours. La classe abstraite Tower est déclinée en ProjectileTower (pour les tours tirant des munitions comme DartMonkey ou BombTower) et NonProjectileTower (pour les tours à effets de zone ou de ralentissement comme IceTower). Chaque tour est associée à un type de Projectile spécifique, dont les dégâts varient selon la spécialisation.
+
+    Système d'Évolution : Pour permettre la progression en jeu, nous avons modélisé un système d'améliorations via la classe Evolution. Ce choix permet d'appliquer différents bonus (Puissance, Cadence, Portée, Projectile) de manière modulaire sur les tours existantes.
+
+    Les Ennemis : La classe Baloon définit les caractéristiques essentielles des cibles (vie, vitesse, force), préparant ainsi la logique de déplacement sur le chemin.
+
+2. Algorithmes implémentés
+
+L'effort principal de ce livrable a porté sur la génération du chemin que doivent suivre les ballons. Nous avons développé deux approches :
+
+    ClassicalBoard : Un chemin prédéfini et linéaire pour un mode de jeu standard.
+
+    RandomBoard (Génération aléatoire) : L'algorithme de génération de chemin dans RandomBoard est plus complexe. Il fonctionne selon les étapes suivantes :
+
+        Sélection du départ : Choix aléatoire d'une case sur le périmètre de la grille.
+
+        Marche aléatoire contrainte : Le chemin avance de case en case. À chaque étape, l'algorithme vérifie les positions adjacentes valides (dans la grille) et filtre celles déjà visitées pour éviter les boucles cycliques.
+
+        Vérification des conditions de victoire (Validité) : Le chemin n'est validé que s'il respecte trois critères : une longueur minimale (12 cases), une sortie située sur un bord du plateau, et une sortie qui n'est pas sur le même côté que l'entrée. Si l'algorithme se retrouve dans un cul-de-sac, il réinitialise le parcours et recommence (méthode de "backtracking" simplifiée).
+
+3. Modifications et Tests
+
+Par rapport aux ébauches précédentes, nous avons renforcé la robustesse du code par l'ajout de tests unitaires JUnit. Ces tests vérifient notamment :
+
+    La validité des positions sur les bords (isEdge).
+
+    L'absence de cycles dans les chemins générés (isDoingCircle).
+
+    Le respect des dimensions de la grille et des règles de distance.
 
 
 
