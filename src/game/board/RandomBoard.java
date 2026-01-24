@@ -137,4 +137,13 @@ public boolean isDoingCircle(ArrayList<Position> path) {
         return false;
     }
 
+    public void applyPathToGrid() {
+        ArrayList<Position> positions = this.path();
+        for (Position p : positions) {
+
+            // On récupère la cellule et on la marque comme chemin
+            this.grid[p.getY()][p.getX()].setAsPath(true);
+        }
+    }
+
 }
