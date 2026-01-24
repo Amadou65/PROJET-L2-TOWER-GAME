@@ -6,11 +6,11 @@ public abstract class Board{
     protected int width;
     protected Cell[][] grid;
 
-    
-    public Board(){
+
+    public Board(int height,int width){
         this.grid = new Cell[6][11];
-        for (int i = 0; i < grid.length; i ++){
-            for (int j = 0; j< grid[0].length; j ++){
+        for (int i = 0; i < height; i ++){
+            for (int j = 0; j< width; j ++){
                 this.grid[i][j] = new Cell("", new Position(i, j));
             }
             }
