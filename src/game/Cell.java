@@ -7,6 +7,7 @@ public class Cell{
     private String state;
     // The position of the cell
     private Position pos;
+    private boolean isPath = false; 
     public Cell(String state, Position pos){
         this.state = state;
         this.pos = pos;
@@ -24,6 +25,15 @@ public class Cell{
      */
     public Position getPosition(){
         return this.pos;
+    }
+
+    public void setAsPath(boolean path) {
+    this.isPath = path;
+    }
+
+    public String getSymbol() {
+    if (this.isPath) return "X"; // Symbole pour le chemin
+        return " "; 
     }
 
 }
