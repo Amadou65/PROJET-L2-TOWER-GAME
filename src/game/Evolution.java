@@ -1,6 +1,3 @@
-class ProjectileTower {
-}
-
 // classe mere
 abstract class Evolution {
 
