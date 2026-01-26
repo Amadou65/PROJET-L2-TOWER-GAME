@@ -134,12 +134,14 @@ Solutions apportées
 Objectifs pour la semaine prochaine (Livrable 2) et répartition
 
 L'objectif est d'attaquer la gestion des ballons et du temps.
-Membre	Tâche spécifique	
+
+Membre	Tâche spécifique
+
 Habiba	
 
 Création de la hiérarchie des classes pour les 3 types de ballons (niveaux 1, 2 et 4).
 	
-Yssin	
+YAssin	
 
 Développement de la logique de progression infra-case (mouvement fluide).
 	
