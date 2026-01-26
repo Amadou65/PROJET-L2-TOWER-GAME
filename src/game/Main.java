@@ -8,4 +8,9 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("=== TEST DU LIVRABLE 1 : TOWER DEFENSE ===\n");
     }
+
+    // 1. Test du Mode A : RandomBoard (Chemin calculé)
+        System.out.println("--- MODE A : PLATEAU ALÉATOIRE ---");
+        Board modeA = new RandomBoard(6, 11);
+        
 }
