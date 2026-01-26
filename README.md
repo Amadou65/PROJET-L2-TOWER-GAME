@@ -99,7 +99,52 @@ On a commencer l'uml avec les diffèrentes classes, pas encore finit à 100%.
 Difficultées: Compléter la classe plateau et la création de la classe plateau en java avec les tests. Aussi le calcul du chemin.
 
 ## Semaine 2
+Semaine 2
+Ce qui a été réalisé
 
+    Finalisation du Livrable 1 : Nous avons terminé la modélisation des deux types de plateaux de jeu prévus.
+
+    Algorithmes de génération de chemin :
+
+        Implémentation réussie de ClassicalBoard avec des chemins linéaires traversant la grille.
+
+        Développement de l'algorithme de génération aléatoire dans RandomBoard.
+
+    Validation par tests : Mise en place de tests unitaires JUnit pour vérifier la validité des sorties, l'absence de boucles (isDoingCircle) et le respect des dimensions de la grille (6x11).
+
+    Mise à jour de l'UML : Intégration des classes de base pour les ballons et les tours afin de préparer la suite.
+
+Difficultés rencontrées
+
+    Gestion des impasses : Dans RandomBoard, l'algorithme de "marche aléatoire" se retrouvait souvent bloqué dans des culs-de-sac avant d'atteindre la longueur minimale de 12 cases.
+
+    Conditions de sortie : Il était complexe de s'assurer mathématiquement que le chemin ne ressorte pas par le même côté que l'entrée.
+
+Solutions apportées
+
+    Réinitialisation dynamique : Nous avons implémenté une méthode qui vide le chemin et recommence la génération depuis le point de départ si aucun mouvement valide n'est possible (système de backtracking simplifié).
+
+    Filtres de validation : Ajout de la méthode isSameSide pour rejeter automatiquement les chemins invalides lors de la vérification finale.
+
+Objectifs pour la semaine prochaine (Livrable 2) et répartition
+
+L'objectif est d'attaquer la gestion des ballons et du temps.
+Membre	Tâche spécifique	
+Habiba	
+
+Création de la hiérarchie des classes pour les 3 types de ballons (niveaux 1, 2 et 4).
+	
+Yssin	
+
+Développement de la logique de progression infra-case (mouvement fluide).
+	
+Amadou	
+
+Mise en place du moteur de "tics" d'horloge et de la boucle de manche.
+	
+Ivkin	
+
+Implémentation de la classe Player (2500 crédits, 20 vies) et gestion des gains.
 
 ### Ce qui a été réalisé
 On a complété l'UML et commencé le code des classe Board et RandomBoard, Tower Cell
