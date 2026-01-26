@@ -141,7 +141,7 @@ Habiba
 
 Création de la hiérarchie des classes pour les 3 types de ballons (niveaux 1, 2 et 4).
 	
-YAssin	
+Yassin	
 
 Développement de la logique de progression infra-case (mouvement fluide).
 	
