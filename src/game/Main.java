@@ -17,4 +17,8 @@ public class Main {
 
         // 2. Test du Mode B : ClassicalBoard (Plateau libre)
         System.out.println("--- MODE B : PLATEAU CLASSIQUE ---");
+        Board modeB = new ClassicalBoard(6, 11);
+        modeB.display();
+
+    
 }
