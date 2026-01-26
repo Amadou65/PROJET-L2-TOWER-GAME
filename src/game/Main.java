@@ -12,5 +12,6 @@ public class Main {
     // 1. Test du Mode A : RandomBoard (Chemin calculé)
         System.out.println("--- MODE A : PLATEAU ALÉATOIRE ---");
         Board modeA = new RandomBoard(6, 11);
-        
+        modeA.display();
+        System.out.println("\n");
 }
