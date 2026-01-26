@@ -16,7 +16,6 @@ public class baloon {
         if (level == 4) return 0.5;
         if (level == 2) return 0.3;
         return 0.2;
-
     public void move() {
         if (!frozen) {
             this.distance += this.speed;
