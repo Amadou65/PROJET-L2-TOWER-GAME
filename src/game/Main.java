@@ -7,7 +7,7 @@ import game.board.ClassicalBoard;
 public class Main {
     public static void main(String[] args) {
         System.out.println("=== TEST DU LIVRABLE 1 : TOWER DEFENSE ===\n");
-    }
+    
 
     // 1. Test du Mode A : RandomBoard (Chemin calculé)
         System.out.println("--- MODE A : PLATEAU ALÉATOIRE ---");
@@ -19,6 +19,11 @@ public class Main {
         System.out.println("--- MODE B : PLATEAU CLASSIQUE ---");
         Board modeB = new ClassicalBoard(6, 11);
         modeB.display();
+
+
+        System.out.println("\n=== FIN DES TESTS DU LIVRABLE 1 ===");
+
+    }
 
     
 }
