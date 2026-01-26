@@ -14,4 +14,7 @@ public class Main {
         Board modeA = new RandomBoard(6, 11);
         modeA.display();
         System.out.println("\n");
+
+        // 2. Test du Mode B : ClassicalBoard (Plateau libre)
+        System.out.println("--- MODE B : PLATEAU CLASSIQUE ---");
 }
