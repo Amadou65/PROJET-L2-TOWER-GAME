@@ -7,26 +7,39 @@ public class baloon {
 
     public baloon(int level) {
         this.health = level;
-        this.speed = 1.0; 
-        this.pathIndex = 0;
+        this.speed = determineSpeed(level);
+        this.santé = 0.0;
         this.frozen = false;
     }
 
+    private double determineSpeed(int level) {
+        if (level == 4) return 0.5;
+        if (level == 2) return 0.3;
+        return 0.2;
+
     public void move() {
         if (!frozen) {
-            this.pathIndex++; 
+            this.distance += this.speed;
         }
     }
 
+    /**
+     * Gestion des dégâts et de la mutation
+     * @param damage points de dégâts reçus
+     */
     public void takeDamage(int damage) {
-        this.health -= damage;
+        this.level -= damage;
+        // Mise à jour de la vitesse si le niveau change
+        if (this.level > 0) {
+            this.speed = determineSpeed(this.level);
+        }
     }
 
     public boolean isPopped() {
-        return this.health <= 0;
+        return this.level <= 0;
     }
 
-    public int getReward() {
-        return 10;
-    }
+    public int getLevel() { return level; }
+    public double getDistance() { return distance; }
+    public void setFrozen(boolean state) { this.frozen = state; }
 }
