@@ -69,4 +69,10 @@ public class Cell{
   public void addTower(Tower t){
     this.addTower(t);
   }
+    /**
+   * methode that remove a tower in the cell
+   */
+  public void removeTower(Tower t){
+    tower_list.remove(t);
+  }
 }
