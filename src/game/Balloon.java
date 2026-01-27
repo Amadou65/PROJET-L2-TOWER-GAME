@@ -29,7 +29,7 @@ public class Balloon {
             // on regarde si le ballon a traversé une case
             if (distance >= 1.0){
                 pathIndex ++;
-                distance = 0.0;
+                distance = 1.0 - distance;
             }
         }
     }
