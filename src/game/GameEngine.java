@@ -13,7 +13,6 @@ public class GameEngine {
     private Player player;
 
     public GameEngine(ArrayList<Balloon> reserve, ArrayList<Position> path, Board board) {
-
         this.reserve = reserve;
         this.actif = new ArrayList<>();
         this.path = path;
@@ -25,7 +24,7 @@ public class GameEngine {
      */
     public void game() {
         int time = 0;
-        while (!reserve.isEmpty() || !actif.isEmpty()) {
+        while (!reserve.isEmpty() || !actif.isEmpty() && player.isAlife()) {
             time++;
             if (time % 20 == 0) {
                 if (!reserve.isEmpty()) {
@@ -34,18 +33,36 @@ public class GameEngine {
                     reserve.remove(b);
                     Position pos_depart = this.path.get(0);
                     board.getCell((pos_depart)).putBallon(b);
-
                 }
-                for (Balloon b : actif){
-                    b.move();
-                    for (int i = actif.size(); i > 0; i --)
-                        if (b.isPopped()){
-                            actif.remove(b);
-                            player.addCredits(10);
-                    }
-                } 
             }
 
-        }
-    }
-}
+                for (int i = actif.size() - 1; i >= 0; i--) {
+                    Balloon b = actif.get(i);
+                    int ancien = b.getPathIndex();
+                    b.move();
+                    int nouveau = b.getPathIndex();
+                    Position pos_ancien = path.get(ancien);
+
+                    if (b.isPopped()) {
+                        actif.remove(b);
+                        player.setCredits(player.getCredits() + 10);
+                        board.getCell(new Position(pos_ancien.getX(), pos_ancien.getY())).removeBallon(b);
+                    }
+                    if (ancien != nouveau) {
+                    
+                        if (nouveau < path.size()) {
+                            Position pos = path.get(nouveau);
+                            board.getCell(new Position(pos_ancien.getX(), pos_ancien.getY())).removeBallon(b);
+                            board.getCell(new Position(pos.getX(), pos.getY())).putBallon(b);
+                    } 
+                    else{
+                        actif.remove(b);
+                        board.getCell(new Position(pos_ancien.getX(), pos_ancien.getY())).removeBallon(b);
+                        player.onHit();
+                    }                      
+                }
+              
+            }
+        } // Fin du while
+    } // Fin de la méthode
+} // Fin de la classe
