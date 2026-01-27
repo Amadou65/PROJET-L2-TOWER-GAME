@@ -73,4 +73,11 @@ public abstract class Board{
     return this.grid[pos.getY()][pos.getX()];
   } 
   
+  /**
+   * methods that add a tower to the board
+   * @param Tower
+   */
+  public void addTower(Tower t, Cell cell){
+    cell.addTower(t);
+  }
 }
