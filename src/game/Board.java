@@ -11,7 +11,7 @@ public abstract class Board{
         this.grid = new Cell[6][11];
         for (int i = 0; i < height; i ++){
             for (int j = 0; j< width; j ++){
-                this.grid[i][j] = new Cell("", new Position(i, j));
+                this.grid[i][j] = new Cell(new Position(i, j));
             }
             }
             this.height = 6;
@@ -50,5 +50,9 @@ public abstract class Board{
     public int getWidth(){
         return this.width;
     }
- 
+    
+    /**
+     * methode that put a ballloon at a scepecific cell
+     */
+    public void putBallon(Balloon ball, Cell cell){};
 }

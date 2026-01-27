@@ -6,25 +6,16 @@ import java.util.ArrayList;
  * class that define the cell of the board
  */
 public class Cell{
-    //the state of the cell
-    private String state;
+
     private ArrayList<Balloon> list_ball;
     // The position of the cell
     private Position pos;
     private boolean isPath = false; 
-    public Cell(String state, Position pos){
-        this.state = state;
+    public Cell( Position pos){
         this.pos = pos;
         this.list_ball = new ArrayList<>();
     }
-    /**
-     * methode that remove the things that is currently in the cell
-     */
-    public void removeState(){
-           this.state = "";
-    }
-
-    /**
+     /**
      * methode that return the position of the current cell
      * @return the postion
      */
