@@ -7,7 +7,7 @@ public abstract class Board{
     protected Cell[][] grid;
 
 
-    public Board(int height,int width){
+    public Board(){
         this.grid = new Cell[6][11];
         for (int i = 0; i < height; i ++){
             for (int j = 0; j< width; j ++){
