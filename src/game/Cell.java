@@ -8,12 +8,14 @@ import java.util.ArrayList;
 public class Cell{
 
     private ArrayList<Balloon> list_ball;
+    private ArrayList<Tower> tower_list;
     // The position of the cell
     private Position pos;
     private boolean isPath = false; 
     public Cell( Position pos){
         this.pos = pos;
         this.list_ball = new ArrayList<>();
+        this.tower_list = new ArrayList<>();
     }
      /**
      * methode that return the position of the current cell
@@ -59,4 +61,12 @@ public class Cell{
     public void putBallon(Balloon ball){
         this.list_ball.add(ball);
     }
+
+      /**
+   * methods that add a tower to the board
+   * @param Tower
+   */
+  public void addTower(Tower t){
+    this.addTower(t);
+  }
 }
