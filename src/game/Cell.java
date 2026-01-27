@@ -22,11 +22,22 @@ public class Cell{
     public Position getPosition(){
         return this.pos;
     }
-
+    /**
+     * methode that put a cell as a path
+     * @param path
+    */
     public void setAsPath(boolean path) {
     this.isPath = path;
     }
 
+    /**
+     * methode that say if a cell is a path
+     * @return
+    */
+   public boolean isPath(){
+    return isPath;
+    
+   }
     public String getSymbol() {
     if (this.isPath) return "X"; // Symbole pour le chemin
         return " "; 
