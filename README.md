@@ -56,7 +56,24 @@ Par rapport aux ébauches précédentes, nous avons renforcé la robustesse du c
 
 
 ## Livrable 2
+Commandes de compilations:
 
+Pour les diffentes classes:
+   - javac -sourcepath src src/game/board/*.java -d classes
+   - javac -sourcepath src src/game/*.java -d classes
+   - javac -sourcepath src src/game/Main.java -d classes
+
+Pour l'execution de la methode Main
+    - java -classpath classes game.Main
+
+Pour les differentes classes de teste:
+    - javac -cp "junit-console.jar:classes" -d test-classes \
+    tests/game/board/RandomBoardTest.java \
+    tests/game/board/TestClassicalBoard.java
+   - java -cp "junit-console.jar:classes" -d test-classes tests/game/PositionTest.java
+
+Pour executer les testes:
+    - java -cp "junit-console.jar:classes" org.junit.platform.console.ConsoleLauncher --scan-class-path
 ### Atteinte des objectifs
 
 ### Difficultés restant à résoudre
