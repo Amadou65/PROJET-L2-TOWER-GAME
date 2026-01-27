@@ -17,6 +17,7 @@ public class GameEngine {
         this.actif = new ArrayList<>();
         this.path = path;
         this.board = board;
+        this.player = new Player();
     }
 
     /**
@@ -24,7 +25,7 @@ public class GameEngine {
      */
     public void game() {
         int time = 0;
-        while (!reserve.isEmpty() || !actif.isEmpty() && player.isAlife()) {
+        while ((!reserve.isEmpty() || !actif.isEmpty()) && player.isAlife()) {
             time++;
             if (time % 20 == 0) {
                 if (!reserve.isEmpty()) {
@@ -46,18 +47,18 @@ public class GameEngine {
                     if (b.isPopped()) {
                         actif.remove(b);
                         player.setCredits(player.getCredits() + 10);
-                        board.getCell(new Position(pos_ancien.getX(), pos_ancien.getY())).removeBallon(b);
+                        board.getCell(pos_ancien).removeBallon(b);
                     }
-                    if (ancien != nouveau) {
+                    else if (ancien != nouveau) {
                     
                         if (nouveau < path.size()) {
                             Position pos = path.get(nouveau);
-                            board.getCell(new Position(pos_ancien.getX(), pos_ancien.getY())).removeBallon(b);
+                            board.getCell(pos_ancien).removeBallon(b);
                             board.getCell(new Position(pos.getX(), pos.getY())).putBallon(b);
                     } 
                     else{
                         actif.remove(b);
-                        board.getCell(new Position(pos_ancien.getX(), pos_ancien.getY())).removeBallon(b);
+                        board.getCell(pos_ancien).removeBallon(b);
                         player.onHit();
                     }                      
                 }
