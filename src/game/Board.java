@@ -55,4 +55,16 @@ public abstract class Board{
      * methode that put a ballloon at a scepecific cell
      */
     public void putBallon(Balloon ball, Cell cell){};
+
+    /**
+     * methode that set all the cell in the with the positin as path 
+    */  
+   public void setCellAsPath(){};
+   /**
+    * method that give the cell at the position
+    * @param pos
+   */
+  public Cell getCell(Position pos){
+    return this.grid[pos.getY()][pos.getX()];
+  } 
 }
