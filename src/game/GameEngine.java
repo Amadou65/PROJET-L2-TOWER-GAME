@@ -26,10 +26,12 @@ public class GameEngine {
     public void game() {
         int time = 0;
         while ((!reserve.isEmpty() || !actif.isEmpty()) && player.isAlife()) {
+            System.out.println("--- Tic : " + time + " ---");
             time++;
             if (time % 20 == 0) {
                 if (!reserve.isEmpty()) {
                     Balloon b = reserve.get(reserve.size() - 1);
+                    System.out.println("[SPAWN] Nouveau ballon !");
                     this.actif.add(b);
                     reserve.remove(b);
                     Position pos_depart = this.path.get(0);
@@ -46,6 +48,7 @@ public class GameEngine {
 
                     if (b.isPopped()) {
                         actif.remove(b);
+                        System.out.println("[BOOM] Ballon éclaté ! Crédits : " + player.getCredits());
                         player.setCredits(player.getCredits() + 10);
                         board.getCell(pos_ancien).removeBallon(b);
                     }
@@ -60,6 +63,7 @@ public class GameEngine {
                         actif.remove(b);
                         board.getCell(pos_ancien).removeBallon(b);
                         player.onHit();
+                        System.out.println("[OUCH] Ballon sorti ! Vies : " + player.getHealth());
                     }                      
                 }
               
