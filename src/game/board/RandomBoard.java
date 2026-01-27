@@ -1,6 +1,8 @@
 package game.board;
+import game.Balloon;
 import game.Board;
 import game.Position;     
+import game.Cell;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -145,5 +147,14 @@ public boolean isDoingCircle(ArrayList<Position> path) {
             this.grid[p.getY()][p.getX()].setAsPath(true);
         }
     }
+    // methode putballon specifique por random board
+    @Override
+    public void putBallon(Balloon ball, Cell cell){
+        if (!cell.isPath()){
+            cell.putBallon(ball);
+        }
+    }
+
+    
 
 }
