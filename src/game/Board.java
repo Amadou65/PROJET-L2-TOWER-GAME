@@ -80,4 +80,11 @@ public abstract class Board{
   public void addTower(Tower t, Cell cell){
     cell.addTower(t);
   }
+
+  /**
+   * methode that remove a tower in the board
+   */
+  public void removeTower(Tower t, Cell cell){
+    cell.removeTower(t);
+  }
 }
