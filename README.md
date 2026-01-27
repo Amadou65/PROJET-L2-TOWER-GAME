@@ -74,10 +74,35 @@ Pour les differentes classes de teste:
 
 Pour executer les testes:
     - java -cp "junit-console.jar:classes" org.junit.platform.console.ConsoleLauncher --scan-class-path
+
+
+
+
 ### Atteinte des objectifs
 
-### Difficultés restant à résoudre
+Amadou :
 
+    Développement du moteur de jeu central (GameEngine) : Mise en place de la boucle de jeu principale basée sur un système de "tics" temporels permettant de cadencer les actions.
+
+    Gestion du cycle de vie des entités : Implémentation complète du flux des ballons : apparition depuis la réserve, gestion des ballons actifs sur le plateau, et suppression lors de l'arrivée ou de la destruction.
+
+    Algorithme de mouvement fluide : Conception d'un système de déplacement "infra-case" utilisant une variable de distance fractionnaire. Cela permet aux ballons d'avoir des vitesses différentes et un mouvement visuel fluide plutôt que des bonds de case en case.
+
+    Synchronisation Plateau/Moteur : Réalisation de la logique de transfert des ballons entre les cellules (Cell) du plateau lors du changement d'indice dans le chemin.
+
+    Interface Joueur : Intégration des mécaniques de récompenses (crédits) et de pénalités (perte de vie) en temps réel selon les événements du jeu.
+
+    Fiabilisation du code : Utilisation de boucles itératives inversées pour permettre la modification sécurisée des listes d'entités en cours de parcours (évitant les erreurs de type ConcurrentModificationException).
+
+### Difficultés restant à résoudre
+Amadou :    
+    Optimisation de la détection de cible : La logique permettant aux tours de scanner efficacement les ballons à portée sans ralentir le moteur de jeu reste à affiner pour le prochain livrable.
+
+    Équilibrage des vitesses : Ajuster les ratios entre la vitesse de rafraîchissement (tics) et la progression des ballons pour garantir une difficulté progressive.
+
+    Gestion des collisions complexes : Prévoir le comportement du moteur si plusieurs types de ballons avec des effets différents (ralentissement, gel) occupent la même cellule.
+
+    Transition vers l'interface graphique : Adapter les logs de la console vers un affichage visuel fluide (Livrable 3).
 ## Livrable 3
 
 ### Atteinte des objectifs
