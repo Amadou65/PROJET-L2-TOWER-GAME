@@ -46,7 +46,9 @@ public class Cell{
      * @param ball
      * 
      */
-    public void removeBallon(Balloon ball){}
+    public void removeBallon(Balloon ball){
+        this.list_ball.remove(ball);
+    }
     /**
      * method that put a balloon in a cell
      * @param ballon
