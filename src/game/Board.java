@@ -1,9 +1,13 @@
 package game;
+
+import java.util.ArrayList;
+
 public abstract class Board{
     // The cell of the Board
     // 
     protected int height;
     protected int width;
+    protected ArrayList<Tower> tower_list;
     protected Cell[][] grid;
 
 
@@ -16,6 +20,7 @@ public abstract class Board{
             }
             this.height = 6;
             this.width = 11;
+            this.tower_list = new ArrayList<>();
         
     }
     /**
@@ -67,4 +72,5 @@ public abstract class Board{
   public Cell getCell(Position pos){
     return this.grid[pos.getY()][pos.getX()];
   } 
+  
 }
