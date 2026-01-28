@@ -3,10 +3,18 @@ package game;
 public class Player {
     private int health; // number of health of Player
     private int credits; // number of Credits of Player
+    private Journal journal; // Journal for statistics
 
     public Player(){
         this.health = 20;
         this.credits = 2500;
+        this.journal = new Journal();
+    }
+
+    public Player(Journal journal){
+        this.health = 20;
+        this.credits = 2500;
+        this.journal = journal;
     }
 
     // geters
@@ -43,6 +51,8 @@ public class Player {
        if(this.credits >= t.cost){
             b.grid[p.getX()][p.getY()].addTower(t);
             this.credits -= t.cost;
+            // add record in journal
+            journal.recordTowerPurchased(t.cost);
         }
         else{
             System.out.println("Not enough credits to buy this tower.");
@@ -66,5 +76,24 @@ public class Player {
      */
     public void setCredits(int i){
         this.credits = i;
+    }
+
+    /*
+    * metode that buy an upgrade for a tower
+    *    @param t is the tower to upgrade
+    *    @param b is board of the game
+    *    @param p is the position of the tower
+    *    @param e is the evolution to buy
+    */
+    public void buyUpgrade(Tower t, Board b, Position p, Evolution e){
+        if(this.credits >= e.cost){
+            this.credits -= e.cost;
+            //t.upgrade(e);
+            // add record in journal
+            journal.recordUpgradeApplied(e.cost);
+        }
+        else{
+            System.out.println("Not enough credits to upgrade this upgrade.");
+        }
     }
 }
