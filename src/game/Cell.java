@@ -67,7 +67,7 @@ public class Cell{
    * @param Tower
    */
   public void addTower(Tower t){
-    this.addTower(t);
+    this.tower_list.add(t);
   }
     /**
    * methode that remove a tower in the cell

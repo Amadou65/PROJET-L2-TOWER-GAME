@@ -13,14 +13,14 @@ public abstract class Board{
 
     public Board(){
         this.grid = new Cell[6][11];
-        for (int i = 0; i < height; i ++){
-            for (int j = 0; j< width; j ++){
+        this.height = 6;
+        this.width = 11;
+        for (int i = 0; i < this.height; i ++){
+            for (int j = 0; j < this.width; j ++){
                 this.grid[i][j] = new Cell(new Position(i, j));
             }
             }
-            this.height = 6;
-            this.width = 11;
-            this.tower_list = new ArrayList<>();
+        this.tower_list = new ArrayList<>();
         
     }
     /**
