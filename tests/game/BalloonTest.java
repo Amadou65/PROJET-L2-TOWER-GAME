@@ -12,7 +12,11 @@ public class BalloonTest {
         path.add(new Position(0,0));
         path.add(new Position(0,1));
 
-        Balloon b = new Balloon(4, path); // Un ballon Rose (Niveau 4)
+        Balloon b = new Balloon(4, path); // Un ballon Rose
         assertEquals(4, b.getLevel());
+
+        b.takeDamage(2); // On lui tire dessus
+        assertEquals(2, b.getLevel(), "Le ballon devrait être niveau 2 après 2 dégâts");
+        assertFalse(b.isPopped());
     
 }
