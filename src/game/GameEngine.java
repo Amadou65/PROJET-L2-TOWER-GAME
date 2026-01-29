@@ -65,9 +65,11 @@ public class GameEngine {
                     board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
                 }
 
-                for (Balloon b : actif) {
-                   int oldX = b.getGridX();
-                   int oldY = b.getGridY();
+            for (Balloon b : actif) {
+                int oldX = b.getGridX();
+                int oldY = b.getGridY();
+
+                b.move(); // Ton ballon avance selon sa vitesse
             }
 
             try { Thread.sleep(50); } catch (InterruptedException e) {}
