@@ -34,8 +34,8 @@ public abstract class Board{
         for (int i = 0; i < grid.length; i++){
             s += " +-+-+-+-+-+-+-+-+-+-+-+-+\n";
             s += i;
-            for (int j = 0; j < grid[0].length; j++){
-                s += "|" + " ";
+            for (int j = 0; j < grid[i].length; j++){
+                s += "|" + grid[i][j].getSymbol();
             }
             s += "|\n";
         }

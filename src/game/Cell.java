@@ -41,8 +41,8 @@ public class Cell{
     
    }
     public String getSymbol() {
-    if (this.isPath) return "X"; // Symbole pour le chemin
-        return " "; 
+      if (this.isPath) return "X"; // Symbole pour le chemin
+      return " "; 
     }
 
     /**

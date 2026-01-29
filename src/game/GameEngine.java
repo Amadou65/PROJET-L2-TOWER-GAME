@@ -25,12 +25,17 @@ public class GameEngine {
      */
     public void game() {
         int time = 0;
-        while ((!reserve.isEmpty() || !actif.isEmpty()) && player.isAlife()) {
-            if(time%5 == 0){System.out.println("--- Tic : " + time + " ---");}
 
-            this.board.display();
+        System.out.println("Votre grille de jeu");
+        System.out.println(this.board.display());
+
+        while ((!reserve.isEmpty() || !actif.isEmpty()) && player.isAlife()) {
+            if(time%5 == 0){
+                System.out.println("--- Tic : " + time + " ---");
+            }
+
             time++;
-            
+
             if (time % 20 == 0) {
                 if (!reserve.isEmpty()) {
                     Balloon b = reserve.get(reserve.size() - 1);
@@ -72,5 +77,11 @@ public class GameEngine {
               
                 }
         } // Fin du while
+        System.out.println(this.board.display());
+        if (player.isAlife()) {
+            System.out.println("Vous avez gagné !");
+        } else {
+            System.out.println("Vous avez perdu !");
+        }
     } // Fin de la méthode
 } // Fin de la classe
