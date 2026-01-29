@@ -11,9 +11,9 @@ public class Livrable2a {
         int nbBalloons = args.length > 2 ? Integer.parseInt(args[2]) : 10;
 
         List<Balloon> balloons = new ArrayList<>();
-
+        int[] balloonTypes = {1, 2, 3};
         for (int i = 0; i < nbBalloons; i++) {
-            balloons.add(new Balloon(1));
+            balloons.add(new Balloon(balloonTypes[(int) (Math.random() * balloonTypes.length)]));
         }
 
         GameEngine ge = new GameEngine(new ArrayList<>(balloons), rb.path(), rb);
