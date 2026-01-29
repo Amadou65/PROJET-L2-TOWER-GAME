@@ -64,6 +64,10 @@ public class GameEngine {
                     board.getCell(new Position(oldX, oldY)).removeBallon(b);
                     board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
                 }
+
+                for (Balloon b : actif) {
+                   int oldX = b.getGridX();
+                   int oldY = b.getGridY();
             }
 
             try { Thread.sleep(50); } catch (InterruptedException e) {}
