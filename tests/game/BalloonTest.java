@@ -18,5 +18,9 @@ public class BalloonTest {
         b.takeDamage(2); // On lui tire dessus
         assertEquals(2, b.getLevel(), "Le ballon devrait être niveau 2 après 2 dégâts");
         assertFalse(b.isPopped());
+
+        b.takeDamage(2);
+        assertTrue(b.isPopped(), "Le ballon devrait être éclaté à 0 PV");
+    }
     
 }
