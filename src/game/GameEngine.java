@@ -26,6 +26,8 @@ public class GameEngine {
     public void game() {
         int time = 0;
 
+        this.board.applyPathToGrid();
+
         System.out.println("Votre grille de jeu");
         System.out.println(this.board.display());
 
