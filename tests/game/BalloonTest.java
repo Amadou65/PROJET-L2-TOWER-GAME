@@ -37,6 +37,7 @@ public class BalloonTest {
         // On vérifie que la logique de vitesse est respectée
         fast.move();
         slow.move();
-
-    
+        assertTrue(fast.getDistance() > slow.getDistance(), "Le ballon niveau 4 doit avancer plus vite");
+    }
 }
+
