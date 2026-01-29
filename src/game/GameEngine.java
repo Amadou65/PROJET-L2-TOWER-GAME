@@ -14,74 +14,84 @@ public class GameEngine {
         this.actif = new ArrayList<>();
         this.path = path;
         this.board = board;
-        this.player = new Player(); // Initialisation du joueur
+        this.player = new Player();
     }
 
-    /**
-     * Méthode principale qui lance la boucle de jeu
-     */
     public void game() {
         int time = 0;
-        System.out.println("--- DÉMARRAGE DE LA PARTIE ---");
+        int totalPopped = 0;   // Compteur de ballons éclatés
+        int totalEscaped = 0;  // Compteur de ballons ayant franchi la ligne
+        int initialCount = reserve.size(); // Nombre total de ballons au départ
 
-        // La boucle s'arrête si plus d'ennemis OU si le joueur meurt
+        System.out.println("--- DÉMARRAGE DE LA MANCHE (" + initialCount + " ballons) ---");
+
         while ((!reserve.isEmpty() || !actif.isEmpty()) && player.isAlife()) {
             time++;
 
-            // 1. APPARITION (Tous les 20 tics)
+            // 1. PHASE DE SPAWN
             if (time % 20 == 0 && !reserve.isEmpty()) {
                 Balloon b = reserve.remove(reserve.size() - 1);
                 this.actif.add(b);
-                
-                // Placement initial sur la grille
                 board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
-                System.out.println("[SPAWN] Un nouveau ballon entre en jeu !");
             }
 
-            // 2. MISE À JOUR DES BALLONS (Boucle inversée pour la sécurité)
+            // 2. PHASE DE MOUVEMENT ET MISE À JOUR
             for (int i = actif.size() - 1; i >= 0; i--) {
                 Balloon b = actif.get(i);
-                
-                // On mémorise la position de grille AVANT le mouvement
                 int oldX = b.getGridX();
                 int oldY = b.getGridY();
 
-                b.move(); // Déplacement fluide (mathématiques de ton camarade)
+                b.move();
 
-                // On vérifie l'état du ballon APRÈS le mouvement
+                // CAS A : BALLON ÉCLATÉ (VICTOIRE LOCALE)
                 if (b.isPopped()) {
-                    System.out.println("[BOOM] Un ballon a été éclaté ! Bravo !");
+                    totalPopped++;
                     player.setCredits(player.getCredits() + 10);
                     board.getCell(new Position(oldX, oldY)).removeBallon(b);
                     actif.remove(i);
+                    System.out.println("[SCORE] Ballon éclaté ! (" + totalPopped + "/" + initialCount + ")");
                 } 
+                // CAS B : BALLON ÉCHAPPÉ (DÉFAITE LOCALE)
                 else if (b.hasReachedEnd()) {
-                    System.out.println("[OUCH] Un ballon a franchi la ligne d'arrivée !");
-                    player.onHit(); // Perte de vie
+                    totalEscaped++;
+                    player.onHit();
                     board.getCell(new Position(oldX, oldY)).removeBallon(b);
                     actif.remove(i);
+                    System.out.println("[ALERTE] Un ballon s'est échappé !");
                 } 
+                // CAS C : MOUVEMENT CLASSIQUE
                 else if (oldX != b.getGridX() || oldY != b.getGridY()) {
-                    // CHANGEMENT DE CASE : Le ballon a franchi la limite visuelle de la case
                     board.getCell(new Position(oldX, oldY)).removeBallon(b);
                     board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
                 }
             }
 
-            // 3. PAUSE (Pour que le jeu soit visible dans la console)
-            try {
-                Thread.sleep(50); // Environ 20 tics par seconde
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            try { Thread.sleep(50); } catch (InterruptedException e) {}
         }
 
-        // 4. FIN DE PARTIE
-        System.out.println("--- FIN DE LA PARTIE ---");
+        // --- PHASE DE BILAN FINAL ---
+        System.out.println("\n====================================");
+        System.out.println("          BILAN DE LA PARTIE        ");
+        System.out.println("====================================");
+        
         if (!player.isAlife()) {
-            System.out.println("GAME OVER... Le joueur n'a plus de PV.");
+            System.out.println("RÉSULTAT : GAME OVER (Le joueur est mort)");
         } else {
-            System.out.println("VICTOIRE ! Tous les ballons ont été neutralisés.");
+            System.out.println("RÉSULTAT : VICTOIRE !");
         }
+
+        System.out.println("Temps de survie : " + time + " tics");
+        System.out.println("Ballons éclatés : " + totalPopped);
+        System.out.println("Ballons échappés : " + totalEscaped);
+
+        // LE MESSAGE DE PRÉCISION
+        if (totalPopped == initialCount) {
+            System.out.println("MÉDAILLE D'OR : Perfect ! Aucun ballon n'a survécu.");
+        } else if (totalPopped > 0) {
+            System.out.println("MÉDAILLE D'ARGENT : Bien joué, mais certains ont filé.");
+        } else {
+            System.out.println("MÉDAILLE DE BRONZE : On fera mieux la prochaine fois...");
+        }
+        System.out.println("====================================\n");
     }
 }

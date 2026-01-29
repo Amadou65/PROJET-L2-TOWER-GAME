@@ -1,23 +1,29 @@
 package game;
+import java.lang.reflect.Array;
 import java.util.*;
 import game.board.RandomBoard;
 
 public class Livrable2a {
     public static void main(String[] args) {
 
-        int height = args.length > 0 ? Integer.parseInt(args[0]) : 6;
-        int width = args.length > 1 ? Integer.parseInt(args[1]) : 11;
-        RandomBoard rb = new RandomBoard(height, width);
-        int nbBalloons = args.length > 2 ? Integer.parseInt(args[2]) : 10;
-
-        List<Balloon> balloons = new ArrayList<>();
-        int[] balloonTypes = {1, 2, 3};
-        for (int i = 0; i < nbBalloons; i++) {
-            balloons.add(new Balloon(balloonTypes[(int) (Math.random() * balloonTypes.length)]));
-        }
-
-        GameEngine ge = new GameEngine(new ArrayList<>(balloons), rb.path(), rb);
-        ge.game();
-
+        System.out.println("Livrable 2a: A");
+        Board board = new RandomBoard(5, 5);
+        board.display();
+        ArrayList<Position> path = new ArrayList<>();
+        Balloon balloon = new Balloon(1, path);
+        Balloon balloon2 = new Balloon(2, path);
+        Balloon balloon3 = new Balloon(3, path);
+        Balloon balloon4 = new Balloon(1, path);
+        System.out.println("Balloon created with level: " + balloon.getLevel());
+        System.out.println("Balloon2 created with level: " + balloon2.getLevel());
+        System.out.println("Balloon3 created with level: " + balloon3.getLevel());
+        System.out.println("Balloon4 created with level: " + balloon4.getLevel());
+        ArrayList<Balloon> balloons = new ArrayList<>();
+        balloons.add(balloon);
+        balloons.add(balloon2);
+        balloons.add(balloon3); 
+        balloons.add(balloon4);
+        GameEngine gameEngine = new GameEngine(balloons, path, board);
+        gameEngine.game();
     }
 }
