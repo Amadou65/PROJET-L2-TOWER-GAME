@@ -70,6 +70,12 @@ public class GameEngine {
                 int oldY = b.getGridY();
 
                 b.move(); // Ton ballon avance selon sa vitesse
+
+                // Si le ballon change de case, on met à jour la grille
+                if (oldX != b.getGridX() || oldY != b.getGridY()) {
+                    board.getCell(new Position(oldX, oldY)).removeBallon(b);
+                    board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
+                }
             }
 
             try { Thread.sleep(50); } catch (InterruptedException e) {}
