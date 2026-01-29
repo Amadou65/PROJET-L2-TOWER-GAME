@@ -22,5 +22,10 @@ public class BalloonTest {
         b.takeDamage(2);
         assertTrue(b.isPopped(), "Le ballon devrait être éclaté à 0 PV");
     }
+
+    @Test
+
+    public void testSpeedLogic() {
+        
     
 }
