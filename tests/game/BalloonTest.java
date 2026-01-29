@@ -29,7 +29,9 @@ public class BalloonTest {
         ArrayList<Position> path = new ArrayList<>();
         path.add(new Position(0,0));
         path.add(new Position(0,1));
-        
+
+        Balloon fast = new Balloon(4, path);
+        Balloon slow = new Balloon(1, path);
 
     
 }
