@@ -36,6 +36,7 @@ public class BalloonTest {
 
         // On vérifie que la logique de vitesse est respectée
         fast.move();
+        slow.move();
 
     
 }
