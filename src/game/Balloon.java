@@ -1,6 +1,6 @@
 package game;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Balloon {
     // Attributs
@@ -8,13 +8,15 @@ public class Balloon {
     private double speed;
     private boolean frozen;
     private int currentTargetIndex; 
+    private int level;
     
     // Methode deplacement
     private double x, y; 
-    private ArrayList<Position> path;
+    private List<Position> path;
 
-    public Balloon(int level, ArrayList<Position> path) {
+    public Balloon(int level, List<Position> path) {
         this.health = level;
+        this.level = level;
         this.frozen = false;
         this.path = path;
         this.currentTargetIndex = 1; 
@@ -67,5 +69,6 @@ public class Balloon {
     // --- Méthodes pour  GameEngine ---
     public int getGridX() { return (int) Math.round(x); }
     public int getGridY() { return (int) Math.round(y); }
+    public int getLevel() { return this.level; }
     public boolean hasReachedEnd() { return currentTargetIndex >= path.size(); }
 }

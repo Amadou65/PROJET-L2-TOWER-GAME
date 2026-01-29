@@ -3,13 +3,13 @@ package game;
 import java.util.*;
 
 public class GameEngine {
-    private ArrayList<Balloon> reserve;
-    private ArrayList<Balloon> actif;
-    private ArrayList<Position> path;
+    private List<Balloon> reserve;
+    private List<Balloon> actif;
+    private List<Position> path;
     private Board board;
     private Player player;
 
-    public GameEngine(ArrayList<Balloon> reserve, ArrayList<Position> path, Board board) {
+    public GameEngine(List<Balloon> reserve, List<Position> path, Board board) {
         this.reserve = reserve;
         this.actif = new ArrayList<>();
         this.path = path;
