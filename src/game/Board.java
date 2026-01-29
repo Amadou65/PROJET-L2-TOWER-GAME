@@ -2,97 +2,127 @@ package game;
 
 import java.util.*;
 
-public abstract class Board{
+public abstract class Board {
     // The cell of the Board
-    // 
+    //
     protected int height;
     protected int width;
     protected ArrayList<Tower> tower_list;
     protected Cell[][] grid;
 
-
-    public Board(int height, int width){
+    public Board(int height, int width) {
         this.height = 6;
         this.width = 11;
         this.grid = new Cell[6][11];
-        for (int i = 0; i < this.height; i ++){
-            for (int j = 0; j < this.width; j ++){
+        for (int i = 0; i < this.height; i++) {
+            for (int j = 0; j < this.width; j++) {
                 this.grid[i][j] = new Cell(new Position(i, j));
             }
         }
 
         this.tower_list = new ArrayList<>();
-        
+
     }
+
     /**
      * methode that show the grid to the player
+     * 
      * @return the grid
      */
-    public String display(){
-        String s = " 0 1 2 3 4 5 6 7 8 9 10 11\n" ;
+    public String display() {
+        int rows = grid.length;
+        int cols = grid[0].length;
+        String s = "";
 
-        for (int i = 0; i < grid.length; i++){
-            s += " +-+-+-+-+-+-+-+-+-+-+-+-+\n";
-            s += i;
-            for (int j = 0; j < grid[i].length; j++){
+        // 1. En-tête des colonnes (0 1 2 3 ... 9 0 1...)
+        s += "   "; // Espaces pour décaler par rapport aux index de lignes
+        for (int j = 0; j < cols; j++) {
+            s += (j % 10) + " "; // On affiche le chiffre des unités
+        }
+        s += "\n";
+
+        // 2. Création de la ligne de séparation "+-+-+-+"
+        String ligneSeparation = "  +";
+        for (int j = 0; j < cols; j++) {
+            ligneSeparation += "-+";
+        }
+        ligneSeparation += "\n";
+
+        // 3. Construction du corps du plateau
+        for (int i = 0; i < rows; i++) {
+            s += ligneSeparation;
+            s += i + " "; // Index de la ligne sur le côté
+            for (int j = 0; j < cols; j++) {
                 s += "|" + grid[i][j].getSymbol();
             }
             s += "|\n";
         }
-        s += " +-+-+-+-+-+-+-+-+-+-+-+-+";
+
+        // 4. Dernière ligne de fermeture
+        s += ligneSeparation;
+
         return s;
     }
+
     /**
      * methode that return the height of the grid
+     * 
      * @return the height
      */
-    public int getHeight(){
+    public int getHeight() {
         return this.height;
     }
+
     /**
      * methode that return the width of the grid
+     * 
      * @return the width
      */
-    public int getWidth(){
+    public int getWidth() {
         return this.width;
     }
-    
+
     /**
      * methode that put a ballloon at a scepecific cell
      */
-    public void putBallon(Balloon ball, Cell cell){};
+    public void putBallon(Balloon ball, Cell cell) {
+    };
 
     /**
-     * methode that set all the cell in the with the positin as path 
-    */  
-   public void setCellAsPath(){};
-   /**
-    * method that give the cell at the position
-    * @param pos
-   */
-  public Cell getCell(Position pos){
-    return this.grid[pos.getX()][pos.getY()];
-  } 
-  
-  /**
-   * methods that add a tower to the board
-   * @param Tower
-   */
-  public void addTower(Tower t, Cell cell){
-    cell.addTower(t);
-  }
+     * methode that set all the cell in the with the positin as path
+     */
+    public void setCellAsPath() {
+    };
 
-  /**
-   * methode that remove a tower in the board
-   */
-  public void removeTower(Tower t, Cell cell){
-    cell.removeTower(t);
-  }
+    /**
+     * method that give the cell at the position
+     * 
+     * @param pos
+     */
+    public Cell getCell(Position pos) {
+        return this.grid[pos.getX()][pos.getY()];
+    }
+
+    /**
+     * methods that add a tower to the board
+     * 
+     * @param Tower
+     */
+    public void addTower(Tower t, Cell cell) {
+        cell.addTower(t);
+    }
+
+    /**
+     * methode that remove a tower in the board
+     */
+    public void removeTower(Tower t, Cell cell) {
+        cell.removeTower(t);
+    }
 
     /**
      * methode that apply the path to the grid visually
      */
-  public abstract void applyPathToGrid();
+    public abstract void applyPathToGrid();
 
-  public abstract List<Position> path();
+    public abstract List<Position> path();
 }
