@@ -27,6 +27,9 @@ public class BalloonTest {
 
     public void testSpeedLogic() {
         ArrayList<Position> path = new ArrayList<>();
+        path.add(new Position(0,0));
+        path.add(new Position(0,1));
+        
 
     
 }
