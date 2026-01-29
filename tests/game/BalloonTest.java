@@ -26,6 +26,7 @@ public class BalloonTest {
     @Test
 
     public void testSpeedLogic() {
-        
+        ArrayList<Position> path = new ArrayList<>();
+
     
 }
