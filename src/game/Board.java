@@ -11,15 +11,16 @@ public abstract class Board{
     protected Cell[][] grid;
 
 
-    public Board(){
-        this.grid = new Cell[6][11];
+    public Board(int height, int width){
         this.height = 6;
         this.width = 11;
+        this.grid = new Cell[6][11];
         for (int i = 0; i < this.height; i ++){
             for (int j = 0; j < this.width; j ++){
                 this.grid[i][j] = new Cell(new Position(i, j));
             }
-            }
+        }
+
         this.tower_list = new ArrayList<>();
         
     }
@@ -70,7 +71,7 @@ public abstract class Board{
     * @param pos
    */
   public Cell getCell(Position pos){
-    return this.grid[pos.getY()][pos.getX()];
+    return this.grid[pos.getX()][pos.getY()];
   } 
   
   /**

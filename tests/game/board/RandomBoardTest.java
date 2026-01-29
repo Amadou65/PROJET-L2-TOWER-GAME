@@ -10,7 +10,7 @@ public class RandomBoardTest {
     private ArrayList<Position> nextPo; 
     @BeforeEach
     public void before(){
-        this.board = new RandomBoard();
+        this.board = new RandomBoard(6,11);
         this.nextPo = new ArrayList<>();
     }
     @Test

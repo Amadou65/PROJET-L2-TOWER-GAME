@@ -1,4 +1,5 @@
 // classe mere
+package game;
 abstract class Projectile {
 
     protected int damage;

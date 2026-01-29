@@ -24,8 +24,9 @@ class ProjectileTower extends Tower {
         System.out.println("tirer un projectile");
     }
 
-    public void findTarget() {
+    public List findTarget() {
         System.out.println("recherche d'une cible spécifique");
+        return new ArrayList();
     }
 }
 

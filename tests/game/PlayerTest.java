@@ -25,7 +25,7 @@ public class PlayerTest {
         Tower t = new ProjectileTower();
         t.cost = 100;
         Position pos = new Position(0, 0);
-        Board b = new ClassicalBoard();
+        Board b = new ClassicalBoard(6, 11);
 
         p.buyTower(t, pos, b);
         assertEquals(2400, p.getCredits());

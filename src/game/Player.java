@@ -72,10 +72,10 @@ public class Player {
     }
 
     /**
-     * methode that  set the credits of the player
+     * methode that  add the credits to the player
      */
-    public void setCredits(int i){
-        this.credits = i;
+    public void addCredits(int i){
+        this.credits += i;
     }
 
     /*
@@ -88,7 +88,7 @@ public class Player {
     public void buyUpgrade(Tower t, Board b, Position p, Evolution e){
         if(this.credits >= e.cost){
             this.credits -= e.cost;
-            //t.upgrade(e);
+            //t.upgrade(e); TO DO
             // add record in journal
             journal.recordUpgradeApplied(e.cost);
         }

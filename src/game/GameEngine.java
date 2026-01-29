@@ -26,8 +26,11 @@ public class GameEngine {
     public void game() {
         int time = 0;
         while ((!reserve.isEmpty() || !actif.isEmpty()) && player.isAlife()) {
-            System.out.println("--- Tic : " + time + " ---");
+            if(time%5 == 0){System.out.println("--- Tic : " + time + " ---");}
+
+            this.board.display();
             time++;
+            
             if (time % 20 == 0) {
                 if (!reserve.isEmpty()) {
                     Balloon b = reserve.get(reserve.size() - 1);
@@ -48,8 +51,8 @@ public class GameEngine {
 
                     if (b.isPopped()) {
                         actif.remove(b);
+                        player.addCredits(10);
                         System.out.println("[BOOM] Ballon éclaté ! Crédits : " + player.getCredits());
-                        player.setCredits(player.getCredits() + 10);
                         board.getCell(pos_ancien).removeBallon(b);
                     }
                     else if (ancien != nouveau) {
@@ -57,17 +60,17 @@ public class GameEngine {
                         if (nouveau < path.size()) {
                             Position pos = path.get(nouveau);
                             board.getCell(pos_ancien).removeBallon(b);
-                            board.getCell(new Position(pos.getX(), pos.getY())).putBallon(b);
-                    } 
-                    else{
-                        actif.remove(b);
-                        board.getCell(pos_ancien).removeBallon(b);
-                        player.onHit();
-                        System.out.println("[OUCH] Ballon sorti ! Vies : " + player.getHealth());
-                    }                      
-                }
+                            board.getCell(pos).putBallon(b);
+                        } 
+                        else{
+                            actif.remove(b);
+                            board.getCell(pos_ancien).removeBallon(b);
+                            player.onHit();
+                            System.out.println("[OUCH] Ballon sorti ! Vies : " + player.getHealth());
+                        }                      
+                    }
               
-            }
+                }
         } // Fin du while
     } // Fin de la méthode
 } // Fin de la classe

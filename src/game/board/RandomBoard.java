@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class RandomBoard extends Board {
     private Random randomNumber = new Random();
-    public RandomBoard() {
-        super();
+    public RandomBoard(int height, int width) {
+        super(height, width);
     }
     /**
      * method that create the list of the starting positions
@@ -144,7 +144,7 @@ public boolean isDoingCircle(ArrayList<Position> path) {
         for (Position p : positions) {
 
             // On récupère la cellule et on la marque comme chemin
-            this.grid[p.getY()][p.getX()].setAsPath(true);
+            this.grid[p.getX()][p.getY()].setAsPath(true);
         }
     }
     // methode putballon specifique por random board

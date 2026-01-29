@@ -2,11 +2,10 @@ package game.board;
 import java.util.*;
 import game.Position;
 import game.Board;
-import java.util.ArrayList;
 
 public class ClassicalBoard extends Board {
-    public ClassicalBoard(){
-        super();
+    public ClassicalBoard(int height, int width) {
+        super(height, width);
     }
 
     /* Returns the list of all boundary cells */

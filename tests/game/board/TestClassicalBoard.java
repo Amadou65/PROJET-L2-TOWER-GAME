@@ -12,7 +12,7 @@ public class TestClassicalBoard {
 
     @Test
     public void testGetPointsBound() {
-        ClassicalBoard board = new ClassicalBoard();
+        ClassicalBoard board = new ClassicalBoard(6, 11);
         List<Position> points = board.getPointsBound();
         assertEquals(30, points.size());
         assertTrue(points.contains(points.get(0)));
@@ -20,7 +20,7 @@ public class TestClassicalBoard {
 
     @Test
     public void testRandomPath() {
-        ClassicalBoard board = new ClassicalBoard();
+        ClassicalBoard board = new ClassicalBoard(6, 11);
         List<Position> path = board.randomPath();
         if (path.get(0).getX() == 0){
             for (int i = 0; i < path.size(); i++){

@@ -70,6 +70,6 @@ public class Balloon {
      * @param the path
      */
     public boolean haveReachedLimit(ArrayList<Position> path){
-
+        return true;
     }
 }
