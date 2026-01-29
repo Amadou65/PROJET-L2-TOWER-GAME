@@ -19,9 +19,9 @@ public class TestClassicalBoard {
     }
 
     @Test
-    public void testRandomPath() {
+    public void testPath() {
         ClassicalBoard board = new ClassicalBoard(6, 11);
-        List<Position> path = board.randomPath();
+        List<Position> path = board.path();
         if (path.get(0).getX() == 0){
             for (int i = 0; i < path.size(); i++){
                 assertEquals(i, path.get(i).getX());

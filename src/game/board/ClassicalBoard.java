@@ -26,7 +26,7 @@ public class ClassicalBoard extends Board {
     }
 
     /* Returns a random path from a boundary point */
-    public List<Position> randomPath(){
+    public List<Position> path(){
         
         List<Position> path = new ArrayList<>();
 
@@ -59,6 +59,13 @@ public class ClassicalBoard extends Board {
         return path;
     }
 
+    public void applyPathToGrid() {
+        List<Position> positions = this.path();
+        for (Position p : positions) {
+            // On récupère la cellule et on la marque comme chemin
+            this.grid[p.getX()][p.getY()].setAsPath(true);
+        }
+    }
 
 
 }

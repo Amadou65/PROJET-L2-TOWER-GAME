@@ -1,6 +1,6 @@
 package game;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public abstract class Board{
     // The cell of the Board
@@ -88,4 +88,11 @@ public abstract class Board{
   public void removeTower(Tower t, Cell cell){
     cell.removeTower(t);
   }
+
+    /**
+     * methode that apply the path to the grid visually
+     */
+  public abstract void applyPathToGrid();
+
+  public abstract List<Position> path();
 }

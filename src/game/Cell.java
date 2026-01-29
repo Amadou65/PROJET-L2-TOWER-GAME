@@ -11,11 +11,12 @@ public class Cell{
     private ArrayList<Tower> tower_list;
     // The position of the cell
     private Position pos;
-    private boolean isPath = false; 
+    private boolean isPath; 
     public Cell( Position pos){
         this.pos = pos;
         this.list_ball = new ArrayList<>();
         this.tower_list = new ArrayList<>();
+        this.isPath = false;
     }
      /**
      * methode that return the position of the current cell
@@ -29,7 +30,7 @@ public class Cell{
      * @param path
     */
     public void setAsPath(boolean path) {
-    this.isPath = path;
+      this.isPath = path;
     }
 
     /**
