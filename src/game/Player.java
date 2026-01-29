@@ -25,7 +25,10 @@ public class Player {
     public int getCredits(){
         return this.credits;
     }
-
+    // seters
+    public void setCredits(int credits){
+        this.credits = credits;
+    }
     /*
      * Predicate that return True if current Player have more than 0 point of life
      * @return boolean
