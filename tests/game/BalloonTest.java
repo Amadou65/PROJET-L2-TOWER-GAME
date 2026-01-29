@@ -33,5 +33,9 @@ public class BalloonTest {
         Balloon fast = new Balloon(4, path);
         Balloon slow = new Balloon(1, path);
 
+
+        // On vérifie que la logique de vitesse est respectée
+        fast.move();
+
     
 }
