@@ -3,26 +3,24 @@ package game;
 import java.util.*;
 
 public class Balloon {
-    // Attributs
-    private int health;
-    private double speed;
-    private boolean frozen;
-    private int currentTargetIndex; 
-    private int level;
-    
-    // Methode deplacement
+    // ... tes autres attributs ...
     private double x, y; 
+    private double distance; // <--- AJOUT : Pour suivre la distance totale
+    private double speed;
+    private int health;
+    private int currentTargetIndex;
     private List<Position> path;
+    private int level;
+    private boolean frozen;
 
     public Balloon(int level, List<Position> path) {
         this.health = level;
         this.level = level;
-        this.frozen = false;
         this.path = path;
-        this.currentTargetIndex = 1; 
+        this.distance = 0.0; // Initialisation à 0
+        this.currentTargetIndex = 1;
         this.speed = determineSpeed(level);
-
-        // Position de départ
+        // ... (le reste du constructeur)
         if (path != null && !path.isEmpty()) {
             this.x = path.get(0).getX();
             this.y = path.get(0).getY();
@@ -35,38 +33,37 @@ public class Balloon {
         return 0.05;
     }
 
-    /**
-     * MÉTHODE MOVE (Fusionnée)
-     */
     public void move() {
         if (!frozen && !isPopped() && currentTargetIndex < path.size()) {
             Position target = path.get(currentTargetIndex);
             double dx = target.getX() - this.x;
             double dy = target.getY() - this.y;
-            double dist = Math.sqrt(dx * dx + dy * dy);
+            double distToTarget = Math.sqrt(dx * dx + dy * dy);
 
-            if (dist <= speed) {
+            // On calcule la distance réelle qu'on va parcourir ce tour-ci
+            double actualMove = Math.min(distToTarget, speed);
+
+            if (distToTarget <= speed) {
                 this.x = target.getX();
                 this.y = target.getY();
                 currentTargetIndex++; 
             } else {
-                this.x += (dx / dist) * speed;
-                this.y += (dy / dist) * speed;
+                this.x += (dx / distToTarget) * speed;
+                this.y += (dy / distToTarget) * speed;
             }
+            
+            // MISE À JOUR : On ajoute le mouvement à la distance totale
+            this.distance += actualMove;
         }
     }
 
-    // --- Méthodes de gestion des dégâts ---
-    public void takeDamage(int damage) {
-        this.health -= damage;
-        if (this.health > 0) {
-            this.speed = determineSpeed(this.health);
-        }
+    // AJOUT : La méthode getDistance
+    public double getDistance() {
+        return this.distance;
     }
 
+    // ... le reste de tes méthodes (isPopped, takeDamage, etc.) ...
     public boolean isPopped() { return this.health <= 0; }
-    
-    // --- Méthodes pour  GameEngine ---
     public int getGridX() { return (int) Math.round(x); }
     public int getGridY() { return (int) Math.round(y); }
     public int getLevel() { return this.level; }
