@@ -58,22 +58,52 @@ Par rapport aux ébauches précédentes, nous avons renforcé la robustesse du c
 ## Livrable 2
 Commandes de compilations:
 
-Pour les diffentes classes:
-   - javac -sourcepath src src/game/board/*.java -d classes
-   - javac -sourcepath src src/game/*.java -d classes
-   - javac -sourcepath src src/game/Main.java -d classes
+Pour la compilation des  diffentes classes:
+
+    mkdir -p bin
+    javac -d bin -sourcepath src \
+    src/game/Position.java \
+    src/game/Player.java \
+    src/game/Balloon.java \
+    src/game/Cell.java \
+    src/game/Board.java \
+    src/game/GameEngine.java \
+    src/game/board/RandomBoard.java \
+    src/game/board/ClassicalBoard.java \
+    src/game/Livrable2a.java \
+    src/game/Livrable2b.java
+
+Pour creer la java doc :
+
+ - javadoc -d docs -sourcepath src \
+    src/game/Livrable2a.java src/game/Livrable2b.java \
+    src/game/GameEngine.java src/game/Balloon.java \
+    src/game/Cell.java src/game/Board.java \
+    src/game/Position.java src/game/Player.java
+
+Ppour la creation des differents jar:
+
+    - jar cfe livrable2a.jar game.Livrable2a -C bin .
+
+    - jar cfe livrable2b.jar game.Livrable2b -C bin .
+
+Pour l'execution des Livrables:
+
+
+    - java -jar livrable2a.jar
+    - java -jar livrable2b.jar
 
 Pour l'execution de la methode Main
+
     - java -classpath classes game.Main
 
 Pour les differentes classes de teste:
-    - javac -cp "junit-console.jar:classes" -d test-classes \
-    tests/game/board/RandomBoardTest.java \
-    tests/game/board/TestClassicalBoard.java
-   - java -cp "junit-console.jar:classes" -d test-classes tests/game/PositionTest.java
+
+    - javac -d bin -cp "bin:junit-console.jar" tests/game/*.java tests/game/board/*.java
 
 Pour executer les testes:
-    - java -cp "junit-console.jar:classes" org.junit.platform.console.ConsoleLauncher --scan-class-path
+
+    - java -jar junit-console.jar --class-path bin --scan-class-path
 
 
 
