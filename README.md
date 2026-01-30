@@ -172,6 +172,8 @@ Habiba :
     Dynamisme des Profils de Vitesse : Mise en place d'un système de vitesses variables corrélées au niveau de l'ennemi.L'entité adapte dynamiquement sa vitesse de progression (determineSpeed) en temps réel dès que sa structure change suite à un impact.
 
     Interface d'Affichage Prioritaire : Optimisation de la classe Cell pour gérer la priorité visuelle. Développement d'un mécanisme d'affichage conditionnel
+
+    Tests de Fiabilité Unitaire (JUnit) : Création d'une suite de tests (BalloonTest) validant les scénarios critiques : calcul exact des dégâts,mutation de niveau, et vérification que la vitesse décroissante est correctement appliquée lors de la perte de résistance.
 ## Livrable 3
 
 ### Atteinte des objectifs
