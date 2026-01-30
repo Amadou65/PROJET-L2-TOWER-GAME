@@ -11,9 +11,9 @@ public abstract class Board {
     protected Cell[][] grid;
 
     public Board(int height, int width) {
-        this.height = 6;
-        this.width = 11;
-        this.grid = new Cell[6][11];
+        this.height = height;
+        this.width = width;
+        this.grid = new Cell[height][width];
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
                 this.grid[i][j] = new Cell(new Position(i, j));

@@ -3,13 +3,13 @@ package game;
 import java.util.*;
 
 public class GameEngine {
-    private ArrayList<Balloon> reserve;
-    private ArrayList<Balloon> actif;
-    private ArrayList<Position> path;
+    private List<Balloon> reserve;
+    private List<Balloon> actif;
+    private List<Position> path;
     private Board board;
     private Player player;
 
-    public GameEngine(ArrayList<Balloon> reserve, ArrayList<Position> path, Board board) {
+    public GameEngine(List<Balloon> reserve, List<Position> path, Board board) {
         this.reserve = reserve;
         this.actif = new ArrayList<>();
         this.path = path;
@@ -61,6 +61,18 @@ public class GameEngine {
                 } 
                 // CAS C : MOUVEMENT CLASSIQUE
                 else if (oldX != b.getGridX() || oldY != b.getGridY()) {
+                    board.getCell(new Position(oldX, oldY)).removeBallon(b);
+                    board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
+                }
+
+            for (Balloon b : actif) {
+                int oldX = b.getGridX();
+                int oldY = b.getGridY();
+
+                b.move(); // Ton ballon avance selon sa vitesse
+
+                // Si le ballon change de case, on met à jour la grille
+                if (oldX != b.getGridX() || oldY != b.getGridY()) {
                     board.getCell(new Position(oldX, oldY)).removeBallon(b);
                     board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
                 }

@@ -42,8 +42,15 @@ public class Cell{
     
    }
     public String getSymbol() {
-      if (this.isPath) return "X"; // Symbole pour le chemin
-      return " "; 
+      // Si la liste des ballons dans cette case n'est pas vide, on affiche B
+      if (!this.list_ball.isEmpty()) {
+        return "B";
+      }
+      // Sinon, si c'est un chemin, on affiche X
+      if (this.isPath) {
+        return "X";
+      }
+      return " ";
     }
 
     /**
