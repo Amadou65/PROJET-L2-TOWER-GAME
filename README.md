@@ -124,6 +124,30 @@ Amadou :
 
     Fiabilisation du code : Utilisation de boucles itératives inversées pour permettre la modification sécurisée des listes d'entités en cours de parcours (évitant les erreurs de type ConcurrentModificationException).
 
+Serhii :
+
+    Creation de la classe de joueur (Player) : La classe Player représente l’état global du joueur au cours de la partie.
+    À l’initialisation, le joueur dispose de 20 points de vie et de 2500 crédits, conformément aux règles du jeu
+
+    Le joueur possède un compteur de points de vie décrémenté à chaque ballon atteignant la fin de sa trajectoire.
+    La méthode onHit() retire un point de vie, tandis que le prédicat isAlife() permet de vérifier si la partie peut continuer.
+
+    Des methode buyTower() permet au joueur d’acheter une tour et de la placer sur le plateau à une position donnée.
+    L’achat est validé uniquement si le joueur dispose de suffisamment de crédits. sellTower() permet de vendre le tour.
+
+    Développement de la classe Journal : La classe Journal est chargée de conserver des statistiques globales sur la partie.
+    Elle enregistre les actions importantes effectuées par le joueur, telles que :
+
+    * l’achat de tours,
+
+    * la nombre des credits obtenu totale,
+
+    * l’achat d’améliorations.
+
+    Ce mécanisme permet de centraliser les informations liées à l’évolution de la partie et de faciliter le suivi des actions du joueur.
+
+    Optimisation des deux classes Boards avec creation des fonctions abstraite
+
 ### Difficultés restant à résoudre
 Amadou :    
     Optimisation de la détection de cible : La logique permettant aux tours de scanner efficacement les ballons à portée sans ralentir le moteur de jeu reste à affiner pour le prochain livrable.
@@ -133,6 +157,11 @@ Amadou :
     Gestion des collisions complexes : Prévoir le comportement du moteur si plusieurs types de ballons avec des effets différents (ralentissement, gel) occupent la même cellule.
 
     Transition vers l'interface graphique : Adapter les logs de la console vers un affichage visuel fluide (Livrable 3).
+
+Serhii :
+    Transfert de statistique entre les manches 
+
+    Creation des exeptions
 ## Livrable 3
 
 ### Atteinte des objectifs
