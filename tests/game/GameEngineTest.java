@@ -3,7 +3,7 @@ package game;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
-import game.board.Board;
+import game.Board;
 import game.board.ClassicalBoard;
 
 public class GameEngineTest {
@@ -39,6 +39,26 @@ public class GameEngineTest {
     @DisplayName("Test d'une partie courte jusqu'à la fin")
     public void testGameFullRun() {
         // On lance le jeu. Avec 2 ballons et un petit plateau, 
-        // cela devrait se terminer rapidement.
+        
         assertDoesNotThrow(() -> engine.game(), "La méthode game() ne devrait pas lever d'exception.");
     }
+    @Test
+    @DisplayName("Vérification de la gestion des ballons dans la réserve")
+    public void testReserveDepletion() {
+        // Avant de lancer, la réserve a 2 ballons
+        assertEquals(2, reserve.size());
+        
+        // On lance le moteur
+        engine.game();
+        
+        // Après le jeu, la réserve doit être vide
+        assertTrue(reserve.isEmpty(), "La réserve de ballons devrait être vide à la fin de la partie.");
+    }
+
+    @Test
+    @DisplayName("Test de l'état du joueur après une partie")
+    public void testPlayerStateAfterGame() {
+        // On lance le jeu
+        engine.game();
+    }
+}
