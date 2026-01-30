@@ -162,6 +162,11 @@ Serhii :
     Transfert de statistique entre les manches 
 
     Creation des exeptions
+
+
+Habiba : 
+    Conception de la classe Balloon : Implémentation d'une entité autonome capable de gérer ses propres attributs de survie (santé) et de cinématique (vitesse) en fonction de son niveau de résistance (1, 2 ou 4).
+    
 ## Livrable 3
 
 ### Atteinte des objectifs
