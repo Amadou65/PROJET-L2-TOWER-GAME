@@ -68,4 +68,15 @@ public class Balloon {
     public int getGridY() { return (int) Math.round(y); }
     public int getLevel() { return this.level; }
     public boolean hasReachedEnd() { return currentTargetIndex >= path.size(); }
+
+    /**
+     * methode Take damage
+     * 
+     */
+    public void takeDamage(int damage) {
+    this.health -= damage;
+    if (this.health > 0) {
+        this.speed = determineSpeed(this.health);
+    }
+}
 }
