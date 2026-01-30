@@ -1,6 +1,7 @@
 package game;
 
-import java.util.*;
+import java.util.*; 
+import game.Position;
 
 public class GameEngine {
     private List<Balloon> reserve;
@@ -19,23 +20,23 @@ public class GameEngine {
 
     public void game() {
         int time = 0;
-        int totalPopped = 0;   // Compteur de ballons éclatés
-        int totalEscaped = 0;  // Compteur de ballons ayant franchi la ligne
-        int initialCount = reserve.size(); // Nombre total de ballons au départ
+        int totalPopped = 0;   
+        int totalEscaped = 0;  
+        int initialCount = reserve.size(); 
 
         System.out.println("--- DÉMARRAGE DE LA MANCHE (" + initialCount + " ballons) ---");
 
         while ((!reserve.isEmpty() || !actif.isEmpty()) && player.isAlife()) {
             time++;
 
-            // 1. PHASE DE SPAWN
+            // 1. PHASE DE SPAWN : Un ballon sort tous les 20 tics
             if (time % 20 == 0 && !reserve.isEmpty()) {
                 Balloon b = reserve.remove(reserve.size() - 1);
                 this.actif.add(b);
                 board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
             }
 
-            // 2. PHASE DE MOUVEMENT ET MISE À JOUR
+            // 2. PHASE DE MOUVEMENT ET MISE À JOUR (Boucle inversée pour pouvoir supprimer)
             for (int i = actif.size() - 1; i >= 0; i--) {
                 Balloon b = actif.get(i);
                 int oldX = b.getGridX();
@@ -43,7 +44,7 @@ public class GameEngine {
 
                 b.move();
 
-                // CAS A : BALLON ÉCLATÉ (VICTOIRE LOCALE)
+                // CAS A : BALLON ÉCLATÉ
                 if (b.isPopped()) {
                     totalPopped++;
                     player.setCredits(player.getCredits() + 10);
@@ -51,7 +52,7 @@ public class GameEngine {
                     actif.remove(i);
                     System.out.println("[SCORE] Ballon éclaté ! (" + totalPopped + "/" + initialCount + ")");
                 } 
-                // CAS B : BALLON ÉCHAPPÉ (DÉFAITE LOCALE)
+                // CAS B : BALLON ÉCHAPPÉ
                 else if (b.hasReachedEnd()) {
                     totalEscaped++;
                     player.onHit();
@@ -59,26 +60,19 @@ public class GameEngine {
                     actif.remove(i);
                     System.out.println("[ALERTE] Un ballon s'est échappé !");
                 } 
-                // CAS C : MOUVEMENT CLASSIQUE
+                // CAS C : MOUVEMENT CLASSIQUE (Changement de case)
                 else if (oldX != b.getGridX() || oldY != b.getGridY()) {
                     board.getCell(new Position(oldX, oldY)).removeBallon(b);
                     board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
                 }
+            } // Fin de la boucle de mouvement
 
-            for (Balloon b : actif) {
-                int oldX = b.getGridX();
-                int oldY = b.getGridY();
-
-                b.move(); // Ton ballon avance selon sa vitesse
-
-                // Si le ballon change de case, on met à jour la grille
-                if (oldX != b.getGridX() || oldY != b.getGridY()) {
-                    board.getCell(new Position(oldX, oldY)).removeBallon(b);
-                    board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
-                }
+            // 3. PAUSE POUR LE RENDU (50ms = 20 FPS)
+            try { 
+                Thread.sleep(50); 
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-
-            try { Thread.sleep(50); } catch (InterruptedException e) {}
         }
 
         // --- PHASE DE BILAN FINAL ---
@@ -96,7 +90,6 @@ public class GameEngine {
         System.out.println("Ballons éclatés : " + totalPopped);
         System.out.println("Ballons échappés : " + totalEscaped);
 
-        // LE MESSAGE DE PRÉCISION
         if (totalPopped == initialCount) {
             System.out.println("MÉDAILLE D'OR : Perfect ! Aucun ballon n'a survécu.");
         } else if (totalPopped > 0) {
