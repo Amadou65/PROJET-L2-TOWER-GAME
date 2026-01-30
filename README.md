@@ -168,8 +168,10 @@ Habiba :
     Conception de la classe Balloon : Implémentation d'une entité autonome capable de gérer ses propres attributs de survie (santé) et de cinématique (vitesse) en fonction de son niveau de résistance (1, 2 ou 4).
 
     Mécanique de "Mutation" des Entités : Développement de la logique de rétrogradation de niveau lors de la réception de dégâts.Un ballon de niveau 4 (Rose) ne disparaît pas immédiatement mais "mute" en un niveau inférieur (Bleu, puis Rouge), respectant ainsi la hiérarchie de résistance du sujet.
-    
+
     Dynamisme des Profils de Vitesse : Mise en place d'un système de vitesses variables corrélées au niveau de l'ennemi.L'entité adapte dynamiquement sa vitesse de progression (determineSpeed) en temps réel dès que sa structure change suite à un impact.
+
+    Interface d'Affichage Prioritaire : Optimisation de la classe Cell pour gérer la priorité visuelle. Développement d'un mécanisme d'affichage conditionnel
 ## Livrable 3
 
 ### Atteinte des objectifs
