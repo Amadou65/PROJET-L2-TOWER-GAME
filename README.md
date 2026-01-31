@@ -110,6 +110,19 @@ Pour executer les testes:
 
 ### Atteinte des objectifs
 
+Yassin :
+
+    Mouvement Fluide : Le passage de coordonnées entières à des coordonnées double permet aux ballons de se déplacer à l'intérieur des cases plutôt que de sauter de l'une à l'autre.
+
+    Vitesse Aléatoire : Chaque ballon possède sa propre vitesse générée au hasard, influençant sa progression en fonction du temps. 
+
+    Suivi de Trajectoire : Le système utilise les listes de positions de RandomBoard ou ClassicalBoard pour diriger les ballons.
+
+    Gestion des Virages : Le code détecte l'approche d'un point de passage et ajuste la position pour assurer une transition précise vers la direction suivante.
+    
+    Lien avec la Grille : Les positions précises sont arrondies pour permettre au GameEngine de situer chaque ballon dans une Cell spécifique du plateau.
+
+
 Amadou :
 
     Développement du moteur de jeu central (GameEngine) : Mise en place de la boucle de jeu principale basée sur un système de "tics" temporels permettant de cadencer les actions.
