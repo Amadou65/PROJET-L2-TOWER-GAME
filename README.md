@@ -168,6 +168,7 @@ Serhii :
 
 ### Difficultés restant à résoudre
 Amadou :    
+
     Optimisation de la détection de cible : La logique permettant aux tours de scanner efficacement les ballons à portée sans ralentir le moteur de jeu reste à affiner pour le prochain livrable.
 
     Équilibrage des vitesses : Ajuster les ratios entre la vitesse de rafraîchissement (tics) et la progression des ballons pour garantir une difficulté progressive.
