@@ -122,6 +122,11 @@ Yassin :
     
     Lien avec la Grille : Les positions précises sont arrondies pour permettre au GameEngine de situer chaque ballon dans une Cell spécifique du plateau.
 
+    Création de la classe Tower : Définit les bases de la défense (portée, cadence, coût). Elle se sépare en tours avec projectiles (ex: DartMonkey, BombTower) qui peuvent tirer, et tours sans projectiles (ex: IceTower) qui gèrent des effets temporels.
+
+    Création de la classe Projectile : Gère la puissance d'attaque via un système de dégâts. Chaque type possède une valeur fixe, comme le Dart (10) ou la ExtraBomb (45).
+
+    Création de la classe Evolution : Permet d'améliorer les tours à projectiles. Elle définit des types d'upgrades spécifiques (puissance, cadence, portée, ou projectile) et gère leur coût d'achat.
 
 Amadou :
 
@@ -187,6 +192,15 @@ Habiba :
     Interface d'Affichage Prioritaire : Optimisation de la classe Cell pour gérer la priorité visuelle. Développement d'un mécanisme d'affichage conditionnel
 
     Tests de Fiabilité Unitaire (JUnit) : Création d'une suite de tests (BalloonTest) validant les scénarios critiques : calcul exact des dégâts,mutation de niveau, et vérification que la vitesse décroissante est correctement appliquée lors de la perte de résistance.
+
+Yassin :
+
+    Création de la classe BalloonMovementManager : Difficulté à synchroniser les coordonnées double (fluides) avec la grille de Cell en int pour que les tours détectent toujours les ballons.
+
+    Gestion des virages : Risque que le ballon dépasse une intersection à cause de sa vitesse ; il faut forcer sa position sur le point exact du chemin avant de tourner.
+
+    Aléatoire : La gestion des vitesses au hasard complique l'affichage, car plusieurs ballons peuvent se superposer sur une même case du plateau.
+
 ## Livrable 3
 
 ### Atteinte des objectifs
