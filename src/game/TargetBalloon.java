@@ -1,10 +1,10 @@
 package game;
-
 import java.util.List;
 
 /**
  * Classe utilitaire pour gérer la détection et le ciblage des ballons par les tours.
  */
+
 public class TargetingSystem {
 
     /**
@@ -19,16 +19,16 @@ public class TargetingSystem {
 
     /**
      * Sélectionne le ballon le plus "avancé" dans le rayon d'action de la tour.
-     * * @param actif La liste des ballons présents sur le plateau [cite: 16]
-     * @param t La tour qui cherche une cible [cite: 51]
-     * @param towerPos La position de cette tour sur la grille [cite: 20]
+     * * @param actif La liste des ballons présents sur le plateau 
+     * @param t La tour qui cherche une cible
+     * @param towerPos La position de cette tour sur la grille 
      * @return Le ballon le plus proche de la fin de parcours, ou null si aucun n'est à portée.
      */
     public static Balloon getBestTarget(List<Balloon> actif, Tower t, Position towerPos) {
         Balloon bestTarget = null;
         double maxProgress = -1.0;
 
-        for (Balloon b : actif) {
+        for (Balloon b : actif) {  
             // 1. Calcul de la distance réelle entre la tour et le ballon
             double dist = calculateDistance(t, towerPos, b);
 
