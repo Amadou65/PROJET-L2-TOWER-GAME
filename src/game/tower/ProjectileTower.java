@@ -10,6 +10,7 @@ public class ProjectileTower extends Tower{
     public Projectile projectile;
 
     public ProjectileTower(int scope, int cadence, int cost, Projectile p){
+        super("titi");
         this.cadence = cadence;
         this.scope = scope;
         this.cost = cost;

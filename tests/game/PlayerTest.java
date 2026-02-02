@@ -2,6 +2,7 @@ package game;
 import game.Player;
 import game.board.ClassicalBoard;
 import game.tower.*;
+import game.tower.typeTower.DartMonkey;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,8 +24,7 @@ public class PlayerTest {
     @Test
     public void testSellBuyTower(){
         Player p = new Player();
-        Tower t = new ProjectileTower();
-        t.cost = 100;
+        Tower t = new DartMonkey();
         Position pos = new Position(0, 0);
         Board b = new ClassicalBoard(6, 11);
 

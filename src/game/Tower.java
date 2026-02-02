@@ -8,14 +8,15 @@ public class Tower {
     protected int cadence;
     protected boolean isEvolutionPossible;
     protected int cost;
+    protected String nom;
 
-    public Tower(){
-
+    public Tower(String nom){
+        this.nom = nom;
     }
 
-    public List findTarget() {       
+    public List<Balloon> findTarget() {       
         System.out.println("recherche d'une cible");
-        return new ArrayList();
+        return new ArrayList<Balloon>();
     }
 
 }
