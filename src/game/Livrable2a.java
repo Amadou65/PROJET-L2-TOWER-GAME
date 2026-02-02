@@ -8,7 +8,9 @@ public class Livrable2a {
         System.out.println("Livrable 2a: A");
 
         // Creation et affichage du board
-        Board board = new RandomBoard(5, 5);
+        int height = args.length > 0 ? Integer.parseInt(args[0]) : 5;
+        int width = args.length > 1 ? Integer.parseInt(args[1]) : 5;
+        Board board = new RandomBoard(height, width);
         System.out.println(board.display());
 
         // On obtient le chemin et on cree des ballons
