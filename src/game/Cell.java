@@ -43,14 +43,15 @@ public class Cell{
    }
     public String getSymbol() {
       // Si la liste des ballons dans cette case n'est pas vide, on affiche B
-      if (!this.list_ball.isEmpty()) {
+      if (this.list_ball !=null && !this.list_ball.isEmpty()) {
         return "B";
       }
-      // Sinon, si c'est un chemin, on affiche X
-      if (this.isPath) {
-        return "X";
+      // Si pas de ballon on regarde si ya tour.
+      if (this.tower_list != null && !this.tower_list.isEmpty()) {
+        return "T";
       }
-      return " ";
+      // sinon on affiche le chemain 
+      return this.isPath ? "X" : " ";
     }
 
     /**
