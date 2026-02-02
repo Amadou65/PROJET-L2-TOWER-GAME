@@ -1,7 +1,6 @@
 package game;
 
 import java.util.*; 
-import game.Position;
 
 public class GameEngine {
     private List<Balloon> reserve;
@@ -67,7 +66,23 @@ public class GameEngine {
                 }
             } // Fin de la boucle de mouvement
 
-            // 3. PAUSE POUR LE RENDU (50ms = 20 FPS)
+            // 3. PHASE DE TIRS DES TOURS
+            for (Tower tower : board.tower_list){
+                // CAS A : UNE TOUR PROJECTILE TOWER
+                if (tower.isProjectileTower()){
+                    if ( time % tower.getCadence() == 0)
+                        tower.shot();
+                }
+
+                // CAS B : UNE TOUR NONPROJECTILE TOWER
+                else{
+                    if (time % tower.getCadence() == 0){
+                        tower.freeze();
+                    }
+                }
+            }
+
+            // 4. PAUSE POUR LE RENDU (50ms = 20 FPS)
             try { 
                 Thread.sleep(50); 
             } catch (InterruptedException e) {
