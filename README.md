@@ -272,7 +272,7 @@ Solutions apportées
 
     Filtres de validation : Ajout de la méthode isSameSide pour rejeter automatiquement les chemins invalides lors de la vérification finale.
 
-Objectifs pour la semaine prochaine (Livrable 2) et répartition
+### Objectifs pour la semaine prochaine (Livrable 2) et répartition
 
 L'objectif est d'attaquer la gestion des ballons et du temps.
 
@@ -280,19 +280,19 @@ Membre	Tâche spécifique
 
 Habiba	
 
-Création de la hiérarchie des classes pour les 3 types de ballons (niveaux 1, 2 et 4).
+    Création de la hiérarchie des classes pour les 3 types de ballons (niveaux 1, 2 et 4).
 	
 Yassin	
 
-Développement de la logique de progression infra-case (mouvement fluide).
+    Développement de la logique de progression infra-case (mouvement fluide).
 	
 Amadou	
 
-Mise en place du moteur de "tics" d'horloge et de la boucle de manche.
+    Mise en place du moteur de "tics" d'horloge et de la boucle de manche.
 	
 Ivkin	
 
-Implémentation de la classe Player (2500 crédits, 20 vies) et gestion des gains.
+    Implémentation de la classe Player (2500 crédits, 20 vies) et gestion des gains.
 
 
 ## Semaine 3
@@ -343,16 +343,16 @@ Ce qui a été réalisé
 
 ### Objectifs pour la semaine et répartition du travail par membre
 
-L'objectif est de rendre les tours opérationnelles (Livrable 3).
-Membre	Tâche spécifique
+    L'objectif est de rendre les tours opérationnelles (Livrable 3).
+    Membre	Tâche spécifique
 
-Amadou	Intégrer la phase d'attaque dans la boucle du GameEngine selon la cadence des tours.
+    Amadou	Intégrer la phase d'attaque dans la boucle du GameEngine selon la cadence des tours.
 
-Yassin	Développer l'algorithme de détection de cible (distance entre tour et ballon).
+    Yassin	Développer l'algorithme de détection de cible (distance entre tour et ballon).
 
-Ivkin	Sécuriser le placement des tours sur la grille (interdiction de poser sur le chemin).
+    Ivkin	Sécuriser le placement des tours sur la grille (interdiction de poser sur le chemin).
 
-Habiba	Initialiser les statistiques réelles (portée, coût, dégâts) dans les constructeurs des tours.
+    Habiba	Initialiser les statistiques réelles (portée, coût, dégâts) dans les constructeurs des tours.
 
 ## Semaine 5
 
