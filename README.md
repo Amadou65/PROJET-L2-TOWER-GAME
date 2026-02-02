@@ -297,19 +297,62 @@ Implémentation de la classe Player (2500 crédits, 20 vies) et gestion des gain
 
 ## Semaine 3
 
-### Ce qui a été réalisé
+Ce qui a été réalisé
+
+    Finalisation du moteur de jeu (GameEngine) : Mise en place de la boucle de jeu principale gérant le temps par "tics" et la gestion des vagues de ballons.
+
+    Système de progression : Implémentation du mouvement "infra-case" permettant aux ballons de se déplacer avec fluidité sur le chemin grâce à des coordonnées réelles (x,y).
+
+    Gestion des entités : Création de la hiérarchie des ballons avec gestion automatique des niveaux de santé et de la vitesse.
+
+    Interface Joueur et Stats : Développement de la classe Player et du Journal pour le suivi des crédits, des vies et des statistiques de fin de manche.
 
 ### Difficultés rencontrées
 
+    Synchronisation du chemin : Problème d'affichage où le chemin généré par RandomBoard ne s'affichait pas avec les symboles 'X' sur la grille car la méthode applyPathToGrid n'était pas appelée au bon moment.
+
+    Mouvement et Cellules : Difficulté à faire correspondre les coordonnées double des ballons avec les index int de la grille pour mettre à jour la présence des ballons dans chaque Cell.
+
 ### Objectifs pour la semaine et répartition du travail par membre
+
+Terminer les tests du Livrable 2 et préparer l'architecture des tours.
+
+    Habiba : Création des classes de base pour les tours et les projectiles.
+
+    Yassin : Optimisation du calcul de distance pour le futur radar des tours.
+
+    Amadou : Tests unitaires du moteur de jeu et affichage du bilan final.
+
+    Ivkin : Gestion des achats de tours dans la classe Player.
 
 ## Semaine 4
 
-### Ce qui a été réalisé
+Ce qui a été réalisé
+
+    Affichage dynamique : Amélioration de la méthode display() pour s'adapter à toutes les tailles de plateaux avec des indices de colonnes et de lignes clairs.
+
+    Architecture du Combat : Mise en place de l'héritage pour les tours (ProjectileTower, NonProjectileTower) et les différents types de projectiles (Dart, Bomb, etc.).
+
+    Validation du Livrable 2 : Passage réussi des tests de simulation où les ballons traversent le plateau et impactent les points de vie du joueur.
 
 ### Difficultés rencontrées
 
+    Mémorisation du chemin : Le chemin changeait à chaque appel de la méthode path(), empêchant les ballons de suivre les 'X' affichés. Nous avons dû implémenter une mémorisation du chemin dans RandomBoard.
+
+    Dimensions fixes : Le constructeur de Board forçait une taille de 6x11, ce qui créait des erreurs lors des tests sur des plateaux plus petits.
+
 ### Objectifs pour la semaine et répartition du travail par membre
+
+L'objectif est de rendre les tours opérationnelles (Livrable 3).
+Membre	Tâche spécifique
+
+Amadou	Intégrer la phase d'attaque dans la boucle du GameEngine selon la cadence des tours.
+
+Yassin	Développer l'algorithme de détection de cible (distance entre tour et ballon).
+
+Ivkin	Sécuriser le placement des tours sur la grille (interdiction de poser sur le chemin).
+
+Habiba	Initialiser les statistiques réelles (portée, coût, dégâts) dans les constructeurs des tours.
 
 ## Semaine 5
 
