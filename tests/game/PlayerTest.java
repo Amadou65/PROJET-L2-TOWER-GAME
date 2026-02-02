@@ -1,6 +1,7 @@
 package game;
 import game.Player;
 import game.board.ClassicalBoard;
+import game.tower.*;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
