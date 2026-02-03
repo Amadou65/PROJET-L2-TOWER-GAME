@@ -122,7 +122,7 @@ public abstract class Board {
     /**
      * methode that apply the path to the grid visually
      */
-    public abstract void applyPathToGrid();
+    public abstract void applyPathToGrid(List<Position> positions);
 
     public abstract List<Position> path();
 }
