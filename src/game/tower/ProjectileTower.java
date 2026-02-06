@@ -5,6 +5,7 @@ import java.util.List;
 
 import game.Projectile;
 import game.Tower;
+import game.Balloon;
 
 public class ProjectileTower extends Tower{
     public Projectile projectile;
@@ -14,7 +15,9 @@ public class ProjectileTower extends Tower{
         this.projectile = p;
     }
 
-    public void shot() {
-        System.out.println("tirer un projectile");
+    public void shot(List<Balloon> balloons){
+        List<Balloon> targets = findTargets(balloons);
+        targets.get(0).takeDamage(projectile.giveDamage());
     }
+
 }
