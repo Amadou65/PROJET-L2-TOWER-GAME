@@ -6,6 +6,6 @@ import game.tower.ProjectileTower;
 public class TackShooter extends ProjectileTower{
 
     public TackShooter(String name){
-        super(name, 80, 24, 350, new Needle());
+        super(name, 1, 24, 350, new Needle());
     }
 }

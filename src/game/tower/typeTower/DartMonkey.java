@@ -5,6 +5,6 @@ import game.tower.ProjectileTower;
 public class DartMonkey extends ProjectileTower{
     
     public DartMonkey(String name){
-        super(name, 100, 20, 200, new Dart());
+        super(name, 1, 20, 200, new Dart());
     }
 }

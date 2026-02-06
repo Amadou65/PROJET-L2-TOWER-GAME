@@ -5,6 +5,6 @@ import game.tower.ProjectileTower;
 
 public class BombTower extends ProjectileTower{
     BombTower(String name){
-        super(name, 150, 36, 600, new Bomb());
+        super(name, 2, 36, 600, new Bomb());
     }
 }
