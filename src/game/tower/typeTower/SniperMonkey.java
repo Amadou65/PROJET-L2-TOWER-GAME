@@ -5,7 +5,7 @@ import game.tower.ProjectileTower;
 
 public class SniperMonkey extends ProjectileTower{
 
-    public SniperMonkey(){
-        super(10000,40,500, new VerySharpDart());
+    public SniperMonkey(String name){
+        super(name, 10000, 40, 500, new VerySharpDart());
     }
 }
