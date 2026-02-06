@@ -45,30 +45,42 @@ public class Tower {
         return position.getY();
     }
 
-/**
- * This function returns a list of balloons in the scope of the tower.
- * @param balloons list of balloons to check
- * @return a list of balloons within the tower's scope
- */
-public List<Balloon> findTargets(List<Balloon> balloons) {
-    List<Balloon> targets = new ArrayList<>();
+    /**
+     * This function returns a list of balloons in the scope of the tower.
+     * @param balloons list of balloons to check
+     * @return a list of balloons within the tower's scope
+     */
+    public List<Balloon> findTargets(List<Balloon> balloons) {
+        List<Balloon> targets = new ArrayList<>();
     
-    if (balloons != null) {
-        for (Balloon balloon : balloons) {
-            if (isInScope(balloon)) {
-                targets.add(balloon);
+        if (balloons != null) {
+            for (Balloon balloon : balloons) {
+                if (isInScope(balloon)) {
+                    targets.add(balloon);
+                }
             }
         }
-    }
     
-    return targets;
-}
+        return targets;
+    }
 
-private boolean isInScope(Balloon balloon) {
-    // Calculate distance between tower and balloon
-    int distance = Math.abs(balloon.getGridX() - this.getX()) 
-                 + Math.abs(balloon.getGridY() - this.getY());
-    return distance <= scope;
-}
+    private boolean isInScope(Balloon balloon) {
+        // Calculate distance between tower and balloon
+        int distance = Math.abs(balloon.getGridX() - this.getX()) + Math.abs(balloon.getGridY() - this.getY());
+        return distance <= scope;
+    }
+
+    public boolean canShoot() {
+        if (cadenceActuelle > 0) {
+            cadenceActuelle--;
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void resetCadence() {
+        this.cadenceActuelle = this.cadence;
+    }
 
 }
