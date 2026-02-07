@@ -79,7 +79,8 @@ public class Balloon {
         this.speed = determineSpeed(this.health);
     }
 }
-// Ajoute ce getter pour tes amis qui coderont les tours plus tard
-
+public double getDistance(){
+    
+}
 
 }
