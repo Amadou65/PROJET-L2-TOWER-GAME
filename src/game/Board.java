@@ -130,7 +130,11 @@ public abstract class Board {
         List<Balloon> inRange = new ArrayList<>();
 
         for (int i = 0; i < height; i++){
-            for (int j = 0; j < width; j++)
+            for (int j = 0; j < width; j++){
+                // On calcule la distance entre la tour et chaque case
+            double dist = Math.sqrt(Math.pow(i - towerPos.getX(), 2) + Math.pow(j - towerPos.getY(), 2));
+            if (dist <= scope)
+            }
         }
     }
 }
