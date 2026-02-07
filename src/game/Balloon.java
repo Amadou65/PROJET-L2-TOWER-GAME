@@ -60,6 +60,7 @@ public class Balloon {
     // AJOUT : La méthode getDistance
     public double getDistance() {
         return (currentTargetIndex - 1) + (Math.sqrt(x*x + y*y) % 1);
+        // Un calcul simple pour savoir qui est le plus avancé sur le chemin
     }
 
     // ... le reste de tes méthodes (isPopped, takeDamage, etc.) ...
