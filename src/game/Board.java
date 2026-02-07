@@ -128,5 +128,7 @@ public abstract class Board {
 
     public List<Balloon> getBallonsInRange(Position towerPos, int scope){
         List<Balloon> inRange = new ArrayList<>();
+
+        for (int i = 0; i < height; i++)
     }
 }
