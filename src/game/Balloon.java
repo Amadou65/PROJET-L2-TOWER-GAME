@@ -59,7 +59,7 @@ public class Balloon {
 
     // AJOUT : La méthode getDistance
     public double getDistance() {
-        return this.distance;
+        return (currentTargetIndex - 1) + (Math.sqrt(x*x + y*y) % 1);
     }
 
     // ... le reste de tes méthodes (isPopped, takeDamage, etc.) ...
@@ -78,9 +78,6 @@ public class Balloon {
     if (this.health > 0) {
         this.speed = determineSpeed(this.health);
     }
-}
-public double getDistance(){
-    
 }
 
 }
