@@ -50,16 +50,20 @@ public class Player {
      * @param b is board of the game
      */
     public void buyTower(Tower t, Position p, Board b){
-       
-       if(this.credits >= t.cost){
-            b.grid[p.getX()][p.getY()].addTower(t);
+        Cell targetCell = b.getCell(p);
+
+       // Condition de sécurité : Pas sur le chemin + Pas sur une autre tour
+       if (targetCell.isPath()) {
+           System.out.println("Impossible : On ne peut pas construire sur le chemin !");
+           return;
+        }
+    
+        if (this.credits >= t.cost) {
+            targetCell.addTower(t); // On utilise la cellule
             this.credits -= t.cost;
-            // add record in journal
-            journal.recordTowerPurchased(t.cost);
+            // journal.recordTowerPurchased(t.cost);
         }
-        else{
-            System.out.println("Not enough credits to buy this tower.");
-        }
+       
     }
 
     /**
