@@ -125,4 +125,8 @@ public abstract class Board {
     public abstract void applyPathToGrid();
 
     public abstract List<Position> path();
+
+    public List<Balloon> getBallonsInRange(Position towerPos, int scope){
+        List<Balloon> inRange = new ArrayList<>();
+    }
 }
