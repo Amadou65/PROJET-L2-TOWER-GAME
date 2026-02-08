@@ -6,6 +6,7 @@ public abstract class Evolution {
     protected int cost;
     protected EvolutionType evoType;
 
+    // enum for the type of evolution
     public static enum EvolutionType {
         PROJECTILE,
         SCOPE,

@@ -19,11 +19,17 @@ public abstract class ProjectileTower extends Tower{
         this.evolutions = new HashSet<EvolutionType>();
     }
 
+    /**
+     * This function finds the first balloon in the scope of the tower and shoot it
+     * @param balloons
+     */
     public void shot(List<Balloon> balloons){
         List<Balloon> targets = findTargets(balloons);
         targets.get(0).takeDamage(projectile.giveDamage());
     }
 
+    // GETTERS AND SETTERS
+    
     public Projectile getProjectile() {
         return projectile;
     }

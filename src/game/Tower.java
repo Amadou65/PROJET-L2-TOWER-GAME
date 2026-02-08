@@ -65,12 +65,22 @@ public abstract class Tower {
         return targets;
     }
 
+    /**
+     * This function checks if a balloon is within the scope of the tower
+     * @param balloon
+     * @return true if the balloon is within the tower's scope, false otherwise
+     */
     private boolean isInScope(Balloon balloon) {
         // Calculate distance between tower and balloon
         int distance = Math.abs(balloon.getGridX() - this.getX()) + Math.abs(balloon.getGridY() - this.getY());
         return distance <= scope;
     }
 
+
+    /**
+     * This is predicat 
+     * @return true if the tower can shoot, false the tower has cooldown(cadenceActuelle > 0) and reduces the cooldown by 1
+     */
     public boolean canShoot() {
         if (cadenceActuelle > 0) {
             cadenceActuelle--;
@@ -80,6 +90,9 @@ public abstract class Tower {
         }
     }
 
+    /**
+     * This function resets the tower's cooldown (cadenceActuelle) to its initial value (cadence) after shooting.
+     */
     public void resetCadence() {
         this.cadenceActuelle = this.cadence;
     }
