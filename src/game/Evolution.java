@@ -1,11 +1,10 @@
 // classe mere
 package game;
-import game.tower.ProjectileTower;
 
 public abstract class Evolution {
 
-    protected ProjectileTower tower;
     protected int cost;
+    protected EvolutionType evoType;
 
     public static enum EvolutionType {
         PROJECTILE,
@@ -14,9 +13,9 @@ public abstract class Evolution {
         POWER
     }
 
-    public Evolution(ProjectileTower tower, int cost) {
-        this.tower = tower;
+    public Evolution(int cost, EvolutionType type) {
         this.cost = cost;
+        this.evoType = type;
     }
 
     // GETTERS
@@ -24,7 +23,7 @@ public abstract class Evolution {
         return cost;
     }
 
-    public Tower getTower() {
-        return tower;
+    public EvolutionType getEvoType() {
+        return evoType;
     }
 }

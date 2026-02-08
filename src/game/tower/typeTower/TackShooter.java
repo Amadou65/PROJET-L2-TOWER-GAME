@@ -1,17 +1,34 @@
 package game.tower.typeTower;
 
-import game.Evolution.EvolutionType;
+import game.Evolution;
 import game.projectiles.Needle;
 import game.tower.ProjectileTower;
 
 public class TackShooter extends ProjectileTower{
 
     public TackShooter(String name){
-        super(name, 1, 24, 350, new Needle());
+        super(name, 1, 24, 350, 1, new Needle());
     }
 
-    public void getEvolution(EvolutionType type) {
-        //TODO
-        
+    public void getEvolution(Evolution e) {
+        Evolution.EvolutionType type = e.getEvoType();
+        if(!this.hasEvolution(type)){
+            switch (type) {
+                case SCOPE:
+                    this.scope += 1;
+                    break;
+                case CADENCE:
+                    this.cadence -= 6;
+                    break;
+                case POWER:
+                    this.power += 1;
+                    
+                    break;
+                case PROJECTILE:
+                    break;
+            }
+            this.evolutions.add(type);
+        }
+
     }
 }

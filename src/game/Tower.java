@@ -2,11 +2,9 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.Evolution.EvolutionType;
-import game.tower.ProjectileTower;
 // classe mère
 public abstract class Tower {
-    protected Object power;
+    protected int power;
     protected Position position;
     protected int scope;
     protected int cadence;
@@ -14,11 +12,12 @@ public abstract class Tower {
     protected int cost;
     protected String nom;
 
-    public Tower(String nom, int scope, int cadence, int cost) {
+    public Tower(String nom, int scope, int cadence, int cost, int power) {
         this.nom = nom;
         this.scope = scope;
         this.cadence = cadence;
         this.cost = cost;
+        this.power = power;
         this.cadenceActuelle = 0;
     }
 

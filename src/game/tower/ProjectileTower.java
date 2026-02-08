@@ -6,14 +6,15 @@ import java.util.List;
 import game.Projectile;
 import game.Tower;
 import game.Balloon;
+import game.Evolution;
 import game.Evolution.EvolutionType;
 
 public abstract class ProjectileTower extends Tower{
     public Projectile projectile;
-    private HashSet<EvolutionType> evolutions;
+    protected HashSet<EvolutionType> evolutions;
 
-    public ProjectileTower(String name, int scope, int cadence, int cost, Projectile p){
-        super(name, scope, cadence, cost);
+    public ProjectileTower(String name, int scope, int cadence, int cost, int power, Projectile p){
+        super(name, scope, cadence, cost, power);
         this.projectile = p;
         this.evolutions = new HashSet<EvolutionType>();
     }
@@ -35,5 +36,5 @@ public abstract class ProjectileTower extends Tower{
         return evolutions.contains(type);
     }
 
-    public abstract void getEvolution(EvolutionType type);
+    public abstract void getEvolution(Evolution e);
 }

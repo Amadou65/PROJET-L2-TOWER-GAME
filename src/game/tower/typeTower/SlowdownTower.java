@@ -5,7 +5,7 @@ import game.tower.NonProjectileTower;
 public class SlowdownTower extends NonProjectileTower{
 
     public SlowdownTower(String name) {
-        super(name, 1, 30, 500);
+        super(name, 1, 30, 500, 1);
     }
     
     public int time() {              
