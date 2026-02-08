@@ -12,4 +12,8 @@ abstract public class Projectile {
     public int giveDamage() {
         return damage;
     }
+
+    public void increaseDamage(int n) {
+        this.damage += n;
+    }
 }
