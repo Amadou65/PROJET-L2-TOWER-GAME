@@ -1,14 +1,16 @@
 package game;
 import java.util.ArrayList;
 import java.util.List;
+
+import game.Evolution.EvolutionType;
+import game.tower.ProjectileTower;
 // classe mère
-public class Tower {
+public abstract class Tower {
     protected Object power;
     protected Position position;
     protected int scope;
     protected int cadence;
     protected int cadenceActuelle;
-    protected boolean isEvolutionPossible;
     protected int cost;
     protected String nom;
 
@@ -82,5 +84,6 @@ public class Tower {
     public void resetCadence() {
         this.cadenceActuelle = this.cadence;
     }
+        
 
 }
