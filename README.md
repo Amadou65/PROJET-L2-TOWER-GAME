@@ -372,11 +372,11 @@ Habiba:
 
 ### Difficultés rencontrées
 
-Gestion des Tours pour le tir sur les balloons
+    Gestion des Tours pour le tir sur les balloons
 
 ### Objectifs pour la semaine et répartition du travail par membre
 
-Finir la gestion des Tours er rendre le livrable 3 complet
+    Finir la gestion des Tours er rendre le livrable 3 complet
 
 ## Semaine 6
 
