@@ -15,6 +15,7 @@ public class BalloonTest {
         // on crée un petit chemin fictif pour le test
         dummyPath = new ArrayList<>();
         dummyPath.add(new Position(0,0));
+        dummyPath.add(new Position(0,1));
     }
     
 }
