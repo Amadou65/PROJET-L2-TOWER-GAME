@@ -36,8 +36,17 @@ public class BalloonTest {
         b.takeDamage(2);
         assertTrue(b.isPopped(), "Le ballon doit être éclaté quand la santé atteint 0");
 
-        
 
+
+    }
+
+    @Test 
+    public void testEvolutionVitesse() {
+        // on crée deux ballons de niveaux differents
+        Balloon rose = new Balloon(4, dummyPath); // Niveau 4
+        Balloon rouge = new Balloon(1, dummyPath); // Niveau 1
+
+        
     }
     
 }
