@@ -358,9 +358,16 @@ Ce qui a été réalisé
 
 ### Ce qui a été réalisé
 
+    Finalistation de la methode TargetBalloon pour viser le premier ballon de la fil tant qu'il est dans le scope de la tour. (encore quelques choses à modifier)
+    Intégration de la classe TargetBalloon dans la classe Boards pour plus de clareté et de compréhension
+
 ### Difficultés rencontrées
 
+    YASSIN : Calcul de distance entre le ballon et la tour. Viser le ballon uniquement tant qu'il est dans le scope de la tour et donc changer de cible une fois le ballon sortit.
+
 ### Objectifs pour la semaine et répartition du travail par membre
+
+     YASSIN : Cloturer la méthode TargetBalloon. Effectuer le test de la méthode.
 
 ## Semaine 6
 
