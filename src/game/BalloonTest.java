@@ -46,7 +46,8 @@ public class BalloonTest {
         Balloon rose = new Balloon(4, dummyPath); // Niveau 4
         Balloon rouge = new Balloon(1, dummyPath); // Niveau 1
 
-        
+        // On vérifie que le Rose est plus rapide que le Rouge
+        assertTrue(rose.getSpeed() > rouge.getSpeed(), "Un ballon de niveau 4 doit être plus rapide qu'un niveau 1");
     }
     
 }
