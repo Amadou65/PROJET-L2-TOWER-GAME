@@ -48,6 +48,11 @@ public class BalloonTest {
 
         // On vérifie que le Rose est plus rapide que le Rouge
         assertTrue(rose.getSpeed() > rouge.getSpeed(), "Un ballon de niveau 4 doit être plus rapide qu'un niveau 1");
+
+        // Test de mutation : Si le Rose perd de la vie, il doit ralentir
+        double vitesseInitiale = rose.getSpeed();
+        rose.takeDamage(2); // Il devient niveau 2
+        assertTrue(rose.getSpeed() < vitesseInitiale, "Le ballon doit ralentir après avoir perdu un niveau");
     }
     
 }
