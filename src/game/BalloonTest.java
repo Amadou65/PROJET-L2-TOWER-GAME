@@ -21,8 +21,14 @@ public class BalloonTest {
         dummyPath.add(new Position(0,2));
     }
 
-    @Transientpublic void testMutationEtSante(){
+    @Test
+    public void testMutationEtSante(){
         // creation d'un ballon niveau 4(Rose)
+        Balloon b = new Balloon(4, dummyPath);
+        assertEquals(4, b.getHealth(), "la santé initiale devrait etre de 4 ");
+
+        
+
     }
     
 }
