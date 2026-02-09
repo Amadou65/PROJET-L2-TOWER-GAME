@@ -358,9 +358,38 @@ Ce qui a été réalisé
 
 ### Ce qui a été réalisé
 
+<<<<<<< HEAD
+    Finalistation de la methode TargetBalloon pour viser le premier ballon de la fil tant qu'il est dans le scope de la tour. (encore quelques choses à modifier)
+    Intégration de la classe TargetBalloon dans la classe Boards pour plus de clareté et de compréhension
+
 ### Difficultés rencontrées
 
+    YASSIN : Calcul de distance entre le ballon et la tour. Viser le ballon uniquement tant qu'il est dans le scope de la tour et donc changer de cible une fois le ballon sortit.
+
 ### Objectifs pour la semaine et répartition du travail par membre
+
+     YASSIN : Cloturer la méthode TargetBalloon. Effectuer le test de la méthode.
+=======
+Amadou:
+
+    Mise A jour de L'uml
+
+Ivkin:
+
+    Gestion de Player
+
+Habiba:
+
+    Peaufinnement de Balloon
+
+### Difficultés rencontrées
+
+    Gestion des Tours pour le tir sur les balloons
+
+### Objectifs pour la semaine et répartition du travail par membre
+
+    Finir la gestion des Tours er rendre le livrable 3 complet
+>>>>>>> 9b26a0947c6e694eeda98100a024c824826e761a
 
 ## Semaine 6
 
