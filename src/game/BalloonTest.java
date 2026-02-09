@@ -29,6 +29,9 @@ public class BalloonTest {
 
         // on simule un dégat de 2
         b.takeDamage(2);
+        assertEquals(2, b.getHealth(), "Aprés 2 dégats, la santé doit etre de 2 ");
+        assertFalse(b.isPopped(), "le ballon n'est doit pas etre eclaté s'il reste de la santé");
+
         
 
     }
