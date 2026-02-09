@@ -32,6 +32,10 @@ public class BalloonTest {
         assertEquals(2, b.getHealth(), "Aprés 2 dégats, la santé doit etre de 2 ");
         assertFalse(b.isPopped(), "le ballon n'est doit pas etre eclaté s'il reste de la santé");
 
+        // On finit le ballon
+        b.takeDamage(2);
+        assertTrue(b.isPopped(), "Le ballon doit être éclaté quand la santé atteint 0");
+
         
 
     }
