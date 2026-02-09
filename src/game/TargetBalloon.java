@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Classe utilitaire pour gérer la détection et le ciblage des ballons.
  */
-public class TargetingSystem {
+public class TargetingBalloon {
 
     /**
      * Calcule la distance réelle (Euclidienne) entre une tour et un ballon.
