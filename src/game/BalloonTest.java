@@ -27,6 +27,8 @@ public class BalloonTest {
         Balloon b = new Balloon(4, dummyPath);
         assertEquals(4, b.getHealth(), "la santé initiale devrait etre de 4 ");
 
+        // on simule un dégat de 2
+        b.takeDamage(2);
         
 
     }
