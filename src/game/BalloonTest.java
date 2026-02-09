@@ -2,6 +2,8 @@ package game;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,10 @@ public class BalloonTest {
         dummyPath.add(new Position(0,0));
         dummyPath.add(new Position(0,1));
         dummyPath.add(new Position(0,2));
+    }
+
+    @Transientpublic void testMutationEtSante(){
+        
     }
     
 }
