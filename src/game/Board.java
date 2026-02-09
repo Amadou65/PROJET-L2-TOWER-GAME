@@ -132,9 +132,13 @@ public abstract class Board {
         for (int i = 0; i < height; i++){
             for (int j = 0; j < width; j++){
                 // On calcule la distance entre la tour et chaque case
-            double dist = Math.sqrt(Math.pow(i - towerPos.getX(), 2) + Math.pow(j - towerPos.getY(), 2));
-            if (dist <= scope)
+                double dist = Math.sqrt(Math.pow(i - towerPos.getX(), 2) + Math.pow(j - towerPos.getY(), 2));
+                if (dist <= scope){
+                    inRange.addAll(grid[i][j].getBallons());
+                }
             }
         }
+
+        return inRange;
     }
 }
