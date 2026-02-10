@@ -1,7 +1,6 @@
 package game;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-import game.Position;
 
 public class PositionTest {
 
@@ -26,6 +25,6 @@ public class PositionTest {
     @Test
     public void testPositionDisplay() {
         Position pos = new Position(1, 1);
-        assertEquals("(1, 1)", pos.display());
+        assertEquals("(1, 1)", pos.toString());
     }
 }

@@ -3,13 +3,11 @@ package game;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
-import game.Board;
 import game.board.ClassicalBoard;
 
 public class GameEngineTest {
 
     private List<Balloon> reserve;
-    private List<Position> path;
     private Board board;
     private GameEngine engine;
 
@@ -17,7 +15,8 @@ public class GameEngineTest {
     public void setUp() {
         // Configuration d'un plateau simple 5x5
         board = new ClassicalBoard(5, 5);
-        board.applyPathToGrid();
+        List<Position> path = board.path();
+        board.applyPathToGrid(path);
         path = board.path();
         
         // Initialisation d'une réserve de 2 ballons
@@ -25,7 +24,7 @@ public class GameEngineTest {
         reserve.add(new Balloon(1, path));
         reserve.add(new Balloon(2, path));
         
-        engine = new GameEngine(reserve, path, board);
+        engine = new GameEngine(reserve, board);
     }
 
     @Test
