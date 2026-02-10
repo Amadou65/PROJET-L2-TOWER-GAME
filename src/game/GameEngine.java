@@ -5,14 +5,12 @@ import java.util.*;
 public class GameEngine {
     private List<Balloon> reserve;
     private List<Balloon> actif;
-    private List<Position> path;
     private Board board;
     private Player player;
 
-    public GameEngine(List<Balloon> reserve, List<Position> path, Board board) {
+    public GameEngine(List<Balloon> reserve, Board board) {
         this.reserve = reserve;
         this.actif = new ArrayList<>();
-        this.path = path;
         this.board = board;
         this.player = new Player();
     }

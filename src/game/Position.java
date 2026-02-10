@@ -7,7 +7,7 @@ public class Position{
         this.y = y;
     }
     // Display coordinates
-    public String display(){
+    public String toString(){
         return "(" + this.x + ", " + this.y + ")";
     }
 

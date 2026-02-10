@@ -1,84 +1,30 @@
 // classe mere
 package game;
 
-abstract class Evolution {
+public class Evolution {
 
-    protected ProjectileTower tower;
-    protected String type;
     protected int cost;
+    protected EvolutionType evoType;
 
-    public Evolution(ProjectileTower tower, String type, int cost) {
-        this.tower = tower;
-        this.type = type;
+    // enum for the type of evolution
+    public static enum EvolutionType {
+        PROJECTILE,
+        SCOPE,
+        CADENCE,
+        POWER
+    }
+
+    public Evolution(int cost, EvolutionType type) {
         this.cost = cost;
+        this.evoType = type;
     }
 
-    public boolean isAllowed() {
-        return true;
+    // GETTERS
+    public int getCost() {
+        return cost;
     }
 
-    public boolean isPowerEvolution() {
-        return false;
-    }
-
-    public boolean isCadenceEvolution() {
-        return false;
-    }
-
-    public boolean isScopeEvolution() {
-        return false;
-    }
-
-    public boolean isProjectileEvolution() {
-        return false;
-    }
-}
-
-// sous classes
-class PowerEvolution extends Evolution {
-
-    public PowerEvolution(ProjectileTower tower, int cost) {
-        super(tower, "Power", cost);
-    }
-
-    @Override
-    public boolean isPowerEvolution() {
-        return true;
-    }
-}
-
-class CadenceEvolution extends Evolution {
-
-    public CadenceEvolution(ProjectileTower tower, int cost) {
-        super(tower, "Cadence", cost);
-    }
-
-    @Override
-    public boolean isCadenceEvolution() {
-        return true;
-    }
-}
-
-class ScopeEvolution extends Evolution {
-
-    public ScopeEvolution(ProjectileTower tower, int cost) {
-        super(tower, "Scope", cost);
-    }
-
-    @Override
-    public boolean isScopeEvolution() {
-        return true;
-    }
-}
-
-class ProjectileEvolution extends Evolution {
-
-    public ProjectileEvolution(ProjectileTower tower, int cost) {
-        super(tower, "Projectile", cost);
-    }
-
-    @Override
-    public boolean isProjectileEvolution() {
-        return true;
+    public EvolutionType getEvoType() {
+        return evoType;
     }
 }

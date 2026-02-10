@@ -1,6 +1,7 @@
 // classe mere
 package game;
-abstract class Projectile {
+
+abstract public class Projectile {
 
     protected int damage;
 
@@ -11,10 +12,8 @@ abstract class Projectile {
     public int giveDamage() {
         return damage;
     }
+
+    public void increaseDamage(int n) {
+        this.damage += n;
+    }
 }
-
-
-
-
-
-

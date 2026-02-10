@@ -124,7 +124,7 @@ public abstract class Board {
     /**
      * méthode qui applique visuellement le chemin sur la grille
      */
-    public abstract void applyPathToGrid();
+    public abstract void applyPathToGrid(List<Position> positions);
 
     /**
      * méthode qui retourne le chemin sous forme de liste de positions

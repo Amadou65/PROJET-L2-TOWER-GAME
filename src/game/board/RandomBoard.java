@@ -14,8 +14,6 @@ public class RandomBoard extends Board {
 
     public RandomBoard(int height, int width) {
         super(height, width);
-        //On déclenche l'application visuelle dès la création
-        this.applyPathToGrid();
     }
 
     /**
@@ -72,9 +70,8 @@ public class RandomBoard extends Board {
      * methode that apply the path to the grid visually
      */
     @Override
-    public void applyPathToGrid() {
-        // On récupère le chemin unique
-        ArrayList<Position> positions = this.path();
+    public void applyPathToGrid(List<Position> positions) {
+
         for (Position p : positions) {
             // On marque la cellule dans la grille héritée de Board
             this.grid[p.getX()][p.getY()].setAsPath(true);

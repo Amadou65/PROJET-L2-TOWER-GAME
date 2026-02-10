@@ -10,31 +10,33 @@ public class Livrable2b {
         System.out.println("Livrable 2b: B");
 
         // Creation et affichage du board
-        Board board = new ClassicalBoard(5, 5);
-        board.applyPathToGrid();
+        int height = args.length > 1 ? Integer.parseInt(args[0]) : 5;
+        int width = args.length > 1 ? Integer.parseInt(args[1]) : 5;
+        int nbBalloons = args.length > 2 ? Integer.parseInt(args[2]) : 5;
+        
+        Board board = new ClassicalBoard(height, width);
+        ArrayList<Balloon> balloons = new ArrayList<>();
+        ArrayList<ArrayList<Position>> pathes = new ArrayList<>();
+
+        for(int i = 0; i < nbBalloons; i++){
+            int randomLevel = (int) (Math.random() * 3) + 1;
+            List<Position> path = board.path();
+            pathes.add((ArrayList<Position>) path);
+            balloons.add(new Balloon(randomLevel, path));
+            System.out.println("Balloon created with level: " + balloons.get(i).getLevel());
+            System.out.println("With path start at" + path.get(0)+ " and end at " + path.get(path.size()-1));
+        }
+
+        for(ArrayList<Position> bp : pathes){
+            board.applyPathToGrid(bp);
+        }
+
+        
         System.out.println(board.display());
 
-        // On obtient le chemin et on cree des ballons
-        List<Position> path = board.path();
-        Balloon balloon = new Balloon(1, path);
-        Balloon balloon2 = new Balloon(2, path);
-        Balloon balloon3 = new Balloon(3, path);
-        Balloon balloon4 = new Balloon(1, path);
-
-        System.out.println("Balloon created with level: " + balloon.getLevel());
-        System.out.println("Balloon2 created with level: " + balloon2.getLevel());
-        System.out.println("Balloon3 created with level: " + balloon3.getLevel());
-        System.out.println("Balloon4 created with level: " + balloon4.getLevel());
-
-        // On ajoute les ballons dans une liste et on lance le jeu
-        ArrayList<Balloon> balloons = new ArrayList<>();
-        balloons.add(balloon);
-        balloons.add(balloon2);
-        balloons.add(balloon3); 
-        balloons.add(balloon4);
-
-        // On lance le jeu
-        GameEngine gameEngine = new GameEngine(balloons, path, board);
+        GameEngine gameEngine = new GameEngine(balloons, board);
         gameEngine.game();
+
+        System.out.println(board.display());
     }
 }

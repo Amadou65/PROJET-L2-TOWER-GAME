@@ -59,8 +59,7 @@ public class ClassicalBoard extends Board {
         return path;
     }
 
-    public void applyPathToGrid() {
-        List<Position> positions = this.path();
+    public void applyPathToGrid(List<Position> positions) {
         for (Position p : positions) {
             // On récupère la cellule et on la marque comme chemin
             this.grid[p.getX()][p.getY()].setAsPath(true);
