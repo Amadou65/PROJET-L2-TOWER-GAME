@@ -1,7 +1,7 @@
 // classe mere
 package game;
 
-public abstract class Evolution {
+public class Evolution {
 
     protected int cost;
     protected EvolutionType evoType;
