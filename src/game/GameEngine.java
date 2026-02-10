@@ -1,7 +1,6 @@
 package game;
 
-import java.util.*; 
-import game.Position;
+import java.util.*;
 
 public class GameEngine {
     private List<Balloon> reserve;

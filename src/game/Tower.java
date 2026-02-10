@@ -38,6 +38,10 @@ public abstract class Tower {
         return nom;
     }
 
+    public int getPower() {
+        return power;
+    }
+
     public int getX() {
         return position.getX();
     }
