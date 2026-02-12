@@ -1,13 +1,14 @@
 package game.tower.typeTower;
 
 import game.Evolution;
+import game.Position;
 import game.projectiles.VerySharpDart;
 import game.tower.ProjectileTower;
 
 public class SniperMonkey extends ProjectileTower{
 
-    public SniperMonkey(String name){
-        super(name, 10000, 40, 500, 1, new VerySharpDart());
+    public SniperMonkey(String name, Position pos) {
+        super(name, 10000, 40, 500, 1, new VerySharpDart(), pos);
     }
 
     public void getEvolution(Evolution e) {

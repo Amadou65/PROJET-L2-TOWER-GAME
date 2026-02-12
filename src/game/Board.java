@@ -155,10 +155,7 @@ public abstract class Board {
                 }
             }
         }
-<<<<<<< HEAD
 
-=======
->>>>>>> f0990537df6d49f11a3d1079255e341ace1b1733
         return inRange;
     }
 

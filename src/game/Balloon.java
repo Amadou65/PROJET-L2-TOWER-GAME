@@ -20,6 +20,7 @@ public class Balloon {
         this.distance = 0.0; // Initialisation à 0
         this.currentTargetIndex = 1;
         this.speed = determineSpeed(level);
+        this.frozen = false;
         // ... (le reste du constructeur)
         if (path != null && !path.isEmpty()) {
             this.x = path.get(0).getX();
@@ -34,7 +35,7 @@ public class Balloon {
     }
 
     public void move() {
-        if (!frozen && !isPopped() && currentTargetIndex < path.size()) {
+        if (!this.frozen && !isPopped() && currentTargetIndex < path.size()) {
             Position target = path.get(currentTargetIndex);
             double dx = target.getX() - this.x;
             double dy = target.getY() - this.y;
@@ -69,16 +70,38 @@ public class Balloon {
     public int getGridY() { return (int) Math.round(y); }
     public int getLevel() { return this.level; }
     public boolean hasReachedEnd() { return currentTargetIndex >= path.size(); }
+    public int getHealth() { return this.health; }
+    public double getSpeed() { return this.speed; }
 
     /**
      * methode Take damage
      * 
      */
     public void takeDamage(int damage) {
-    this.health -= damage;
-    if (this.health > 0) {
-        this.speed = determineSpeed(this.health);
+        this.health -= damage;
+        if (this.health > 0) {
+            this.speed = determineSpeed(this.health);
+        }
     }
-}
 
+    /**
+     * methode qui gèle le ballon
+    */
+    public void freeze() {
+        this.frozen = true;
+    }
+
+    /**
+     * methode qui ralentit le ballon
+     */
+    public void slowDown() {
+        this.speed *= 0.5; // Réduction de la vitesse à 50%
+    }
+
+    /**
+     * methode qui dégel le ballon
+     */
+    public void unSlowDown() {
+        this.speed *= 2.0; // Rétablissement de la vitesse normale
+    }
 }

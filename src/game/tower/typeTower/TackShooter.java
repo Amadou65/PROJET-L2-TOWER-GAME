@@ -1,13 +1,14 @@
 package game.tower.typeTower;
 
 import game.Evolution;
+import game.Position;
 import game.projectiles.Needle;
 import game.tower.ProjectileTower;
 
 public class TackShooter extends ProjectileTower{
 
-    public TackShooter(String name){
-        super(name, 1, 24, 350, 1, new Needle());
+    public TackShooter(String name, Position pos) {
+        super(name, 1, 24, 350, 1, new Needle(), pos);
     }
 
     public void getEvolution(Evolution e) {

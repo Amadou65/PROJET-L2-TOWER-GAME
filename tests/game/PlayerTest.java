@@ -22,7 +22,7 @@ public class PlayerTest {
     @Test
     public void testSellBuyTower(){
         Player p = new Player();
-        Tower t = new DartMonkey("drt");
+        Tower t = new DartMonkey("drt", new Position(0, 0));
         Position pos = new Position(0, 0);
         Board b = new ClassicalBoard(6, 11);
 

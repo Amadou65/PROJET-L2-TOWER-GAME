@@ -3,18 +3,15 @@ package game.tower;
 import java.util.HashSet;
 import java.util.List;
 
-import game.Projectile;
-import game.Tower;
-import game.Balloon;
-import game.Evolution;
+import game.*;
 import game.Evolution.EvolutionType;
 
 public abstract class ProjectileTower extends Tower{
     public Projectile projectile;
     protected HashSet<EvolutionType> evolutions;
 
-    public ProjectileTower(String name, int scope, int cadence, int cost, int power, Projectile p){
-        super(name, scope, cadence, cost, power);
+    public ProjectileTower(String name, int scope, int cadence, int cost, int power, Projectile p, Position pos){
+        super(name, scope, cadence, cost, power, pos);
         this.projectile = p;
         this.evolutions = new HashSet<EvolutionType>();
     }
@@ -24,8 +21,12 @@ public abstract class ProjectileTower extends Tower{
      * @param balloons
      */
     public void shot(List<Balloon> balloons){
-        List<Balloon> targets = findTargets(balloons);
-        targets.get(0).takeDamage(projectile.giveDamage());
+        Balloon target = TargetingBalloon.getBestTarget(balloons, this);
+        if (target != null) {
+            target.takeDamage(this.power);
+            this.resetCadence();
+        }
+
     }
 
     // GETTERS AND SETTERS

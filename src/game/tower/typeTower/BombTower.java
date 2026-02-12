@@ -1,13 +1,14 @@
 package game.tower.typeTower;
 
 import game.Evolution;
+import game.Position;
 import game.projectiles.Bomb;
 import game.projectiles.ExtraBomb;
 import game.tower.ProjectileTower;
 
 public class BombTower extends ProjectileTower{
-    BombTower(String name){
-        super(name, 2, 36, 600, 1, new Bomb());
+    BombTower(String name, Position pos) {
+        super(name, 2, 36, 600, 1, new Bomb(), pos);
     }
 
     public void getEvolution(Evolution e) {

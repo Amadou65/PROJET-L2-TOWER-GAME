@@ -1,6 +1,7 @@
 package game;
 
 import java.util.*; 
+import game.tower.*;
 
 public class GameEngine {
     private List<Balloon> reserve;
@@ -67,15 +68,16 @@ public class GameEngine {
             // 3. PHASE DE TIRS DES TOURS
             for (Tower tower : board.tower_list){
                 // CAS A : UNE TOUR PROJECTILE TOWER
-                if (tower.isProjectileTower()){
-                    if ( time % tower.getCadence() == 0)
-                        tower.shot();
+                if (tower instanceof ProjectileTower){
+                    if (tower.canShoot()){
+                        ((ProjectileTower)tower).shot(actif);
+                    }
                 }
 
                 // CAS B : UNE TOUR NONPROJECTILE TOWER
                 else{
                     if (time % tower.getCadence() == 0){
-                        tower.freeze();
+                        ((NonProjectileTower)tower).freeze(actif);
                     }
                 }
             }

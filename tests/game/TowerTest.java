@@ -10,7 +10,7 @@ import game.tower.*;
 public class TowerTest {
     @Test
     public void testTowerConstructorAndGetters() {
-        Tower t = new DartMonkey("drt");
+        Tower t = new DartMonkey("drt", new Position(0, 0));
 
         assertEquals("drt", t.getNom());
         assertEquals(200, t.getCost());
@@ -22,7 +22,7 @@ public class TowerTest {
     @Test
     public void testFindTargets() {
         // Create a tower and some balloons
-        Tower t = new DartMonkey("drt");
+        Tower t = new DartMonkey("drt", new Position(0, 0));
 
         ArrayList<Position> path1 = new ArrayList<>();
         path1.add(new Position(0, 0));
@@ -47,7 +47,7 @@ public class TowerTest {
         t.position = new Position(0, 0);
     
         // Find targets
-        List<Balloon> targets = t.findTargets(balloons);
+        List<Balloon> targets = TargetingBalloon.getAllTargets(balloons, t);
     
         // Check that only the balloons within scope are returned
         assertTrue(targets.contains(b1));
@@ -57,7 +57,7 @@ public class TowerTest {
     
     @Test
     public void EvolutionTest(){
-        ProjectileTower t = new DartMonkey("drt");
+        ProjectileTower t = new DartMonkey("drt", new Position(0, 0));
         Evolution e = new Evolution(300, EvolutionType.SCOPE);
 
         assertEquals(1, t.getScope());
