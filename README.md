@@ -358,8 +358,8 @@ Ce qui a été réalisé
 
 ### Ce qui a été réalisé
 
-<<<<<<< HEAD
-    Finalistation de la methode TargetBalloon pour viser le premier ballon de la fil tant qu'il est dans le scope de la tour. (encore quelques choses à modifier)
+
+    Yassin : Finalistation de la methode TargetBalloon pour viser le premier ballon de la fil tant qu'il est dans le scope de la tour. (encore quelques choses à modifier)
     Intégration de la classe TargetBalloon dans la classe Boards pour plus de clareté et de compréhension
 
 ### Difficultés rencontrées
@@ -368,8 +368,10 @@ Ce qui a été réalisé
 
 ### Objectifs pour la semaine et répartition du travail par membre
 
-     YASSIN : Cloturer la méthode TargetBalloon. Effectuer le test de la méthode.
-=======
+YASSIN:
+
+    Cloturer la méthode TargetBalloon. Effectuer le test de la méthode.
+
 Amadou:
 
     Mise A jour de L'uml
