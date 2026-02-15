@@ -68,6 +68,8 @@ public class Balloon {
     public boolean isPopped() { return this.health <= 0; }
     public int getGridX() { return (int) Math.round(x); }
     public int getGridY() { return (int) Math.round(y); }
+    public double getX() { return this.x; }
+    public double getY() { return this.y; }
     public int getLevel() { return this.level; }
     public boolean hasReachedEnd() { return currentTargetIndex >= path.size(); }
     public int getHealth() { return this.health; }
