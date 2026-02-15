@@ -91,10 +91,11 @@ public class GameEngine {
         }
 
         // --- PHASE DE BILAN FINAL ---
+        System.out.println("====================================");
         System.out.println("\n====================================");
         System.out.println("          BILAN DE LA PARTIE        ");
         System.out.println("====================================");
-        
+        System.out.println("====================================");
         if (!player.isAlife()) {
             System.out.println("RÉSULTAT : GAME OVER (Le joueur est mort)");
         } else {
