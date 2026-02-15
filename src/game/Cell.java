@@ -84,4 +84,20 @@ public class Cell{
   public void removeTower(Tower t){
     tower_list.remove(t);
   }
+
+  /**
+   * methode that returns the list of balloons in this cell
+   * @return ArrayList of balloons
+   */
+  public ArrayList<Balloon> getBallons(){
+    return this.list_ball;
+  }
+
+  /**
+   * methode that adds a balloon to this cell
+   * @param ball the balloon to add
+   */
+  public void addBalloon(Balloon ball){
+    this.list_ball.add(ball);
+  }
 }
