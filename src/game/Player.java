@@ -26,6 +26,15 @@ public class Player {
         return this.credits;
     }
 
+    /**
+     * Returns the Journal tracking statistics for this player.
+     * 
+     * @return the journal
+     */
+    public Journal getJournal() {
+        return this.journal;
+    }
+
     // seters
     public void setCredits(int credits) {
         this.credits = credits;
