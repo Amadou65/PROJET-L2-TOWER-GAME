@@ -2,6 +2,7 @@ package game;
 
 import java.util.*;
 import game.board.LeftStartRandomBoard;
+import game.board.RandomBoard;
 import game.tower.typeTower.*;
 
 /**
@@ -11,7 +12,7 @@ import game.tower.typeTower.*;
  * balloons,
  * and logs all game events with their timestamp.
  *
- * Usage: java -jar livrable3a.jar <height> <width> <nbBalloons>
+ * 
  */
 public class Livrable3a {
 
@@ -25,7 +26,7 @@ public class Livrable3a {
                 + " | Ballons : " + nbBalloons);
 
         // 1. Créer un plateau aléatoire avec chemin partant du bord gauche
-        RandomBoard board = new LeftStartRandomBoard(height, width);
+        LeftStartRandomBoard board = new LeftStartRandomBoard(height, width);
         List<Position> path = board.path();
         board.applyPathToGrid(path);
 
