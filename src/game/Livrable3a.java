@@ -2,7 +2,6 @@ package game;
 
 import java.util.*;
 import game.board.LeftStartRandomBoard;
-import game.board.RandomBoard;
 import game.tower.typeTower.*;
 
 /**
