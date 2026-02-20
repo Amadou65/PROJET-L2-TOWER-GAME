@@ -9,6 +9,7 @@ public class Journal {
     private int upgradesPurchased;
     private int healthLost;
     private int healthRestore;
+
     /**
      * Constructeur par défaut
      */
@@ -44,11 +45,14 @@ public class Journal {
         this.creditUsedTotal += upgradeCost;
     }
 
+    /**
+     * Records that the player lost one health point.
+     */
     public void recordHealthLost() {
-        this.healthLost--;
+        this.healthLost++;
     }
 
-    //Getters 
+    // Getters
 
     public int getBalloonsDestroyed() {
         return balloonsDestroyed;

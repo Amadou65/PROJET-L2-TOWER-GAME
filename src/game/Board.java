@@ -85,7 +85,7 @@ public abstract class Board {
      * méthode qui place un ballon dans une cellule spécifique
      */
     public void putBallon(Balloon ball, Cell cell) {
-        cell.addBalloon(ball);
+        cell.putBallon(ball);
     }
 
     /**
@@ -139,18 +139,12 @@ public abstract class Board {
 
         for (int i = 0; i < height; i++){
             for (int j = 0; j < width; j++){
-<<<<<<< HEAD
-                // On calcule la distance entre la tour et chaque case
-                double dist = Math.sqrt(Math.pow(i - towerPos.getX(), 2) + Math.pow(j - towerPos.getY(), 2));
-                if (dist <= scope){
-=======
                 // Calcul de la distance entre la tour et chaque case
                 double dist = Math.sqrt(
                         Math.pow(i - towerPos.getX(), 2)
                       + Math.pow(j - towerPos.getY(), 2));
 
                 if (dist <= scope) {
->>>>>>> f0990537df6d49f11a3d1079255e341ace1b1733
                     inRange.addAll(grid[i][j].getBallons());
                 }
             }
