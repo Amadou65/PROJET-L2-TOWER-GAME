@@ -167,13 +167,14 @@ public class Balloon {
     }
 
     /**
-     * Applies damage to the balloon. Also adapts speed to the new health level.
+     * Applies damage to the balloon. Adapts speed and level to the new health.
      * 
      * @param damage amount of damage to apply
      */
     public void takeDamage(int damage) {
         this.health -= damage;
         if (this.health > 0) {
+            this.level = this.health; // mutation : le niveau suit la santé
             this.baseSpeed = determineSpeed(this.health);
             this.speed = this.slowed ? this.baseSpeed * 0.5 : this.baseSpeed;
         }
