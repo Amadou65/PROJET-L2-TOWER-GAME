@@ -1,70 +1,80 @@
 package game.board;
+
 import java.util.*;
 import game.Position;
 import game.Board;
 
+/**
+ * A board with straight-line paths (horizontal or vertical).
+ * The path() method generates a line crossing the whole board from one side to
+ * the opposite.
+ */
 public class ClassicalBoard extends Board {
     public ClassicalBoard(int height, int width) {
         super(height, width);
     }
 
-    /* Returns the list of all boundary cells */
-    public List<Position> getPointsBound(){
+    /**
+     * Returns all boundary cells of the board (perimeter).
+     * Convention: Position(row, col) where row ∈ [0, height-1], col ∈ [0, width-1].
+     */
+    public List<Position> getPointsBound() {
         List<Position> points = new ArrayList<>();
-        // on ajoute les points des bords du haut et du bas
-        for (int i = 0; i < this.getWidth(); i++){
-            points.add(new Position(i, 0));
-            points.add(new Position(i, (this.getHeight() - 1)));
+        // Bords haut et bas (toutes les colonnes)
+        for (int col = 0; col < this.getWidth(); col++) {
+            points.add(new Position(0, col));
+            points.add(new Position(this.getHeight() - 1, col));
         }
-        // on ajoute les points des bords de gauche et de droite mais sans les coins deja ajoutes
-        for (int j = 1; j < this.getHeight() - 1; j++){
-            points.add(new Position(0, j));
-            points.add(new Position((this.getWidth() - 1), j));
+        // Bords gauche et droite (lignes intérieures)
+        for (int row = 1; row < this.getHeight() - 1; row++) {
+            points.add(new Position(row, 0));
+            points.add(new Position(row, this.getWidth() - 1));
         }
-
         return points;
     }
 
-    /* Returns a random path from a boundary point */
-    public List<Position> path(){
-        
+    /**
+     * Generates a straight-line path crossing the whole board.
+     * If start is on top/bottom border → vertical line.
+     * If start is on left/right border → horizontal line.
+     */
+    public List<Position> path() {
         List<Position> path = new ArrayList<>();
 
-        // on choisit un point de depart aleatoire
         List<Position> boundaryPoints = this.getPointsBound();
         Position start = boundaryPoints.get((int) (Math.random() * boundaryPoints.size()));
 
-        // on construit le chemin en fonction du point de depart
-        if(start.getX() == 0){
-            for(int i = 0; i < this.getWidth(); i++){
-                path.add(new Position(i, start.getY()));
+        if (start.getX() == 0) {
+            // départ bord haut → chemin vertical descendant
+            for (int row = 0; row < this.getHeight(); row++) {
+                path.add(new Position(row, start.getY()));
             }
-        }
-        else if(start.getX() == (this.getWidth() - 1)){
-            for(int i = this.getWidth() - 1; i >= 0; i--){
-                path.add(new Position(i, start.getY()));
+        } else if (start.getX() == this.getHeight() - 1) {
+            // départ bord bas → chemin vertical montant
+            for (int row = this.getHeight() - 1; row >= 0; row--) {
+                path.add(new Position(row, start.getY()));
             }
-        }
-        else if(start.getY() == 0){
-            for(int j = 0; j < this.getHeight(); j++){
-                path.add(new Position(start.getX(), j));
+        } else if (start.getY() == 0) {
+            // départ bord gauche → chemin horizontal droite
+            for (int col = 0; col < this.getWidth(); col++) {
+                path.add(new Position(start.getX(), col));
             }
-        }
-        else{
-            for(int j = this.getHeight() - 1; j >= 0; j--){
-                path.add(new Position(start.getX(), j));
+        } else {
+            // départ bord droit → chemin horizontal gauche
+            for (int col = this.getWidth() - 1; col >= 0; col--) {
+                path.add(new Position(start.getX(), col));
             }
         }
 
         return path;
     }
 
+    /**
+     * Marks each position in the path as a path cell on the grid.
+     */
     public void applyPathToGrid(List<Position> positions) {
         for (Position p : positions) {
-            // On récupère la cellule et on la marque comme chemin
             this.grid[p.getX()][p.getY()].setAsPath(true);
         }
     }
-
-
 }
