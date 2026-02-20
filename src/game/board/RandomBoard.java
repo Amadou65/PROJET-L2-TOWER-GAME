@@ -2,7 +2,7 @@ package game.board;
 
 import game.Balloon;
 import game.Board;
-import game.Position;     
+import game.Position;
 import game.Cell;
 import java.util.Random;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ public class RandomBoard extends Board {
 
     /**
      * method that gives a random path for the grid
+     * 
      * @return the list of the path
      */
     @Override
@@ -27,13 +28,13 @@ public class RandomBoard extends Board {
             return this.generatedPath;
         }
 
-        // Sinon, on procède à la génération 
+        // Sinon, on procède à la génération
         ArrayList<Position> liste_depart = this.creerListeDepart();
         Position pos_depart = liste_depart.get(randomNumber.nextInt(liste_depart.size()));
-        
+
         ArrayList<Position> path = new ArrayList<>();
         path.add(pos_depart);
-        
+
         boolean found = false;
         while (!found) {
             Position current = path.get(path.size() - 1);
@@ -43,13 +44,18 @@ public class RandomBoard extends Board {
             } else {
                 ArrayList<Position> possible_path = this.nextPositions(current);
                 ArrayList<Position> valid_choices = new ArrayList<>();
-                
+
                 for (Position p : possible_path) {
                     boolean alreadyVisited = false;
                     for (Position visited : path) {
-                        if (p.equals(visited)) { alreadyVisited = true; break; }
+                        if (p.equals(visited)) {
+                            alreadyVisited = true;
+                            break;
+                        }
                     }
-                    if (!alreadyVisited) { valid_choices.add(p); }
+                    if (!alreadyVisited) {
+                        valid_choices.add(p);
+                    }
                 }
 
                 if (valid_choices.isEmpty()) {
@@ -61,8 +67,8 @@ public class RandomBoard extends Board {
                 }
             }
         }
-        
-        this.generatedPath = path; 
+
+        this.generatedPath = path;
         return path;
     }
 
@@ -102,7 +108,8 @@ public class RandomBoard extends Board {
         int x = pos.getX();
         int y = pos.getY();
 
-        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        // Ordre spécifique : bas, droite, haut, gauche (correspond aux tests attendus)
+        int[][] directions = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
         for (int[] d : directions) {
             int nx = x + d[0];
             int ny = y + d[1];
@@ -116,27 +123,32 @@ public class RandomBoard extends Board {
     public boolean isDoingCircle(ArrayList<Position> path) {
         Position last = path.get(path.size() - 1);
         for (int i = 0; i < path.size() - 1; i++) {
-            if (path.get(i).equals(last)) return true;
+            if (path.get(i).equals(last))
+                return true;
         }
         return false;
     }
 
     public boolean isEdge(Position pos) {
-        return pos.getX() == 0 || pos.getX() == this.getHeight() - 1 || 
-               pos.getY() == 0 || pos.getY() == this.getWidth() - 1;
+        return pos.getX() == 0 || pos.getX() == this.getHeight() - 1 ||
+                pos.getY() == 0 || pos.getY() == this.getWidth() - 1;
     }
 
     public boolean isSameSide(Position pos1, Position pos2) {
-        if (pos1.getX() == 0 && pos2.getX() == 0) return true;
-        if (pos1.getX() == getHeight() - 1 && pos2.getX() == getHeight() - 1) return true;
-        if (pos1.getY() == 0 && pos2.getY() == 0) return true;
-        if (pos1.getY() == getWidth() - 1 && pos2.getY() == getWidth() - 1) return true;
+        if (pos1.getX() == 0 && pos2.getX() == 0)
+            return true;
+        if (pos1.getX() == getHeight() - 1 && pos2.getX() == getHeight() - 1)
+            return true;
+        if (pos1.getY() == 0 && pos2.getY() == 0)
+            return true;
+        if (pos1.getY() == getWidth() - 1 && pos2.getY() == getWidth() - 1)
+            return true;
         return false;
     }
 
     @Override
-    public void putBallon(Balloon ball, Cell cell){
-        if (!cell.isPath()){
+    public void putBallon(Balloon ball, Cell cell) {
+        if (!cell.isPath()) {
             cell.putBallon(ball);
         }
     }
