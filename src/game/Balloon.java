@@ -2,26 +2,39 @@ package game;
 
 import java.util.*;
 
+/**
+ * Represents a balloon enemy moving along a path.
+ * A balloon has a level (1=Red, 2=Blue, 4=Pink), health, and speed.
+ * It can be frozen, slowed, or take damage.
+ */
 public class Balloon {
-    // ... tes autres attributs ...
-    private double x, y; 
-    private double distance; // <--- AJOUT : Pour suivre la distance totale
+    private double x, y;
+    private double distance;
     private double speed;
+    private double baseSpeed;
     private int health;
     private int currentTargetIndex;
     private List<Position> path;
     private int level;
     private boolean frozen;
+    private boolean slowed;
 
+    /**
+     * Creates a balloon at the start of the given path.
+     * 
+     * @param level the balloon level (1, 2 or 4) which determines health and speed
+     * @param path  the list of positions forming the path
+     */
     public Balloon(int level, List<Position> path) {
         this.health = level;
         this.level = level;
         this.path = path;
-        this.distance = 0.0; // Initialisation à 0
+        this.distance = 0.0;
         this.currentTargetIndex = 1;
         this.speed = determineSpeed(level);
+        this.baseSpeed = this.speed;
         this.frozen = false;
-        // ... (le reste du constructeur)
+        this.slowed = false;
         if (path != null && !path.isEmpty()) {
             this.x = path.get(0).getX();
             this.y = path.get(0).getY();
@@ -29,11 +42,17 @@ public class Balloon {
     }
 
     private double determineSpeed(int level) {
-        if (level == 4) return 0.15; 
-        if (level == 2) return 0.1;
+        if (level == 4)
+            return 0.15;
+        if (level == 2)
+            return 0.1;
         return 0.05;
     }
 
+    /**
+     * Moves the balloon one step along the path based on its speed.
+     * Does nothing if the balloon is frozen or has reached the end.
+     */
     public void move() {
         if (!this.frozen && !isPopped() && currentTargetIndex < path.size()) {
             Position target = path.get(currentTargetIndex);
@@ -41,67 +60,174 @@ public class Balloon {
             double dy = target.getY() - this.y;
             double distToTarget = Math.sqrt(dx * dx + dy * dy);
 
-            // On calcule la distance réelle qu'on va parcourir ce tour-ci
             double actualMove = Math.min(distToTarget, speed);
 
             if (distToTarget <= speed) {
                 this.x = target.getX();
                 this.y = target.getY();
-                currentTargetIndex++; 
+                currentTargetIndex++;
             } else {
                 this.x += (dx / distToTarget) * speed;
                 this.y += (dy / distToTarget) * speed;
             }
-            
-            // MISE À JOUR : On ajoute le mouvement à la distance totale
+
             this.distance += actualMove;
         }
     }
 
-    // AJOUT : La méthode getDistance
+    /**
+     * Returns the total distance traveled by the balloon.
+     * Used to prioritize targets (most advanced balloon).
+     * 
+     * @return total distance traveled
+     */
     public double getDistance() {
-        return (currentTargetIndex - 1) + (Math.sqrt(x*x + y*y) % 1);
-        // Un calcul simple pour savoir qui est le plus avancé sur le chemin
+        return this.distance;
     }
 
-    // ... le reste de tes méthodes (isPopped, takeDamage, etc.) ...
-    public boolean isPopped() { return this.health <= 0; }
-    public int getGridX() { return (int) Math.round(x); }
-    public int getGridY() { return (int) Math.round(y); }
-    public int getLevel() { return this.level; }
-    public boolean hasReachedEnd() { return currentTargetIndex >= path.size(); }
-    public int getHealth() { return this.health; }
-    public double getSpeed() { return this.speed; }
+    /**
+     * Returns the precise X coordinate (double) of the balloon.
+     * 
+     * @return x coordinate
+     */
+    public double getX() {
+        return this.x;
+    }
 
     /**
-     * methode Take damage
+     * Returns the precise Y coordinate (double) of the balloon.
      * 
+     * @return y coordinate
+     */
+    public double getY() {
+        return this.y;
+    }
+
+    /**
+     * Returns whether the balloon has been destroyed (health <= 0).
+     * 
+     * @return true if popped
+     */
+    public boolean isPopped() {
+        return this.health <= 0;
+    }
+
+    /**
+     * Returns the grid X coordinate (rounded int).
+     * 
+     * @return grid column index
+     */
+    public int getGridX() {
+        return (int) Math.round(x);
+    }
+
+    /**
+     * Returns the grid Y coordinate (rounded int).
+     * 
+     * @return grid row index
+     */
+    public int getGridY() {
+        return (int) Math.round(y);
+    }
+
+    /**
+     * Returns the level of the balloon.
+     * 
+     * @return level (1, 2 or 4)
+     */
+    public int getLevel() {
+        return this.level;
+    }
+
+    /**
+     * Returns whether the balloon has reached the end of the path.
+     * 
+     * @return true if escaped
+     */
+    public boolean hasReachedEnd() {
+        return currentTargetIndex >= path.size();
+    }
+
+    /**
+     * Returns the current health of the balloon.
+     * 
+     * @return health points
+     */
+    public int getHealth() {
+        return this.health;
+    }
+
+    /**
+     * Returns the current speed of the balloon.
+     * 
+     * @return speed value
+     */
+    public double getSpeed() {
+        return this.speed;
+    }
+
+    /**
+     * Applies damage to the balloon. Also adapts speed to the new health level.
+     * 
+     * @param damage amount of damage to apply
      */
     public void takeDamage(int damage) {
         this.health -= damage;
         if (this.health > 0) {
-            this.speed = determineSpeed(this.health);
+            this.baseSpeed = determineSpeed(this.health);
+            this.speed = this.slowed ? this.baseSpeed * 0.5 : this.baseSpeed;
         }
     }
 
     /**
-     * methode qui gèle le ballon
-    */
+     * Freezes the balloon (stops movement).
+     */
     public void freeze() {
         this.frozen = true;
     }
 
     /**
-     * methode qui ralentit le ballon
+     * Unfreezes the balloon (restarts movement).
      */
-    public void slowDown() {
-        this.speed *= 0.5; // Réduction de la vitesse à 50%
+    public void unfreeze() {
+        this.frozen = false;
     }
 
     /**
-     * methode qui dégel le ballon
+     * Slows down the balloon by halving its speed.
+     */
+    public void slowDown() {
+        if (!this.slowed) {
+            this.speed *= 0.5;
+            this.slowed = true;
+        }
+    }
+
+    /**
+     * Restores the balloon to its base speed.
      */
     public void unSlowDown() {
-        this.speed *= 2.0; // Rétablissement de la vitesse normale
+        if (this.slowed) {
+            this.speed = this.baseSpeed;
+            this.slowed = false;
+        }
+    }
+
+    /**
+     * Returns whether the balloon is currently frozen.
+     * 
+     * @return true if frozen
+     */
+    public boolean isFrozen() {
+        return this.frozen;
+    }
+
+    /**
+     * Returns whether the balloon is currently slowed.
+     * 
+     * @return true if slowed
+     */
+    public boolean isSlowed() {
+        return this.slowed;
     }
 }
