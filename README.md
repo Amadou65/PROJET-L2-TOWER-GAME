@@ -204,9 +204,70 @@ Yassin :
 
 ## Livrable 3
 
+Commandes de compilation et d'exécution :
+
+    make classes
+
+Pour générer les JARs exécutables :
+
+    make jar
+
+Pour exécuter les livrables :
+
+    - java -jar livrable3a.jar <hauteur> <largeur> <nbBallons>
+    - java -jar livrable3b.jar <hauteur> <largeur> <nbChemins>
+
+Pour générer la javadoc :
+
+    make docs
+
+Pour compiler et lancer les tests :
+
+    make tests
+    make runtests
+
 ### Atteinte des objectifs
 
+Amadou :
+
+    Correction de tous les bugs de compilation bloquants (conflits Git dans Board.java,
+    méthodes manquantes getBallons(), getTowers(), getX(), getY()).
+
+    Réécriture du GameEngine avec logs horodatés [t=N] pour chaque événement du jeu :
+    ballon touché, gelé, ralenti, détruit ou sorti. Le Journal est mis à jour en temps réel.
+
+    Création du Makefile avec toutes les cibles demandées (classes, jar, docs, tests, runtests).
+
+Yassin :
+
+    Implémentation de Livrable3a : plateau aléatoire dont le chemin part obligatoirement
+    du bord gauche. Création de LeftStartRandomBoard, sous-classe de RandomBoard qui
+    surcharge creerListeDepart() pour limiter les départs à la colonne 0.
+    Placement aléatoire de 2 tours de chaque type sur les cases hors-chemin.
+
+Serhii :
+
+    Implémentation de Livrable3b : plateau avec N chemins rectilignes distincts.
+    Chaque chemin est généré par ClassicalBoard.path() avec un point de départ
+    différent. Un ballon de niveau aléatoire (1, 2 ou 4) est assigné à chaque chemin.
+    Correction de ClassicalBoard qui confondait height et width dans ses boucles.
+
+Habiba :
+
+    Amélioration de la classe Balloon : ajout de baseSpeed pour restaurer la vitesse
+    après un ralentissement, ajout de isFrozen() et isSlowed() pour les logs.
+    Correction de takeDamage() pour que le level suive health (mutation visible).
+    Correction de Journal.recordHealthLost() qui décrémentait au lieu d'incrémenter.
+
 ### Difficultés restant à résoudre
+
+    Trois tests de RandomBoardTest échouent : ils testent des positions (4,4) comme
+    étant sur le bord d'un plateau 6×11, ce qui est incorrect (la position (4,4) n'est
+    sur aucun bord). Ce sont des bugs dans les tests eux-mêmes et non dans notre code.
+
+### Lien UML
+
+    Le diagramme UML est disponible à la racine du projet dans le dossier uml/.
 
 ## Livrable 4
 
@@ -368,30 +429,7 @@ Ce qui a été réalisé
 
 ### Objectifs pour la semaine et répartition du travail par membre
 
-YASSIN:
-
     Cloturer la méthode TargetBalloon. Effectuer le test de la méthode.
-
-Amadou:
-
-    Mise A jour de L'uml
-
-Ivkin:
-
-    Gestion de Player
-
-Habiba:
-
-    Peaufinnement de Balloon
-
-### Difficultés rencontrées
-
-    Gestion des Tours pour le tir sur les balloons
-
-### Objectifs pour la semaine et répartition du travail par membre
-
-    Finir la gestion des Tours er rendre le livrable 3 complet
->>>>>>> 9b26a0947c6e694eeda98100a024c824826e761a
 
 ## Semaine 6
 
@@ -445,6 +483,16 @@ Habiba:
 
 ### Ce qui a été réalisé
 
+    Tout le groupe : Finalisation du Livrable 3 — correction des bugs de compilation,
+    implémentation de Livrable3a et Livrable3b, création du Makefile,
+    mise à jour de la Javadoc et du README.
+
 ### Difficultés rencontrées
 
+    Conflits de merge Git résiduels dans Board.java et README.md.
+    ClassicalBoard confondait les axes height/width causant un ArrayIndexOutOfBoundsException.
+    BalloonTest.java était mal placé dans src/ au lieu de tests/.
+
 ### Objectifs pour finaliser le projet et répartition du travail par membre
+
+    Tout le groupe : effectuer les commits et pousser avant 23h59.
