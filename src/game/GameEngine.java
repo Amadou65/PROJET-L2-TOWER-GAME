@@ -1,26 +1,68 @@
 package game;
 
-import java.util.*; 
+import java.util.*;
 import game.tower.*;
 
+/**
+ * GameEngine is the central game loop manager.
+ * It handles balloon spawning, movement, tower attacks, and event logging.
+ */
 public class GameEngine {
     private List<Balloon> reserve;
     private List<Balloon> actif;
     private Board board;
     private Player player;
+    private Journal journal;
 
+    /**
+     * Creates a new GameEngine.
+     * 
+     * @param reserve the list of balloons waiting to enter the board
+     * @param board   the game board
+     */
     public GameEngine(List<Balloon> reserve, Board board) {
         this.reserve = reserve;
         this.actif = new ArrayList<>();
         this.board = board;
         this.player = new Player();
+        this.journal = player.getJournal();
     }
 
+    /**
+     * Creates a new GameEngine with an existing player.
+     * 
+     * @param reserve the list of balloons waiting to enter the board
+     * @param board   the game board
+     * @param player  the player
+     */
+    public GameEngine(List<Balloon> reserve, Board board, Player player) {
+        this.reserve = reserve;
+        this.actif = new ArrayList<>();
+        this.board = board;
+        this.player = player;
+        this.journal = player.getJournal();
+    }
+
+    /**
+     * Returns the player managed by this engine.
+     * 
+     * @return the player
+     */
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    /**
+     * Runs the main game loop.
+     * Balloons spawn every 20 ticks, move each tick, and towers fire according to
+     * their cadence.
+     * Logs every event with its timestamp.
+     */
     public void game() {
         int time = 0;
-        int totalPopped = 0;   
-        int totalEscaped = 0;  
-        int initialCount = reserve.size(); 
+        int totalPopped = 0;
+        int totalEscaped = 0;
+        int initialCount = reserve.size();
 
         System.out.println("--- DÉMARRAGE DE LA MANCHE (" + initialCount + " ballons) ---");
 
@@ -32,9 +74,10 @@ public class GameEngine {
                 Balloon b = reserve.remove(reserve.size() - 1);
                 this.actif.add(b);
                 board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
+                System.out.println("[t=" + time + "] Ballon spawné (niveau " + b.getLevel() + ")");
             }
 
-            // 2. PHASE DE MOUVEMENT ET MISE À JOUR (Boucle inversée pour pouvoir supprimer)
+            // 2. PHASE DE MOUVEMENT (boucle inversée pour suppression sûre)
             for (int i = actif.size() - 1; i >= 0; i--) {
                 Balloon b = actif.get(i);
                 int oldX = b.getGridX();
@@ -45,74 +88,85 @@ public class GameEngine {
                 // CAS A : BALLON ÉCLATÉ
                 if (b.isPopped()) {
                     totalPopped++;
-                    player.setCredits(player.getCredits() + 10);
+                    player.addCredits(10);
+                    journal.recordBalloonDestroyed();
                     board.getCell(new Position(oldX, oldY)).removeBallon(b);
                     actif.remove(i);
-                    System.out.println("[SCORE] Ballon éclaté ! (" + totalPopped + "/" + initialCount + ")");
-                } 
-                // CAS B : BALLON ÉCHAPPÉ
-                else if (b.hasReachedEnd()) {
+                    System.out.println("[t=" + time + "] 💥 Ballon DÉTRUIT ! (" + totalPopped + "/" + initialCount
+                            + ") | Crédits: +" + 10);
+
+                    // CAS B : BALLON ÉCHAPPÉ
+                } else if (b.hasReachedEnd()) {
                     totalEscaped++;
                     player.onHit();
+                    journal.recordHealthLost();
                     board.getCell(new Position(oldX, oldY)).removeBallon(b);
                     actif.remove(i);
-                    System.out.println("[ALERTE] Un ballon s'est échappé !");
-                } 
-                // CAS C : MOUVEMENT CLASSIQUE (Changement de case)
-                else if (oldX != b.getGridX() || oldY != b.getGridY()) {
+                    System.out.println("[t=" + time + "] 💨 Ballon SORTI ! Vies restantes: " + player.getHealth());
+
+                    // CAS C : MOUVEMENT (changement de case)
+                } else if (oldX != b.getGridX() || oldY != b.getGridY()) {
                     board.getCell(new Position(oldX, oldY)).removeBallon(b);
                     board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
                 }
-            } // Fin de la boucle de mouvement
+            }
 
             // 3. PHASE DE TIRS DES TOURS
-            for (Tower tower : board.tower_list){
-                // CAS A : UNE TOUR PROJECTILE TOWER
-                if (tower instanceof ProjectileTower){
-                    if (tower.canShoot()){
-                        ((ProjectileTower)tower).shot(actif);
-                    }
-                }
+            for (Tower tower : board.tower_list) {
 
-                // CAS B : UNE TOUR NONPROJECTILE TOWER
-                else{
-                    if (time % tower.getCadence() == 0){
-                        ((NonProjectileTower)tower).freeze(actif);
+                // CAS A : TOUR À PROJECTILE
+                if (tower instanceof ProjectileTower) {
+                    if (tower.canShoot()) {
+                        ProjectileTower pt = (ProjectileTower) tower;
+                        Balloon target = TargetingBalloon.getBestTarget(actif, tower);
+                        if (target != null) {
+                            int healthBefore = target.getHealth();
+                            pt.shot(actif);
+                            int healthAfter = target.getHealth();
+                            if (healthAfter < healthBefore) {
+                                System.out.println("[t=" + time + "] 🎯 Ballon TOUCHÉ par " + tower.getNom()
+                                        + " ! Santé: " + healthBefore + " → " + healthAfter);
+                            }
+                        }
+                    }
+
+                    // CAS B : TOUR NON PROJECTILE (glace / ralentissement)
+                } else if (tower instanceof NonProjectileTower) {
+                    if (time % tower.getCadence() == 0) {
+                        NonProjectileTower npt = (NonProjectileTower) tower;
+                        List<Balloon> targets = TargetingBalloon.getAllTargets(actif, tower);
+                        for (Balloon b : targets) {
+                            boolean wasFrozen = b.isFrozen();
+                            npt.freeze(actif);
+                            if (!wasFrozen && b.isFrozen()) {
+                                System.out.println("[t=" + time + "] ❄️  Ballon ARRÊTÉ (gelé) par " + tower.getNom());
+                            } else if (b.isSlowed()) {
+                                System.out.println("[t=" + time + "] 🐌 Ballon RALENTI par " + tower.getNom());
+                            }
+                        }
                     }
                 }
             }
 
-            // 4. PAUSE POUR LE RENDU (50ms = 20 FPS)
-            try { 
-                Thread.sleep(50); 
+            // 4. PAUSE (50ms = 20 FPS)
+            try {
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        // --- PHASE DE BILAN FINAL ---
-        System.out.println("====================================");
+        // --- BILAN FINAL ---
         System.out.println("\n====================================");
         System.out.println("          BILAN DE LA PARTIE        ");
         System.out.println("====================================");
-        System.out.println("====================================");
-        if (!player.isAlife()) {
-            System.out.println("RÉSULTAT : GAME OVER (Le joueur est mort)");
-        } else {
-            System.out.println("RÉSULTAT : VICTOIRE !");
-        }
-
-        System.out.println("Temps de survie : " + time + " tics");
-        System.out.println("Ballons éclatés : " + totalPopped);
-        System.out.println("Ballons échappés : " + totalEscaped);
-
-        if (totalPopped == initialCount) {
-            System.out.println("MÉDAILLE D'OR : Perfect ! Aucun ballon n'a survécu.");
-        } else if (totalPopped > 0) {
-            System.out.println("MÉDAILLE D'ARGENT : Bien joué, mais certains ont filé.");
-        } else {
-            System.out.println("MÉDAILLE DE BRONZE : On fera mieux la prochaine fois...");
-        }
+        System.out.println(player.isAlife() ? "RÉSULTAT : VICTOIRE !" : "RÉSULTAT : GAME OVER");
+        System.out.println("Temps de survie       : " + time + " tics");
+        System.out.println("Ballons détruits      : " + totalPopped + "/" + initialCount);
+        System.out.println("Ballons échappés      : " + totalEscaped);
+        System.out.println("Vies restantes        : " + player.getHealth());
+        System.out.println("Crédits               : " + player.getCredits());
+        System.out.println("Tours achetées        : " + journal.getTowersPurchased());
         System.out.println("====================================\n");
     }
 }
