@@ -481,18 +481,9 @@ Ce qui a été réalisé
 
 ## Semaine 12
 
-### Ce qui a été réalisé
-
-    Tout le groupe : Finalisation du Livrable 3 — correction des bugs de compilation,
-    implémentation de Livrable3a et Livrable3b, création du Makefile,
-    mise à jour de la Javadoc et du README.
+### Ce qui a été réalisée
 
 ### Difficultés rencontrées
 
-    Conflits de merge Git résiduels dans Board.java et README.md.
-    ClassicalBoard confondait les axes height/width causant un ArrayIndexOutOfBoundsException.
-    BalloonTest.java était mal placé dans src/ au lieu de tests/.
 
 ### Objectifs pour finaliser le projet et répartition du travail par membre
-
-    Tout le groupe : effectuer les commits et pousser avant 23h59.
