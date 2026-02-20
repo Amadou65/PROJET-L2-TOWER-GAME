@@ -1,4 +1,5 @@
 package game;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +54,19 @@ public abstract class Tower {
     }
 
     /**
-     * This is predicat 
-     * @return true if the tower can shoot, false the tower has cooldown(cadenceActuelle > 0) and reduces the cooldown by 1
+     * Returns the position of this tower on the board.
+     * 
+     * @return the position
+     */
+    public Position getPosition() {
+        return this.position;
+    }
+
+    /**
+     * This is predicat
+     * 
+     * @return true if the tower can shoot, false the tower has
+     *         cooldown(cadenceActuelle > 0) and reduces the cooldown by 1
      */
     public boolean canShoot() {
         if (cadenceActuelle > 0) {
@@ -66,11 +78,11 @@ public abstract class Tower {
     }
 
     /**
-     * This function resets the tower's cooldown (cadenceActuelle) to its initial value (cadence) after shooting.
+     * This function resets the tower's cooldown (cadenceActuelle) to its initial
+     * value (cadence) after shooting.
      */
     public void resetCadence() {
         this.cadenceActuelle = this.cadence;
     }
-        
 
 }
