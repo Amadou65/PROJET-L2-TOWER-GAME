@@ -54,6 +54,7 @@ public class Player {
     // func decrease health of player by 1
     public void onHit() {
         this.health -= 1;
+        this.journal.recordHealthLost();
     }
 
     /**
@@ -83,6 +84,7 @@ public class Player {
         if (this.credits >= t.cost) {
             b.addTower(t, targetCell); // adds to both Cell and board.tower_list
             this.credits -= t.cost;
+            // add record in journal
             journal.recordTowerPurchased(t.cost);
         } else {
             System.out.println("Not enough credits to buy this tower.");

@@ -32,6 +32,7 @@ public class Journal {
 
     public void recordBalloonDestroyed() {
         this.balloonsDestroyed++;
+        this.healthRestore++;
         this.creditGainedTotal += 10;
     }
 
