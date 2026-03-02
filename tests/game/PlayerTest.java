@@ -1,4 +1,5 @@
 package game;
+import game.Evolution.EvolutionType;
 import game.board.ClassicalBoard;
 import game.tower.typeTower.DartMonkey;
 
@@ -31,5 +32,12 @@ public class PlayerTest {
 
         p.sellTower(t, b, pos);
         assertEquals(2500, p.getCredits());
+    }
+
+    @Test
+    public void testBuyEvolution(){
+        Player p = new Player();
+        Tower t = new DartMonkey("drt", new Position(0, 0));
+        //Evolution e = Evolution(10, Evolution.EvolutionType.SCOPE) TO DO
     }
 }
