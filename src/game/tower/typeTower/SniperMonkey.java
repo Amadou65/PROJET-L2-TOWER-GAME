@@ -5,7 +5,7 @@ import game.Position;
 import game.projectiles.VerySharpDart;
 import game.tower.ProjectileTower;
 
-public class SniperMonkey extends ProjectileTower{
+public class SniperMonkey extends ProjectileTower {
 
     public SniperMonkey(String name, Position pos) {
         super(name, 10000, 40, 500, 1, new VerySharpDart(), pos);
@@ -13,7 +13,7 @@ public class SniperMonkey extends ProjectileTower{
 
     public void getEvolution(Evolution e) {
         Evolution.EvolutionType type = e.getEvoType();
-        if(!this.hasEvolution(type)){
+        if (!this.hasEvolution(type)) {
             switch (type) {
                 case SCOPE:
                     this.scope += 1;
@@ -23,9 +23,10 @@ public class SniperMonkey extends ProjectileTower{
                     break;
                 case POWER:
                     this.power += 1;
-                    
+
                     break;
                 case PROJECTILE:
+                    this.power = this.power * 2; // double puissance
                     break;
             }
             this.evolutions.add(type);
