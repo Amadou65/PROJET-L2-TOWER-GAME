@@ -442,11 +442,36 @@ Ce qui a été réalisé
 ## Semaine 7
 
 ### Ce qui a été réalisé
-
+le livrable 3 a été fait et corrigé 
 ### Difficultés rencontrées
 
 ### Objectifs pour la semaine et répartition du travail par membre
+Amadou —
+    Livrable4.java : plateau, placement de tours, achat d'évolutions, lancement du moteur 
+    Makefile : ajouter livrable4.jar 
 
+Yassin 
+
+    TowerTest.java: 6 nouveaux tests JUnit (testEvolutionPower, testEvolutionCadence, testEvolutionProjectile, testEvolutionUnique, testCannotUpgradeIceTower, testCannotUpgradeSlowdownTower) 
+    Vérifier que BombTower
+    PROJECTILE (Bomb→ExtraBomb) fonctionne bien
+
+Serhii 
+
+    PlayerTest.java
+    : 3 tests (testBuyUpgrade, testCanUpgrade, testCannotUpgradeIceTower) 
+    Journal
+    : ajouter comptage par type d'évolution (POWER/CADENCE/SCOPE/PROJECTILE) 
+
+Habiba — 
+
+    Javadoc complète pour Evolution, Player.buyUpgrade(), Player.canUpgrade(), ProjectileTower.getEvolution() 
+    Mise à jour du diagramme UML (
+    uml/diagramme.puml
+    ) : ajouter
+    canUpgrade(), nouvelle signature buyUpgrade()
+ 
+    Relecture et validation que les tests de Yassin couvrent bien les cas limites définis dans le sujet 
 ## Semaine 8
 
 ### Ce qui a été réalisé
