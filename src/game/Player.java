@@ -121,16 +121,17 @@ public class Player {
      * 
      * @param e is the evolution to buy
      */
-    public void buyUpgrade(ProjectileTower t, Board b, Position p, Evolution e) {
+    public void buyEvolution(ProjectileTower t, Board b, Position p, Evolution e) {
+        
         if (this.credits >= e.cost) {
-            if(!t.hasEvolution(e.getEvoType())){
+            if(!t.hasEvolution(e.getEvoType())) {
                 this.credits -= e.cost;
                 t.getEvolution(e);
 
                 // add record in journal
-                journal.recordUpgradeApplied(e.cost);
+                journal.recordEvolutionApplied(e.cost);
             }
-            else{
+            else {
                 System.out.println("This evolution already done");
             }
         } else {

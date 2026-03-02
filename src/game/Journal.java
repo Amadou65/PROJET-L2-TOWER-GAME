@@ -6,7 +6,7 @@ public class Journal {
     private int creditGainedTotal;
     private int creditUsedTotal;
     private int towersPurchased;
-    private int upgradesPurchased;
+    private int evolutionsPurchased;
     private int healthLost;
     private int healthRestore;
 
@@ -25,7 +25,7 @@ public class Journal {
         this.creditGainedTotal = 0;
         this.creditUsedTotal = 0;
         this.towersPurchased = 0;
-        this.upgradesPurchased = 0;
+        this.evolutionsPurchased = 0;
         this.healthLost = 0;
         this.healthRestore = 0;
     }
@@ -41,8 +41,8 @@ public class Journal {
         this.creditUsedTotal += towerCost;
     }
 
-    public void recordUpgradeApplied(int upgradeCost) {
-        this.upgradesPurchased++;
+    public void recordEvolutionApplied(int upgradeCost) {
+        this.evolutionsPurchased++;
         this.creditUsedTotal += upgradeCost;
     }
 
@@ -68,7 +68,7 @@ public class Journal {
     }
 
     public int getUpgradesPurchased() {
-        return upgradesPurchased;
+        return evolutionsPurchased;
     }
 
     public int getTotalCreditsSpent() {
