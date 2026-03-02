@@ -1,5 +1,7 @@
 package game;
 
+import game.tower.ProjectileTower;
+
 public class Player {
     private int health; // number of health of Player
     private int credits; // number of Credits of Player
@@ -117,12 +119,18 @@ public class Player {
      * 
      * @param e is the evolution to buy
      */
-    public void buyUpgrade(Tower t, Board b, Position p, Evolution e) {
+    public void buyUpgrade(ProjectileTower t, Board b, Position p, Evolution e) {
         if (this.credits >= e.cost) {
-            this.credits -= e.cost;
-            // t.upgrade(e); TO DO
-            // add record in journal
-            journal.recordUpgradeApplied(e.cost);
+            if(!t.hasEvolution(e.getEvoType())){
+                this.credits -= e.cost;
+                t.getEvolution(e);
+
+                // add record in journal
+                journal.recordUpgradeApplied(e.cost);
+            }
+            else{
+                System.out.println("This evolution already done");
+            }
         } else {
             System.out.println("Not enough credits to upgrade this upgrade.");
         }
