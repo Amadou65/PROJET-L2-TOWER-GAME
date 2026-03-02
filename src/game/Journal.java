@@ -1,14 +1,21 @@
 package game;
 
+import game.Evolution.EvolutionType;
+
 public class Journal {
     // Statistiques des ballons
     private int balloonsDestroyed;
     private int creditGainedTotal;
     private int creditUsedTotal;
     private int towersPurchased;
-    private int upgradesPurchased;
+    private int evolutionsPurchased;
     private int healthLost;
     private int healthRestore;
+    // ndEvolution par type
+    private int nbEvolSCOPE;
+    private int nbEvolPOWER;
+    private int nbEvolCADENCE;
+    private int nbEvolPROJECTILE;
 
     /**
      * Constructeur par défaut
@@ -25,13 +32,20 @@ public class Journal {
         this.creditGainedTotal = 0;
         this.creditUsedTotal = 0;
         this.towersPurchased = 0;
-        this.upgradesPurchased = 0;
         this.healthLost = 0;
         this.healthRestore = 0;
+        
+        this.evolutionsPurchased = 0;
+        // ndEvolution par type
+        this.nbEvolSCOPE = 0;
+        this.nbEvolPOWER = 0;
+        this.nbEvolCADENCE = 0;
+        this.nbEvolPROJECTILE = 0;
     }
 
     public void recordBalloonDestroyed() {
         this.balloonsDestroyed++;
+        this.healthRestore++;
         this.creditGainedTotal += 10;
     }
 
@@ -40,8 +54,8 @@ public class Journal {
         this.creditUsedTotal += towerCost;
     }
 
-    public void recordUpgradeApplied(int upgradeCost) {
-        this.upgradesPurchased++;
+    public void recordEvolutionApplied(int upgradeCost) {
+        this.evolutionsPurchased++;
         this.creditUsedTotal += upgradeCost;
     }
 
@@ -50,6 +64,26 @@ public class Journal {
      */
     public void recordHealthLost() {
         this.healthLost++;
+    }
+
+    public void recordNbTypeEvolution(EvolutionType et){
+        switch (et) {
+            case CADENCE:
+                nbEvolCADENCE++;
+                break;
+            case POWER:
+                nbEvolPOWER++;
+                break;
+            case SCOPE:
+                nbEvolSCOPE++;
+                break;
+            case PROJECTILE:
+                nbEvolPROJECTILE++;
+                break;
+        
+            default:
+                System.out.println("This type not exist");
+        }
     }
 
     // Getters
@@ -67,7 +101,7 @@ public class Journal {
     }
 
     public int getUpgradesPurchased() {
-        return upgradesPurchased;
+        return evolutionsPurchased;
     }
 
     public int getTotalCreditsSpent() {
@@ -80,5 +114,21 @@ public class Journal {
 
     public int getHealthRestore() {
         return healthRestore;
+    }
+
+    public int getNbTypeEvolution(EvolutionType et){
+        switch (et) {
+            case CADENCE:
+                return nbEvolCADENCE;
+            case POWER:
+                return nbEvolPOWER;
+            case SCOPE:
+                return nbEvolSCOPE;
+            case PROJECTILE:
+                return nbEvolPROJECTILE;
+        
+            default:
+                return 0;
+        }
     }
 }

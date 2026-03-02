@@ -1,5 +1,7 @@
 package game;
 
+import game.tower.ProjectileTower;
+
 public class Player {
     private int health; // number of health of Player
     private int credits; // number of Credits of Player
@@ -52,6 +54,7 @@ public class Player {
     // func decrease health of player by 1
     public void onHit() {
         this.health -= 1;
+        this.journal.recordHealthLost();
     }
 
     /**
@@ -81,6 +84,7 @@ public class Player {
         if (this.credits >= t.cost) {
             b.addTower(t, targetCell); // adds to both Cell and board.tower_list
             this.credits -= t.cost;
+            // add record in journal
             journal.recordTowerPurchased(t.cost);
         } else {
             System.out.println("Not enough credits to buy this tower.");
@@ -117,12 +121,19 @@ public class Player {
      * 
      * @param e is the evolution to buy
      */
-    public void buyUpgrade(Tower t, Board b, Position p, Evolution e) {
+    public void buyEvolution(ProjectileTower t, Board b, Position p, Evolution e) {
+        
         if (this.credits >= e.cost) {
-            this.credits -= e.cost;
-            // t.upgrade(e); TO DO
-            // add record in journal
-            journal.recordUpgradeApplied(e.cost);
+            if(!t.hasEvolution(e.getEvoType())) {
+                this.credits -= e.cost;
+                t.getEvolution(e);
+
+                // add record in journal
+                journal.recordEvolutionApplied(e.cost);
+            }
+            else {
+                System.out.println("This evolution already done");
+            }
         } else {
             System.out.println("Not enough credits to upgrade this upgrade.");
         }
