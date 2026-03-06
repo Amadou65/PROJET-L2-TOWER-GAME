@@ -118,58 +118,32 @@ public class Player {
      * @param e the evolution to apply
      * @return true if the upgrade is possible
      */
-<<<<<<< Updated upstream
     public void buyEvolution(ProjectileTower t, Board b, Position p, Evolution e) {
         
-        if (this.credits >= e.cost) {
+        if (this.credits >= e.getCost()) {
             if(!t.hasEvolution(e.getEvoType())) {
-                this.credits -= e.cost;
-                t.getEvolution(e);
+                this.credits -= e.getCost();
+                ((ProjectileTower) t).getEvolution(e);
 
                 // add record in journal
-                journal.recordEvolutionApplied(e.cost);
+                journal.recordEvolutionApplied(e);
+                System.out.println("✨ Évolution " + e.getEvoType() + " appliquée à " + t.getNom()
+                        + " | Crédits restants : " + this.credits);
             }
             else {
                 System.out.println("This evolution already done");
             }
         } else {
             System.out.println("Not enough credits to upgrade this upgrade.");
-=======
-    public boolean canUpgrade(Tower t, Evolution e) {
-        return (t instanceof ProjectileTower) && (this.credits >= e.getCost());
-    }
-
-    /**
-     * Buys an evolution for the given tower.
-     * Deducts the cost from the player's credits and applies the evolution.
-     * Only works for ProjectileTower (IceTower and SlowdownTower cannot evolve).
-     *
-     * @param t the tower to upgrade
-     * @param e the evolution to apply
-     */
-    public void buyUpgrade(Tower t, Evolution e) {
-        if (!canUpgrade(t, e)) {
-            if (!(t instanceof ProjectileTower)) {
-                System.out.println("Cette tour ne peut pas évoluer.");
-            } else {
-                System.out.println("Crédits insuffisants pour acheter cette évolution.");
-            }
-            return;
->>>>>>> Stashed changes
         }
-        this.credits -= e.getCost();
-        ((ProjectileTower) t).getEvolution(e);
-        journal.recordUpgradeApplied(e.getCost());
-        System.out.println("✨ Évolution " + e.getEvoType() + " appliquée à " + t.getNom()
-                + " | Crédits restants : " + this.credits);
     }
 
     /**
      * @deprecated Use buyUpgrade(Tower, Evolution) instead.
      *             Kept for backward compatibility.
      */
-    @Deprecated
+    /*@Deprecated
     public void buyUpgrade(Tower t, Board b, Position p, Evolution e) {
         buyUpgrade(t, e);
-    }
+    }*/
 }

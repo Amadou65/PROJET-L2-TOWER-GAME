@@ -11,7 +11,8 @@ public class Evolution {
         PROJECTILE,
         SCOPE,
         CADENCE,
-        POWER
+        POWER,
+        ALL
     }
 
     public Evolution(int cost, EvolutionType type) {

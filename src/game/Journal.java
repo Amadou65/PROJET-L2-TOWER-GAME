@@ -54,9 +54,10 @@ public class Journal {
         this.creditUsedTotal += towerCost;
     }
 
-    public void recordEvolutionApplied(int upgradeCost) {
+    public void recordEvolutionApplied(Evolution e) {
         this.evolutionsPurchased++;
-        this.creditUsedTotal += upgradeCost;
+        this.creditUsedTotal += e.getCost();
+        this.recordNbTypeEvolution(e.getEvoType());
     }
 
     /**
