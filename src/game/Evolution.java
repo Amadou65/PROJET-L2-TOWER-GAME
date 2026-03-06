@@ -1,6 +1,12 @@
 // classe mere
 package game;
 
+/**
+ * Représente une amélioration applicable à une tour.
+ * Chaque évolution a un coût et un type spécifique qui définit 
+ * quelle statistique de la tour sera impactée (Portée, Puissance, etc.).
+ */
+
 public class Evolution {
 
     protected int cost;
