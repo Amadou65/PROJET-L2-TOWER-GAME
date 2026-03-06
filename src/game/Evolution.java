@@ -13,7 +13,7 @@ public class Evolution {
      * Types d'évolutions disponibles dans le jeu.
      * PROJECTILE : Change le type de projectile (ex: Bomb -> ExtraBomb).
      * SCOPE : Augmente le rayon de détection de la tour.
-     * CADENCE : Réduit le temps d'attente entre deux tirs.
+     * 
      * POWER : Augmente les dégâts de base de la tour.
      */
 
