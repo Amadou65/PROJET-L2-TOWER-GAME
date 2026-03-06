@@ -44,5 +44,14 @@ public abstract class ProjectileTower extends Tower{
     }
 
 
+
+    /**
+     * Applique une évolution à la tour de type Projectile.
+     * Cette méthode est abstraite et sera précisée dans chaque type de tour 
+     * (BombTower, DartMonkey, etc.) pour définir les bonus exacts.
+     * Elle vérifie également que l'évolution n'a pas déjà été appliquée via le HashSet.
+     * @param e L'évolution à appliquer.
+     */
+
     public abstract void getEvolution(Evolution e);
 }
