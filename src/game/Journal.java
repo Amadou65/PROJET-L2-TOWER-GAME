@@ -116,6 +116,11 @@ public class Journal {
         return healthRestore;
     }
 
+    /**
+     * Returns the number of evolutions purchased for a specific evolution type. By default, it returns the total number of evolutions.
+     * @param et the evolution type
+     * @return the number of evolutions purchased for the specified type
+     */
     public int getNbTypeEvolution(EvolutionType et){
         switch (et) {
             case CADENCE:
@@ -128,7 +133,7 @@ public class Journal {
                 return nbEvolPROJECTILE;
         
             default:
-                return 0;
+                return evolutionsPurchased;        
         }
     }
 }
