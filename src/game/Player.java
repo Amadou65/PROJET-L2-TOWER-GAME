@@ -1,6 +1,7 @@
 package game;
 
 import game.tower.ProjectileTower;
+import game.exeptions.*;
 
 public class Player {
     private int health; // number of health of Player
@@ -58,13 +59,6 @@ public class Player {
     }
 
     /**
-     * metode that buy a tower
-     * 
-     * @param t is the tower to buy
-     * @param p is the position to place the tower
-     * @param b is board of the game
-     */
-    /**
      * Buys a tower and places it on the board at position p.
      * Refuses placement if the cell is on the path or lacks credits.
      * 
@@ -111,30 +105,43 @@ public class Player {
     }
 
     /**
-     * Predicate: returns true if the tower can be upgraded with the given evolution
-     * (sufficient credits and the tower is a ProjectileTower).
+     * Buys an evolution for a given tower if the player has enough credits and the tower does not already have that evolution
      *
-     * @param t the tower to check
+     * @param t the tower to upgrade
      * @param e the evolution to apply
-     * @return true if the upgrade is possible
      */
-    public void buyEvolution(ProjectileTower t, Board b, Position p, Evolution e) {
+    public void buyEvolution(Tower t, Evolution e) throws TypeTowerException {
         
-        if (this.credits >= e.getCost()) {
-            if(!t.hasEvolution(e.getEvoType())) {
-                this.credits -= e.getCost();
-                ((ProjectileTower) t).getEvolution(e);
+        // Check if the tower is a ProjectileTower. Only ProjectileTowers can be upgraded
+        if(t instanceof ProjectileTower) {
 
-                // add record in journal
-                journal.recordEvolutionApplied(e);
-                System.out.println("✨ Évolution " + e.getEvoType() + " appliquée à " + t.getNom()
+            // change the type of t to ProjectileTower to access getEvolution method
+            ProjectileTower pt = (ProjectileTower) t;
+
+
+            if (this.credits >= e.getCost()) {
+
+                if(!pt.hasEvolution(e.getEvoType())) {
+                    // deduct credits and apply evolution to the tower
+                    this.credits -= e.getCost();
+                    ((ProjectileTower) pt).getEvolution(e);
+
+                    // add record in journal
+                    journal.recordEvolutionApplied(e);
+
+                    // show evolution applied and credits left in console
+                    System.out.println("✨ Évolution " + e.getEvoType() + " appliquée à " + t.getNom()
                         + " | Crédits restants : " + this.credits);
-            }
+                }
             else {
                 System.out.println("This evolution already done");
             }
-        } else {
-            System.out.println("Not enough credits to upgrade this upgrade.");
+            } else {
+                System.out.println("Not enough credits to upgrade this upgrade.");
+            }
+        }
+        else {
+            throw new TypeTowerException("Only Projectile Towers can be upgraded with evolutions.");
         }
     }
 

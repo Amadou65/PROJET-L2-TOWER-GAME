@@ -29,6 +29,8 @@ public class DartMonkey extends ProjectileTower {
                 case PROJECTILE:
                     this.setProjectileType(new SharpDart());
                     break;
+                default:
+                    System.out.println("This type not exist");
             }
             this.evolutions.add(type);
         }
