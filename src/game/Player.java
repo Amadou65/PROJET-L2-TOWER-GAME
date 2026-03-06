@@ -118,23 +118,6 @@ public class Player {
      * @param e the evolution to apply
      * @return true if the upgrade is possible
      */
-<<<<<<< Updated upstream
-    public void buyEvolution(ProjectileTower t, Board b, Position p, Evolution e) {
-        
-        if (this.credits >= e.cost) {
-            if(!t.hasEvolution(e.getEvoType())) {
-                this.credits -= e.cost;
-                t.getEvolution(e);
-
-                // add record in journal
-                journal.recordEvolutionApplied(e.cost);
-            }
-            else {
-                System.out.println("This evolution already done");
-            }
-        } else {
-            System.out.println("Not enough credits to upgrade this upgrade.");
-=======
     public boolean canUpgrade(Tower t, Evolution e) {
         return (t instanceof ProjectileTower) && (this.credits >= e.getCost());
     }
@@ -155,15 +138,8 @@ public class Player {
                 System.out.println("Crédits insuffisants pour acheter cette évolution.");
             }
             return;
->>>>>>> Stashed changes
         }
-        this.credits -= e.getCost();
-        ((ProjectileTower) t).getEvolution(e);
-        journal.recordUpgradeApplied(e.getCost());
-        System.out.println("✨ Évolution " + e.getEvoType() + " appliquée à " + t.getNom()
-                + " | Crédits restants : " + this.credits);
     }
-
     /**
      * @deprecated Use buyUpgrade(Tower, Evolution) instead.
      *             Kept for backward compatibility.
