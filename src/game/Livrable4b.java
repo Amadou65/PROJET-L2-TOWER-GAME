@@ -56,3 +56,9 @@ public class Livrable4b extends Livrable4 {
             int lvl = levels[rng.nextInt(levels.length)];
             reserve.add(new Balloon(lvl, path));
         }
+        System.out.println("\n--- LANCEMENT DE LA MANCHE ---");
+        // On passe le player existant pour conserver les stats du journal
+        GameEngine engine = new GameEngine(reserve, board, player);
+        engine.game();
+    }
+}
