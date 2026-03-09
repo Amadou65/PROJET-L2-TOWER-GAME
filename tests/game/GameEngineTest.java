@@ -77,5 +77,35 @@ public class GameEngineTest {
                 "Le joueur devrait avoir perdu au moins une vie.");
     }
 
+    /**
+     * Vérifie que les crédits du joueur ne tombent pas en négatif
+     * même après des achats de tour et fin de partie.
+     */
+    @Test
+    @DisplayName("Les crédits du joueur restent positifs après la partie")
+    public void testPlayerCreditsPositiveAfterGame() {
+        Player player = new Player();
 
+        // Chercher la première case libre (hors chemin) pour placer une tour
+        Position freePosForTower = null;
+        for (int i = 0; i < 5 && freePosForTower == null; i++) {
+            for (int j = 0; j < 5 && freePosForTower == null; j++) {
+                Position p = new Position(i, j);
+                if (!board.getCell(p).isPath()) {
+                    freePosForTower = p;
+                }
+            }
+        }
+
+        if (freePosForTower != null) {
+            DartMonkey dart = new DartMonkey("DartMonkey", freePosForTower);
+            player.buyTower(dart, freePosForTower, board);
+        }
+
+        GameEngine engineWithPlayer = new GameEngine(reserve, board, player);
+        engineWithPlayer.game();
+
+        assertTrue(player.getCredits() >= 0,
+                "Les crédits du joueur ne doivent pas être négatifs.");
+    }
 }
