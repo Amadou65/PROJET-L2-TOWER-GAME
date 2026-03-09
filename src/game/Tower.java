@@ -1,8 +1,5 @@
 package game;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // classe mère
 public abstract class Tower {
     protected int power;

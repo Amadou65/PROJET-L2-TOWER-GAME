@@ -28,6 +28,8 @@ public class SniperMonkey extends ProjectileTower {
                 case PROJECTILE:
                     this.power = this.power * 2; // double puissance
                     break;
+                default:
+                    System.out.println("This type not exist");
             }
             this.evolutions.add(type);
         }

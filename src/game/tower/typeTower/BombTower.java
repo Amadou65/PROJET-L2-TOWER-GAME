@@ -28,6 +28,8 @@ public class BombTower extends ProjectileTower {
                     this.power += 1;
 
                     break;
+                default:
+                    System.out.println("This type not exist");
             }
             this.evolutions.add(type);
         }

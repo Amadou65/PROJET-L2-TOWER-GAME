@@ -1,6 +1,7 @@
 package game;
 
 import game.tower.ProjectileTower;
+import game.exeptions.*;
 
 public class Player {
     private int health; // number of health of Player
@@ -57,13 +58,6 @@ public class Player {
         this.journal.recordHealthLost();
     }
 
-    /**
-     * metode that buy a tower
-     * 
-     * @param t is the tower to buy
-     * @param p is the position to place the tower
-     * @param b is board of the game
-     */
     /**
      * Buys a tower and places it on the board at position p.
      * Refuses placement if the cell is on the path or lacks credits.
@@ -126,26 +120,51 @@ public class Player {
      * Buys an evolution for the given tower.
      * Deducts the cost from the player's credits and applies the evolution.
      * Only works for ProjectileTower (IceTower and SlowdownTower cannot evolve).
+     * Buys an evolution for a given tower if the player has enough credits and the tower does not already have that evolution
      *
      * @param t the tower to upgrade
      * @param e the evolution to apply
      */
-    public void buyUpgrade(Tower t, Evolution e) {
-        if (!canUpgrade(t, e)) {
-            if (!(t instanceof ProjectileTower)) {
-                System.out.println("Cette tour ne peut pas évoluer.");
-            } else {
-                System.out.println("Crédits insuffisants pour acheter cette évolution.");
+    public void buyEvolution(Tower t, Evolution e) throws TypeTowerException {
+        
+        // Check if the tower is a ProjectileTower. Only ProjectileTowers can be upgraded
+        if(t instanceof ProjectileTower) {
+
+            // change the type of t to ProjectileTower to access getEvolution method
+            ProjectileTower pt = (ProjectileTower) t;
+
+
+            if (this.credits >= e.getCost()) {
+
+                if(!pt.hasEvolution(e.getEvoType())) {
+                    // deduct credits and apply evolution to the tower
+                    this.credits -= e.getCost();
+                    ((ProjectileTower) pt).getEvolution(e);
+
+                    // add record in journal
+                    journal.recordEvolutionApplied(e);
+
+                    // show evolution applied and credits left in console
+                    System.out.println("✨ Évolution " + e.getEvoType() + " appliquée à " + t.getNom()
+                        + " | Crédits restants : " + this.credits);
+                }
+            else {
+                System.out.println("This evolution already done");
             }
-            return;
+            } else {
+                System.out.println("Not enough credits to upgrade this upgrade.");
+            }
+        }
+        else {
+            throw new TypeTowerException("Only Projectile Towers can be upgraded with evolutions.");
         }
     }
     /**
      * @deprecated Use buyUpgrade(Tower, Evolution) instead.
      *             Kept for backward compatibility.
      */
-    @Deprecated
+    /*@Deprecated
     public void buyUpgrade(Tower t, Board b, Position p, Evolution e) {
         buyUpgrade(t, e);
-    }
+    }*/
 }

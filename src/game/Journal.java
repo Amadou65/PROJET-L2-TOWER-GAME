@@ -35,6 +35,7 @@ public class Journal {
         this.healthLost = 0;
         this.healthRestore = 0;
         
+        // nbEvolutions total
         this.evolutionsPurchased = 0;
         // ndEvolution par type
         this.nbEvolSCOPE = 0;
@@ -54,9 +55,10 @@ public class Journal {
         this.creditUsedTotal += towerCost;
     }
 
-    public void recordEvolutionApplied(int upgradeCost) {
+    public void recordEvolutionApplied(Evolution e) {
         this.evolutionsPurchased++;
-        this.creditUsedTotal += upgradeCost;
+        this.creditUsedTotal += e.getCost();
+        this.recordNbTypeEvolution(e.getEvoType());
     }
 
     /**
@@ -66,6 +68,10 @@ public class Journal {
         this.healthLost++;
     }
 
+    /**
+     * Records Evolution purchase by type. This method is called when an evolution is applied to a tower
+     * @param et the type of evolution purchased
+     */
     public void recordNbTypeEvolution(EvolutionType et){
         switch (et) {
             case CADENCE:
@@ -116,6 +122,11 @@ public class Journal {
         return healthRestore;
     }
 
+    /**
+     * Returns the number of evolutions purchased for a specific evolution type. By default, it returns the total number of evolutions.
+     * @param et the evolution type
+     * @return (int) the number of evolutions purchased for the specified type
+     */
     public int getNbTypeEvolution(EvolutionType et){
         switch (et) {
             case CADENCE:
@@ -128,7 +139,7 @@ public class Journal {
                 return nbEvolPROJECTILE;
         
             default:
-                return 0;
+                return evolutionsPurchased;        
         }
     }
 }

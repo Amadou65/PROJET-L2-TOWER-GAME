@@ -29,6 +29,8 @@ public class SuperMonkey extends ProjectileTower {
                 case PROJECTILE:
                     this.setProjectileType(new VerySharpDart());
                     break;
+                default:
+                    System.out.println("This type not exist");
             }
             this.evolutions.add(type);
         }
