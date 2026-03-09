@@ -585,6 +585,11 @@ Serhii
     du try/catch sur TypeTowerException à l'intérieur de la boucle m'a permis de
     continuer l'achat sur les autres tours.
 
+    Yassin :
+    Quelques difficultées rencontrés lors des test par exemple le lien  entre toutes les classes, vérification que le solde du joueur ne bouge pas lors d'une amélioration ou évolution interdite...
+
+    Difficultées aussi pour le TestCannotUpgradeIceTower car comparer aux autres test je devais vérifier que l'action n'a pas lieu, je devais comparer l'état du joueur avant et après l'appel de la méthode.
+
 ### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 9
