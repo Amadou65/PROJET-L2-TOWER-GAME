@@ -73,3 +73,36 @@ public class Livrable4 {
         }
         return placedTowers;
     }
+    /**
+     * Achète une évolution POWER puis CADENCE sur chaque tour eligible.
+     * Seules les {@link ProjectileTower} peuvent recevoir des évolutions.
+     * Si une tour non-eligible est passée, l'exception {@link TypeTowerException}
+     * est interceptée et un message est affiché.
+     *
+     * @param towers la liste des tours sur lesquelles tenter les évolutions
+     * @param player le joueur (dont les crédits sont débités)
+     */
+    public static void buyEvolutions(List<Tower> towers, Player player) {
+        // On prépare deux types d'évolutions
+        Evolution evopower = new Evolution(200, Evolution.EvolutionType.POWER);
+        Evolution evocadence = new Evolution(150, Evolution.EvolutionType.CADENCE);
+
+        for (Tower t : towers) {
+            // Tentative d'achat POWER
+            try {
+                player.buyEvolution(t, evopower);
+            } catch (TypeTowerException e) {
+                // IceTower / SlowdownTower ne peuvent pas évoluer → on l'ignore
+                System.out.println("[EVOL] " + t.getNom()
+                        + " ne peut pas évoluer : " + e.getMessage());
+            }
+
+            // Tentative d'achat CADENCE
+            try {
+                player.buyEvolution(t, evocadence);
+            } catch (TypeTowerException e) {
+                System.out.println("[EVOL] " + t.getNom()
+                        + " ne peut pas évoluer : " + e.getMessage());
+            }
+        }
+    }
