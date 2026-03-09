@@ -567,6 +567,12 @@ Amadou :
     Ajout de deux tests JUnit dans GameEngineTest.java : testPlayerLosesLifeWhenBalloonEscapes
     et testPlayerCreditsPositiveAfterGame.
 
+Serhii
+    - Des tests de Player pour acheter l'evolution et verification d'erreur a cause de evoluer NonProjectileTower
+    - Fin de fonction buyEvolution de la classe Player et creation l'exeption TypeTowerException
+    - L'adition de comptage des evolution par type dans Journal avec deux fonctions recordNbTypeEvolution et getNbTypeEvolution
+    - Verification des nouveaux fonctions avec des tests dans JournalTest
+
 ### Difficultés rencontrées
 
     Amadou : La méthode buyEvolutions() devait gérer correctement le cas des tours non
