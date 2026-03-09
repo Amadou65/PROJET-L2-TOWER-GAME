@@ -1,19 +1,22 @@
-import game.*;
-import game.board.ClassicalBoard;
+package game;
+
+import game.exeptions.*;
+import game.tower.typeTower.*;
 import game.Evolution.EvolutionType;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+public class testEvolutionProjectile {
 @Test
-public void testEvolutionProjectile() {
+public void testEvolutionProjectile() throws TypeTowerException {
     Player p = new Player();
-    Board b = new ClassicalBoard(5, 5);
-    Tower t = new BombTower();
+    Tower t = new BombTower("bt", new Position(0, 0));
     Evolution e = new Evolution(400, EvolutionType.PROJECTILE);
 
-    p.buyUpgrade(t, b, new Position(0, 0), e);
+    p.buyEvolution(t, e);
 
     assertEquals(1, p.getJournal().getNbTypeEvolution(EvolutionType.PROJECTILE), 
         "ERREUR : Le changement de projectile n'a pas été enregistré.");
     System.out.println("SUCCÈS : Méthode Projectile validée.");
+}
 }
