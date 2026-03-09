@@ -7,7 +7,7 @@ import game.Evolution.EvolutionType;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class testEvolutionPower {
+public class TestEvolutionPower {
 @Test
 public void testEvolutionPower() throws TypeTowerException {
     Player p = new Player();

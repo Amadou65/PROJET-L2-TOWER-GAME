@@ -7,7 +7,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class testEvolutionCadence {
+public class TestEvolutionCadence {
 @Test
 public void testEvolutionCadence() throws TypeTowerException {
     Player p = new Player();

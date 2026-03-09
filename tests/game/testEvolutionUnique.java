@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class testEvolutionUnique {
     @Test
-    public void testEvolutionUnique() throws TypeTowerException{
+    public void TestEvolutionUnique() throws TypeTowerException{
         Player p = new Player();
         Board b = new ClassicalBoard(5, 5);
         Tower t = new DartMonkey("dm", new Position(0, 0));
@@ -25,4 +25,4 @@ public class testEvolutionUnique {
             "ERREUR : Le joueur a été débité une deuxième fois pour la même évolution.");
         System.out.println("SUCCÈS : Le blocage du doublon d'évolution fonctionne.");
     }
-}
+}   
