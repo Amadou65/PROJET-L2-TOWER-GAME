@@ -461,9 +461,41 @@ Ce qui a été réalisé
 
 ### Ce qui a été réalisé
 
+    Yassin : Clôture et correction de la méthode TargetBalloon (TargetingBalloon.java).
+    Finalisation de l'algorithme de calcul de distance entre tour et ballon. La tour cible
+    désormais le ballon le plus avancé dans le chemin à portée, et change de cible dès
+    que le ballon sort de sa portée.
+
+    Amadou : Intégration et débogage de la phase d'attaque des tours dans la boucle du
+    GameEngine. Les tirs sont déclenchés selon la cadence de chaque tour (ProjectileTower)
+    et les effets de zone (IceTower, SlowdownTower) sont appliqués à tous les ballons à portée.
+    Correction des conflits Git dans Board.java et des méthodes manquantes (getBallons(),
+    getTowers()).
+
+    Habiba : Correction de la classe Balloon : ajout de baseSpeed pour restaurer la vitesse
+    après un ralentissement. Correction de takeDamage() pour que le niveau suive la santé
+    lors des mutations de ballons.
+
+    Ivkin : Correction et fiabilisation du placement des tours sur la grille (interdiction
+    de poser sur le chemin). Correction de ClassicalBoard qui confondait height et width.
+
 ### Difficultés rencontrées
 
+    Intégration des tours : Il était difficile de synchroniser les tirs des tours avec
+    la boucle de jeu basée sur les tics, notamment pour éviter qu'une tour tire plusieurs
+    fois sur le même ballon dans le même tic.
+
+    Conflits Git : La fusion des branches de chaque membre a généré des conflits dans
+    Board.java qui ont nécessité une résolution manuelle.
+
 ### Objectifs pour la semaine et répartition du travail par membre
+
+    Finaliser et tester le Livrable 3 (Livrable3a et Livrable3b opérationnels).
+
+    Amadou : Réécriture du GameEngine avec logs horodatés [t=N] et création du Makefile.
+    Yassin : Implémentation de Livrable3a avec LeftStartRandomBoard.
+    Serhii : Implémentation de Livrable3b avec N chemins rectilignes.
+    Habiba : Correction de Journal.recordHealthLost() et ajout des méthodes isFrozen()/isSlowed().
 
 ## Semaine 7
 
