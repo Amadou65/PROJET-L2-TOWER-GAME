@@ -106,3 +106,33 @@ public class Livrable4 {
             }
         }
     }
+
+    /**
+     * Fabrique une tour du type demandé à la position donnée.
+     *
+     * @param type le nom du type de tour (ex : "DartMonkey", "BombTower")
+     * @param pos  la position où la tour sera placée
+     * @return l'instance créée, ou {@code null} si le type est inconnu
+     */
+    public static Tower buildTower(String type, Position pos) {
+        switch (type) {
+            case "DartMonkey":
+                return new DartMonkey("DartMonkey", pos);
+            case "BombTower":
+                return new BombTower("BombTower", pos);
+            case "SniperMonkey":
+                return new SniperMonkey("SniperMonkey", pos);
+            case "SuperMonkey":
+                return new SuperMonkey("SuperMonkey", pos);
+            case "TackShooter":
+                return new TackShooter("TackShooter", pos);
+            case "IceTower":
+                return new IceTower("IceTower", pos);
+            case "SlowdownTower":
+                return new SlowdownTower("SlowdownTower", pos);
+            default:
+                System.out.println("[WARN] Type de tour inconnu : " + type);
+                return null;
+        }
+    }
+}
