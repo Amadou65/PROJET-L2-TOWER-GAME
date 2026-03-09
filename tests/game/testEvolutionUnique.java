@@ -19,7 +19,7 @@ public class testEvolutionUnique {
         p.buyEvolution(t, e);
         int creditsApresPremier = p.getCredits();
 
-        // Tentative de second achat identique
+        // Tentative de second achat 
         p.buyEvolution(t, e);
         assertEquals(creditsApresPremier, p.getCredits(), 
             "ERREUR : Le joueur a été débité une deuxième fois pour la même évolution.");
