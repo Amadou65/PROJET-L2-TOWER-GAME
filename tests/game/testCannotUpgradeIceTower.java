@@ -17,7 +17,7 @@ public class testCannotUpgradeIceTower{
         Evolution e = new Evolution(250, EvolutionType.POWER);
         int creditsInitiaux = p.getCredits();
 
-        p.buyEvolution(t,e);
+        assertThrows(TypeTowerException.class, () -> p.buyEvolution(t, e));
 
         assertEquals(creditsInitiaux, p.getCredits(), 
             "ERREUR : La tour de glace a été améliorée (interdit).");
