@@ -44,3 +44,7 @@ public class Livrable4b extends Livrable4 {
                 + player.getCredits() + ") ---");
         List<Tower> towers = Livrable4.placeTowers(board, player, height, width);
         System.out.println("Crédits restants après tours : " + player.getCredits());
+        // --- PHASE 3 : Acheter des évolutions sur les tours éligibles ---
+        System.out.println("\n--- ACHAT DES ÉVOLUTIONS ---");
+        Livrable4.buyEvolutions(towers, player);
+        System.out.println("Crédits restants après évolutions : " + player.getCredits());
