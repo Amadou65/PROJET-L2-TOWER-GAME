@@ -148,9 +148,9 @@ public class Player {
                     System.out.println("✨ Évolution " + e.getEvoType() + " appliquée à " + t.getNom()
                         + " | Crédits restants : " + this.credits);
                 }
-            else {
-                System.out.println("This evolution already done");
-            }
+                else {
+                    System.out.println("This evolution already done");
+                }
             } else {
                 System.out.println("Not enough credits to upgrade this upgrade.");
             }

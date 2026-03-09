@@ -46,7 +46,7 @@ public class PlayerTest {
         // Check that the player's credits have been reduced by the cost of the evolution
         assertEquals(2400, p.getCredits());
 
-        // Check that the tower has the evolution applied
+        // Check that the tower has the evolution SCOPE applied
         ProjectileTower pt = (ProjectileTower) t;
         assertTrue(pt.hasEvolution(Evolution.EvolutionType.SCOPE));
         assertFalse(pt.hasEvolution(Evolution.EvolutionType.POWER));
