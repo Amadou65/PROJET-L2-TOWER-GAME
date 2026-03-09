@@ -5,7 +5,6 @@ import game.tower.*;
 import game.tower.typeTower.*;
 import game.exeptions.TypeTowerException;
 
-
 /**
  * Livrable4 est la classe parent commune à Livrable4a et Livrable4b.
  * Elle regroupe les méthodes utilitaires partagées entre les deux scénarios :
@@ -64,15 +63,23 @@ public class Livrable4 {
             Position pos = freeCells.get(idx++);
             Tower t = buildTower(type, pos);
             if (t != null) {
+                // Vérification anticipée : on n'appelle buyTower que si les crédits suffisent
+                if (player.getCredits() < t.cost) {
+                    break; // plus assez de crédits : on arrête le placement
+                }
+                int creditsAvant = player.getCredits();
                 player.buyTower(t, pos, board);
-                placedTowers.add(t);
-                System.out.println("[SETUP] Tour " + t.getNom()
-                        + " achetée (" + t.cost + " crédits) en ("
-                        + t.getX() + "," + t.getY() + ")");
+                if (player.getCredits() < creditsAvant) {
+                    placedTowers.add(t);
+                    System.out.println("[SETUP] Tour " + t.getNom()
+                            + " achetée (" + t.cost + " crédits) en ("
+                            + t.getX() + "," + t.getY() + ")");
+                }
             }
         }
         return placedTowers;
     }
+
     /**
      * Achète une évolution POWER puis CADENCE sur chaque tour eligible.
      * Seules les {@link ProjectileTower} peuvent recevoir des évolutions.
@@ -89,20 +96,24 @@ public class Livrable4 {
 
         for (Tower t : towers) {
             // Tentative d'achat POWER
-            try {
-                player.buyEvolution(t, evopower);
-            } catch (TypeTowerException e) {
-                // IceTower / SlowdownTower ne peuvent pas évoluer → on l'ignore
-                System.out.println("[EVOL] " + t.getNom()
-                        + " ne peut pas évoluer : " + e.getMessage());
+            // canUpgrade() vérifie : ProjectileTower ET crédits suffisants
+            if (player.canUpgrade(t, evopower)) {
+                try {
+                    player.buyEvolution(t, evopower);
+                } catch (TypeTowerException e) {
+                    System.out.println("[EVOL] " + t.getNom()
+                            + " ne peut pas évoluer : " + e.getMessage());
+                }
             }
 
             // Tentative d'achat CADENCE
-            try {
-                player.buyEvolution(t, evocadence);
-            } catch (TypeTowerException e) {
-                System.out.println("[EVOL] " + t.getNom()
-                        + " ne peut pas évoluer : " + e.getMessage());
+            if (player.canUpgrade(t, evocadence)) {
+                try {
+                    player.buyEvolution(t, evocadence);
+                } catch (TypeTowerException e) {
+                    System.out.println("[EVOL] " + t.getNom()
+                            + " ne peut pas évoluer : " + e.getMessage());
+                }
             }
         }
     }
