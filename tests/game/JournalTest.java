@@ -1,5 +1,8 @@
 package game;
 import org.junit.jupiter.api.*;
+
+import game.Evolution.EvolutionType;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JournalTest {
@@ -32,5 +35,19 @@ public class JournalTest {
         journal.recordTowerPurchased(100);
         assertEquals(1, journal.getTowersPurchased());
         assertEquals(100, journal.getTotalCreditsSpent());
+    }
+
+    @Test
+    public void testRecordNbTypeEvolution(){
+
+        Evolution e = new Evolution(10, EvolutionType.SCOPE);
+        journal.recordEvolutionApplied(e);
+
+        assertEquals(1, journal.getNbTypeEvolution(e.getEvoType()));
+        assertEquals(1, journal.getNbTypeEvolution(EvolutionType.ALL));
+        assertEquals(0, journal.getNbTypeEvolution(EvolutionType.CADENCE));
+
+        journal.recordNbTypeEvolution(EvolutionType.CADENCE);
+        assertEquals(1, journal.getNbTypeEvolution(EvolutionType.CADENCE));
     }
 }

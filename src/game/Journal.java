@@ -43,18 +43,28 @@ public class Journal {
         this.nbEvolCADENCE = 0;
         this.nbEvolPROJECTILE = 0;
     }
-
+    /**
+     * Record one balloon destroyed
+     */
     public void recordBalloonDestroyed() {
         this.balloonsDestroyed++;
         this.healthRestore++;
         this.creditGainedTotal += 10;
     }
 
+    /**
+     * Record Tower that was be purchased
+     * @param towerCost (int) ammount of tower
+     */
     public void recordTowerPurchased(int towerCost) {
         this.towersPurchased++;
         this.creditUsedTotal += towerCost;
     }
 
+    /**
+     * Record purchase of Evolution. Also record type of evolution in counter for this journal
+     * @param e
+     */
     public void recordEvolutionApplied(Evolution e) {
         this.evolutionsPurchased++;
         this.creditUsedTotal += e.getCost();
@@ -123,7 +133,7 @@ public class Journal {
     }
 
     /**
-     * Returns the number of evolutions purchased for a specific evolution type. By default, it returns the total number of evolutions.
+     * Returns the number of evolutions purchased for a specific evolution type. By default, it returns the total number of evolutions. We can choose default by EvolutionType.ALL
      * @param et the evolution type
      * @return (int) the number of evolutions purchased for the specified type
      */
