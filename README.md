@@ -445,17 +445,35 @@ Ce qui a été réalisé
 
 ### Ce qui a été réalisé
 
+    Yassin : Finalisation de la méthode TargetBalloon pour viser le premier ballon de la file
+    tant qu'il est dans le scope de la tour. Intégration de la classe TargetingBalloon dans
+    la classe Board pour plus de clarté et de compréhension.
 
-    Yassin : Finalistation de la methode TargetBalloon pour viser le premier ballon de la fil tant qu'il est dans le scope de la tour. (encore quelques choses à modifier)
-    Intégration de la classe TargetBalloon dans la classe Boards pour plus de clareté et de compréhension
+    Amadou : Intégration de la phase de tir des tours dans la boucle principale du GameEngine.
+    Mise en place de la logique de cadence (une tour tire uniquement quand son compteur de tics
+    atteint sa cadence). Implémentation de l'attaque des ProjectileTower (méthode shot()) et
+    des effets de zone des NonProjectileTower (méthode freeze()). Ajout de l'affichage du
+    bilan final de la manche (ballons détruits, vies restantes, crédits).
+
+    Habiba : Initialisation des statistiques réelles (portée, coût, dégâts) dans les
+    constructeurs des tours. Chaque type de tour possède désormais ses propres valeurs
+    de départ conformes au sujet (ex. DartMonkey, BombTower, IceTower).
+
+    Ivkin : Sécurisation du placement des tours sur la grille : interdiction de poser une
+    tour sur une case appartenant au chemin. Vérification dans la méthode buyTower() de Player.
 
 ### Difficultés rencontrées
 
-    YASSIN : Calcul de distance entre le ballon et la tour. Viser le ballon uniquement tant qu'il est dans le scope de la tour et donc changer de cible une fois le ballon sortit.
+    Yassin : Calcul de distance entre le ballon et la tour. Viser le ballon uniquement
+    tant qu'il est dans le scope de la tour et changer de cible une fois le ballon sorti.
+
+    Amadou : Synchronisation entre la phase de mouvement des ballons et la phase de tir
+    des tours pour éviter de tirer sur un ballon déjà supprimé de la liste active.
 
 ### Objectifs pour la semaine et répartition du travail par membre
 
-    Cloturer la méthode TargetBalloon. Effectuer le test de la méthode.
+    Clôturer la méthode TargetBalloon et effectuer les tests de la méthode.
+    Finaliser l'intégration des tours dans le GameEngine et corriger les conflits Git.
 
 ## Semaine 6
 
