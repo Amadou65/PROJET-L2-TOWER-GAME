@@ -48,5 +48,13 @@ public class Livrable4a extends Livrable4 {
         System.out.println("\n--- ACHAT DES ÉVOLUTIONS ---");
         Livrable4.buyEvolutions(towers, player);
         System.out.println("Crédits restants après évolutions : " + player.getCredits());
+        // --- PHASE 4 : Créer les ballons et lancer la manche ---
+        List<Balloon> reserve = new ArrayList<>();
+        int[] levels = { 1, 2, 4 };
+        Random rng = new Random();
+        for (int i = 0; i < nbBallons; i++) {
+            int lvl = levels[rng.nextInt(levels.length)];
+            reserve.add(new Balloon(lvl, path));
+        }
 
 
