@@ -17,6 +17,6 @@ public void testEvolutionProjectile() throws TypeTowerException {
 
     assertEquals(1, p.getJournal().getNbTypeEvolution(EvolutionType.PROJECTILE), 
         "ERREUR : Le changement de projectile n'a pas été enregistré.");
-    System.out.println("SUCCÈS : Méthode Projectile validée.");
+    System.out.println("La Méthode Projectile a été validée avec succés.");
 }
 }
