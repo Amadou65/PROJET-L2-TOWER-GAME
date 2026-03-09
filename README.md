@@ -552,7 +552,25 @@ Habiba —
 
 ### Ce qui a été réalisé
 
+    Amadou : Implémentation du Livrable 4 (partie commune + deux scénarios).
+    Création de la classe parent Livrable4.java regroupant les méthodes utilitaires communes :
+    placeTowers() qui achète et place 2 tours de chaque type via player.buyTower() en
+    déduisant les crédits, buyEvolutions() qui applique des évolutions POWER et CADENCE
+    sur toutes les ProjectileTower avec gestion de l'exception TypeTowerException pour les
+    tours non éligibles (IceTower, SlowdownTower), et buildTower() comme fabrique de tours.
+    Création de Livrable4a.java (plateau aléatoire LeftStartRandomBoard) et Livrable4b.java
+    (plateau classique ClassicalBoard), chacun héritant de Livrable4 et définissant leur
+    propre main().
+    Mise à jour du Makefile pour générer livrable4a.jar et livrable4b.jar.
+    Ajout de deux tests JUnit dans GameEngineTest.java : testPlayerLosesLifeWhenBalloonEscapes
+    et testPlayerCreditsPositiveAfterGame.
+
 ### Difficultés rencontrées
+
+    Amadou : La méthode buyEvolutions() devait gérer correctement le cas des tours non
+    éligibles (IceTower, SlowdownTower) sans interrompre le programme ; l'utilisation
+    d'un try/catch sur TypeTowerException à l'intérieur de la boucle a permis de
+    continuer l'achat sur les autres tours.
 
 ### Objectifs pour la semaine et répartition du travail par membre
 
