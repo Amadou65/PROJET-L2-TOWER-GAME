@@ -552,6 +552,11 @@ Habiba —
 
 ### Ce qui a été réalisé
 
+  Yassin : 
+    Réalisations de six nouveaux test en lien avec les différentes classes que j'ai réalisées (testEvolutionPower, testEvolutionCadence, testEvolutionProjectile, testEvolutionUnique, testCannotUpgradeIceTower, testCannotUpgradeSlowdownTower).
+
+    Vérifications de BombTower/PROJECTILE (Bomb→ExtraBomb) fonctionne bien.
+
 Amadou :
 
     Implémentation du Livrable 4 (partie commune + deux scénarios).
