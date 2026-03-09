@@ -552,6 +552,11 @@ Habiba —
 
 ### Ce qui a été réalisé
 
+  Yassin : 
+    Réalisations de six nouveaux test en lien avec les différentes classes que j'ai réalisées (testEvolutionPower, testEvolutionCadence, testEvolutionProjectile, testEvolutionUnique, testCannotUpgradeIceTower, testCannotUpgradeSlowdownTower).
+
+    Vérifications de BombTower/PROJECTILE (Bomb→ExtraBomb) fonctionne bien.
+
 Amadou :
 
     Implémentation du Livrable 4 (partie commune + deux scénarios).
@@ -567,12 +572,23 @@ Amadou :
     Ajout de deux tests JUnit dans GameEngineTest.java : testPlayerLosesLifeWhenBalloonEscapes
     et testPlayerCreditsPositiveAfterGame.
 
+Serhii
+    - Des tests de Player pour acheter l'evolution et verification d'erreur a cause de evoluer NonProjectileTower
+    - Fin de fonction buyEvolution de la classe Player et creation l'exeption TypeTowerException
+    - L'adition de comptage des evolution par type dans Journal avec deux fonctions recordNbTypeEvolution et getNbTypeEvolution
+    - Verification des nouveaux fonctions avec des tests dans JournalTest
+
 ### Difficultés rencontrées
 
     Amadou : La méthode buyEvolutions() devait gérer correctement le cas des tours non
     éligibles (IceTower, SlowdownTower) sans interrompre le programme ; l'utilisation
     du try/catch sur TypeTowerException à l'intérieur de la boucle m'a permis de
     continuer l'achat sur les autres tours.
+
+    Yassin :
+    Quelques difficultées rencontrés lors des test par exemple le lien  entre toutes les classes, vérification que le solde du joueur ne bouge pas lors d'une amélioration ou évolution interdite...
+
+    Difficultées aussi pour le TestCannotUpgradeIceTower car comparer aux autres test je devais vérifier que l'action n'a pas lieu, je devais comparer l'état du joueur avant et après l'appel de la méthode.
 
 ### Objectifs pour la semaine et répartition du travail par membre
 
