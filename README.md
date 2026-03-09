@@ -273,6 +273,32 @@ Habiba :
 
 ### Atteinte des objectifs
 
+Amadou :
+
+    Livrable4.java (classe parent) : concentre les méthodes utilitaires communes aux deux
+    scénarios. placeTowers() achète et place 2 tours de chaque type sur les cases libres via
+    player.buyTower(), ce qui déduit automatiquement les crédits. buyEvolutions() tente
+    d'appliquer une évolution POWER (200 crédits) et CADENCE (150 crédits) sur chaque tour
+    en gérant l'exception TypeTowerException levée pour IceTower et SlowdownTower.
+
+    Livrable4a.java : scénario A avec plateau aléatoire (LeftStartRandomBoard). Le chemin
+    part obligatoirement du bord gauche. Les tours sont achetées via le joueur, les évolutions
+    appliquées, puis la manche est lancée avec le même Player (crédits déjà déduits).
+
+    Livrable4b.java : scénario B avec plateau classique (ClassicalBoard). Même logique que 4a
+    mais avec un chemin rectiligne fixe.
+
+    GameEngineTest.java : ajout de deux nouveaux tests JUnit :
+    - testPlayerLosesLifeWhenBalloonEscapes : vérifie que la santé baisse si un ballon passe.
+    - testPlayerCreditsPositiveAfterGame : vérifie que les crédits restent positifs après la partie.
+
+    Makefile mis à jour pour créer livrable4a.jar et livrable4b.jar.
+
+Pour exécuter les livrables :
+
+    - java -jar livrable4a.jar <hauteur> <largeur> <nbBallons>
+    - java -jar livrable4b.jar <hauteur> <largeur> <nbBallons>
+
 ### Difficultés restant à résoudre
 
 ## Livrable 5
