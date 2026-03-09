@@ -19,5 +19,6 @@ public void testEvolutionCadence() throws TypeTowerException {
     assertEquals(1, p.getJournal().getNbTypeEvolution(EvolutionType.CADENCE), 
         "ERREUR : L'évolution de cadence n'a pas été enregistrée.");
     System.out.println("SUCCÈS : Méthode Cadence validée.");
-}
+    
+    }
 }
