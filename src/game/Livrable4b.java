@@ -38,3 +38,9 @@ public class Livrable4b extends Livrable4 {
         System.out.println("Départ : " + path.get(0)
                 + " → Arrivée : " + path.get(path.size() - 1));
         System.out.println(board.display());
+        // --- PHASE 2 : Créer le joueur et acheter les tours ---
+        Player player = new Player();
+        System.out.println("\n--- ACHAT DES TOURS (crédits initiaux : "
+                + player.getCredits() + ") ---");
+        List<Tower> towers = Livrable4.placeTowers(board, player, height, width);
+        System.out.println("Crédits restants après tours : " + player.getCredits());
