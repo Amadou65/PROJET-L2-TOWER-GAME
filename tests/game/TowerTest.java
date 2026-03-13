@@ -83,7 +83,7 @@ public class TowerTest {
     @Test
     public void testPlayerMoneyForUpgrade() {
         Player p = new Player();
-        p.setCredits(100); // Pas d'
+        p.setCredits(100); //
         
         ProjectileTower t = new DartMonkey("drt", new Position(0, 0));
         Evolution e = new Evolution(500, EvolutionType.POWER);
