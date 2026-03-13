@@ -75,7 +75,7 @@ public class TowerTest {
         t.getEvolution(e);
         assertEquals(2, t.getScope(), "La portée devrait être de 2");
 
-        // Deuxième achat (ne devrait rien changer)
+        // Deuxième achat (ne devrait rien change
         t.getEvolution(e);
         assertEquals(2, t.getScope(), "La portée ne doit pas augmenter une seconde fois pour la même évolution !");
     }
@@ -83,7 +83,7 @@ public class TowerTest {
     @Test
     public void testPlayerMoneyForUpgrade() {
         Player p = new Player();
-        p.setCredits(100); //
+        p.setCredits(100); 
         
         ProjectileTower t = new DartMonkey("drt", new Position(0, 0));
         Evolution e = new Evolution(500, EvolutionType.POWER);
