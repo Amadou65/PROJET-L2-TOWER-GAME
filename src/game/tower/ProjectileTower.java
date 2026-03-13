@@ -54,4 +54,17 @@ public abstract class ProjectileTower extends Tower{
      */
 
     public abstract void getEvolution(Evolution e);
+
+    /**
+    * Supprime une évolution de la tour et réinitialise la statistique associée.
+    * @param type Le type d'évolution à retirer.
+    */
+    public void removeEvolution(EvolutionType type) {
+        if (this.evolutions.contains(type)) {
+            this.evolutions.remove(type);
+            // Ici, il faudrait idéalement remettre la stat de base
+            // (ex: si on retire SCOPE, on réduit la portée)
+            System.out.println("Évolution " + type + " supprimée de la tour " + this.nom);
+        }
+    } 
 }
