@@ -75,7 +75,7 @@ public class TowerTest {
         t.getEvolution(e);
         assertEquals(2, t.getScope(), "La portée devrait être de 2");
 
-        // Deuxième achat (ne devrait rien
+        // Deuxième achat (ne devrait
         t.getEvolution(e);
         assertEquals(2, t.getScope(), "La portée ne doit pas augmenter une seconde fois pour la même évolution !");
     }
