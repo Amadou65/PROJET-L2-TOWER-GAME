@@ -304,6 +304,8 @@ Habiba:
 
 Logique des Ballons : Finalisation du système de mutation. Quand un ballon est touché, il change de niveau (ex: Rose vers Bleu) et sa vitesse s'adapte automatiquement.
 Documentation & Qualité : Rédaction de la Javadoc technique et création des protocoles de tests pour valider l'économie et les cas limites.
+
+Gestion des évolutions : Nous avons choisi d'utiliser un HashSet<EvolutionType> dans la classe ProjectileTower. Ce choix permet de garantir l'unicité des améliorations (une tour ne peut pas avoir deux fois la même évolution) et offre une complexité constante O(1) pour vérifier (hasEvolution) ou supprimer (removeEvolution) une amélioration.Mutation des ballons : La méthode takeDamage du ballon gère dynamiquement le changement de niveau et de vitesse. Cela permet une transition fluide entre les types de ballons sans avoir à recréer d'objets.Affichage par événements : Pour respecter les consignes de performance et de lisibilité, l'affichage ne rafraîchit pas la grille entière, mais génère des logs horodatés pour chaque action significative (tir, destruction, sortie).
 ### Difficultés restant à résoudre
 
 ## Livrable 5
