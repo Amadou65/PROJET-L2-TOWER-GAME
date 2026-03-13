@@ -65,4 +65,34 @@ public class TowerTest {
         assertEquals(2, t.getScope());
 
     }
+
+    @Test
+    public void testDoubleEvolutionImpossible() {
+        ProjectileTower t = new DartMonkey("drt", new Position(0, 0));
+        Evolution e = new Evolution(300, EvolutionType.SCOPE);
+
+        // Premier achat
+        t.getEvolution(e);
+        assertEquals(2, t.getScope(), "La portée devrait être de 2");
+
+        // Deuxième achat (ne devrait rien changer)
+        t.getEvolution(e);
+        assertEquals(2, t.getScope(), "La portée ne doit pas augmenter une seconde fois pour la même évolution !");
+    }
+
+    @Test
+    public void testPlayerMoneyForUpgrade() {
+        Player p = new Player();
+        p.setCredits(100); // Pas assez d'argent
+        
+        ProjectileTower t = new DartMonkey("drt", new Position(0, 0));
+        Evolution e = new Evolution(500, EvolutionType.POWER);
+        
+        // On essaie d'acheter via le Player
+        p.buyUpgrade(t, null, t.getPosition(), e);
+        
+        // On vérifie que la puissance n'a pas augmenté
+        assertEquals(1, t.getPower(), "La tour ne devrait pas évoluer si le joueur est pauvre");
+        assertEquals(100, p.getCredits(), "Le solde ne devrait pas avoir bougé");
+    }
 }
