@@ -299,6 +299,11 @@ Pour exécuter les livrables :
     - java -jar livrable4a.jar <hauteur> <largeur> <nbBallons>
     - java -jar livrable4b.jar <hauteur> <largeur> <nbBallons>
 
+
+Habiba:
+
+Logique des Ballons : Finalisation du système de mutation. Quand un ballon est touché, il change de niveau (ex: Rose vers Bleu) et sa vitesse s'adapte automatiquement.
+Documentation & Qualité : Rédaction de la Javadoc technique et création des protocoles de tests pour valider l'économie et les cas limites.
 ### Difficultés restant à résoudre
 
 ## Livrable 5
