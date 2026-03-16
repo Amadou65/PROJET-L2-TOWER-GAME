@@ -271,6 +271,28 @@ Habiba :
 
 ## Livrable 4
 
+Commandes de compilation et d'exécution :
+
+    make classes
+
+Pour générer les JARs exécutables :
+
+    make jar
+
+Pour exécuter les livrables :
+
+    - java -jar livrable3a.jar <hauteur> <largeur> <nbBallons>
+    - java -jar livrable3b.jar <hauteur> <largeur> <nbChemins>
+
+Pour générer la javadoc :
+
+    make docs
+
+Pour compiler et lancer les tests :
+
+    make tests
+    make runtests
+    
 ### Atteinte des objectifs
 
 Amadou :
