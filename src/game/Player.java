@@ -93,8 +93,11 @@ public class Player {
      * @param b is board of the game
      */
     public void sellTower(Tower t, Board b, Position p) {
-        this.credits += t.cost;
-        b.grid[p.getX()][p.getY()].removeTower(t);
+        Cell targetCell = b.getCell(p);
+        if (targetCell.getTowers().contains(t)) {
+            this.credits += t.cost;
+            b.removeTower(t, targetCell);
+        }
     }
 
     /**
