@@ -99,7 +99,6 @@ public class GameEngine {
                 } else if (b.hasReachedEnd()) {
                     totalEscaped++;
                     player.onHit();
-                    journal.recordHealthLost();
                     board.getCell(new Position(oldX, oldY)).removeBallon(b);
                     actif.remove(i);
                     System.out.println("[t=" + time + "] 💨 Ballon SORTI ! Vies restantes: " + player.getHealth());
