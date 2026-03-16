@@ -17,6 +17,7 @@ public class Balloon {
     private List<Position> path;
     private int level;
     private boolean frozen;
+    private int frozenTicksRemaining;
     private boolean slowed;
 
     /**
@@ -34,6 +35,7 @@ public class Balloon {
         this.speed = determineSpeed(level);
         this.baseSpeed = this.speed;
         this.frozen = false;
+        this.frozenTicksRemaining = 0;
         this.slowed = false;
         if (path != null && !path.isEmpty()) {
             this.x = path.get(0).getX();
@@ -54,25 +56,35 @@ public class Balloon {
      * Does nothing if the balloon is frozen or has reached the end.
      */
     public void move() {
-        if (!this.frozen && !isPopped() && currentTargetIndex < path.size()) {
-            Position target = path.get(currentTargetIndex);
-            double dx = target.getX() - this.x;
-            double dy = target.getY() - this.y;
-            double distToTarget = Math.sqrt(dx * dx + dy * dy);
-
-            double actualMove = Math.min(distToTarget, speed);
-
-            if (distToTarget <= speed) {
-                this.x = target.getX();
-                this.y = target.getY();
-                currentTargetIndex++;
-            } else {
-                this.x += (dx / distToTarget) * speed;
-                this.y += (dy / distToTarget) * speed;
-            }
-
-            this.distance += actualMove;
+        if (isPopped() || currentTargetIndex >= path.size()) {
+            return;
         }
+
+        if (this.frozen) {
+            this.frozenTicksRemaining--;
+            if (this.frozenTicksRemaining <= 0) {
+                this.unfreeze();
+            }
+            return;
+        }
+
+        Position target = path.get(currentTargetIndex);
+        double dx = target.getX() - this.x;
+        double dy = target.getY() - this.y;
+        double distToTarget = Math.sqrt(dx * dx + dy * dy);
+
+        double actualMove = Math.min(distToTarget, speed);
+
+        if (distToTarget <= speed) {
+            this.x = target.getX();
+            this.y = target.getY();
+            currentTargetIndex++;
+        } else {
+            this.x += (dx / distToTarget) * speed;
+            this.y += (dy / distToTarget) * speed;
+        }
+
+        this.distance += actualMove;
     }
 
     /**
@@ -174,7 +186,7 @@ public class Balloon {
     public void takeDamage(int damage) {
         this.health -= damage;
         if (this.health > 0) {
-            this.level = this.health; // mutation : le niveau suit la santé
+            this.level = this.health; // le niveau suit la santé
             this.baseSpeed = determineSpeed(this.health);
             this.speed = this.slowed ? this.baseSpeed * 0.5 : this.baseSpeed;
         }
@@ -184,7 +196,17 @@ public class Balloon {
      * Freezes the balloon (stops movement).
      */
     public void freeze() {
+        freeze(1);
+    }
+
+    /**
+     * Freezes the balloon for a limited number of movement ticks.
+     *
+     * @param durationTicks number of move() calls to skip
+     */
+    public void freeze(int durationTicks) {
         this.frozen = true;
+        this.frozenTicksRemaining = Math.max(this.frozenTicksRemaining, durationTicks);
     }
 
     /**
@@ -192,6 +214,7 @@ public class Balloon {
      */
     public void unfreeze() {
         this.frozen = false;
+        this.frozenTicksRemaining = 0;
     }
 
     /**

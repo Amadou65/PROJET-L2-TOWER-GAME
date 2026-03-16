@@ -134,9 +134,16 @@ public class GameEngine {
                     if (time % tower.getCadence() == 0) {
                         NonProjectileTower npt = (NonProjectileTower) tower;
                         List<Balloon> targets = TargetingBalloon.getAllTargets(actif, tower);
+                        List<Boolean> wereFrozen = new ArrayList<>();
                         for (Balloon b : targets) {
-                            boolean wasFrozen = b.isFrozen();
-                            npt.freeze(actif);
+                            wereFrozen.add(b.isFrozen());
+                        }
+
+                        npt.freeze(actif);
+
+                        for (int index = 0; index < targets.size(); index++) {
+                            Balloon b = targets.get(index);
+                            boolean wasFrozen = wereFrozen.get(index);
                             if (!wasFrozen && b.isFrozen()) {
                                 System.out.println("[t=" + time + "] ❄️  Ballon ARRÊTÉ (gelé) par " + tower.getNom());
                             } else if (b.isSlowed()) {

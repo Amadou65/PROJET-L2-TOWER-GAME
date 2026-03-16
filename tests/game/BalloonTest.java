@@ -39,5 +39,26 @@ public class BalloonTest {
         slow.move();
         assertTrue(fast.getDistance() > slow.getDistance(), "Le ballon niveau 4 doit avancer plus vite");
     }
-}
 
+    @Test
+    public void testFreezeIsTemporary() {
+        ArrayList<Position> path = new ArrayList<>();
+        path.add(new Position(0,0));
+        path.add(new Position(0,1));
+        path.add(new Position(0,2));
+
+        Balloon b = new Balloon(1, path);
+        b.freeze(2);
+
+        b.move();
+        assertEquals(0.0, b.getDistance(), 0.0001);
+        assertTrue(b.isFrozen());
+
+        b.move();
+        assertEquals(0.0, b.getDistance(), 0.0001);
+        assertFalse(b.isFrozen());
+
+        b.move();
+        assertTrue(b.getDistance() > 0.0, "Le ballon doit repartir après la fin du gel");
+    }
+}
