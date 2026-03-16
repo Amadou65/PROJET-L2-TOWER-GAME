@@ -641,6 +641,11 @@ Serhii :
     Mise à jour du Makefile pour générer les exécutables livrable4a.jar et
     livrable4b.jar.
 
+    Serhii :
+
+    Finalisation de la classe Journal.
+    Des test pour Player et Journal
+
 ### Difficultés rencontrées
 
     Amadou :
