@@ -626,9 +626,41 @@ Serhii :
 
 ### Ce qui a été réalisé
 
+    Amadou :
+
+    Implémentation du Livrable 4 avec une factorisation du code commun dans
+    Livrable4.java. Ajout de la méthode placeTowers() pour acheter et placer
+    automatiquement des tours via le joueur, de la méthode buyEvolutions() pour
+    appliquer des évolutions POWER et CADENCE sur les tours éligibles, et de la
+    méthode buildTower() pour centraliser la création des différentes tours.
+
+    Création des deux scénarios Livrable4a.java et Livrable4b.java à partir de
+    la classe parent Livrable4, avec génération du plateau, achat des tours,
+    achat des évolutions, création des ballons puis lancement de la manche.
+
+    Mise à jour du Makefile pour générer les exécutables livrable4a.jar et
+    livrable4b.jar.
+
 ### Difficultés rencontrées
 
+    Amadou :
+
+    La principale difficulté a été de garder une logique commune entre les deux
+    scénarios du Livrable 4 sans dupliquer le code. Il fallait aussi gérer
+    proprement le cas des tours non éligibles aux évolutions, en particulier
+    IceTower et SlowdownTower, sans interrompre l'exécution du programme.
+
+    Il a également fallu conserver le même joueur entre les phases d'achat et
+    de simulation afin de garder des crédits cohérents et un journal de partie
+    correct jusqu'à la fin de la manche.
+
 ### Objectifs pour la semaine et répartition du travail par membre
+
+    Amadou :
+
+    Finaliser et stabiliser le Livrable 4 en préparant une version propre des
+    deux scénarios, avec placement automatique des tours, gestion des évolutions
+    et exécution complète d'une partie sur les deux types de plateaux.
 
 ## Semaine 10
 
