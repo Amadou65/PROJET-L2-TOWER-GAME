@@ -95,4 +95,23 @@ public class TowerTest {
         assertEquals(1, t.getPower(), "La tour ne devrait pas évoluer si le joueur est pauvre");
         assertEquals(100, p.getCredits(), "Le solde ne devrait pas avoir bougé");
     }
+
+    @Test
+    public void testTargetingUsesPreciseBalloonPosition() {
+        Tower t = new DartMonkey("drt", new Position(0, 0));
+
+        ArrayList<Position> path = new ArrayList<>();
+        path.add(new Position(0, 1));
+        path.add(new Position(0, 2));
+
+        Balloon b = new Balloon(1, path);
+        for (int i = 0; i < 8; i++) {
+            b.move();
+        }
+
+        assertTrue(b.getY() > 1.0, "Le ballon doit être hors de portée réelle");
+        assertTrue(TargetingBalloon.calculateDistance(t, b) > t.getScope());
+        assertTrue(TargetingBalloon.getAllTargets(List.of(b), t).isEmpty(),
+                "Le ciblage ne doit plus utiliser les coordonnées arrondies.");
+    }
 }

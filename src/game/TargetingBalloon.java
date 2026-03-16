@@ -12,8 +12,8 @@ public class TargetingBalloon {
      * Utilise les coordonnées précises (double) du ballon.
      */
     public static double calculateDistance(Tower t, Balloon b) {
-        double dx = b.getGridX() - t.getX();
-        double dy = b.getGridY() - t.getY();
+        double dx = b.getX() - t.getX();
+        double dy = b.getY() - t.getY();
         // Formule de Pythagore pour la distance réelle
         return Math.sqrt(dx * dx + dy * dy);
     }
