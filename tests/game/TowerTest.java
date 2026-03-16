@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.*;
 import game.Evolution.EvolutionType;
+import game.exeptions.TypeTowerException;
 import game.tower.typeTower.*;
 import game.tower.*;
 
@@ -81,15 +82,15 @@ public class TowerTest {
     }
 
     @Test
-    public void testPlayerMoneyForUpgrade() {
+    public void testPlayerMoneyForUpgrade() throws TypeTowerException {
         Player p = new Player();
         p.setCredits(100); 
         
-        ProjectileTower t = new DartMonkey("drt", new Position(0, 0));
+        Tower t = new DartMonkey("drt", new Position(0, 0));
         Evolution e = new Evolution(500, EvolutionType.POWER);
         
         // On essaie d'acheter via le Player
-        p.buyUpgrade(t, null, t.getPosition(), e);
+        p.buyEvolution(t, e);
         
         // On vérifie que la puissance n'a pas augmenté
         assertEquals(1, t.getPower(), "La tour ne devrait pas évoluer si le joueur est pauvre");
