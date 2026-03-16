@@ -21,15 +21,33 @@ public class TestClassicalBoard {
     public void testPath() {
         ClassicalBoard board = new ClassicalBoard(6, 11);
         List<Position> path = board.path();
-        if (path.get(0).getX() == 0){
-            for (int i = 0; i < path.size(); i++){
-                assertEquals(i, path.get(i).getX());
+
+        Position start = path.get(0);
+        Position end = path.get(path.size() - 1);
+
+        if (start.getX() == 0 || start.getX() == board.getHeight() - 1) {
+            assertEquals(board.getHeight(), path.size());
+            for (int i = 1; i < path.size(); i++) {
+                assertEquals(path.get(0).getY(), path.get(i).getY());
+                assertEquals(1, Math.abs(path.get(i).getX() - path.get(i - 1).getX()));
             }
-        }
-        else if (path.get(0).getY() == 0){
-            for (int i = 0; i < path.size(); i++){
-                assertEquals(i, path.get(i).getY());
+            assertEquals(Math.abs(end.getX() - start.getX()), path.size() - 1);
+        } else {
+            assertEquals(board.getWidth(), path.size());
+            for (int i = 1; i < path.size(); i++) {
+                assertEquals(path.get(0).getX(), path.get(i).getX());
+                assertEquals(1, Math.abs(path.get(i).getY() - path.get(i - 1).getY()));
             }
+            assertEquals(Math.abs(end.getY() - start.getY()), path.size() - 1);
         }
+    }
+
+    @Test
+    public void testPathIsStableAcrossCalls() {
+        ClassicalBoard board = new ClassicalBoard(6, 11);
+        List<Position> firstPath = board.path();
+        List<Position> secondPath = board.path();
+
+        assertEquals(firstPath, secondPath);
     }
 }

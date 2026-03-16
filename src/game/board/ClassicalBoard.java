@@ -10,8 +10,11 @@ import game.Board;
  * the opposite.
  */
 public class ClassicalBoard extends Board {
+    private List<Position> generatedPath;
+
     public ClassicalBoard(int height, int width) {
         super(height, width);
+        this.generatedPath = null;
     }
 
     /**
@@ -39,6 +42,10 @@ public class ClassicalBoard extends Board {
      * If start is on left/right border → horizontal line.
      */
     public List<Position> path() {
+        if (this.generatedPath != null) {
+            return this.generatedPath;
+        }
+
         List<Position> path = new ArrayList<>();
 
         List<Position> boundaryPoints = this.getPointsBound();
@@ -66,7 +73,8 @@ public class ClassicalBoard extends Board {
             }
         }
 
-        return path;
+        this.generatedPath = path;
+        return this.generatedPath;
     }
 
     /**
