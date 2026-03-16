@@ -160,11 +160,15 @@ public class Player {
         }
     }
     /**
-     * @deprecated Use buyUpgrade(Tower, Evolution) instead.
-     *             Kept for backward compatibility.
+     * @deprecated Use buyEvolution(Tower, Evolution) instead.
+     *             Kept for backward compatibility with older tests/callers.
      */
-    /*@Deprecated
+    @Deprecated
     public void buyUpgrade(Tower t, Board b, Position p, Evolution e) {
-        buyUpgrade(t, e);
-    }*/
+        try {
+            buyEvolution(t, e);
+        } catch (TypeTowerException ex) {
+            throw new IllegalArgumentException(ex.getMessage(), ex);
+        }
+    }
 }
