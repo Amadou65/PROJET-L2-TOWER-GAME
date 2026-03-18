@@ -78,6 +78,39 @@ public class ClassicalBoard extends Board {
     }
 
     /**
+     * Generates a new random straight-line path each time (no caching).
+     * Useful for creating multiple distinct paths for mode b,
+     * where each balloon follows its own trajectory.
+     *
+     * @return a new list of positions forming a rectilinear path
+     */
+    public List<Position> generateNewPath() {
+        List<Position> newPath = new ArrayList<>();
+        List<Position> boundaryPoints = this.getPointsBound();
+        Position start = boundaryPoints.get((int) (Math.random() * boundaryPoints.size()));
+
+        if (start.getX() == 0) {
+            for (int row = 0; row < this.getHeight(); row++) {
+                newPath.add(new Position(row, start.getY()));
+            }
+        } else if (start.getX() == this.getHeight() - 1) {
+            for (int row = this.getHeight() - 1; row >= 0; row--) {
+                newPath.add(new Position(row, start.getY()));
+            }
+        } else if (start.getY() == 0) {
+            for (int col = 0; col < this.getWidth(); col++) {
+                newPath.add(new Position(start.getX(), col));
+            }
+        } else {
+            for (int col = this.getWidth() - 1; col >= 0; col--) {
+                newPath.add(new Position(start.getX(), col));
+            }
+        }
+
+        return newPath;
+    }
+
+    /**
      * Marks each position in the path as a path cell on the grid.
      */
     public void applyPathToGrid(List<Position> positions) {

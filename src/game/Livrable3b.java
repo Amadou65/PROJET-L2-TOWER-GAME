@@ -9,7 +9,7 @@ import game.tower.typeTower.*;
  * Places one balloon per path (random speeds), 2 towers of each type randomly,
  * and logs all game events with their timestamp.
  *
- * Usage: java -jar livrable3b.jar <height> <width> <nbPaths>
+ *
  */
 public class Livrable3b {
 
@@ -35,7 +35,7 @@ public class Livrable3b {
 
         while (genCount < nbPaths && attempts < 100) {
             attempts++;
-            List<Position> path = board.path();
+            List<Position> path = board.generateNewPath();
 
             // Vérifier que ce chemin n'est pas déjà utilisé (même départ)
             boolean duplicate = false;
