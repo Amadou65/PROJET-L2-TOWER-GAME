@@ -626,6 +626,11 @@ Serhii :
 
 ### Ce qui a été réalisé
 
+
+    Yassin :
+
+    Finalisation des différents test realisé les semaines précédentes.
+
     Amadou :
 
     Implémentation du Livrable 4 avec une factorisation du code commun dans
@@ -660,6 +665,10 @@ Serhii :
     correct jusqu'à la fin de la manche.
 
 ### Objectifs pour la semaine et répartition du travail par membre
+
+    Yassin : 
+
+    Terminer les tests et finaliser mes différentes classes
 
     Amadou :
 
