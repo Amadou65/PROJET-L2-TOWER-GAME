@@ -755,9 +755,58 @@ Serhii :
 
 ### Ce qui a été réalisé
 
+    Amadou :
+
+    Implémentation complète de la gestion des actions du joueur (Livrable 5).
+    Création de la classe Livrable5.java contenant la boucle d'actions via
+    ListChooser : le joueur peut acheter et placer des tours, évoluer des tours,
+    vendre des tours, ou vendre des évolutions, tant que ses crédits sont positifs.
+
+    Création de trois classes utilitaires dans game.choice :
+    - PlayerAction (enum) pour les 5 actions du joueur
+    - TowerChoice (wrapper) pour l'affichage des tours dans le ListChooser
+    - EvolutionChoice (wrapper) pour l'affichage des évolutions
+
+    Création de Livrable5a.java (mode aléatoire avec RandomListChooser) et
+    Livrable5b.java (mode interactif avec InteractiveListChooser).
+
+    Mise à jour du Makefile pour générer livrable5a.jar et livrable5b.jar.
+    Rédaction de la section Livrable 5 dans le README.
+
 ### Difficultés rencontrées
 
+    Amadou :
+
+    Gestion des types génériques avec ListChooser<T> : la phase d'actions
+    nécessite de choisir des objets de types différents (PlayerAction,
+    TowerChoice, Position, EvolutionChoice). Utilisation du type brut avec
+    @SuppressWarnings pour contourner cette limitation.
+
+    Accès au champ protected evolutions de ProjectileTower depuis un autre
+    package : résolu en itérant sur les EvolutionType avec hasEvolution()
+    plutôt qu'en accédant directement au HashSet.
+
 ### Objectifs pour la semaine et répartition du travail par membre
+
+    Amadou :
+
+    Tester et stabiliser le Livrable 5, vérifier que livrable5a.jar et
+    livrable5b.jar fonctionnent correctement sur les deux modes.
+
+    Yassin :
+
+    Création des classes de choix (PlayerAction, TowerChoice, EvolutionChoice)
+    et des tests JUnit pour le Livrable 5 (Livrable5Test.java).
+
+    Serhii :
+
+    Modifications de Player.java (ajout de sellEvolution), correction de
+    removeEvolution() dans ProjectileTower, et mise à jour du Journal.
+
+    Habiba :
+
+    Mise à jour du diagramme UML, rédaction de la section Livrable 5 du README
+    pour les autres membres, et Javadoc des nouvelles classes.
 
 ## Semaine 11
 
