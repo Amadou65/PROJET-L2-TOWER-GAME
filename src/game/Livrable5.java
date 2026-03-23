@@ -190,4 +190,31 @@ public class Livrable5 {
             return;
         }
 
+        ProjectileTower pt = (ProjectileTower) towerChoice.getTower();
+
+        // 3. Proposer les évolutions disponibles (non déjà appliquées)
+        Object[][] evoSpecs = {
+                { Evolution.EvolutionType.POWER, 250 },
+                { Evolution.EvolutionType.CADENCE, 150 },
+                { Evolution.EvolutionType.SCOPE, 100 },
+                { Evolution.EvolutionType.PROJECTILE, 300 }
+        };
+
+        List<EvolutionChoice> availableEvos = new ArrayList<>();
+        for (Object[] spec : evoSpecs) {
+            Evolution.EvolutionType type = (Evolution.EvolutionType) spec[0];
+            int cost = (int) spec[1];
+            if (!pt.hasEvolution(type) && player.getCredits() >= cost) {
+                availableEvos.add(new EvolutionChoice(type, cost));
+            }
+        }
+
+        if (availableEvos.isEmpty()) {
+            System.out.println("[EVOL] Aucune évolution disponible pour " + pt.getNom()
+                    + " (toutes appliquées ou crédits insuffisants).");
+            return;
+        }
+
+        // 4. Choisir l'évolution
+
 }
