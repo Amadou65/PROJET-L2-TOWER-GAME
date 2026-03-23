@@ -332,9 +332,84 @@ Gestion des évolutions : Nous avons choisi d'utiliser un HashSet<EvolutionType>
 
 ## Livrable 5
 
+Commandes de compilation et d'exécution :
+
+    make classes
+
+Pour générer les JARs exécutables :
+
+    make jar
+
+Pour exécuter les livrables :
+
+    - java -jar livrable5a.jar <hauteur> <largeur> <nbBallons>
+    - java -jar livrable5b.jar <hauteur> <largeur> <nbBallons>
+
+Pour générer la javadoc :
+
+    make docs
+
+Pour compiler et lancer les tests :
+
+    make tests
+    make runtests
+
 ### Atteinte des objectifs
 
+Amadou :
+
+    Livrable5.java (classe parent) : implémentation de la boucle d'actions du joueur
+    via la méthode playerActionPhase(). Cette méthode utilise l'interface ListChooser
+    pour proposer les choix au joueur de manière générique (interactif ou aléatoire).
+    Le joueur peut effectuer autant d'actions qu'il le souhaite tant que ses crédits
+    restent positifs. Cinq actions sont disponibles : acheter une tour, évoluer une
+    tour, vendre une tour, vendre une évolution, ou terminer le tour.
+
+    handleBuyTower() : filtre les types de tours achetables selon les crédits du
+    joueur, propose les cases libres (hors chemin et sans tour), puis appelle
+    player.buyTower() pour placer et payer la tour.
+
+    handleEvolveTower() : affiche les ProjectileTower présentes sur le plateau,
+    filtre les évolutions non encore appliquées et compatibles avec les crédits,
+    puis appelle player.buyEvolution() avec gestion de TypeTowerException.
+
+    handleSellTower() : propose les tours du plateau à la vente et appelle
+    player.sellTower() pour rembourser le joueur.
+
+    handleSellEvolution() : affiche les tours ayant des évolutions, propose celles
+    à revendre, puis retire l'évolution via removeEvolution() et rembourse le joueur.
+
+    Livrable5a.java : scénario A avec plateau aléatoire (LeftStartRandomBoard) et
+    choix automatiques via RandomListChooser. Le programme génère un plateau, exécute
+    la phase d'actions avec des décisions aléatoires, puis lance la manche.
+
+    Livrable5b.java : scénario B avec plateau classique (ClassicalBoard) et choix
+    interactifs via InteractiveListChooser. Le joueur saisit ses choix au clavier
+    pour acheter, évoluer ou vendre ses tours avant le lancement de la manche.
+
+    Création de trois classes utilitaires dans le package game.choice :
+    - PlayerAction (enum) : les 5 actions du joueur avec label français pour
+      l'affichage dans le ListChooser.
+    - TowerChoice : wrapper affichant le nom, coût, portée et cadence d'une tour
+      pour une sélection lisible.
+    - EvolutionChoice : wrapper affichant le type et coût d'une évolution.
+
+    Makefile mis à jour pour créer livrable5a.jar et livrable5b.jar.
+
 ### Difficultés restant à résoudre
+
+Amadou :
+
+    Utilisation des types génériques avec ListChooser : l'interface ListChooser<T>
+    est paramétrée, mais la phase d'actions nécessite de choisir des objets de
+    types différents (PlayerAction, TowerChoice, Position, EvolutionChoice).
+    La solution retenue est d'utiliser le type brut (raw type) avec @SuppressWarnings
+    pour permettre un ListChooser unique tout au long de la phase d'actions.
+
+    Accès au champ evolutions de ProjectileTower : le champ est protected dans le
+    package game.tower, donc inaccessible depuis game.Livrable5. La solution a été
+    d'utiliser hasEvolution() en itérant sur les 4 types d'évolution possibles
+    plutôt que d'accéder directement au HashSet.
 
 ## Livrable 6
 
