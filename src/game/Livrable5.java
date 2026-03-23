@@ -291,5 +291,29 @@ public class Livrable5 {
     private static void handleSellEvolution(Board board, Player player,
             ListChooser chooser) {
 
+        // 1. Récupérer les tours qui ont au moins une évolution
+        Evolution.EvolutionType[] allTypes = {
+                Evolution.EvolutionType.POWER, Evolution.EvolutionType.CADENCE,
+                Evolution.EvolutionType.SCOPE, Evolution.EvolutionType.PROJECTILE
+        };
+
+        List<TowerChoice> evolvedTowers = new ArrayList<>();
+        for (Tower t : board.tower_list) {
+            if (t instanceof ProjectileTower) {
+                ProjectileTower pt = (ProjectileTower) t;
+                boolean hasAny = false;
+                for (Evolution.EvolutionType type : allTypes) {
+                    if (pt.hasEvolution(type)) { hasAny = true; break; }
+                }
+                if (hasAny) {
+                    evolvedTowers.add(new TowerChoice(t));
+                }
+            }
+        }
+
+        if (evolvedTowers.isEmpty()) {
+            System.out.println("[REVENTE] Aucune tour n'a d'évolution à revendre.");
+            return;
+        }
 
 }
