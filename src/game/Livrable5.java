@@ -113,5 +113,17 @@ public class Livrable5 {
             }
         }
 
-         
+  if (availableTowers.isEmpty()) {
+            System.out.println("[ACHAT] Aucune tour achetable avec vos crédits actuels.");
+            return;
+        }
+
+        // 2. Choisir un type de tour
+        TowerChoice towerChoice = (TowerChoice) chooser.choose(
+                "Quelle tour souhaitez-vous acheter ?", availableTowers);
+        if (towerChoice == null) {
+            System.out.println("[ACHAT] Achat annulé.");
+            return;
+        }
+       
 }
