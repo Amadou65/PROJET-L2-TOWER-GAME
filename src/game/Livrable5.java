@@ -316,4 +316,14 @@ public class Livrable5 {
             return;
         }
 
+        // 2. Choisir la tour
+        TowerChoice towerChoice = (TowerChoice) chooser.choose(
+                "De quelle tour souhaitez-vous revendre une évolution ?",
+                evolvedTowers);
+        if (towerChoice == null) {
+            System.out.println("[REVENTE] Revente annulée.");
+            return;
+        }
+
+
 }
