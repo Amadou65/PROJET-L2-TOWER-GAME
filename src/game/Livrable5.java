@@ -102,5 +102,16 @@ public class Livrable5 {
                 { "SlowdownTower", "500", "100", "1500" }
         };
 
-        
+     List<TowerChoice> availableTowers = new ArrayList<>();
+        for (String[] spec : towerSpecs) {
+            int cost = Integer.parseInt(spec[1]);
+            if (player.getCredits() >= cost) {
+                availableTowers.add(new TowerChoice(
+                        spec[0], cost,
+                        Integer.parseInt(spec[2]),
+                        Integer.parseInt(spec[3])));
+            }
+        }
+
+         
 }
