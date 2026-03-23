@@ -256,5 +256,13 @@ public class Livrable5 {
             sellableTowers.add(new TowerChoice(t));
         }
 
- 
+         // 2. Choisir la tour à vendre
+        TowerChoice towerChoice = (TowerChoice) chooser.choose(
+                "Quelle tour souhaitez-vous vendre ?", sellableTowers);
+        if (towerChoice == null) {
+            System.out.println("[VENTE] Vente annulée.");
+            return;
+        }
+
+
 }
