@@ -348,4 +348,13 @@ public class Livrable5 {
             return;
         }
 
+        // 4. Choisir l'évolution à revendre
+        EvolutionChoice evoChoice = (EvolutionChoice) chooser.choose(
+                "Quelle évolution de " + pt.getNom() + " revendre ?",
+                sellableEvos);
+        if (evoChoice == null) {
+            System.out.println("[REVENTE] Revente annulée.");
+            return;
+        }
+
 }
