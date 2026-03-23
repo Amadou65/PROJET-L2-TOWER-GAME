@@ -273,4 +273,23 @@ public class Livrable5 {
                 + " Crédits : " + player.getCredits());
     }
 
+    // =========================================================================
+    //  VENDRE UNE ÉVOLUTION
+    // =========================================================================
+
+    /**
+     * Gère la vente d'une évolution déjà achetée.
+     * 1. Propose les tours évoluées
+     * 2. Propose les évolutions à revendre
+     * 3. Retire l'évolution et rembourse le joueur
+     *
+     * Note : utilise removeEvolution() de ProjectileTower et rembourse
+     * directement le joueur. Quand Player.sellEvolution() sera implémenté
+     * par Serhii, cette méthode pourra être simplifiée.
+     */
+    @SuppressWarnings("unchecked")
+    private static void handleSellEvolution(Board board, Player player,
+            ListChooser chooser) {
+
+
 }
