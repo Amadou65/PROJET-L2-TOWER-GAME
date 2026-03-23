@@ -44,5 +44,32 @@ public class Livrable5 {
             System.out.println("Tours sur le plateau : " + board.tower_list.size());
             System.out.println(board.display());
 
-            
+            // Proposer les actions au joueur
+            List<PlayerAction> actions = Arrays.asList(PlayerAction.values());
+            PlayerAction chosen = (PlayerAction) chooser.choose(
+                    "Quelle action souhaitez-vous réaliser ?", actions);
+
+            if (chosen == null || chosen == PlayerAction.END_TURN) {
+                continueActions = false;
+                System.out.println("[ACTION] Fin de la phase d'actions.");
+            } else {
+                switch (chosen) {
+                    case BUY_TOWER:
+                        handleBuyTower(board, player, chooser, height, width);
+                        break;
+                    case EVOLVE_TOWER:
+                        handleEvolveTower(board, player, chooser);
+                        break;
+                    case SELL_TOWER:
+                        handleSellTower(board, player, chooser);
+                        break;
+                    case SELL_EVOLUTION:
+                        handleSellEvolution(board, player, chooser);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
 }
