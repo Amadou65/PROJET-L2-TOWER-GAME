@@ -264,5 +264,13 @@ public class Livrable5 {
             return;
         }
 
+        // 3. Vendre la tour
+        Tower tower = towerChoice.getTower();
+        Position pos = tower.getPosition();
+        player.sellTower(tower, board, pos);
+        System.out.println("[VENTE] ✅ Tour " + tower.getNom()
+                + " vendue pour " + tower.getCost() + " crédits."
+                + " Crédits : " + player.getCredits());
+    }
 
 }
