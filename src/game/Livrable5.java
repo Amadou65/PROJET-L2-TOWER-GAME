@@ -154,5 +154,27 @@ public class Livrable5 {
             }
         }
     }
-   
+ 
+    // =========================================================================
+    //  ÉVOLUER UNE TOUR
+    // =========================================================================
+
+    /**
+     * Gère l'achat d'une évolution pour une tour existante.
+     * 1. Propose les ProjectileTower du plateau
+     * 2. Propose les types d'évolutions disponibles
+     * 3. Appelle player.buyEvolution()
+     */
+    @SuppressWarnings("unchecked")
+    private static void handleEvolveTower(Board board, Player player,
+            ListChooser chooser) {
+
+        // 1. Récupérer les ProjectileTower sur le plateau
+        List<TowerChoice> evolvableTowers = new ArrayList<>();
+        for (Tower t : board.tower_list) {
+            if (t instanceof ProjectileTower) {
+                evolvableTowers.add(new TowerChoice(t));
+            }
+        }
+  
 }
