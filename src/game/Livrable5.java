@@ -72,4 +72,21 @@ public class Livrable5 {
             }
         }
 
+        if (player.getCredits() <= 0) {
+            System.out.println("[ACTION] Plus de crédits — fin automatique de la phase d'actions.");
+        }
+    }
+
+    // =========================================================================
+    //  ACHETER UNE TOUR
+    // =========================================================================
+
+    /**
+     * Gère l'achat et le placement d'une tour.
+     * 1. Propose la liste des types de tours achetables (filtrée par crédits)
+     * 2. Propose la liste des cases libres
+     * 3. Appelle player.buyTower()
+     */
+    @SuppressWarnings("unchecked")
+   
 }
