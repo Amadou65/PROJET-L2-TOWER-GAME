@@ -232,5 +232,23 @@ public class Livrable5 {
         }
     }
 
+    // =========================================================================
+    //  VENDRE UNE TOUR
+    // =========================================================================
+
+    /**
+     * Gère la vente d'une tour existante.
+     * 1. Propose les tours du plateau
+     * 2. Appelle player.sellTower()
+     */
+    @SuppressWarnings("unchecked")
+    private static void handleSellTower(Board board, Player player,
+            ListChooser chooser) {
+
+        if (board.tower_list.isEmpty()) {
+            System.out.println("[VENTE] Aucune tour à vendre.");
+            return;
+        }
+
 
 }
