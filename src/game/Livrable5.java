@@ -325,5 +325,27 @@ public class Livrable5 {
             return;
         }
 
+        ProjectileTower pt = (ProjectileTower) towerChoice.getTower();
+
+        // 3. Proposer les évolutions à revendre
+        // Coûts de référence pour le remboursement
+        Map<Evolution.EvolutionType, Integer> evoCosts = new HashMap<>();
+        evoCosts.put(Evolution.EvolutionType.POWER, 250);
+        evoCosts.put(Evolution.EvolutionType.CADENCE, 150);
+        evoCosts.put(Evolution.EvolutionType.SCOPE, 100);
+        evoCosts.put(Evolution.EvolutionType.PROJECTILE, 300);
+
+        List<EvolutionChoice> sellableEvos = new ArrayList<>();
+        for (Evolution.EvolutionType type : allTypes) {
+            if (pt.hasEvolution(type)) {
+                int cost = evoCosts.getOrDefault(type, 0);
+                sellableEvos.add(new EvolutionChoice(type, cost));
+            }
+        }
+
+        if (sellableEvos.isEmpty()) {
+            System.out.println("[REVENTE] Cette tour n'a aucune évolution.");
+            return;
+        }
 
 }
