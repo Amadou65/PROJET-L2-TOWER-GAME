@@ -1,7 +1,7 @@
 /**
- * Cette classe représente une option de choix pour l'évolution de type "Power" dans le jeu. 
+ * Cette classe représente une option de choix pour l'évolution de type "Projectile" dans le jeu. 
  * Elle étend la classe abstraite Choice et implémente la méthode getChoice() 
- * pour retourner le type d'évolution correspondant à "Power".
+ * pour retourner le type d'évolution correspondant à "Projectile".
  */
 
 
