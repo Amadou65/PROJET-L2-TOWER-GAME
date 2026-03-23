@@ -250,5 +250,11 @@ public class Livrable5 {
             return;
         }
 
+        // 1. Construire la liste des tours vendables
+        List<TowerChoice> sellableTowers = new ArrayList<>();
+        for (Tower t : board.tower_list) {
+            sellableTowers.add(new TowerChoice(t));
+        }
 
+ 
 }
