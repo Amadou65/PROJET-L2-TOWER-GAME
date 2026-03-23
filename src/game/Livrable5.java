@@ -133,5 +133,13 @@ public class Livrable5 {
             return;
         }
 
-     
+         // 4. Choisir une position
+        Position pos = (Position) chooser.choose(
+                "Où placer la tour " + towerChoice.getTowerType() + " ?", freeCells);
+        if (pos == null) {
+            System.out.println("[ACHAT] Placement annulé.");
+            return;
+        }
+
+    
 }
