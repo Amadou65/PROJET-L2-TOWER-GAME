@@ -216,5 +216,21 @@ public class Livrable5 {
         }
 
         // 4. Choisir l'évolution
+        EvolutionChoice evoChoice = (EvolutionChoice) chooser.choose(
+                "Quelle évolution pour " + pt.getNom() + " ?", availableEvos);
+        if (evoChoice == null) {
+            System.out.println("[EVOL] Évolution annulée.");
+            return;
+        }
+
+        // 5. Appliquer l'évolution
+        Evolution evo = new Evolution(evoChoice.getCost(), evoChoice.getType());
+        try {
+            player.buyEvolution(pt, evo);
+        } catch (TypeTowerException e) {
+            System.out.println("[EVOL] Erreur : " + e.getMessage());
+        }
+    }
+
 
 }
