@@ -366,5 +366,26 @@ public class Livrable5 {
                 + " crédits. Crédits : " + player.getCredits());
     }
 
+    // =========================================================================
+    //  MÉTHODES UTILITAIRES
+    // =========================================================================
+
+    /**
+     * Retourne la liste des cases libres (hors chemin et sans tour) du plateau.
+     */
+    public static List<Position> getFreeCells(Board board, int height, int width) {
+        List<Position> freeCells = new ArrayList<>();
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                Position p = new Position(i, j);
+                Cell cell = board.getCell(p);
+                if (!cell.isPath() && cell.getTowers().isEmpty()) {
+                    freeCells.add(p);
+                }
+            }
+        }
+        return freeCells;
+    }
+
 
 }
