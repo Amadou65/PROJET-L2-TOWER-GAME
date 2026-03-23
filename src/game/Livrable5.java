@@ -88,5 +88,19 @@ public class Livrable5 {
      * 3. Appelle player.buyTower()
      */
     @SuppressWarnings("unchecked")
-   
+    private static void handleBuyTower(Board board, Player player,
+            ListChooser chooser, int height, int width) {
+
+        // 1. Construire la liste des types de tours achetables
+        String[][] towerSpecs = {
+                { "DartMonkey", "200", "1", "20" },
+                { "BombTower", "600", "2", "36" },
+                { "SniperMonkey", "300", "999", "60" },
+                { "SuperMonkey", "1200", "200", "300" },
+                { "TackShooter", "400", "1", "10" },
+                { "IceTower", "400", "100", "1500" },
+                { "SlowdownTower", "500", "100", "1500" }
+        };
+
+        
 }
