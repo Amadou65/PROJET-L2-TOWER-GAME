@@ -357,4 +357,14 @@ public class Livrable5 {
             return;
         }
 
+        // 5. Retirer l'évolution et rembourser
+        pt.removeEvolution(evoChoice.getType());
+        player.addCredits(evoChoice.getCost());
+        System.out.println("[REVENTE] ✅ Évolution " + evoChoice.getType()
+                + " retirée de " + pt.getNom()
+                + ". Remboursement : " + evoChoice.getCost()
+                + " crédits. Crédits : " + player.getCredits());
+    }
+
+
 }
