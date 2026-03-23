@@ -28,5 +28,21 @@ public class Livrable5 {
      * @param width   largeur du plateau
      */
     @SuppressWarnings("unchecked")
+    public static void playerActionPhase(Board board, Player player,
+            ListChooser chooser, int height, int width) {
 
+        System.out.println("\n========================================");
+        System.out.println("   PHASE D'ACTIONS DU JOUEUR");
+        System.out.println("========================================");
+
+        boolean continueActions = true;
+
+        while (continueActions && player.getCredits() > 0) {
+            // Afficher l'état actuel
+            System.out.println("\n--- État actuel ---");
+            System.out.println("Crédits : " + player.getCredits());
+            System.out.println("Tours sur le plateau : " + board.tower_list.size());
+            System.out.println(board.display());
+
+            
 }
