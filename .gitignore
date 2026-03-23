@@ -306,3 +306,4 @@ $RECYCLE.BIN/
 tests/BaloonTest.java
 
 # End of https://www.toptal.com/developers/gitignore/api/java,linux,windows,macos,eclipse,visualstudiocode,intellij
+.vscode/settings.json
