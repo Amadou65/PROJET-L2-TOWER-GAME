@@ -125,5 +125,13 @@ public class Livrable5 {
             System.out.println("[ACHAT] Achat annulé.");
             return;
         }
-       
+  
+        // 3. Collecter les cases libres
+        List<Position> freeCells = getFreeCells(board, height, width);
+        if (freeCells.isEmpty()) {
+            System.out.println("[ACHAT] Aucune case libre disponible !");
+            return;
+        }
+
+     
 }
