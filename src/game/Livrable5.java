@@ -141,5 +141,18 @@ public class Livrable5 {
             return;
         }
 
-    
+         // 5. Créer et acheter la tour
+        Tower tower = buildTower(towerChoice.getTowerType(), pos);
+        if (tower != null) {
+            int creditsBefore = player.getCredits();
+            player.buyTower(tower, pos, board);
+            if (player.getCredits() < creditsBefore) {
+                System.out.println("[ACHAT] ✅ Tour " + tower.getNom()
+                        + " achetée en (" + pos.getX() + "," + pos.getY()
+                        + ") pour " + tower.getCost() + " crédits."
+                        + " Crédits restants : " + player.getCredits());
+            }
+        }
+    }
+   
 }
