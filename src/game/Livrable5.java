@@ -177,4 +177,17 @@ public class Livrable5 {
             }
         }
   
+        if (evolvableTowers.isEmpty()) {
+            System.out.println("[EVOL] Aucune tour évolutive sur le plateau.");
+            return;
+        }
+
+        // 2. Choisir la tour à évoluer
+        TowerChoice towerChoice = (TowerChoice) chooser.choose(
+                "Quelle tour souhaitez-vous évoluer ?", evolvableTowers);
+        if (towerChoice == null) {
+            System.out.println("[EVOL] Évolution annulée.");
+            return;
+        }
+
 }
