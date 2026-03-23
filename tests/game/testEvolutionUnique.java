@@ -1,7 +1,6 @@
 package game;
 
 import game.exeptions.*;
-import game.board.ClassicalBoard;
 import game.tower.typeTower.*;
 import game.Evolution.EvolutionType;
 import org.junit.jupiter.api.*;
@@ -11,7 +10,6 @@ public class testEvolutionUnique {
     @Test
     public void TestEvolutionUnique() throws TypeTowerException{
         Player p = new Player();
-        Board b = new ClassicalBoard(5, 5);
         Tower t = new DartMonkey("dm", new Position(0, 0));
         Evolution e = new Evolution(100, EvolutionType.SCOPE);
 

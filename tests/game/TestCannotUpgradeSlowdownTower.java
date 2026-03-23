@@ -1,6 +1,5 @@
 package game;
 
-import game.*;
 import game.exeptions.*;
 import game.tower.typeTower.*;
 import game.Evolution.EvolutionType;

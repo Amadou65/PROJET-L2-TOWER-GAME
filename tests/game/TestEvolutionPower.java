@@ -2,7 +2,6 @@ package game;
 
 import game.exeptions.*;
 import game.tower.typeTower.*;
-import game.board.ClassicalBoard;
 import game.Evolution.EvolutionType;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +10,6 @@ public class TestEvolutionPower {
 @Test
 public void testEvolutionPower() throws TypeTowerException {
     Player p = new Player();
-    Board b = new ClassicalBoard(5, 5);
     Tower t = new DartMonkey("dm", new Position(0, 0));
     Evolution e = new Evolution(250, EvolutionType.POWER);
 

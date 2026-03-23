@@ -1,8 +1,6 @@
 package game;
 
-import game.*;
 import game.exeptions.*;
-import game.board.ClassicalBoard;
 import game.tower.typeTower.*;
 import game.Evolution.EvolutionType;
 import org.junit.jupiter.api.*;
