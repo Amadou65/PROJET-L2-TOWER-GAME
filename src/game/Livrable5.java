@@ -387,5 +387,33 @@ public class Livrable5 {
         return freeCells;
     }
 
-
+    /**
+     * Fabrique une tour du type demandé à la position donnée.
+     * Réutilise la logique de Livrable4.
+     *
+     * @param type le nom du type de tour
+     * @param pos  la position
+     * @return la tour créée, ou null si type inconnu
+     */
+    public static Tower buildTower(String type, Position pos) {
+        switch (type) {
+            case "DartMonkey":
+                return new DartMonkey("DartMonkey", pos);
+            case "BombTower":
+                return new BombTower("BombTower", pos);
+            case "SniperMonkey":
+                return new SniperMonkey("SniperMonkey", pos);
+            case "SuperMonkey":
+                return new SuperMonkey("SuperMonkey", pos);
+            case "TackShooter":
+                return new TackShooter("TackShooter", pos);
+            case "IceTower":
+                return new IceTower("IceTower", pos);
+            case "SlowdownTower":
+                return new SlowdownTower("SlowdownTower", pos);
+            default:
+                System.out.println("[WARN] Type de tour inconnu : " + type);
+                return null;
+        }
+    } 
 }
