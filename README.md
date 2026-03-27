@@ -695,6 +695,9 @@ Serhii :
 
     Difficultées aussi pour le TestCannotUpgradeIceTower car comparer aux autres test je devais vérifier que l'action n'a pas lieu, je devais comparer l'état du joueur avant et après l'appel de la méthode.
 
+    Habiba : 
+    Représenter proprement la relation d'héritage entre les tours à projectiles et les tours à effets (IceTower) pour que la Javadoc reflète bien que seules les premières peuvent évoluer.
+
 ### Objectifs pour la semaine et répartition du travail par membre
 
 ## Semaine 9
