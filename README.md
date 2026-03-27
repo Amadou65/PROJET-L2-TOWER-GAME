@@ -753,6 +753,9 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
     de simulation afin de garder des crédits cohérents et un journal de partie
     correct jusqu'à la fin de la manche.
 
+    Habiba: 
+    S'assurer que les modifications de vitesse des ballons n'entraînent pas de bugs de positionnement sur le plateau lors des changements de manche.
+
 ### Objectifs pour la semaine et répartition du travail par membre
 
     Yassin : 
