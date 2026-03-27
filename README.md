@@ -683,6 +683,11 @@ Serhii :
     - L'adition de comptage des evolution par type dans Journal avec deux fonctions recordNbTypeEvolution et getNbTypeEvolution
     - Verification des nouveaux fonctions avec des tests dans JournalTest
 
+Habiba:
+Rédaction de la Javadoc complète pour les nouvelles méthodes de la classe Player (buyUpgrade, canUpgrade) et de ProjectileTower.
+
+Définition des règles de gestion des évolutions (unicité via le HashSet) pour guider l'implémentation d'Amadou et les tests de Yassin.
+
 ### Difficultés rencontrées
 
     Amadou : La méthode buyEvolutions() devait gérer correctement le cas des tours non
