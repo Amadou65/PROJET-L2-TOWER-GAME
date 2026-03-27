@@ -734,6 +734,12 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
     Finalisation de la classe Journal.
     Des test pour Player et Journal
 
+    Habiba: 
+
+    Relecture et vérification des tests JUnit de Yassin. S'assurer que les cas limites (solde insuffisant, double évolution) sont bien couverts pour garantir la robustesse du système d'évolution.
+    Révision de la méthode takeDamage dans la classe Balloon pour s'assurer que la vitesse se met à jour correctement lors de la mutation entre les niveaux 1 à 4.
+   Structuration de la section "Choix de modélisation" pour expliquer l'usage du HashSet dans la gestion des types d'évolutions.
+
 ### Difficultés rencontrées
 
     Amadou :
