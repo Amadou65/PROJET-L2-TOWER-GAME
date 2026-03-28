@@ -36,4 +36,28 @@ public class SuperMonkey extends ProjectileTower {
         }
 
     }
+
+    public void removeEvolution(Evolution e){
+        Evolution.EvolutionType type = e.getEvoType();
+        if (this.hasEvolution(type)) {
+            switch (type) {
+                case SCOPE:
+                    this.scope -= 1;
+                    break;
+                case CADENCE:
+                    this.cadence += 1;
+                    break;
+                case POWER:
+                    this.power -= 1;
+
+                    break;
+                case PROJECTILE:
+                    this.setProjectileType(new SharpDart());
+                    break;
+                default:
+                    System.out.println("This type not exist");
+            }
+            this.evolutions.remove(type);
+        }
+    }
 }

@@ -36,4 +36,28 @@ public class DartMonkey extends ProjectileTower {
         }
 
     }
+
+    public void removeEvolution(Evolution e){
+        Evolution.EvolutionType type = e.getEvoType();
+        if (!this.hasEvolution(type)) {
+            switch (type) {
+                case SCOPE:
+                    this.scope -= 1;
+                    break;
+                case CADENCE:
+                    this.cadence += 5;
+                    break;
+                case POWER:
+                    this.power -= 1;
+
+                    break;
+                case PROJECTILE:
+                    this.setProjectileType(new Dart());
+                    break;
+                default:
+                    System.out.println("This type not exist");
+            }
+            this.evolutions.remove(type);
+        }
+    }
 }
