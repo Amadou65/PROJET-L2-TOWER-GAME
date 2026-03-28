@@ -128,6 +128,10 @@ public class Journal {
         return towersPurchased;
     }
 
+    public int getTowerSold() {
+        return towerSold;
+    }
+
     public int getUpgradesPurchased() {
         return evolutionsPurchased;
     }
@@ -143,6 +147,7 @@ public class Journal {
     public int getHealthRestore() {
         return healthRestore;
     }
+    
 
     /**
      * Returns the number of evolutions purchased for a specific evolution type. By default, it returns the total number of evolutions. We can choose default by EvolutionType.ALL
@@ -163,5 +168,9 @@ public class Journal {
             default:
                 return evolutionsPurchased;        
         }
+    }
+
+    public int getEvolutionSold(){
+        return evolutionSold;
     }
 }
