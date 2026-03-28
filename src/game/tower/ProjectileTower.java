@@ -43,6 +43,10 @@ public abstract class ProjectileTower extends Tower{
         return evolutions.contains(type);
     }
 
+    public HashSet<Evolution.EvolutionType> getEvoAplied(){
+        return this.evolutions;
+    }
+
 
 
     /**
