@@ -39,7 +39,7 @@ public class DartMonkey extends ProjectileTower {
 
     public void removeEvolution(Evolution e){
         Evolution.EvolutionType type = e.getEvoType();
-        if (!this.hasEvolution(type)) {
+        if (this.hasEvolution(type)) {
             switch (type) {
                 case SCOPE:
                     this.scope -= 1;

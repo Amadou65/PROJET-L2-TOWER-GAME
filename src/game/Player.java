@@ -164,13 +164,13 @@ public class Player {
         }
     }
 
-    public void sellEvolution(Tower t, Evolution e, int refund) throws TypeTowerException, NoEvolutionException {
+    public void sellEvolution(Tower t, Evolution e) throws TypeTowerException, NoEvolutionException {
         if(t instanceof ProjectileTower) {
             ProjectileTower pt = (ProjectileTower) t;
             if(pt.hasEvolution(e.getEvoType())){
 
                 pt.removeEvolution(e);
-                this.addCredits(refund);
+                this.addCredits(e.getCost());
                 journal.recordEvolutionSold();
             }
             else{
