@@ -97,6 +97,7 @@ public class Player {
         if (targetCell.getTowers().contains(t)) {
             this.credits += t.cost;
             b.removeTower(t, targetCell);
+            journal.recordTowerSold();
         }
     }
 
@@ -163,13 +164,14 @@ public class Player {
         }
     }
 
-    public void sellEvolution(Tower t, Evolution.EvolutionType evoType, int refund) throws TypeTowerException, NoEvolutionException {
+    public void sellEvolution(Tower t, Evolution e, int refund) throws TypeTowerException, NoEvolutionException {
         if(t instanceof ProjectileTower) {
             ProjectileTower pt = (ProjectileTower) t;
-            if(pt.hasEvolution(evoType)){
+            if(pt.hasEvolution(e.getEvoType())){
 
-                pt.removeEvolution(evoType);
+                pt.removeEvolution(e);
                 this.addCredits(refund);
+                journal.recordEvolutionSold();
             }
             else{
                 throw new NoEvolutionException("This evolution is not contains in this tower");
