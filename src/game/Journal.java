@@ -8,7 +8,9 @@ public class Journal {
     private int creditGainedTotal;
     private int creditUsedTotal;
     private int towersPurchased;
+    private int towerSold;
     private int evolutionsPurchased;
+    private int evolutionSold;
     private int healthLost;
     private int healthRestore;
     // ndEvolution par type
@@ -32,11 +34,13 @@ public class Journal {
         this.creditGainedTotal = 0;
         this.creditUsedTotal = 0;
         this.towersPurchased = 0;
+        this.towerSold = 0;
         this.healthLost = 0;
         this.healthRestore = 0;
         
         // nbEvolutions total
         this.evolutionsPurchased = 0;
+        this.evolutionSold = 0;
         // ndEvolution par type
         this.nbEvolSCOPE = 0;
         this.nbEvolPOWER = 0;
@@ -61,6 +65,10 @@ public class Journal {
         this.creditUsedTotal += towerCost;
     }
 
+    public void recordTowerSold(){
+        this.towerSold++;
+    }
+
     /**
      * Record purchase of Evolution. Also record type of evolution in counter for this journal
      * @param e
@@ -69,6 +77,10 @@ public class Journal {
         this.evolutionsPurchased++;
         this.creditUsedTotal += e.getCost();
         this.recordNbTypeEvolution(e.getEvoType());
+    }
+
+    public void recordEvolutionSold(){
+        this.evolutionSold++;
     }
 
     /**
