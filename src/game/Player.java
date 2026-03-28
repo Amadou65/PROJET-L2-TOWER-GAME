@@ -162,6 +162,23 @@ public class Player {
             throw new TypeTowerException("Only Projectile Towers can be upgraded with evolutions.");
         }
     }
+
+    public void sellEvolution(Tower t, Evolution.EvolutionType evoType, int refund) throws TypeTowerException, NoEvolutionException {
+        if(t instanceof ProjectileTower) {
+            ProjectileTower pt = (ProjectileTower) t;
+            if(pt.hasEvolution(evoType)){
+
+                pt.removeEvolution(evoType);
+                this.addCredits(refund);
+            }
+            else{
+                throw new NoEvolutionException("This evolution is not contains in this tower");
+            }
+        }
+        else{
+            throw new TypeTowerException("Only Projectile Towers can be upgraded with evolutions.");
+        }
+    }
     /**
      * @deprecated Use buyEvolution(Tower, Evolution) instead.
      *             Kept for backward compatibility with older tests/callers.
