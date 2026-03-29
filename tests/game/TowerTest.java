@@ -58,7 +58,7 @@ public class TowerTest {
     
     @Test
     public void EvolutionTest(){
-        ProjectileTower t = new DartMonkey("drt",  new Position(0, 0));
+        ProjectileTower t = new DartMonkey("drt", new Position(0, 0));
         Evolution e = new Evolution(300, EvolutionType.SCOPE);
 
         assertEquals(1, t.getScope());
