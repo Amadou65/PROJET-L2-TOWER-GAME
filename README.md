@@ -823,7 +823,7 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
     Habiba :
 
     Mise à jour du diagramme UML, rédaction de la section Livrable 5 du README
-    pour les autres membres, et Javadoc des nouvelles classes.
+    pour les autres membres, et Javadoc des nouvelles c lasses.
 
 ## Semaine 11
 
