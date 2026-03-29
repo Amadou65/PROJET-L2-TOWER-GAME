@@ -50,7 +50,7 @@ public class TowerTest {
         // Find targets
         List<Balloon> targets = TargetingBalloon.getAllTargets(balloons, t);
     
-        // Check that only the balloons within scope are  returned
+        // Check that only the balloons within scope are returned
         assertTrue(targets.contains(b1));
         assertTrue(targets.contains(b3));
         assertFalse(targets.contains(b2));
