@@ -190,16 +190,4 @@ public class Player {
             throw new TypeTowerException("Only Projectile Towers can be upgraded with evolutions.");
         }
     }
-    /**
-     * @deprecated Use buyEvolution(Tower, Evolution) instead.
-     *             Kept for backward compatibility with older tests/callers.
-     */
-    @Deprecated
-    public void buyUpgrade(Tower t, Board b, Position p, Evolution e) {
-        try {
-            buyEvolution(t, e);
-        } catch (TypeTowerException ex) {
-            throw new IllegalArgumentException(ex.getMessage(), ex);
-        }
-    }
 }
