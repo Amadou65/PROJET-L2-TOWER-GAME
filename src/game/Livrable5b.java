@@ -40,3 +40,17 @@ public class Livrable5b extends Livrable5 {
         @SuppressWarnings("rawtypes")
         InteractiveListChooser chooser = new InteractiveListChooser();
         Livrable5.playerActionPhase(board, player, chooser, height, width);
+         // --- PHASE 3 : Créer les ballons et lancer la manche ---
+        List<Balloon> reserve = new ArrayList<>();
+        int[] levels = { 1, 2, 4 };
+        Random rng = new Random();
+        for (int i = 0; i < nbBallons; i++) {
+            int lvl = levels[rng.nextInt(levels.length)];
+            reserve.add(new Balloon(lvl, path));
+        }
+
+        System.out.println("\n--- LANCEMENT DE LA MANCHE ---");
+        GameEngine engine = new GameEngine(reserve, board, player);
+        engine.game();
+    }
+}
