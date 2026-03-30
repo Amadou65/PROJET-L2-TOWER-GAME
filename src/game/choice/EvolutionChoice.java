@@ -29,3 +29,10 @@ public class EvolutionChoice {
     public int getCost() {
         return cost;
     }
+    
+    @Override
+    public String toString() {
+        return type.name() + " (coût: " + cost + " crédits)";
+    }
+}
+
