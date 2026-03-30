@@ -6,17 +6,19 @@ import game.board.ClassicalBoard;
 /**
  * Livrable4b : scénario B du Livrable 4.
  * <p>
- * Crée un plateau classique (chemins rectilignes), place des tours
- * via le joueur (avec déduction des crédits), achète des évolutions
- * sur les tours éligibles, puis lance la manche.
+ * Crée un plateau classique avec N chemins rectilignes distincts,
+ * place des tours via le joueur, puis joue 10 manches avec gestion
+ * progressive des évolutions :
+ * <ul>
+ *   <li>Manches 1 à 5 : une évolution est ajoutée à chaque manche (si possible)</li>
+ *   <li>Manches 6 à 10 : une évolution est retirée à chaque manche (si possible)</li>
+ * </ul>
+ * À chaque manche, un ballon est créé sur chaque chemin.
  * </p>
  *
- * <p>
- * Usage :
- * </p>
- * 
+ * <p>Usage :</p>
  * <pre>
- * java -jar livrable4b.jar &lt;hauteur&gt; &lt;largeur&gt; &lt;nbBallons&gt;
+ * java -jar livrable4b.jar &lt;hauteur&gt; &lt;largeur&gt; &lt;nbChemins&gt;
  * </pre>
  */
 public class Livrable4b extends Livrable4 {
@@ -24,19 +26,19 @@ public class Livrable4b extends Livrable4 {
     public static void main(String[] args) {
         int height = args.length > 0 ? Integer.parseInt(args[0]) : 8;
         int width = args.length > 1 ? Integer.parseInt(args[1]) : 12;
-        int nbBallons = args.length > 2 ? Integer.parseInt(args[2]) : 5;
+        int nbChemins = args.length > 2 ? Integer.parseInt(args[2]) : 3;
 
         System.out.println("=== LIVRABLE 4B ===");
         System.out.println("Plateau classique : " + height + "x" + width
-                + " | Ballons : " + nbBallons);
+                + " | Chemins : " + nbChemins);
 
         // --- PHASE 1 : Plateau classique avec PLUSIEURS chemins rectilignes ---
         ClassicalBoard board = new ClassicalBoard(height, width);
 
-        // Générer un chemin distinct par ballon
+        // Générer N chemins distincts
         List<List<Position>> allPaths = new ArrayList<>();
         int attempts = 0;
-        while (allPaths.size() < nbBallons && attempts < 200) {
+        while (allPaths.size() < nbChemins && attempts < 200) {
             attempts++;
             List<Position> path = board.generateNewPath();
 
@@ -69,23 +71,65 @@ public class Livrable4b extends Livrable4 {
         List<Tower> towers = Livrable4.placeTowers(board, player, height, width);
         System.out.println("Crédits restants après tours : " + player.getCredits());
 
-        // --- PHASE 3 : Acheter des évolutions sur les tours éligibles ---
-        System.out.println("\n--- ACHAT DES ÉVOLUTIONS ---");
-        Livrable4.buyEvolutions(towers, player);
-        System.out.println("Crédits restants après évolutions : " + player.getCredits());
-
-        // --- PHASE 4 : Créer les ballons (chacun avec son propre chemin) ---
-        List<Balloon> reserve = new ArrayList<>();
-        int[] levels = { 1, 2, 4 };
+        // --- PHASE 3 : Boucle de 10 manches ---
         Random rng = new Random();
-        for (int i = 0; i < allPaths.size(); i++) {
-            int lvl = levels[rng.nextInt(levels.length)];
-            reserve.add(new Balloon(lvl, allPaths.get(i)));
+        int[] levels = { 1, 2, 4 };
+
+        for (int manche = 1; manche <= 10; manche++) {
+            System.out.println("\n╔══════════════════════════════════════════╗");
+            System.out.println("║          MANCHE " + manche + " / 10                    ║");
+            System.out.println("╚══════════════════════════════════════════╝");
+
+            // --- Gestion des évolutions ---
+            if (manche <= 5) {
+                // Manches 1 à 5 : ajouter une évolution
+                String result = Livrable4.applyOneEvolution(towers, player);
+                if (result != null) {
+                    System.out.println("[MANCHE " + manche + "] ✨ Évolution ajoutée : " + result);
+                } else {
+                    System.out.println("[MANCHE " + manche + "] Aucune évolution possible à ajouter.");
+                }
+            } else {
+                // Manches 6 à 10 : retirer une évolution
+                String result = Livrable4.removeOneEvolution(towers, player);
+                if (result != null) {
+                    System.out.println("[MANCHE " + manche + "] 🔻 Évolution retirée : " + result);
+                } else {
+                    System.out.println("[MANCHE " + manche + "] Aucune évolution à retirer.");
+                }
+            }
+
+            // Afficher les évolutions des tours
+            System.out.println("[MANCHE " + manche + "] État des évolutions :");
+            Livrable4.displayEvolutions(towers);
+
+            // --- Créer un ballon par chemin pour cette manche ---
+            List<Balloon> reserve = new ArrayList<>();
+            for (int i = 0; i < allPaths.size(); i++) {
+                int lvl = levels[rng.nextInt(levels.length)];
+                reserve.add(new Balloon(lvl, allPaths.get(i)));
+            }
+
+            // --- Lancer la manche ---
+            System.out.println("\n--- Lancement de la manche " + manche
+                    + " (" + reserve.size() + " ballons, un par chemin) ---");
+            GameEngine engine = new GameEngine(reserve, board, player);
+            engine.game();
+
+            // Vérifier si le joueur est encore en vie
+            if (!player.isAlife()) {
+                System.out.println("\n💀 GAME OVER à la manche " + manche + " !");
+                break;
+            }
+
+            System.out.println("[MANCHE " + manche + "] Terminée | Vies : " + player.getHealth()
+                    + " | Crédits : " + player.getCredits());
         }
 
-        System.out.println("\n--- LANCEMENT DE LA MANCHE (" + reserve.size()
-                + " ballons, chacun sur son propre chemin) ---");
-        GameEngine engine = new GameEngine(reserve, board, player);
-        engine.game();
+        System.out.println("\n====================================");
+        System.out.println("       FIN DES 10 MANCHES          ");
+        System.out.println("====================================");
+        System.out.println("Vies restantes : " + player.getHealth());
+        System.out.println("Crédits finaux : " + player.getCredits());
     }
 }
