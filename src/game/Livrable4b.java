@@ -28,6 +28,19 @@ public class Livrable4b extends Livrable4 {
         int width = args.length > 1 ? Integer.parseInt(args[1]) : 12;
         int nbChemins = args.length > 2 ? Integer.parseInt(args[2]) : 3;
 
+        // Validation des arguments
+        if (height <= 0 || width <= 0 || nbChemins <= 0) {
+            System.err.println("Erreur : tous les arguments doivent être strictement positifs.");
+            System.err.println("Usage : java -jar livrable4b.jar <hauteur> <largeur> <nbChemins>");
+            return;
+        }
+        if (nbChemins > height) {
+            System.out.println("⚠️  Le nombre de chemins demandé (" + nbChemins
+                    + ") dépasse la hauteur du plateau (" + height
+                    + "). Limité à " + height + " chemins.");
+            nbChemins = height;
+        }
+
         System.out.println("=== LIVRABLE 4B ===");
         System.out.println("Plateau classique : " + height + "x" + width
                 + " | Chemins : " + nbChemins);
