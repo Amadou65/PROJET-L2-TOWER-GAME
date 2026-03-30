@@ -33,3 +33,18 @@ public class TowerChoice {
         this.tower = null;
         this.position = null;
     }
+    
+
+    /**
+     * Constructeur pour un choix de TOUR EXISTANTE (lors de la vente/évolution).
+     * 
+     * @param tower la tour existante sur le plateau
+     */
+    public TowerChoice(Tower tower) {
+        this.towerType = tower.getNom();
+        this.cost = tower.getCost();
+        this.scope = tower.getScope();
+        this.cadence = tower.getCadence();
+        this.tower = tower;
+        this.position = tower.getPosition();
+    }
