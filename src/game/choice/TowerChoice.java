@@ -17,3 +17,19 @@ public class TowerChoice {
     private Position position; // null si c'est un choix de tour existante
 
     /**
+    
+     * Constructeur pour un choix de TYPE de tour (lors de l'achat).
+     * 
+     * @param towerType le nom du type de tour
+     * @param cost      le coût d'achat
+     * @param scope     la portée
+     * @param cadence   la cadence de tir
+     */
+    public TowerChoice(String towerType, int cost, int scope, int cadence) {
+        this.towerType = towerType;
+        this.cost = cost;
+        this.scope = scope;
+        this.cadence = cadence;
+        this.tower = null;
+        this.position = null;
+    }
