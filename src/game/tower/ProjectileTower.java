@@ -1,9 +1,7 @@
 package game.tower;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import game.*;
 import game.Evolution.EvolutionType;
@@ -44,21 +42,23 @@ public abstract class ProjectileTower extends Tower{
     public boolean hasEvolution(EvolutionType type) {
         return evolutions.contains(type);
     }
-
+    
     public HashSet<Evolution.EvolutionType> getEvoAplied(){
         return this.evolutions;
     }
-    /**
-    * Retourne la liste des évolutions actuellement appliquées à la tour.
-    * Utile pour l'affichage dans le menu de vente du Livrable 5.
-    */
-    public Set<EvolutionType> getAppliedEvolutions() {
-        return Collections.unmodifiableSet(this.evolutions);
-    }
 
     /**
-    * Méthode abstraite : chaque tour doit définir comment elle 
-    * réinitialise ses stats (portée, dégâts...) quand on vend une évolution.
-    */
-    public abstract void removeEvolution(EvolutionType type);
+     * Applique une évolution à la tour de type Projectile.
+     * Cette méthode est abstraite et sera précisée dans chaque type de tour 
+     * (BombTower, DartMonkey, etc.) pour définir les bonus exacts.
+     * Elle vérifie également que l'évolution n'a pas déjà été appliquée via le HashSet.
+     * @param e L'évolution à appliquer.
+     */
+    public abstract void removeEvolution(Evolution e);
+
+    /**
+     * Applique une évolution à la tour de type Projectile
+     * @param e
+     */
+    public abstract void getEvolution(Evolution e);
 }
