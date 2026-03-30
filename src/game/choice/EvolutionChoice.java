@@ -16,21 +16,3 @@ public class EvolutionChoice {
      * @param type le type d'évolution
      * @param cost le coût de l'évolution
      */
-    public EvolutionChoice(Evolution.EvolutionType type, int cost) {
-        this.type = type;
-        this.cost = cost;
-    }
-
-    public Evolution.EvolutionType getType() {
-        return type;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    @Override
-    public String toString() {
-        return type.name() + " (coût: " + cost + " crédits)";
-    }
-}
