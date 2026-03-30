@@ -25,3 +25,7 @@ public class EvolutionChoice {
     public Evolution.EvolutionType getType() {
         return type;
     }
+    
+    public int getCost() {
+        return cost;
+    }
