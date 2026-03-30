@@ -10,3 +10,9 @@ public enum PlayerAction {
     SELL_TOWER("Vendre une tour"),
     SELL_EVOLUTION("Vendre une évolution"),
     END_TURN("Terminer le tour");
+    
+    private String label;
+
+    PlayerAction(String label) {
+        this.label = label;
+    }
