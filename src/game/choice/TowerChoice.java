@@ -48,3 +48,8 @@ public class TowerChoice {
         this.tower = tower;
         this.position = tower.getPosition();
     }
+    
+    public String getTowerType() {
+        return towerType;
+    }
+
