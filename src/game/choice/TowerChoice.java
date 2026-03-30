@@ -68,3 +68,19 @@ public class TowerChoice {
         return position;
     }
 
+
+    @Override
+    public String toString() {
+        if (tower != null) {
+            return towerType + " en (" + tower.getX() + "," + tower.getY()
+                    + ") | coût: " + cost + " | portée: " + scope
+                    + " | cadence: " + cadence;
+        }
+        return towerType + " (coût: " + cost + ", portée: " + scope
+                + ", cadence: " + cadence + ")";
+    }
+}
+
+
+        
+
