@@ -377,7 +377,9 @@ Amadou :
     player.sellTower() pour rembourser le joueur.
 
     handleSellEvolution() : affiche les tours ayant des évolutions, propose celles
-    à revendre, puis retire l'évolution via removeEvolution() et rembourse le joueur.
+    à revendre, puis appelle player.sellEvolution() (méthode implémentée par Serhii)
+    qui se charge de retirer l'évolution, rembourser le joueur et enregistrer dans
+    le Journal. Gestion de TypeTowerException et NoEvolutionException.
 
     Livrable5a.java : scénario A avec plateau aléatoire (LeftStartRandomBoard) et
     choix automatiques via RandomListChooser. Le programme génère un plateau, exécute
@@ -396,6 +398,40 @@ Amadou :
 
     Makefile mis à jour pour créer livrable5a.jar et livrable5b.jar.
 
+    Intégration avec le travail des autres membres :
+    - Utilisation de Player.sellEvolution() (Serhii) dans handleSellEvolution().
+    - Compatibilité avec removeEvolution(Evolution e) qui prend désormais un objet
+      Evolution complet, et non plus un simple EvolutionType.
+    - Compilation et tests validés : make classes, make jar, exécution de
+      livrable5a.jar et livrable5b.jar OK.
+
+Serhii :
+
+    Player.sellEvolution() : implémentation de la méthode de vente d'évolution
+    dans Player.java avec gestion des exceptions TypeTowerException et
+    NoEvolutionException. La méthode retire l'évolution de la tour, rembourse
+    les crédits et enregistre la vente dans le Journal.
+
+    ProjectileTower : ajout de la méthode abstraite removeEvolution(Evolution e)
+    et implémentation dans chaque sous-classe (DartMonkey, BombTower, etc.) pour
+    réinitialiser correctement les stats modifiées par l'évolution.
+
+    Journal.java : ajout de recordTowerSold() et recordEvolutionSold() pour
+    enregistrer les ventes dans les statistiques du joueur.
+
+    NoEvolutionException : nouvelle exception levée quand on tente de vendre
+    une évolution que la tour ne possède pas.
+
+Yassin :
+
+    Création des classes de choix dans game.choice :
+    - actionchoice/ : BuyTower, SellTower, EvolveTower (extends Choice<String>)
+    - towerchoice/ : DartMonkeyTower, BombTowerTower, SniperMonkeyTower,
+      SuperMonkeyTower, TackShooterTower, IceTowerTower, SlowDownTowerTower
+      (extends Choice<Tower>)
+    - ChoiceTest.java : test unitaire vérifiant le bon fonctionnement de
+      getChoice() sur les classes d'évolution.
+
 ### Difficultés restant à résoudre
 
 Amadou :
@@ -410,6 +446,10 @@ Amadou :
     package game.tower, donc inaccessible depuis game.Livrable5. La solution a été
     d'utiliser hasEvolution() en itérant sur les 4 types d'évolution possibles
     plutôt que d'accéder directement au HashSet.
+
+    Intégration avec Serhii : la signature de removeEvolution() a changé (prend
+    un Evolution au lieu d'un EvolutionType). Résolu en créant un objet Evolution
+    complet et en utilisant player.sellEvolution() directement.
 
 ## Livrable 6
 
@@ -829,9 +869,46 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
 
 ### Ce qui a été réalisé
 
+    Amadou :
+
+    Intégration et correction de compatibilité du Livrable 5. La méthode
+    handleSellEvolution() a été mise à jour pour utiliser Player.sellEvolution()
+    implémenté par Serhii, au lieu du code manuel (removeEvolution + addCredits)
+    qui ne compilait plus depuis que removeEvolution() prend un objet Evolution
+    (et non un EvolutionType).
+
+    Vérification complète de la chaîne de compilation et d'exécution :
+    - make classes : compilation de 61 fichiers Java sans erreur
+    - make jar : génération des 6 JARs (3a, 3b, 4a, 4b, 5a, 5b)
+    - java -jar livrable5a.jar 8 12 5 : exécution OK (mode aléatoire)
+    - java -jar livrable5b.jar 8 12 5 : exécution OK (mode interactif)
+
+    Mise à jour du README : section Livrable 5 complétée avec les contributions
+    de tous les membres (Serhii, Yassin) et journal de bord semaine 11.
+
 ### Difficultés rencontrées
 
+    Amadou :
+
+    Changement de signature de removeEvolution() entre les semaines : la méthode
+    prenait auparavant un EvolutionType mais prend désormais un Evolution complet.
+    Résolu en créant un objet Evolution(cost, type) et en déléguant à
+    player.sellEvolution().
+
 ### Objectifs pour la semaine et répartition du travail par membre
+
+    Amadou :
+
+    Préparer le Livrable 6 (boucle de jeu complète avec manches successives).
+
+    Yassin :
+
+    Compléter les tests JUnit pour le Livrable 5 (couvrir achat, vente,
+    évolution, vente d'évolution, fin de tour).
+
+    Habiba :
+
+    Mise à jour du diagramme UML et Javadoc des nouvelles classes du Livrable 5.
 
 ## Semaine 12
 
