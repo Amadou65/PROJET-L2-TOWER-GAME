@@ -26,3 +26,12 @@ public class Livrable5b extends Livrable5 {
         System.out.println("=== LIVRABLE 5B — Mode Interactif ===");
         System.out.println("Plateau classique : " + height + "x" + width
                 + " | Ballons : " + nbBallons);
+        // --- PHASE 1 : Plateau classique ---
+        ClassicalBoard board = new ClassicalBoard(height, width);
+        List<Position> path = board.path();
+        board.applyPathToGrid(path);
+
+        System.out.println("Chemin généré : " + path.size() + " cases");
+        System.out.println("Départ : " + path.get(0)
+                + " → Arrivée : " + path.get(path.size() - 1));
+        System.out.println(board.display());
