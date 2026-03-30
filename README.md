@@ -774,6 +774,11 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
     Finalisation de la classe Journal.
     Des test pour Player et Journal
 
+    ProjectileTower:
+        removeEvolution() une methode abstraite qui permet d'enlever l'evolution de tour choisi
+        
+        getEvoAplied() retourne HashSet des evolutions acquises sur cette tour
+
     Habiba: 
 
     Relecture et vérification des tests JUnit de Yassin. S'assurer que les cas limites (solde insuffisant, double évolution) sont bien couverts pour garantir la robustesse du système d'évolution.
@@ -795,6 +800,7 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
 
     Habiba: 
     S'assurer que les modifications de vitesse des ballons n'entraînent pas de bugs de positionnement sur le plateau lors des changements de manche.
+
 
 ### Objectifs pour la semaine et répartition du travail par membre
 
@@ -830,6 +836,30 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
     Mise à jour du Makefile pour générer livrable5a.jar et livrable5b.jar.
     Rédaction de la section Livrable 5 dans le README.
 
+    Serhii :
+
+    Un système de choix a été mis en place dans le package `game.choice`.
+
+    Une classe abstraite `Choice<T>` permet de représenter une option de choix pour le joueur.  
+    Cette classe est générique afin de pouvoir être utilisée pour différents types de choix (actions, évolutions, etc.).
+
+    Chaque classe concrète doit étendre `Choice` et implémenter la méthode `getChoice()`.
+
+
+    Des methodes displayChoice() et getChoice()
+
+    displayChoice() permet d'afficher dans une console le methode qui nous avons choisi
+
+    getChoide() Retourne l'objet correspondant au choix (par exemple une évolution, une action, etc.), afin de l'utiliser dans le jeu.
+
+    Player.java :
+        sellEvolution - permet de vendre l'evolution, autrement dit l'enlever et retourner des credits depenser
+        On verifie que la tour est de type projectileTower
+        On verifie que la tour a cette amelioration
+
+    
+
+
 ### Difficultés rencontrées
 
     Amadou :
@@ -842,6 +872,9 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
     Accès au champ protected evolutions de ProjectileTower depuis un autre
     package : résolu en itérant sur les EvolutionType avec hasEvolution()
     plutôt qu'en accédant directement au HashSet.
+    
+    Serhii :
+    Trouver l'option de retourne pour des chois de actionchoice et towerchoice
 
 ### Objectifs pour la semaine et répartition du travail par membre
 
