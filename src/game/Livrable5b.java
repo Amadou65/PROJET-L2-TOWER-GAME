@@ -35,3 +35,8 @@ public class Livrable5b extends Livrable5 {
         System.out.println("Départ : " + path.get(0)
                 + " → Arrivée : " + path.get(path.size() - 1));
         System.out.println(board.display());
+        // --- PHASE 2 : Phase d'actions du joueur (choix interactifs) ---
+        Player player = new Player();
+        @SuppressWarnings("rawtypes")
+        InteractiveListChooser chooser = new InteractiveListChooser();
+        Livrable5.playerActionPhase(board, player, chooser, height, width);
