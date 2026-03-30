@@ -31,3 +31,13 @@ public class Livrable5a extends Livrable5 {
         LeftStartRandomBoard board = new LeftStartRandomBoard(height, width);
         List<Position> path = board.path();
         board.applyPathToGrid(path);
+        System.out.println("Chemin généré : " + path.size() + " cases");
+        System.out.println("Départ : " + path.get(0)
+                + " → Arrivée : " + path.get(path.size() - 1));
+        System.out.println(board.display());
+
+        // --- PHASE 2 : Phase d'actions du joueur (choix aléatoires) ---
+        Player player = new Player();
+        @SuppressWarnings("rawtypes")
+        RandomListChooser chooser = new RandomListChooser();
+        Livrable5.playerActionPhase(board, player, chooser, height, width);
