@@ -16,3 +16,11 @@ public enum PlayerAction {
     PlayerAction(String label) {
         this.label = label;
     }
+    
+    @Override
+    public String toString() {
+        return this.label;
+    }
+}
+
+        
