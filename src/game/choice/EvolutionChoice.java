@@ -21,3 +21,7 @@ public class EvolutionChoice {
         this.type = type;
         this.cost = cost;
     }
+    
+    public Evolution.EvolutionType getType() {
+        return type;
+    }
