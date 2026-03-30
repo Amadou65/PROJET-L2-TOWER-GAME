@@ -683,6 +683,11 @@ Serhii :
     - L'adition de comptage des evolution par type dans Journal avec deux fonctions recordNbTypeEvolution et getNbTypeEvolution
     - Verification des nouveaux fonctions avec des tests dans JournalTest
 
+Habiba:
+Rédaction de la Javadoc complète pour les nouvelles méthodes de la classe Player (buyUpgrade, canUpgrade) et de ProjectileTower.
+
+Définition des règles de gestion des évolutions (unicité via le HashSet) pour guider l'implémentation d'Amadou et les tests de Yassin.
+
 ### Difficultés rencontrées
 
     Amadou : La méthode buyEvolutions() devait gérer correctement le cas des tours non
@@ -694,6 +699,9 @@ Serhii :
     Quelques difficultées rencontrés lors des test par exemple le lien  entre toutes les classes, vérification que le solde du joueur ne bouge pas lors d'une amélioration ou évolution interdite...
 
     Difficultées aussi pour le TestCannotUpgradeIceTower car comparer aux autres test je devais vérifier que l'action n'a pas lieu, je devais comparer l'état du joueur avant et après l'appel de la méthode.
+
+    Habiba : 
+    Représenter proprement la relation d'héritage entre les tours à projectiles et les tours à effets (IceTower) pour que la Javadoc reflète bien que seules les premières peuvent évoluer.
 
 ### Objectifs pour la semaine et répartition du travail par membre
 
@@ -726,6 +734,12 @@ Serhii :
     Finalisation de la classe Journal.
     Des test pour Player et Journal
 
+    Habiba: 
+
+    Relecture et vérification des tests JUnit de Yassin. S'assurer que les cas limites (solde insuffisant, double évolution) sont bien couverts pour garantir la robustesse du système d'évolution.
+    Révision de la méthode takeDamage dans la classe Balloon pour s'assurer que la vitesse se met à jour correctement lors de la mutation entre les niveaux 1 à 4.
+   Structuration de la section "Choix de modélisation" pour expliquer l'usage du HashSet dans la gestion des types d'évolutions.
+
 ### Difficultés rencontrées
 
     Amadou :
@@ -738,6 +752,9 @@ Serhii :
     Il a également fallu conserver le même joueur entre les phases d'achat et
     de simulation afin de garder des crédits cohérents et un journal de partie
     correct jusqu'à la fin de la manche.
+
+    Habiba: 
+    S'assurer que les modifications de vitesse des ballons n'entraînent pas de bugs de positionnement sur le plateau lors des changements de manche.
 
 ### Objectifs pour la semaine et répartition du travail par membre
 

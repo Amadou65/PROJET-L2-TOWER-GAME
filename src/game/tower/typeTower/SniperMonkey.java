@@ -35,4 +35,28 @@ public class SniperMonkey extends ProjectileTower {
         }
 
     }
+
+    public void removeEvolution(Evolution e){
+        Evolution.EvolutionType type = e.getEvoType();
+        if (this.hasEvolution(type)) {
+            switch (type) {
+                case SCOPE:
+                    this.scope -= 1;
+                    break;
+                case CADENCE:
+                    this.cadence += 10;
+                    break;
+                case POWER:
+                    this.power -= 1;
+
+                    break;
+                case PROJECTILE:
+                    this.power = (int) this.power/2;
+                    break;
+                default:
+                    System.out.println("This type not exist");
+            }
+            this.evolutions.remove(type);
+        }
+    }
 }

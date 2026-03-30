@@ -7,6 +7,8 @@ import game.exeptions.*;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashSet;
+
 public class PlayerTest {
     @Test
     public void testGetersPlayer(){
@@ -61,6 +63,39 @@ public class PlayerTest {
         // Check that buying the evolution does not apply to non-projectile towers
         NonProjectileTower npt = new IceTower("npt",new Position(0, 0));
         assertThrows(TypeTowerException.class, () -> p.buyEvolution(npt, e));
+
+    }
+
+    @Test
+    public void testSellEvolution() throws TypeTowerException, NoEvolutionException {
+
+        Player p = new Player();
+        ProjectileTower t = new DartMonkey("drt", new Position(0, 0));
+        Evolution e = new Evolution(100, Evolution.EvolutionType.SCOPE);
+        p.buyEvolution(t, e);
+
+        // testSellEvolutionResetsStats - la stat est réinitialisée
+        assertTrue(t.hasEvolution(Evolution.EvolutionType.SCOPE));
+        p.sellEvolution(t, e);
+        assertFalse(t.hasEvolution(Evolution.EvolutionType.SCOPE));
+
+        // testSellEvolutionNotOwned - comportement quand évolution non possédée
+        assertThrows(NoEvolutionException.class, () -> p.sellEvolution(t, e));
+
+
+        p.buyEvolution(t, e);
+
+        
+        // testJournalRecordsSell - le Journal enregistre la vente
+        assertEquals(p.getJournal().getEvolutionSold(), 1);
+
+        // testGetAppliedEvolutions - la liste est correcte
+
+        HashSet<Evolution.EvolutionType> st = t.getEvoAplied();
+
+        assertEquals(st.size(), 1);
+        assertTrue(t.getEvoAplied().contains(Evolution.EvolutionType.SCOPE));
+
 
     }
 }

@@ -97,6 +97,7 @@ public class Player {
         if (targetCell.getTowers().contains(t)) {
             this.credits += t.cost;
             b.removeTower(t, targetCell);
+            journal.recordTowerSold();
         }
     }
 
@@ -159,6 +160,24 @@ public class Player {
             }
         }
         else {
+            throw new TypeTowerException("Only Projectile Towers can be upgraded with evolutions.");
+        }
+    }
+
+    public void sellEvolution(Tower t, Evolution e) throws TypeTowerException, NoEvolutionException {
+        if(t instanceof ProjectileTower) {
+            ProjectileTower pt = (ProjectileTower) t;
+            if(pt.hasEvolution(e.getEvoType())){
+
+                pt.removeEvolution(e);
+                this.addCredits(e.getCost());
+                journal.recordEvolutionSold();
+            }
+            else{
+                throw new NoEvolutionException("This evolution is not contains in this tower");
+            }
+        }
+        else{
             throw new TypeTowerException("Only Projectile Towers can be upgraded with evolutions.");
         }
     }

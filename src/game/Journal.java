@@ -8,7 +8,9 @@ public class Journal {
     private int creditGainedTotal;
     private int creditUsedTotal;
     private int towersPurchased;
+    private int towerSold;
     private int evolutionsPurchased;
+    private int evolutionSold;
     private int healthLost;
     private int healthRestore;
     // ndEvolution par type
@@ -32,11 +34,13 @@ public class Journal {
         this.creditGainedTotal = 0;
         this.creditUsedTotal = 0;
         this.towersPurchased = 0;
+        this.towerSold = 0;
         this.healthLost = 0;
         this.healthRestore = 0;
         
         // nbEvolutions total
         this.evolutionsPurchased = 0;
+        this.evolutionSold = 0;
         // ndEvolution par type
         this.nbEvolSCOPE = 0;
         this.nbEvolPOWER = 0;
@@ -61,6 +65,10 @@ public class Journal {
         this.creditUsedTotal += towerCost;
     }
 
+    public void recordTowerSold(){
+        this.towerSold++;
+    }
+
     /**
      * Record purchase of Evolution. Also record type of evolution in counter for this journal
      * @param e
@@ -69,6 +77,10 @@ public class Journal {
         this.evolutionsPurchased++;
         this.creditUsedTotal += e.getCost();
         this.recordNbTypeEvolution(e.getEvoType());
+    }
+
+    public void recordEvolutionSold(){
+        this.evolutionSold++;
     }
 
     /**
@@ -116,6 +128,10 @@ public class Journal {
         return towersPurchased;
     }
 
+    public int getTowerSold() {
+        return towerSold;
+    }
+
     public int getUpgradesPurchased() {
         return evolutionsPurchased;
     }
@@ -131,6 +147,7 @@ public class Journal {
     public int getHealthRestore() {
         return healthRestore;
     }
+    
 
     /**
      * Returns the number of evolutions purchased for a specific evolution type. By default, it returns the total number of evolutions. We can choose default by EvolutionType.ALL
@@ -151,5 +168,9 @@ public class Journal {
             default:
                 return evolutionsPurchased;        
         }
+    }
+
+    public int getEvolutionSold(){
+        return evolutionSold;
     }
 }
