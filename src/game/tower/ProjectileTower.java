@@ -53,10 +53,10 @@ public abstract class ProjectileTower extends Tower{
     * Utile pour l'affichage dans le menu de vente du Livrable 5.
     */
     public Set<EvolutionType> getAppliedEvolutions() {
-         return Collections.unmodifiableSet(this.evolutions);
+        return Collections.unmodifiableSet(this.evolutions);
     }
 
-    /**
+     /**
     * Méthode abstraite : chaque tour doit définir comment elle 
     * réinitialise ses stats (portée, dégâts...) quand on vend une évolution.
     */
