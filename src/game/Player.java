@@ -164,6 +164,15 @@ public class Player {
         }
     }
 
+    /**
+     * Sells an evolution from the given tower.
+     * Adds the cost back to the player's credits and removes the evolution.
+     * 
+     * @param t tower from which the evolution will be removed
+     * @param e evolution that we want to remove
+     * @throws TypeTowerException if the tower iss not a ProjectileTower
+     * @throws NoEvolutionException if this tower don't have this evolution
+     */
     public void sellEvolution(Tower t, Evolution e) throws TypeTowerException, NoEvolutionException {
         if(t instanceof ProjectileTower) {
             ProjectileTower pt = (ProjectileTower) t;

@@ -357,13 +357,19 @@ public class Livrable5 {
             return;
         }
 
-        // 5. Retirer l'évolution et rembourser
-        pt.removeEvolution(evoChoice.getType());
-        player.addCredits(evoChoice.getCost());
-        System.out.println("[REVENTE] ✅ Évolution " + evoChoice.getType()
-                + " retirée de " + pt.getNom()
-                + ". Remboursement : " + evoChoice.getCost()
-                + " crédits. Crédits : " + player.getCredits());
+        // 5. Vendre l'évolution via Player.sellEvolution()
+        Evolution evo = new Evolution(evoChoice.getCost(), evoChoice.getType());
+        try {
+            player.sellEvolution(pt, evo);
+            System.out.println("[REVENTE] ✅ Évolution " + evoChoice.getType()
+                    + " retirée de " + pt.getNom()
+                    + ". Remboursement : " + evoChoice.getCost()
+                    + " crédits. Crédits : " + player.getCredits());
+        } catch (TypeTowerException e) {
+            System.out.println("[REVENTE] Erreur : " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("[REVENTE] Erreur : " + e.getMessage());
+        }
     }
 
     // =========================================================================
