@@ -27,6 +27,13 @@ public class Livrable4a extends Livrable4 {
         int width = args.length > 1 ? Integer.parseInt(args[1]) : 12;
         int nbBallons = args.length > 2 ? Integer.parseInt(args[2]) : 5;
 
+        // Validation des arguments
+        if (height <= 0 || width <= 0 || nbBallons <= 0) {
+            System.err.println("Erreur : tous les arguments doivent être strictement positifs.");
+            System.err.println("Usage : java -jar livrable4a.jar <hauteur> <largeur> <nbBallons>");
+            return;
+        }
+
         System.out.println("=== LIVRABLE 4A ===");
         System.out.println("Plateau aléatoire : " + height + "x" + width
                 + " | Ballons par manche : " + nbBallons);
