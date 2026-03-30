@@ -57,3 +57,9 @@ public class TowerChoice {
     public int getCost() {
         return cost;
     }
+
+    
+    public Tower getTower() {
+        return tower;
+    }
+
