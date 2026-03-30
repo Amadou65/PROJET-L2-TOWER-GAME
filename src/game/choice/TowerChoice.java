@@ -63,3 +63,8 @@ public class TowerChoice {
         return tower;
     }
 
+    
+    public Position getPosition() {
+        return position;
+    }
+
