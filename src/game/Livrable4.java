@@ -4,6 +4,7 @@ import java.util.*;
 import game.tower.*;
 import game.tower.typeTower.*;
 import game.exeptions.TypeTowerException;
+import game.exeptions.NoEvolutionException;
 
 /**
  * Livrable4 est la classe parent commune à Livrable4a et Livrable4b.
@@ -11,6 +12,7 @@ import game.exeptions.TypeTowerException;
  * - placement de tours via le joueur (avec déduction des crédits)
  * - achat d'évolutions sur les tours de type ProjectileTower
  * - fabrique de tours (buildTower)
+ * - gestion progressive des évolutions au fil des manches
  *
  * <p>
  * Cette classe ne contient pas de méthode main ; ce sont ses sous-classes
@@ -18,6 +20,14 @@ import game.exeptions.TypeTowerException;
  * </p>
  */
 public class Livrable4 {
+
+    /** Types d'évolutions utilisés pour l'ajout/suppression progressive */
+    private static final Evolution.EvolutionType[] EVO_TYPES = {
+        Evolution.EvolutionType.POWER,
+        Evolution.EvolutionType.CADENCE,
+        Evolution.EvolutionType.SCOPE,
+        Evolution.EvolutionType.PROJECTILE
+    };
 
     /**
      * Collecte les cases libres (hors chemin) du plateau, puis
@@ -96,7 +106,6 @@ public class Livrable4 {
 
         for (Tower t : towers) {
             // Tentative d'achat POWER
-            // canUpgrade() vérifie : ProjectileTower ET crédits suffisants
             if (player.canUpgrade(t, evopower)) {
                 try {
                     player.buyEvolution(t, evopower);
@@ -114,6 +123,95 @@ public class Livrable4 {
                     System.out.println("[EVOL] " + t.getNom()
                             + " ne peut pas évoluer : " + e.getMessage());
                 }
+            }
+        }
+    }
+
+    /**
+     * Tente d'appliquer UNE évolution sur la première tour éligible trouvée.
+     * Parcourt les types d'évolutions (POWER, CADENCE, SCOPE, PROJECTILE)
+     * et les tours jusqu'à trouver une combinaison possible.
+     *
+     * @param towers la liste des tours sur le plateau
+     * @param player le joueur (dont les crédits sont débités)
+     * @return une description de l'évolution appliquée, ou null si aucune n'a pu être appliquée
+     */
+    public static String applyOneEvolution(List<Tower> towers, Player player) {
+        for (Evolution.EvolutionType type : EVO_TYPES) {
+            int cost;
+            switch (type) {
+                case POWER: cost = 200; break;
+                case CADENCE: cost = 150; break;
+                case SCOPE: cost = 180; break;
+                case PROJECTILE: cost = 250; break;
+                default: cost = 200; break;
+            }
+            Evolution evo = new Evolution(cost, type);
+
+            for (Tower t : towers) {
+                if (!(t instanceof ProjectileTower)) continue;
+                ProjectileTower pt = (ProjectileTower) t;
+                if (pt.hasEvolution(type)) continue;
+                if (player.getCredits() < cost) continue;
+
+                try {
+                    player.buyEvolution(t, evo);
+                    return type + " sur " + t.getNom();
+                } catch (TypeTowerException e) {
+                    // Tour non éligible, on continue
+                }
+            }
+        }
+        return null; // Aucune évolution possible
+    }
+
+    /**
+     * Tente de supprimer UNE évolution sur la première tour qui en possède une.
+     * Parcourt les tours et retire la première évolution trouvée.
+     *
+     * @param towers la liste des tours sur le plateau
+     * @param player le joueur (qui est remboursé)
+     * @return une description de l'évolution retirée, ou null si aucune n'a pu être retirée
+     */
+    public static String removeOneEvolution(List<Tower> towers, Player player) {
+        for (Tower t : towers) {
+            if (!(t instanceof ProjectileTower)) continue;
+            ProjectileTower pt = (ProjectileTower) t;
+
+            for (Evolution.EvolutionType type : EVO_TYPES) {
+                if (!pt.hasEvolution(type)) continue;
+
+                int cost;
+                switch (type) {
+                    case POWER: cost = 200; break;
+                    case CADENCE: cost = 150; break;
+                    case SCOPE: cost = 180; break;
+                    case PROJECTILE: cost = 250; break;
+                    default: cost = 200; break;
+                }
+                Evolution evo = new Evolution(cost, type);
+
+                try {
+                    player.sellEvolution(t, evo);
+                    return type + " de " + t.getNom();
+                } catch (TypeTowerException | NoEvolutionException e) {
+                    // Erreur inattendue, on continue
+                }
+            }
+        }
+        return null; // Aucune évolution à retirer
+    }
+
+    /**
+     * Affiche les évolutions actuelles de toutes les tours.
+     *
+     * @param towers la liste des tours
+     */
+    public static void displayEvolutions(List<Tower> towers) {
+        for (Tower t : towers) {
+            if (t instanceof ProjectileTower) {
+                ProjectileTower pt = (ProjectileTower) t;
+                System.out.println("  " + t.getNom() + " : " + pt.getEvoAplied());
             }
         }
     }

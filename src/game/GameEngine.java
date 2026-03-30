@@ -82,8 +82,14 @@ public class GameEngine {
                 Balloon b = actif.get(i);
                 int oldX = b.getGridX();
                 int oldY = b.getGridY();
+                boolean wasFrozenBeforeMove = b.isFrozen();
 
                 b.move();
+
+                // Détection du redémarrage (dégel)
+                if (wasFrozenBeforeMove && !b.isFrozen()) {
+                    System.out.println("[t=" + time + "] ▶️  Ballon REDÉMARRÉ (dégelé)");
+                }
 
                 // CAS A : BALLON ÉCLATÉ
                 if (b.isPopped()) {
