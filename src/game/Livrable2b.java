@@ -2,10 +2,11 @@
 package game;
 import java.util.*;
 import game.board.ClassicalBoard;
+import game.exeptions.ZeroValueException;
 
 public class Livrable2b {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ZeroValueException {
 
         System.out.println("Livrable 2b: B");
 

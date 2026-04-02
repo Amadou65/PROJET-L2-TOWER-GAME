@@ -1,6 +1,8 @@
 package game;
 
 import java.util.*;
+import game.exeptions.ZeroValueException;
+import game.exeptions.NegativeValueException;
 
 public abstract class Board {
     // Les cellules du plateau
@@ -9,7 +11,14 @@ public abstract class Board {
     protected ArrayList<Tower> tower_list;
     protected Cell[][] grid;
 
-    public Board(int height, int width) {
+    public Board(int height, int width) throws ZeroValueException, NegativeValueException {
+         if(height < 0 || width < 0) {
+            throw new NegativeValueException("La grille ne peut pas avoir de dimensions négatives.");
+        }
+        if(height == 0 || width == 0) {
+            throw new ZeroValueException("La grille doit avoir des dimensions supérieures à zéro.");
+        }
+        
         this.height = height;
         this.width = width;
         this.grid = new Cell[height][width];

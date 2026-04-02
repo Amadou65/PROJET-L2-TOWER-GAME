@@ -2,6 +2,7 @@ package game;
 
 import java.util.*;
 import game.tower.*;
+import game.exeptions.ZeroValueException;
 
 /**
  * GameEngine is the central game loop manager.
@@ -20,7 +21,10 @@ public class GameEngine {
      * @param reserve the list of balloons waiting to enter the board
      * @param board   the game board
      */
-    public GameEngine(List<Balloon> reserve, Board board) {
+    public GameEngine(List<Balloon> reserve, Board board) throws ZeroValueException{
+        if(reserve == null) {
+            throw new IllegalArgumentException("La réserve de ballons ne peut pas être nulle.");
+        }
         this.reserve = reserve;
         this.actif = new ArrayList<>();
         this.board = board;

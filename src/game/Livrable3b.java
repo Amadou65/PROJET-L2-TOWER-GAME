@@ -2,6 +2,7 @@ package game;
 
 import java.util.*;
 import game.board.ClassicalBoard;
+import game.exeptions.ZeroValueException;
 import game.tower.typeTower.*;
 
 /**
@@ -13,7 +14,7 @@ import game.tower.typeTower.*;
  */
 public class Livrable3b {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ZeroValueException{
         int height = args.length > 0 ? Integer.parseInt(args[0]) : 8;
         int width = args.length > 1 ? Integer.parseInt(args[1]) : 12;
         int nbPaths = args.length > 2 ? Integer.parseInt(args[2]) : 3;

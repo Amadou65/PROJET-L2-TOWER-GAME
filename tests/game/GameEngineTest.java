@@ -4,7 +4,9 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
 import game.board.ClassicalBoard;
+import game.exeptions.ZeroValueException;
 import game.tower.typeTower.DartMonkey;
+
 
 public class GameEngineTest {
 
@@ -13,7 +15,7 @@ public class GameEngineTest {
     private GameEngine engine;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws ZeroValueException{
         // Configuration d'un plateau simple 5x5
         board = new ClassicalBoard(5, 5);
         List<Position> path = board.path();
