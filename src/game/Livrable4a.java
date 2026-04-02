@@ -27,6 +27,10 @@ public class Livrable4a extends Livrable4 {
         int width = args.length > 1 ? Integer.parseInt(args[1]) : 12;
         int nbBallons = args.length > 2 ? Integer.parseInt(args[2]) : 5;
 
+        if(nbBallons < 0) {
+            throw new IllegalArgumentException("Le nombre de ballons ne peut pas être négatif.");
+        }
+
         // Validation des arguments
         if (height <= 0 || width <= 0 || nbBallons <= 0) {
             System.err.println("Erreur : tous les arguments doivent être strictement positifs.");

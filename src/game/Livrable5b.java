@@ -23,6 +23,10 @@ public class Livrable5b extends Livrable5 {
         int width = args.length > 1 ? Integer.parseInt(args[1]) : 12;
         int nbBallons = args.length > 2 ? Integer.parseInt(args[2]) : 5;
 
+        if(nbBallons < 0) {
+            throw new IllegalArgumentException("Le nombre de ballons ne peut pas être négatif.");
+        }
+
         System.out.println("=== LIVRABLE 5B — Mode Interactif ===");
         System.out.println("Plateau classique : " + height + "x" + width
                 + " | Ballons : " + nbBallons);

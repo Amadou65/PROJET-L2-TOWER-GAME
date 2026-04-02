@@ -2,6 +2,8 @@ package game;
 
 import java.util.*;
 import game.board.ClassicalBoard;
+import game.exeptions.NegativeValueException;
+import game.exeptions.TooLongPathException;
 
 /**
  * Livrable4b : scénario B du Livrable 4.
@@ -23,10 +25,17 @@ import game.board.ClassicalBoard;
  */
 public class Livrable4b extends Livrable4 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  throws TooLongPathException, NegativeValueException{
         int height = args.length > 0 ? Integer.parseInt(args[0]) : 8;
         int width = args.length > 1 ? Integer.parseInt(args[1]) : 12;
         int nbChemins = args.length > 2 ? Integer.parseInt(args[2]) : 3;
+
+        if(nbChemins < 0) {
+            throw new NegativeValueException("Le nombre de chemins ne peut pas être négatif.");
+        }
+        if(nbChemins >= (int)(height*width)) {
+            throw new TooLongPathException("Le nombre des chemin sont trop grand");
+        }
 
         // Validation des arguments
         if (height <= 0 || width <= 0 || nbChemins <= 0) {
