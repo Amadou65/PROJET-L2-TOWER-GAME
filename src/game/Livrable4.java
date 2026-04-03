@@ -9,7 +9,7 @@ import game.exeptions.NoEvolutionException;
 /**
  * Livrable4 est la classe parent commune à Livrable4a et Livrable4b.
  * Elle regroupe les méthodes utilitaires partagées entre les deux scénarios :
- * - placement de tours via le joueur (avec déduction des crédits)
+ * - placement de tours via le joueur (sans impacter les crédits de départ)
  * - achat d'évolutions sur les tours de type ProjectileTower
  * - fabrique de tours (buildTower)
  * - gestion progressive des évolutions au fil des manches
@@ -32,7 +32,8 @@ public class Livrable4 {
     /**
      * Collecte les cases libres (hors chemin) du plateau, puis
      * achète et place 2 tours de chaque type via {@code player.buyTower()}.
-     * Les crédits du joueur sont automatiquement déduits à chaque achat.
+    * Le coût de ces tours de setup est remboursé pour préserver
+    * le budget initial de la manche.
      *
      * @param board  le plateau de jeu
      * @param player le joueur (propriétaire des crédits)
@@ -41,6 +42,8 @@ public class Livrable4 {
      * @return la liste des tours effectivement achetées et placées
      */
     public static List<Tower> placeTowers(Board board, Player player, int height, int width) {
+        int initialCredits = player.getCredits();
+
         // 1. Collecter toutes les cases libres (hors chemin)
         List<Position> freeCells = new ArrayList<>();
         for (int i = 0; i < height; i++) {
@@ -64,7 +67,13 @@ public class Livrable4 {
                 "SlowdownTower", "SlowdownTower"
         };
 
-        // 3. Acheter chaque tour via player.buyTower() (déduit les crédits)
+        if (freeCells.size() < types.length) {
+            System.out.println("[SETUP][WARN] Cases libres insuffisantes : "
+                    + freeCells.size() + " disponibles pour " + types.length + " tours.");
+        }
+
+        // 3. Acheter chaque tour via player.buyTower() puis rembourser son coût
+        // pour garantir un setup fixe de 2 tours par type.
         List<Tower> placedTowers = new ArrayList<>();
         int idx = 0;
         for (String type : types) {
@@ -73,20 +82,29 @@ public class Livrable4 {
             Position pos = freeCells.get(idx++);
             Tower t = buildTower(type, pos);
             if (t != null) {
-                // Vérification anticipée : on n'appelle buyTower que si les crédits suffisent
-                if (player.getCredits() < t.cost) {
-                    break; // plus assez de crédits : on arrête le placement
-                }
                 int creditsAvant = player.getCredits();
                 player.buyTower(t, pos, board);
                 if (player.getCredits() < creditsAvant) {
                     placedTowers.add(t);
+                    // Les tours initiales sont offertes pour ce scénario.
+                    player.addCredits(t.getCost());
                     System.out.println("[SETUP] Tour " + t.getNom()
-                            + " achetée (" + t.cost + " crédits) en ("
+                            + " placée en ("
                             + t.getX() + "," + t.getY() + ")");
+                } else {
+                    System.out.println("[SETUP][WARN] Impossible de placer " + type
+                            + " en (" + pos.getX() + "," + pos.getY() + ")");
                 }
             }
         }
+
+        player.setCredits(initialCredits);
+
+        if (placedTowers.size() < types.length) {
+            System.out.println("[SETUP][WARN] " + placedTowers.size() + "/" + types.length
+                    + " tours placées. Vérifiez la taille du plateau et le chemin.");
+        }
+
         return placedTowers;
     }
 
