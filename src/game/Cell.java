@@ -58,7 +58,7 @@ public class Cell {
       return "T";
     }
     // sinon on affiche le chemain
-    return this.isPath ? "X" : " ";
+    return this.isPath ? " X " : "   ";
   }
 
   /**

@@ -43,16 +43,16 @@ public abstract class Board {
         String s = "";
 
         // 1. En-tête des colonnes (0 1 2 3 ... 9 0 1...)
-        s += "   "; // Espaces pour décaler par rapport aux index de lignes
+        s += "    "; // Espaces pour décaler par rapport aux index de lignes
         for (int j = 0; j < cols; j++) {
-            s += (j % 10) + " ";
+            s += (j % 10) + "   ";
         }
         s += "\n";
 
         // 2. Création de la ligne de séparation "+-+-+-+"
         String ligneSeparation = "  +";
         for (int j = 0; j < cols; j++) {
-            ligneSeparation += "-+";
+            ligneSeparation += "---+";
         }
         ligneSeparation += "\n";
 

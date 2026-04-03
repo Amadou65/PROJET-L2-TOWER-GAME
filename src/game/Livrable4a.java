@@ -30,7 +30,7 @@ public class Livrable4a extends Livrable4 {
         int nbBallons = args.length > 2 ? Integer.parseInt(args[2]) : 5;
 
         if(nbBallons < 0) {
-            throw new IllegalArgumentException("Le nombre de ballons ne peut pas être négatif.");
+            throw new NegativeValueException("Le nombre de ballons ne peut pas être négatif.");
         }
 
         // Validation des arguments
