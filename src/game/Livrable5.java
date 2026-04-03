@@ -27,9 +27,8 @@ public class Livrable5 {
      * @param height  hauteur du plateau
      * @param width   largeur du plateau
      */
-    @SuppressWarnings("unchecked")
-    public static void playerActionPhase(Board board, Player player,
-            ListChooser chooser, int height, int width) {
+        public static void playerActionPhase(Board board, Player player,
+            ListChooser<Object> chooser, int height, int width) {
 
         System.out.println("\n========================================");
         System.out.println("   PHASE D'ACTIONS DU JOUEUR");
@@ -87,33 +86,28 @@ public class Livrable5 {
      * 2. Propose la liste des cases libres
      * 3. Appelle player.buyTower()
      */
-    @SuppressWarnings("unchecked")
-    private static void handleBuyTower(Board board, Player player,
-            ListChooser chooser, int height, int width) {
+        private static void handleBuyTower(Board board, Player player,
+            ListChooser<Object> chooser, int height, int width) {
 
         // 1. Construire la liste des types de tours achetables
-        String[][] towerSpecs = {
-                { "DartMonkey", "200", "1", "20" },
-                { "BombTower", "600", "2", "36" },
-                { "SniperMonkey", "300", "999", "60" },
-                { "SuperMonkey", "1200", "200", "300" },
-                { "TackShooter", "400", "1", "10" },
-                { "IceTower", "400", "100", "1500" },
-                { "SlowdownTower", "500", "100", "1500" }
+        String[] towerTypes = {
+            "DartMonkey", "BombTower", "SniperMonkey", "SuperMonkey",
+            "TackShooter", "IceTower", "SlowdownTower"
         };
 
-     List<TowerChoice> availableTowers = new ArrayList<>();
-        for (String[] spec : towerSpecs) {
-            int cost = Integer.parseInt(spec[1]);
-            if (player.getCredits() >= cost) {
-                availableTowers.add(new TowerChoice(
-                        spec[0], cost,
-                        Integer.parseInt(spec[2]),
-                        Integer.parseInt(spec[3])));
+        List<TowerChoice> availableTowers = new ArrayList<>();
+        for (String towerType : towerTypes) {
+            Tower previewTower = buildTower(towerType, new Position(0, 0));
+            if (previewTower != null && player.getCredits() >= previewTower.getCost()) {
+            availableTowers.add(new TowerChoice(
+                towerType,
+                previewTower.getCost(),
+                previewTower.getScope(),
+                previewTower.getCadence()));
             }
         }
 
-  if (availableTowers.isEmpty()) {
+        if (availableTowers.isEmpty()) {
             System.out.println("[ACHAT] Aucune tour achetable avec vos crédits actuels.");
             return;
         }
@@ -165,9 +159,8 @@ public class Livrable5 {
      * 2. Propose les types d'évolutions disponibles
      * 3. Appelle player.buyEvolution()
      */
-    @SuppressWarnings("unchecked")
-    private static void handleEvolveTower(Board board, Player player,
-            ListChooser chooser) {
+        private static void handleEvolveTower(Board board, Player player,
+            ListChooser<Object> chooser) {
 
         // 1. Récupérer les ProjectileTower sur le plateau
         List<TowerChoice> evolvableTowers = new ArrayList<>();
@@ -235,15 +228,14 @@ public class Livrable5 {
     // =========================================================================
     //  VENDRE UNE TOUR
     // =========================================================================
-
+    
     /**
      * Gère la vente d'une tour existante.
      * 1. Propose les tours du plateau
      * 2. Appelle player.sellTower()
      */
-    @SuppressWarnings("unchecked")
-    private static void handleSellTower(Board board, Player player,
-            ListChooser chooser) {
+        private static void handleSellTower(Board board, Player player,
+            ListChooser<Object> chooser) {
 
         if (board.tower_list.isEmpty()) {
             System.out.println("[VENTE] Aucune tour à vendre.");
@@ -287,9 +279,8 @@ public class Livrable5 {
      * directement le joueur. Quand Player.sellEvolution() sera implémenté
      * par Serhii, cette méthode pourra être simplifiée.
      */
-    @SuppressWarnings("unchecked")
-    private static void handleSellEvolution(Board board, Player player,
-            ListChooser chooser) {
+        private static void handleSellEvolution(Board board, Player player,
+            ListChooser<Object> chooser) {
 
         // 1. Récupérer les tours qui ont au moins une évolution
         Evolution.EvolutionType[] allTypes = {

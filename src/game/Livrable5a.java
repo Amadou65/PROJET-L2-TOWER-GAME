@@ -44,8 +44,7 @@ public class Livrable5a extends Livrable5 {
 
         // --- PHASE 2 : Phase d'actions du joueur (choix aléatoires) ---
         Player player = new Player();
-        @SuppressWarnings("rawtypes")
-        RandomListChooser chooser = new RandomListChooser();
+        RandomListChooser<Object> chooser = new RandomListChooser<>();
         Livrable5.playerActionPhase(board, player, chooser, height, width);
         // --- PHASE 3 : Créer les ballons et lancer la manche ---
         List<Balloon> reserve = new ArrayList<>();
