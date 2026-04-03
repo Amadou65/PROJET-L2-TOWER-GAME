@@ -281,8 +281,8 @@ Pour générer les JARs exécutables :
 
 Pour exécuter les livrables :
 
-    - java -jar livrable3a.jar <hauteur> <largeur> <nbBallons>
-    - java -jar livrable3b.jar <hauteur> <largeur> <nbChemins>
+    - java -jar livrable4a.jar <hauteur> <largeur> <nbBallons>
+    - java -jar livrable4b.jar <hauteur> <largeur> <nbChemins>
 
 Pour générer la javadoc :
 
