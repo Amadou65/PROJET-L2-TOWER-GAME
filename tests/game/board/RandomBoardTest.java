@@ -8,7 +8,7 @@ public class RandomBoardTest {
     private RandomBoard board;
     private ArrayList<Position> nextPo; 
     @BeforeEach
-    public void before(){
+    public void before() throws Exception {
         this.board = new RandomBoard(6,11);
         this.nextPo = new ArrayList<>();
     }
