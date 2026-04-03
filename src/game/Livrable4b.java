@@ -34,7 +34,7 @@ public class Livrable4b extends Livrable4 {
         if(nbChemins < 0) {
             throw new NegativeValueException("Le nombre de chemins ne peut pas être négatif.");
         }
-        if(nbChemins >= (int)(height*width)) {
+        if(nbChemins > height) {
             throw new TooLongPathException("Le nombre des chemin sont trop grand");
         }
 

@@ -53,4 +53,11 @@ public class TestClassicalBoard {
 
         assertEquals(firstPath, secondPath);
     }
+
+    @Test
+    public void testExceptions(){
+        assertThrows(NegativeValueException.class, () -> new ClassicalBoard(-1,2));
+
+        assertThrows(ZeroValueException.class, () -> new ClassicalBoard(2,0));
+    }
 }

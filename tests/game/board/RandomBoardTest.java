@@ -1,5 +1,8 @@
 package game.board;
 import game.Position;
+import game.exeptions.NegativeValueException;
+import game.exeptions.ZeroValueException;
+
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
@@ -8,7 +11,7 @@ public class RandomBoardTest {
     private RandomBoard board;
     private ArrayList<Position> nextPo; 
     @BeforeEach
-    public void before() throws Exception {
+    public void before() throws ZeroValueException, NegativeValueException{
         this.board = new RandomBoard(6,11);
         this.nextPo = new ArrayList<>();
     }
@@ -76,5 +79,12 @@ public class RandomBoardTest {
         assertTrue(board.isEdge(end), "Le point d'arrivée n'est pas sur le bord.");
         assertFalse(board.isSameSide(start, end), "Le point de départ et d'arrivée sont sur le même côté.");
         assertTrue(path.size() >= 12, "La longueur du chemin est inférieure à 12.");
+    }
+
+    @Test
+    public void testExceptions(){
+        assertThrows(NegativeValueException.class, () -> new RandomBoard(-1,2));
+
+        assertThrows(ZeroValueException.class, () -> new RandomBoard(2,0));
     }
 }
