@@ -1,6 +1,9 @@
 package game.board;
 
 import game.Position;
+import game.exeptions.NegativeValueException;
+import game.exeptions.ZeroValueException;
+
 import java.util.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestClassicalBoard {
 
     @Test
-    public void testGetPointsBound() {
+    public void testGetPointsBound() throws NegativeValueException, ZeroValueException {
         ClassicalBoard board = new ClassicalBoard(6, 11);
         List<Position> points = board.getPointsBound();
         assertEquals(30, points.size());
@@ -18,7 +21,7 @@ public class TestClassicalBoard {
     }
 
     @Test
-    public void testPath() {
+    public void testPath() throws NegativeValueException, ZeroValueException {
         ClassicalBoard board = new ClassicalBoard(6, 11);
         List<Position> path = board.path();
 
@@ -43,7 +46,7 @@ public class TestClassicalBoard {
     }
 
     @Test
-    public void testPathIsStableAcrossCalls() {
+    public void testPathIsStableAcrossCalls() throws NegativeValueException, ZeroValueException {
         ClassicalBoard board = new ClassicalBoard(6, 11);
         List<Position> firstPath = board.path();
         List<Position> secondPath = board.path();

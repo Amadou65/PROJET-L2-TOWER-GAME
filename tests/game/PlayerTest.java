@@ -24,7 +24,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void testSellBuyTower(){
+    public void testSellBuyTower() throws NegativeValueException, ZeroValueException {
         Player p = new Player();
         Tower t = new DartMonkey("drt", new Position(0, 0));
         Position pos = new Position(0, 0);

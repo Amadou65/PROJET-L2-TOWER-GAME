@@ -8,6 +8,7 @@ import game.tower.*;
 import game.tower.typeTower.*;
 import game.exeptions.*;
 import game.Evolution.EvolutionType;
+import game.board.*;
 
 public class Livrable5Test {
 
@@ -15,10 +16,10 @@ public class Livrable5Test {
     private Board board;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws NegativeValueException, ZeroValueException {
         player = new Player();
         // On initialise un plateau classique pour les tests
-        board = new game.tower.typeTower.ClassicalBoard(10, 10);
+        board = new ClassicalBoard(10, 10);
     }
 
     @Test
