@@ -28,13 +28,15 @@ classes:
 	$(JAVAC) -d $(BIN_DIR) -sourcepath $(SRC_DIR) $(SRC_FILES)
 
 # ─────────────────────────────────────────────
-# jar : crée les JARs des livrables 3 et 4
+# jar : crée les JARs des livrables 3, 4 et 5
 # ─────────────────────────────────────────────
 jar: classes
 	$(JAR) cfe livrable3a.jar game.Livrable3a -C $(BIN_DIR) .
 	$(JAR) cfe livrable3b.jar game.Livrable3b -C $(BIN_DIR) .
 	$(JAR) cfe livrable4a.jar game.Livrable4a -C $(BIN_DIR) .
 	$(JAR) cfe livrable4b.jar game.Livrable4b -C $(BIN_DIR) .
+	$(JAR) cfe livrable5a.jar game.Livrable5a -C $(BIN_DIR) .
+	$(JAR) cfe livrable5b.jar game.Livrable5b -C $(BIN_DIR) .
 
 # ─────────────────────────────────────────────
 # tests : compile les classes de tests
