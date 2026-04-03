@@ -2,6 +2,7 @@ package game;
 
 import java.util.*;
 import game.board.LeftStartRandomBoard;
+import game.exeptions.NegativeValueException;
 import game.exeptions.ZeroValueException;
 import game.tower.typeTower.*;
 
@@ -16,7 +17,7 @@ import game.tower.typeTower.*;
  */
 public class Livrable3a {
 
-    public static void main(String[] args) throws ZeroValueException {
+    public static void main(String[] args) throws ZeroValueException, NegativeValueException  {
         int height = args.length > 0 ? Integer.parseInt(args[0]) : 8;
         int width = args.length > 1 ? Integer.parseInt(args[1]) : 12;
         int nbBalloons = args.length > 2 ? Integer.parseInt(args[2]) : 5;

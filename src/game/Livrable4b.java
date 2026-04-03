@@ -4,6 +4,7 @@ import java.util.*;
 import game.board.ClassicalBoard;
 import game.exeptions.NegativeValueException;
 import game.exeptions.TooLongPathException;
+import game.exeptions.ZeroValueException;
 
 /**
  * Livrable4b : scénario B du Livrable 4.
@@ -25,7 +26,7 @@ import game.exeptions.TooLongPathException;
  */
 public class Livrable4b extends Livrable4 {
 
-    public static void main(String[] args)  throws TooLongPathException, NegativeValueException{
+    public static void main(String[] args)  throws TooLongPathException, NegativeValueException, ZeroValueException {
         int height = args.length > 0 ? Integer.parseInt(args[0]) : 8;
         int width = args.length > 1 ? Integer.parseInt(args[1]) : 12;
         int nbChemins = args.length > 2 ? Integer.parseInt(args[2]) : 3;

@@ -2,6 +2,8 @@ package game;
 
 import java.util.*;
 import game.board.LeftStartRandomBoard;
+import game.exeptions.NegativeValueException;
+import game.exeptions.ZeroValueException;
 
 /**
  * Livrable4a : scénario A du Livrable 4.
@@ -22,7 +24,7 @@ import game.board.LeftStartRandomBoard;
  */
 public class Livrable4a extends Livrable4 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ZeroValueException, NegativeValueException {
         int height = args.length > 0 ? Integer.parseInt(args[0]) : 8;
         int width = args.length > 1 ? Integer.parseInt(args[1]) : 12;
         int nbBallons = args.length > 2 ? Integer.parseInt(args[2]) : 5;

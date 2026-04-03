@@ -2,6 +2,8 @@ package game.board;
 
 import java.util.*;
 import game.Position;
+import game.exeptions.NegativeValueException;
+import game.exeptions.ZeroValueException;
 import game.Board;
 
 /**
@@ -12,7 +14,7 @@ import game.Board;
 public class ClassicalBoard extends Board {
     private List<Position> generatedPath;
 
-    public ClassicalBoard(int height, int width) {
+    public ClassicalBoard(int height, int width) throws ZeroValueException, NegativeValueException {
         super(height, width);
         this.generatedPath = null;
     }

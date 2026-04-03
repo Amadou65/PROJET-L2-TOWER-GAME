@@ -1,6 +1,9 @@
 package game.board;
 
 import game.*;
+import game.exeptions.NegativeValueException;
+import game.exeptions.ZeroValueException;
+
 import java.util.*;
 
 /**
@@ -16,7 +19,7 @@ public class LeftStartRandomBoard extends RandomBoard {
      * @param height number of rows
      * @param width  number of columns
      */
-    public LeftStartRandomBoard(int height, int width) {
+    public LeftStartRandomBoard(int height, int width) throws ZeroValueException, NegativeValueException {
         super(height, width);
     }
 

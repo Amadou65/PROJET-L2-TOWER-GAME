@@ -1,11 +1,13 @@
 package game;
 
 import game.board.RandomBoard;
+import game.exeptions.NegativeValueException;
+import game.exeptions.ZeroValueException;
 import game.board.ClassicalBoard;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ZeroValueException, NegativeValueException {
         System.out.println("=== TEST DU LIVRABLE 1 : TOWER DEFENSE ===\n");
     
 

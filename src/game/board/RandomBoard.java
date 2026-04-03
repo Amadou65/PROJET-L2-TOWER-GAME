@@ -3,6 +3,8 @@ package game.board;
 import game.Balloon;
 import game.Board;
 import game.Position;
+import game.exeptions.NegativeValueException;
+import game.exeptions.ZeroValueException;
 import game.Cell;
 import java.util.Random;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ public class RandomBoard extends Board {
     private Random randomNumber = new Random();
     private ArrayList<Position> generatedPath = null; // Pour mémoriser le chemin
 
-    public RandomBoard(int height, int width) {
+    public RandomBoard(int height, int width) throws ZeroValueException, NegativeValueException {
         super(height, width);
     }
 

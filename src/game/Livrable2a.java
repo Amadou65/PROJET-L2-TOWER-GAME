@@ -1,10 +1,11 @@
 package game;
 import java.util.*;
 import game.board.RandomBoard;
+import game.exeptions.NegativeValueException;
 import game.exeptions.ZeroValueException;
 
 public class Livrable2a {
-    public static void main(String[] args) throws ZeroValueException {
+    public static void main(String[] args) throws ZeroValueException, NegativeValueException  {
 
         System.out.println("Livrable 2a: A");
 
