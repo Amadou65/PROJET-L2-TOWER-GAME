@@ -6,6 +6,8 @@ import game.tower.typeTower.*;
 import game.listchooser.ListChooser;
 import game.choice.*;
 import game.exeptions.TypeTowerException;
+import game.exeptions.NoEvolutionException;
+import game.tower.NonProjectileTower;
 
 /**
  * Livrable5 est la classe parent commune à Livrable5a et Livrable5b.
@@ -382,6 +384,263 @@ public class Livrable5 {
             }
         }
         return freeCells;
+    }
+
+    /**
+     * Fabrique une tour du type demandé à la position donnée.
+     * Réutilise la logique de Livrable4.
+     *
+     * @param type le nom du type de tour
+     * @param pos  la position
+     * @return la tour créée, ou null si type inconnu
+     */
+    // =========================================================================
+    //  PLACEMENT DE TOURS VIA ACTIONS
+    // =========================================================================
+
+    /**
+     * Place exactement 2 tours de chaque type via le mécanisme d'action.
+     * La position est choisie aléatoirement via le ListChooser.
+     * Le joueur doit disposer de suffisamment de crédits (coût total ≈ 9 300).
+     *
+     * @param board   le plateau de jeu
+     * @param player  le joueur
+     * @param chooser le sélecteur de positions (interactif ou aléatoire)
+     * @param height  hauteur du plateau
+     * @param width   largeur du plateau
+     */
+    public static void placeTowersViaActions(Board board, Player player,
+            ListChooser<Object> chooser, int height, int width) {
+
+        System.out.println("\n========================================");
+        System.out.println("   PLACEMENT DES TOURS (via actions)");
+        System.out.println("========================================");
+
+        String[] towerTypes = {
+            "DartMonkey", "BombTower", "SniperMonkey", "SuperMonkey",
+            "TackShooter", "IceTower", "SlowdownTower"
+        };
+
+        for (String type : towerTypes) {
+            for (int i = 0; i < 2; i++) {
+                List<Position> freeCells = getFreeCells(board, height, width);
+                if (freeCells.isEmpty()) {
+                    System.out.println("[PLACEMENT] Plus de cases libres disponibles.");
+                    return;
+                }
+                Position pos = (Position) chooser.choose(
+                        "Où placer la tour " + type + " ?", freeCells);
+                if (pos == null) continue;
+
+                Tower tower = buildTower(type, pos);
+                if (tower == null) continue;
+
+                if (player.getCredits() >= tower.getCost()) {
+                    player.buyTower(tower, pos, board);
+                    System.out.println("[PLACEMENT] Tour " + type + " placée en ("
+                            + pos.getX() + "," + pos.getY() + ")"
+                            + " | Crédits restants : " + player.getCredits());
+                } else {
+                    System.out.println("[PLACEMENT] Crédits insuffisants pour " + type
+                            + " (besoin : " + tower.getCost()
+                            + ", disponible : " + player.getCredits() + ")");
+                }
+            }
+        }
+    }
+
+    // =========================================================================
+    //  ÉVOLUTION AUTOMATIQUE VIA ACTIONS (manches 1–5)
+    // =========================================================================
+
+    /**
+     * Applique UNE évolution à une tour choisie au hasard parmi celles qui
+     * peuvent encore évoluer (évolution disponible ET crédits suffisants).
+     * Utilisé pour les manches 1 à 5.
+     *
+     * @param board   le plateau de jeu
+     * @param player  le joueur
+     * @param chooser le sélecteur d'actions
+     */
+    public static void applyOneEvolutionViaAction(Board board, Player player,
+            ListChooser<Object> chooser) {
+
+        Object[][] evoSpecs = {
+            { Evolution.EvolutionType.POWER,      250 },
+            { Evolution.EvolutionType.CADENCE,    150 },
+            { Evolution.EvolutionType.SCOPE,      100 },
+            { Evolution.EvolutionType.PROJECTILE, 300 }
+        };
+
+        // Filtrer les tours pouvant encore évoluer
+        List<TowerChoice> evolvable = new ArrayList<>();
+        for (Tower t : board.tower_list) {
+            if (t instanceof ProjectileTower) {
+                ProjectileTower pt = (ProjectileTower) t;
+                for (Object[] spec : evoSpecs) {
+                    Evolution.EvolutionType type = (Evolution.EvolutionType) spec[0];
+                    int cost = (int) spec[1];
+                    if (!pt.hasEvolution(type) && player.getCredits() >= cost) {
+                        evolvable.add(new TowerChoice(t));
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (evolvable.isEmpty()) {
+            System.out.println("[EVOL AUTO] Aucune tour évolutive disponible"
+                    + " (toutes évoluées ou crédits insuffisants).");
+            return;
+        }
+
+        TowerChoice towerChoice = (TowerChoice) chooser.choose(
+                "Tour à faire évoluer :", evolvable);
+        if (towerChoice == null) return;
+
+        ProjectileTower pt = (ProjectileTower) towerChoice.getTower();
+
+        List<EvolutionChoice> availableEvos = new ArrayList<>();
+        for (Object[] spec : evoSpecs) {
+            Evolution.EvolutionType type = (Evolution.EvolutionType) spec[0];
+            int cost = (int) spec[1];
+            if (!pt.hasEvolution(type) && player.getCredits() >= cost) {
+                availableEvos.add(new EvolutionChoice(type, cost));
+            }
+        }
+
+        if (availableEvos.isEmpty()) return;
+
+        EvolutionChoice evoChoice = (EvolutionChoice) chooser.choose(
+                "Évolution à appliquer :", availableEvos);
+        if (evoChoice == null) return;
+
+        Evolution evo = new Evolution(evoChoice.getCost(), evoChoice.getType());
+        try {
+            player.buyEvolution(pt, evo);
+        } catch (TypeTowerException e) {
+            System.out.println("[EVOL AUTO] Erreur : " + e.getMessage());
+        }
+    }
+
+    // =========================================================================
+    //  SUPPRESSION D'ÉVOLUTION VIA ACTIONS (manches 6–10)
+    // =========================================================================
+
+    /**
+     * Retire UNE évolution d'une tour choisie au hasard parmi celles qui
+     * possèdent au moins une évolution appliquée.
+     * Utilisé pour les manches 6 à 10.
+     *
+     * @param board   le plateau de jeu
+     * @param player  le joueur
+     * @param chooser le sélecteur d'actions
+     */
+    public static void removeOneEvolutionViaAction(Board board, Player player,
+            ListChooser<Object> chooser) {
+
+        Evolution.EvolutionType[] allTypes = {
+            Evolution.EvolutionType.POWER, Evolution.EvolutionType.CADENCE,
+            Evolution.EvolutionType.SCOPE, Evolution.EvolutionType.PROJECTILE
+        };
+
+        // Filtrer les tours ayant au moins une évolution
+        List<TowerChoice> evolvedTowers = new ArrayList<>();
+        for (Tower t : board.tower_list) {
+            if (t instanceof ProjectileTower) {
+                ProjectileTower pt = (ProjectileTower) t;
+                for (Evolution.EvolutionType type : allTypes) {
+                    if (pt.hasEvolution(type)) {
+                        evolvedTowers.add(new TowerChoice(t));
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (evolvedTowers.isEmpty()) {
+            System.out.println("[DÉVOL AUTO] Aucune tour n'a d'évolution à retirer.");
+            return;
+        }
+
+        TowerChoice towerChoice = (TowerChoice) chooser.choose(
+                "Tour dont retirer une évolution :", evolvedTowers);
+        if (towerChoice == null) return;
+
+        ProjectileTower pt = (ProjectileTower) towerChoice.getTower();
+
+        Map<Evolution.EvolutionType, Integer> evoCosts = new HashMap<>();
+        evoCosts.put(Evolution.EvolutionType.POWER,      250);
+        evoCosts.put(Evolution.EvolutionType.CADENCE,    150);
+        evoCosts.put(Evolution.EvolutionType.SCOPE,      100);
+        evoCosts.put(Evolution.EvolutionType.PROJECTILE, 300);
+
+        List<EvolutionChoice> appliedEvos = new ArrayList<>();
+        for (Evolution.EvolutionType type : allTypes) {
+            if (pt.hasEvolution(type)) {
+                appliedEvos.add(new EvolutionChoice(type, evoCosts.getOrDefault(type, 0)));
+            }
+        }
+
+        if (appliedEvos.isEmpty()) return;
+
+        EvolutionChoice evoChoice = (EvolutionChoice) chooser.choose(
+                "Évolution à retirer :", appliedEvos);
+        if (evoChoice == null) return;
+
+        Evolution evo = new Evolution(evoChoice.getCost(), evoChoice.getType());
+        try {
+            player.sellEvolution(pt, evo);
+            System.out.println("[DÉVOL AUTO] Évolution " + evoChoice.getType()
+                    + " retirée de " + pt.getNom()
+                    + " | Remboursement : " + evoChoice.getCost()
+                    + " | Crédits : " + player.getCredits());
+        } catch (TypeTowerException e) {
+            System.out.println("[DÉVOL AUTO] Erreur type : " + e.getMessage());
+        } catch (NoEvolutionException e) {
+            System.out.println("[DÉVOL AUTO] Évolution absente : " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("[DÉVOL AUTO] Erreur : " + e.getMessage());
+        }
+    }
+
+    // =========================================================================
+    //  AFFICHAGE DE L'ÉTAT DES ÉVOLUTIONS
+    // =========================================================================
+
+    /**
+     * Affiche l'état des évolutions de toutes les tours du plateau.
+     * Pour chaque ProjectileTower, liste ses évolutions appliquées.
+     * Pour les NonProjectileTower, indique qu'elles ne peuvent pas évoluer.
+     *
+     * @param board le plateau de jeu
+     */
+    public static void displayTowerEvolutions(Board board) {
+        System.out.println("\n--- État des évolutions des tours ---");
+        if (board.tower_list.isEmpty()) {
+            System.out.println("  (aucune tour sur le plateau)");
+            return;
+        }
+        Evolution.EvolutionType[] allTypes = {
+            Evolution.EvolutionType.POWER, Evolution.EvolutionType.CADENCE,
+            Evolution.EvolutionType.SCOPE, Evolution.EvolutionType.PROJECTILE
+        };
+        for (Tower t : board.tower_list) {
+            if (t instanceof ProjectileTower) {
+                ProjectileTower pt = (ProjectileTower) t;
+                List<String> evos = new ArrayList<>();
+                for (Evolution.EvolutionType type : allTypes) {
+                    if (pt.hasEvolution(type)) evos.add(type.toString());
+                }
+                System.out.println("  " + t.getNom()
+                        + " @ (" + t.getPosition().getX() + "," + t.getPosition().getY() + ")"
+                        + " → " + (evos.isEmpty() ? "aucune évolution" : String.join(", ", evos)));
+            } else {
+                System.out.println("  " + t.getNom()
+                        + " @ (" + t.getPosition().getX() + "," + t.getPosition().getY() + ")"
+                        + " → (pas d'évolution)");
+            }
+        }
     }
 
     /**

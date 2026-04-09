@@ -332,6 +332,8 @@ Gestion des évolutions : Nous avons choisi d'utiliser un HashSet<EvolutionType>
 
 ## Livrable 5
 
+![UML Livrable 5](UML/UML%20LIVRABLE%205.png)
+
 Commandes de compilation et d'exécution :
 
     make classes
@@ -432,7 +434,7 @@ Yassin :
     - ChoiceTest.java : test unitaire vérifiant le bon fonctionnement de
       getChoice() sur les classes d'évolution.
 
-### Difficultés restant à résoudre
+### Difficultés rencontrées
 
 Amadou :
 
@@ -450,6 +452,66 @@ Amadou :
     Intégration avec Serhii : la signature de removeEvolution() a changé (prend
     un Evolution au lieu d'un EvolutionType). Résolu en créant un objet Evolution
     complet et en utilisant player.sellEvolution() directement.
+
+### Choix de modélisation
+
+**Mécanisme d'action via ListChooser**
+
+Le cœur du Livrable 5 est l'interface `ListChooser<T>` qui abstrait la sélection
+d'un élément parmi une liste. Deux implémentations existent :
+- `RandomListChooser` : sélection aléatoire, utilisée dans Livrable5a pour
+  le mode automatique (placement et évolutions gérés sans intervention humaine).
+- `InteractiveListChooser` : saisie clavier, utilisée dans Livrable5b pour
+  le mode interactif.
+
+Ce choix permet de réutiliser la totalité de la logique de `Livrable5.java` dans
+les deux scénarios sans duplication de code.
+
+**Boucle de 10 manches dans Livrable5a**
+
+La boucle des 10 manches a été placée dans `Livrable5a.main()` plutôt que dans
+`GameEngine` pour respecter la séparation des responsabilités : `GameEngine`
+gère une seule manche (spawn, mouvement, tirs), tandis que la logique de progression
+(évolutions, numérotation des manches) appartient au programme principal.
+
+**Placement garanti de 2 tours de chaque type**
+
+La méthode `placeTowersViaActions()` itère explicitement sur les 7 types de tours
+en 2 exemplaires chacun, et utilise `chooser.choose()` pour sélectionner la
+position via le mécanisme d'action. Le joueur est initialisé avec 15 000 crédits
+(coût total des 14 tours ≈ 9 300) pour garantir le placement complet.
+
+**Filtrage des tours avant proposition**
+
+Dans `applyOneEvolutionViaAction()`, seules les tours ayant au moins une évolution
+non encore appliquée ET abordable sont proposées au mécanisme de choix. De même,
+`removeOneEvolutionViaAction()` ne propose que les tours qui possèdent effectivement
+des évolutions. Ce filtrage évite les no-ops et garantit qu'une action aboutit
+toujours à un effet observable.
+
+**Gestion des types d'évolution**
+
+L'évolution est modélisée par un enum `EvolutionType` (POWER, CADENCE, SCOPE,
+PROJECTILE) stocké dans un `HashSet` dans chaque `ProjectileTower`. Cette structure
+garantit l'unicité et permet de tester en O(1) si une évolution est déjà appliquée.
+Seules les `ProjectileTower` peuvent évoluer ; `IceTower` et `SlowdownTower` héritent
+de `NonProjectileTower` et ne disposent pas de ce mécanisme.
+
+### État du développement
+
+| Fonctionnalité | État |
+|---|---|
+| Plateau aléatoire avec chemin depuis le bord gauche | Implémenté (LeftStartRandomBoard) |
+| Plateau classique multi-chemins | Implémenté (ClassicalBoard) |
+| Placement de 2 tours de chaque type via action | Implémenté (placeTowersViaActions) |
+| Phase d'actions interactive (achat, évolution, vente) | Implémenté (playerActionPhase + 4 handlers) |
+| Boucle de 10 manches avec nbBallons par manche | Implémenté (Livrable5a) |
+| Application automatique d'évolution (manches 1–5) via action | Implémenté (applyOneEvolutionViaAction) |
+| Suppression automatique d'évolution (manches 6–10) via action | Implémenté (removeOneEvolutionViaAction) |
+| Affichage du numéro de manche et état des évolutions | Implémenté (displayTowerEvolutions) |
+| Affichage des événements (touché, détruit, arrêté, ralenti, sorti) | Implémenté (GameEngine) |
+| La manche s'arrête quand tous les ballons ont fini leur parcours | Implémenté (condition GameEngine.game()) |
+| Tests des méthodes publiques | 18 fichiers de tests JUnit |
 
 ## Livrable 6
 
@@ -945,9 +1007,50 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
 
 ## Semaine 12
 
-### Ce qui a été réalisée
+### Ce qui a été réalisé
+
+Amadou :
+
+    Finalisation du Livrable 5 : implémentation de la boucle de 10 manches dans
+    Livrable5a.java avec les évolutions automatiques via le mécanisme d'action.
+
+    Ajout de 4 nouvelles méthodes statiques dans Livrable5.java :
+    - placeTowersViaActions() : place exactement 2 tours de chaque type en utilisant
+      chooser.choose() pour sélectionner la position via le mécanisme d'action.
+      Le joueur est initialisé avec 15 000 crédits (coût total ≈ 9 300).
+    - applyOneEvolutionViaAction() : applique une évolution à une tour choisie au
+      hasard parmi celles qui peuvent encore évoluer (filtrage : évolution disponible
+      ET crédits suffisants). Appelle player.buyEvolution() via l'action.
+    - removeOneEvolutionViaAction() : retire une évolution d'une tour choisie au
+      hasard parmi celles qui en possèdent au moins une. Appelle player.sellEvolution()
+      via l'action.
+    - displayTowerEvolutions() : affiche l'état des évolutions de toutes les tours
+      du plateau (type d'évolution et position) à chaque début de manche.
+
+    Mise à jour du README : section "Choix de modélisation", "État du développement",
+    intégration du diagramme UML Livrable 5, et complétion du journal de bord
+    semaine 12.
+
+    Vérification complète :
+    - make classes : compilation sans erreur
+    - make jar : génération des 6 JARs (3a, 3b, 4a, 4b, 5a, 5b)
+    - java -jar livrable5a.jar 8 12 5 : 10 manches exécutées, évolutions appliquées
+      manches 1–5, évolutions retirées manches 6–10
 
 ### Difficultés rencontrées
 
+    Amadou :
+
+    La principale difficulté a été de s'assurer que le filtrage des tours éligibles
+    dans applyOneEvolutionViaAction() soit correct : une tour peut être une
+    ProjectileTower sans avoir d'évolution disponible abordable. Le filtrage en deux
+    étapes (vérifier hasEvolution() ET crédits suffisants) résout ce problème.
+
+    La méthode displayTowerEvolutions() devait accéder à getPosition() de Tower.
+    Ce getter existe bien dans la hiérarchie Tower, ce qui a permis d'afficher
+    proprement les coordonnées de chaque tour.
 
 ### Objectifs pour finaliser le projet et répartition du travail par membre
+
+    Amadou : Finalisation et soumission du Livrable 5 — vérification finale de
+    la compilation, des tests et de la documentation.
