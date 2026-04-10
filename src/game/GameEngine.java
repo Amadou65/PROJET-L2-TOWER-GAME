@@ -141,7 +141,7 @@ public class GameEngine {
 
                     // CAS B : TOUR NON PROJECTILE (glace / ralentissement)
                 } else if (tower instanceof NonProjectileTower) {
-                    if (time % tower.getCadence() == 0) {
+                    if (tower.getCadence() > 0 && time % tower.getCadence() == 0) {
                         NonProjectileTower npt = (NonProjectileTower) tower;
                         List<Balloon> targets = TargetingBalloon.getAllTargets(actif, tower);
                         List<Boolean> wereFrozen = new ArrayList<>();

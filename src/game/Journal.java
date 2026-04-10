@@ -65,8 +65,9 @@ public class Journal {
         this.creditUsedTotal += towerCost;
     }
 
-    public void recordTowerSold(){
+    public void recordTowerSold(int towerCost){
         this.towerSold++;
+        this.creditUsedTotal -= towerCost;
     }
 
     /**
@@ -79,8 +80,9 @@ public class Journal {
         this.recordNbTypeEvolution(e.getEvoType());
     }
 
-    public void recordEvolutionSold(){
+    public void recordEvolutionSold(int evolutionCost){
         this.evolutionSold++;
+        this.creditUsedTotal -= evolutionCost;
     }
 
     /**

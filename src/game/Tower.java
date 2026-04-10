@@ -79,7 +79,7 @@ public abstract class Tower {
      * value (cadence) after shooting.
      */
     public void resetCadence() {
-        this.cadenceActuelle = this.cadence;
+        this.cadenceActuelle = Math.max(1, this.cadence);
     }
 
 }

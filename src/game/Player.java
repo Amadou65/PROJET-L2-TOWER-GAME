@@ -97,7 +97,7 @@ public class Player {
         if (targetCell.getTowers().contains(t)) {
             this.credits += t.cost;
             b.removeTower(t, targetCell);
-            journal.recordTowerSold();
+            journal.recordTowerSold(t.cost);
         }
     }
 
@@ -180,7 +180,7 @@ public class Player {
 
                 pt.removeEvolution(e);
                 this.addCredits(e.getCost());
-                journal.recordEvolutionSold();
+                journal.recordEvolutionSold(e.getCost());
             }
             else{
                 throw new NoEvolutionException("This evolution is not contains in this tower");

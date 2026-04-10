@@ -267,7 +267,7 @@ Habiba :
 
 ### Lien UML
 
-    Le diagramme UML est disponible à la racine du projet dans le dossier uml/.
+    Le diagramme UML est disponible à la racine du projet dans le dossier UML/.
 
 ## Livrable 4
 
@@ -282,7 +282,7 @@ Pour générer les JARs exécutables :
 Pour exécuter les livrables :
 
     - java -jar livrable4a.jar <hauteur> <largeur> <nbBallons>
-    - java -jar livrable4b.jar <hauteur> <largeur> <nbChemins>
+    - java -jar livrable4b.jar <hauteur> <largeur> <nbBallons>
 
 Pour générer la javadoc :
 
@@ -382,13 +382,11 @@ Amadou :
     qui se charge de retirer l'évolution, rembourser le joueur et enregistrer dans
     le Journal. Gestion de TypeTowerException et NoEvolutionException.
 
-    Livrable5a.java : scénario A avec plateau aléatoire (LeftStartRandomBoard) et
-    choix automatiques via RandomListChooser. Le programme génère un plateau, exécute
-    la phase d'actions avec des décisions aléatoires, puis lance la manche.
-
-    Livrable5b.java : scénario B avec plateau classique (ClassicalBoard) et choix
-    interactifs via InteractiveListChooser. Le joueur saisit ses choix au clavier
-    pour acheter, évoluer ou vendre ses tours avant le lancement de la manche.
+    Livrable5.java (programme unique) : programme principal avec plateau aléatoire
+    (LeftStartRandomBoard) et choix automatiques via RandomListChooser. Le programme
+    génère un plateau, place 2 tours de chaque type, puis exécute 10 manches avec
+    application automatique d'évolutions (manches 1–5) et suppression automatique
+    (manches 6–10).
 
     Création de trois classes utilitaires dans le package game.choice :
     - PlayerAction (enum) : les 5 actions du joueur avec label français pour
@@ -397,14 +395,14 @@ Amadou :
       pour une sélection lisible.
     - EvolutionChoice : wrapper affichant le type et coût d'une évolution.
 
-    Makefile mis à jour pour créer livrable5a.jar et livrable5b.jar.
+    Makefile mis à jour pour créer livrable5.jar.
 
     Intégration avec le travail des autres membres :
     - Utilisation de Player.sellEvolution() (Serhii) dans handleSellEvolution().
     - Compatibilité avec removeEvolution(Evolution e) qui prend désormais un objet
       Evolution complet, et non plus un simple EvolutionType.
     - Compilation et tests validés : make classes, make jar, exécution de
-      livrable5a.jar et livrable5b.jar OK.
+      livrable5.jar OK.
 
 Serhii :
 
@@ -425,13 +423,9 @@ Serhii :
 
 Yassin :
 
-    Création des classes de choix dans game.choice :
-    - actionchoice/ : BuyTower, SellTower, EvolveTower (extends Choice<String>)
-    - towerchoice/ : DartMonkeyTower, BombTowerTower, SniperMonkeyTower,
-      SuperMonkeyTower, TackShooterTower, IceTowerTower, SlowDownTowerTower
-      (extends Choice<Tower>)
-    - ChoiceTest.java : test unitaire vérifiant le bon fonctionnement de
-      getChoice() sur les classes d'évolution.
+    Création de l'interface ListChooser et de ses implémentations
+    (RandomListChooser, InteractiveListChooser). Participation aux tests
+    unitaires vérifiant le bon fonctionnement du mécanisme de choix.
 
 
 Habiba :
@@ -485,17 +479,16 @@ Habiba :
 
 Le cœur du Livrable 5 est l'interface `ListChooser<T>` qui abstrait la sélection
 d'un élément parmi une liste. Deux implémentations existent :
-- `RandomListChooser` : sélection aléatoire, utilisée dans Livrable5a pour
+- `RandomListChooser` : sélection aléatoire, utilisée dans Livrable5 pour
   le mode automatique (placement et évolutions gérés sans intervention humaine).
-- `InteractiveListChooser` : saisie clavier, utilisée dans Livrable5b pour
-  le mode interactif.
+- `InteractiveListChooser` : saisie clavier, disponible pour un mode interactif.
 
 Ce choix permet de réutiliser la totalité de la logique de `Livrable5.java` dans
 les deux scénarios sans duplication de code.
 
-**Boucle de 10 manches dans Livrable5a**
+**Boucle de 10 manches dans Livrable5**
 
-La boucle des 10 manches a été placée dans `Livrable5a.main()` plutôt que dans
+La boucle des 10 manches a été placée dans `Livrable5.main()` plutôt que dans
 `GameEngine` pour respecter la séparation des responsabilités : `GameEngine`
 gère une seule manche (spawn, mouvement, tirs), tandis que la logique de progression
 (évolutions, numérotation des manches) appartient au programme principal.
@@ -531,7 +524,7 @@ de `NonProjectileTower` et ne disposent pas de ce mécanisme.
 | Plateau classique multi-chemins | Implémenté (ClassicalBoard) |
 | Placement de 2 tours de chaque type via action | Implémenté (placeTowersViaActions) |
 | Phase d'actions interactive (achat, évolution, vente) | Implémenté (playerActionPhase + 4 handlers) |
-| Boucle de 10 manches avec nbBallons par manche | Implémenté (Livrable5a) |
+| Boucle de 10 manches avec nbBallons par manche | Implémenté (Livrable5) |
 | Application automatique d'évolution (manches 1–5) via action | Implémenté (applyOneEvolutionViaAction) |
 | Suppression automatique d'évolution (manches 6–10) via action | Implémenté (removeOneEvolutionViaAction) |
 | Affichage du numéro de manche et état des évolutions | Implémenté (displayTowerEvolutions) |
@@ -918,10 +911,10 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
     - TowerChoice (wrapper) pour l'affichage des tours dans le ListChooser
     - EvolutionChoice (wrapper) pour l'affichage des évolutions
 
-    Création de Livrable5a.java (mode aléatoire avec RandomListChooser) et
-    Livrable5b.java (mode interactif avec InteractiveListChooser).
+    Création de Livrable5.java (programme unique avec RandomListChooser pour
+    le mode automatique).
 
-    Mise à jour du Makefile pour générer livrable5a.jar et livrable5b.jar.
+    Mise à jour du Makefile pour générer livrable5.jar.
     Rédaction de la section Livrable 5 dans le README.
 
     Serhii :
@@ -971,8 +964,8 @@ Habiba :
 
     Amadou :
 
-    Tester et stabiliser le Livrable 5, vérifier que livrable5a.jar et
-    livrable5b.jar fonctionnent correctement sur les deux modes.
+    Tester et stabiliser le Livrable 5, vérifier que livrable5.jar
+    fonctionne correctement.
 
     Yassin :
 
@@ -1003,9 +996,8 @@ Habiba :
 
     Vérification complète de la chaîne de compilation et d'exécution :
     - make classes : compilation de 61 fichiers Java sans erreur
-    - make jar : génération des 6 JARs (3a, 3b, 4a, 4b, 5a, 5b)
-    - java -jar livrable5a.jar 8 12 5 : exécution OK (mode aléatoire)
-    - java -jar livrable5b.jar 8 12 5 : exécution OK (mode interactif)
+    - make jar : génération des 5 JARs (3a, 3b, 4a, 4b, 5)
+    - java -jar livrable5.jar 8 12 5 : exécution OK
 
     Mise à jour du README : section Livrable 5 complétée avec les contributions
     de tous les membres (Serhii, Yassin) et journal de bord semaine 11.
@@ -1052,7 +1044,7 @@ Habiba :
 Amadou :
 
     Finalisation du Livrable 5 : implémentation de la boucle de 10 manches dans
-    Livrable5a.java avec les évolutions automatiques via le mécanisme d'action.
+    Livrable5.java avec les évolutions automatiques via le mécanisme d'action.
 
     Ajout de 4 nouvelles méthodes statiques dans Livrable5.java :
     - placeTowersViaActions() : place exactement 2 tours de chaque type en utilisant
@@ -1073,8 +1065,8 @@ Amadou :
 
     Vérification complète :
     - make classes : compilation sans erreur
-    - make jar : génération des 6 JARs (3a, 3b, 4a, 4b, 5a, 5b)
-    - java -jar livrable5a.jar 8 12 5 : 10 manches exécutées, évolutions appliquées
+    - make jar : génération des 5 JARs (3a, 3b, 4a, 4b, 5)
+    - java -jar livrable5.jar 8 12 5 : 10 manches exécutées, évolutions appliquées
       manches 1–5, évolutions retirées manches 6–10
 
 Habiba :

@@ -6,7 +6,7 @@ import game.Evolution.EvolutionType;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class testEvolutionUnique {
+public class TestEvolutionUnique {
     @Test
     public void TestEvolutionUnique() throws TypeTowerException{
         Player p = new Player();

@@ -26,6 +26,33 @@ import game.exeptions.NoEvolutionException;
  */
 public class Livrable5 {
 
+    /** Coûts des évolutions (constantes partagées par toutes les méthodes). */
+    private static final int COST_POWER      = 250;
+    private static final int COST_CADENCE    = 150;
+    private static final int COST_SCOPE      = 100;
+    private static final int COST_PROJECTILE = 300;
+
+    private static final Object[][] EVO_SPECS = {
+        { Evolution.EvolutionType.POWER,      COST_POWER },
+        { Evolution.EvolutionType.CADENCE,    COST_CADENCE },
+        { Evolution.EvolutionType.SCOPE,      COST_SCOPE },
+        { Evolution.EvolutionType.PROJECTILE, COST_PROJECTILE }
+    };
+
+    private static final Evolution.EvolutionType[] ALL_EVO_TYPES = {
+        Evolution.EvolutionType.POWER, Evolution.EvolutionType.CADENCE,
+        Evolution.EvolutionType.SCOPE, Evolution.EvolutionType.PROJECTILE
+    };
+
+    private static Map<Evolution.EvolutionType, Integer> evoCostsMap() {
+        Map<Evolution.EvolutionType, Integer> m = new HashMap<>();
+        m.put(Evolution.EvolutionType.POWER,      COST_POWER);
+        m.put(Evolution.EvolutionType.CADENCE,    COST_CADENCE);
+        m.put(Evolution.EvolutionType.SCOPE,      COST_SCOPE);
+        m.put(Evolution.EvolutionType.PROJECTILE, COST_PROJECTILE);
+        return m;
+    }
+
     /**
      * Point d'entrée du programme.
      *
@@ -272,12 +299,7 @@ public class Livrable5 {
         ProjectileTower pt = (ProjectileTower) towerChoice.getTower();
 
         // 3. Proposer les évolutions disponibles (non déjà appliquées)
-        Object[][] evoSpecs = {
-                { Evolution.EvolutionType.POWER, 250 },
-                { Evolution.EvolutionType.CADENCE, 150 },
-                { Evolution.EvolutionType.SCOPE, 100 },
-                { Evolution.EvolutionType.PROJECTILE, 300 }
-        };
+        Object[][] evoSpecs = EVO_SPECS;
 
         List<EvolutionChoice> availableEvos = new ArrayList<>();
         for (Object[] spec : evoSpecs) {
@@ -369,10 +391,7 @@ public class Livrable5 {
             ListChooser<Object> chooser) {
 
         // 1. Récupérer les tours qui ont au moins une évolution
-        Evolution.EvolutionType[] allTypes = {
-                Evolution.EvolutionType.POWER, Evolution.EvolutionType.CADENCE,
-                Evolution.EvolutionType.SCOPE, Evolution.EvolutionType.PROJECTILE
-        };
+        Evolution.EvolutionType[] allTypes = ALL_EVO_TYPES;
 
         List<TowerChoice> evolvedTowers = new ArrayList<>();
         for (Tower t : board.tower_list) {
@@ -549,12 +568,7 @@ public class Livrable5 {
     public static void applyOneEvolutionViaAction(Board board, Player player,
             ListChooser<Object> chooser) {
 
-        Object[][] evoSpecs = {
-            { Evolution.EvolutionType.POWER,      250 },
-            { Evolution.EvolutionType.CADENCE,    150 },
-            { Evolution.EvolutionType.SCOPE,      100 },
-            { Evolution.EvolutionType.PROJECTILE, 300 }
-        };
+        Object[][] evoSpecs = EVO_SPECS;
 
         // Filtrer les tours pouvant encore évoluer
         List<TowerChoice> evolvable = new ArrayList<>();
@@ -623,10 +637,7 @@ public class Livrable5 {
     public static void removeOneEvolutionViaAction(Board board, Player player,
             ListChooser<Object> chooser) {
 
-        Evolution.EvolutionType[] allTypes = {
-            Evolution.EvolutionType.POWER, Evolution.EvolutionType.CADENCE,
-            Evolution.EvolutionType.SCOPE, Evolution.EvolutionType.PROJECTILE
-        };
+        Evolution.EvolutionType[] allTypes = ALL_EVO_TYPES;
 
         // Filtrer les tours ayant au moins une évolution
         List<TowerChoice> evolvedTowers = new ArrayList<>();
@@ -705,10 +716,7 @@ public class Livrable5 {
             System.out.println("  (aucune tour sur le plateau)");
             return;
         }
-        Evolution.EvolutionType[] allTypes = {
-            Evolution.EvolutionType.POWER, Evolution.EvolutionType.CADENCE,
-            Evolution.EvolutionType.SCOPE, Evolution.EvolutionType.PROJECTILE
-        };
+        Evolution.EvolutionType[] allTypes = ALL_EVO_TYPES;
         for (Tower t : board.tower_list) {
             if (t instanceof ProjectileTower) {
                 ProjectileTower pt = (ProjectileTower) t;

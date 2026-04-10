@@ -12,7 +12,8 @@ public class IceTower extends NonProjectileTower{
     }
 
     public void freeze(List<Balloon> balloons) {
-        for (Balloon b : balloons) {
+        List<Balloon> targets = TargetingBalloon.getAllTargets(balloons, this);
+        for (Balloon b : targets) {
             b.freeze(FREEZE_DURATION_TICKS);
         }
     }

@@ -12,13 +12,8 @@ public class SlowdownTower extends NonProjectileTower{
 
     public void freeze(List<Balloon> balloons) {
         List<Balloon> targets = TargetingBalloon.getAllTargets(balloons, this);
-        for (Balloon b : balloons) {
-            if(targets.contains(b)){
-                b.slowDown();
-            }
-            else{
-                b.unSlowDown();
-            }
+        for (Balloon b : targets) {
+            b.slowDown();
         }
     }
 }
