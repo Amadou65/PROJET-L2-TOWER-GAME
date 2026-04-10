@@ -1015,6 +1015,12 @@ Habiba :
     - Finalisation du diagramme UML avec les derniers changements sur les signatures des méthodes.
     - Rédaction de la partie "Choix de modélisation" pour le Livrable 5 dans le README.
 
+
+    Serhii :
+    - correction d'UML 4 et creation UML 5. 
+    - Creation des exceptions NegativeValueException, TooLongPathException et ZeroValueException et les integration dans une classe Board et Livrable
+
+
 ### Difficultés rencontrées
 
     Amadou :

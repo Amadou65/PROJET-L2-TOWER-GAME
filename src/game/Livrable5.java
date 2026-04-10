@@ -9,7 +9,6 @@ import game.listchooser.RandomListChooser;
 import game.choice.*;
 import game.exeptions.TypeTowerException;
 import game.exeptions.NoEvolutionException;
-import game.tower.NonProjectileTower;
 
 /**
  * Livrable5 est le programme principal du livrable 5.
