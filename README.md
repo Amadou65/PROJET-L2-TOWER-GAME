@@ -342,10 +342,9 @@ Pour générer les JARs exécutables :
 
     make jar
 
-Pour exécuter les livrables :
+Pour exécuter le livrable :
 
-    - java -jar livrable5a.jar <hauteur> <largeur> <nbBallons>
-    - java -jar livrable5b.jar <hauteur> <largeur> <nbBallons>
+    java -jar livrable5.jar <largeur> <hauteur> <nbBallons>
 
 Pour générer la javadoc :
 

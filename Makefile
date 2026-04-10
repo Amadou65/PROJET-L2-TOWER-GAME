@@ -35,8 +35,7 @@ jar: classes
 	$(JAR) cfe livrable3b.jar game.Livrable3b -C $(BIN_DIR) .
 	$(JAR) cfe livrable4a.jar game.Livrable4a -C $(BIN_DIR) .
 	$(JAR) cfe livrable4b.jar game.Livrable4b -C $(BIN_DIR) .
-	$(JAR) cfe livrable5a.jar game.Livrable5a -C $(BIN_DIR) .
-	$(JAR) cfe livrable5b.jar game.Livrable5b -C $(BIN_DIR) .
+	$(JAR) cfe livrable5.jar game.Livrable5 -C $(BIN_DIR) .
 
 # ─────────────────────────────────────────────
 # tests : compile les classes de tests

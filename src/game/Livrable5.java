@@ -3,21 +3,106 @@ package game;
 import java.util.*;
 import game.tower.*;
 import game.tower.typeTower.*;
+import game.board.LeftStartRandomBoard;
 import game.listchooser.ListChooser;
+import game.listchooser.RandomListChooser;
 import game.choice.*;
 import game.exeptions.TypeTowerException;
 import game.exeptions.NoEvolutionException;
 import game.tower.NonProjectileTower;
 
 /**
- * Livrable5 est la classe parent commune à Livrable5a et Livrable5b.
- * Elle implémente la gestion des actions du joueur au début de chaque manche :
- * acheter/placer des tours, évoluer, vendre des tours ou des évolutions.
+ * Livrable5 est le programme principal du livrable 5.
  *
- * <p>Le joueur peut réaliser autant d'actions qu'il le veut tant que
- * ses crédits restent positifs. Lorsqu'il a terminé, la manche démarre.</p>
+ * <p>Crée un plateau aléatoire (chemin partant du bord gauche), place 2 tours
+ * de chaque type via le mécanisme d'action, puis joue 10 manches :</p>
+ * <ul>
+ *   <li>Manches 1–5 : application d'une évolution via action (tour au hasard).</li>
+ *   <li>Manches 6–10 : suppression d'une évolution via action (tour au hasard).</li>
+ * </ul>
+ *
+ * <pre>
+ * java -jar livrable5.jar &lt;largeur&gt; &lt;hauteur&gt; &lt;nbBallons&gt;
+ * </pre>
  */
 public class Livrable5 {
+
+    /**
+     * Point d'entrée du programme.
+     *
+     * @param args largeur, hauteur, nbBallons
+     */
+    public static void main(String[] args) throws Exception {
+        int width     = args.length > 0 ? Integer.parseInt(args[0]) : 12;
+        int height    = args.length > 1 ? Integer.parseInt(args[1]) : 8;
+        int nbBallons = args.length > 2 ? Integer.parseInt(args[2]) : 5;
+
+        if (width <= 0 || height <= 0 || nbBallons <= 0) {
+            System.err.println("Erreur : tous les arguments doivent être strictement positifs.");
+            System.err.println("Usage : java -jar livrable5.jar <largeur> <hauteur> <nbBallons>");
+            return;
+        }
+
+        System.out.println("=== LIVRABLE 5 ===");
+        System.out.println("Plateau : " + width + "x" + height
+                + " | Ballons par manche : " + nbBallons);
+
+        // --- PHASE 1 : Plateau aléatoire avec départ bord gauche ---
+        LeftStartRandomBoard board = new LeftStartRandomBoard(height, width);
+        List<Position> path = board.path();
+        board.applyPathToGrid(path);
+        System.out.println("Chemin généré : " + path.size() + " cases");
+        System.out.println("Départ : " + path.get(0)
+                + " → Arrivée : " + path.get(path.size() - 1));
+        System.out.println(board.display());
+
+        // --- PHASE 2 : Placement de 2 tours de chaque type via actions ---
+        Player player = new Player();
+        player.setCredits(15000);
+        RandomListChooser<Object> chooser = new RandomListChooser<>();
+        placeTowersViaActions(board, player, chooser, height, width);
+
+        System.out.println("\nPlateau après placement des tours :");
+        System.out.println(board.display());
+
+        // --- PHASE 3 : Boucle de 10 manches ---
+        int[] levels = { 1, 2, 4 };
+        Random rng = new Random();
+
+        for (int manche = 1; manche <= 10; manche++) {
+            System.out.println("\n========================================");
+            System.out.println("   MANCHE " + manche + "/10");
+            System.out.println("========================================");
+
+            displayTowerEvolutions(board);
+
+            if (manche <= 5) {
+                System.out.println("\n→ Application d'une évolution (manche " + manche + "/5)");
+                applyOneEvolutionViaAction(board, player, chooser);
+            } else {
+                System.out.println("\n→ Suppression d'une évolution (manche " + manche + "/10)");
+                removeOneEvolutionViaAction(board, player, chooser);
+            }
+
+            List<Balloon> reserve = new ArrayList<>();
+            for (int i = 0; i < nbBallons; i++) {
+                int lvl = levels[rng.nextInt(levels.length)];
+                reserve.add(new Balloon(lvl, path));
+            }
+
+            System.out.println("\n--- LANCEMENT DE LA MANCHE " + manche
+                    + " (" + nbBallons + " ballons) ---");
+            GameEngine engine = new GameEngine(reserve, board, player);
+            engine.game();
+        }
+
+        System.out.println("\n========================================");
+        System.out.println("   FIN DES 10 MANCHES");
+        System.out.println("========================================");
+        System.out.println("Crédits finaux : " + player.getCredits());
+        System.out.println("Vies restantes : " + player.getHealth());
+        displayTowerEvolutions(board);
+    }
 
     /**
      * Phase d'actions du joueur : boucle de choix via le ListChooser
