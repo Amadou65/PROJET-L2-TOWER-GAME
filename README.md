@@ -1049,6 +1049,10 @@ Amadou :
     - java -jar livrable5a.jar 8 12 5 : 10 manches exécutées, évolutions appliquées
       manches 1–5, évolutions retirées manches 6–10
 
+Habiba :
+    - Relecture globale du projet pour s'assurer que toutes les consignes du Livrable 5 sont respectées.
+    - Vérification de la documentation technique et test de la commande `make docs` pour s'assurer qu'il n'y a pas d'erreurs.
+
 ### Difficultés rencontrées
 
     Amadou :
