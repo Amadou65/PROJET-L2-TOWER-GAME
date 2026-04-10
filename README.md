@@ -434,6 +434,23 @@ Yassin :
     - ChoiceTest.java : test unitaire vérifiant le bon fonctionnement de
       getChoice() sur les classes d'évolution.
 
+
+Habiba :
+
+    Mise à jour du diagramme UML : Intégration du nouveau package game.choice 
+    (enum PlayerAction, wrappers de choix) et ajout des méthodes de revente 
+    pour refléter la nouvelle architecture du Livrable 5.
+
+    Documentation (Javadoc) : Rédaction complète des commentaires pour la 
+    nouvelle classe parente Livrable5 et ses sous-méthodes de gestion d'actions.
+
+    Rédaction du README : Explication détaillée des choix de modélisation 
+    pour le Livrable 5, notamment la séparation des menus et la sécurité des évolutions.
+
+    Relecture et validation : Vérification croisée du code pour s'assurer que 
+    la méthode removeEvolution est bien implémentée dans chaque tour spécifique 
+    (DartMonkey, BombTower...) avant la fusion finale.
+
 ### Difficultés rencontrées
 
 Amadou :
@@ -452,6 +469,12 @@ Amadou :
     Intégration avec Serhii : la signature de removeEvolution() a changé (prend
     un Evolution au lieu d'un EvolutionType). Résolu en créant un objet Evolution
     complet et en utilisant player.sellEvolution() directement.
+
+Habiba :
+
+    Assurer la cohérence de la documentation technique et du README entre le 
+    travail de Serhii (la logique de revente) et celui d'Amadou (la gestion 
+    des menus) pour que le rapport final soit parfaitement aligné avec le sujet.
 
 ### Choix de modélisation
 
