@@ -455,6 +455,10 @@ Amadou :
 
 ### Choix de modélisation
 
+- **Séparation des menus :** Nous avons créé un package `game.choice` pour séparer l'affichage des menus de la logique du jeu. Cela rend le code plus propre.
+- **Sécurité des évolutions :** L'utilisation d'une méthode abstraite `removeEvolution` oblige chaque tour à définir comment elle annule ses bonus. Cela évite les bugs lors de la revente.
+- **Clarté de la console :** Au lieu d'afficher la grille à chaque seconde, le jeu affiche seulement des messages d'événements (ex: "Ballon touché"). C'est beaucoup plus lisible pour des parties longues.
+
 **Mécanisme d'action via ListChooser**
 
 Le cœur du Livrable 5 est l'interface `ListChooser<T>` qui abstrait la sélection
@@ -919,7 +923,10 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
         On verifie que la tour est de type projectileTower
         On verifie que la tour a cette amelioration
 
-    
+Habiba : 
+
+    - Mise à jour du diagramme UML pour inclure les nouveaux menus.
+    - Rédaction de la Javadoc pour les nouvelles classes afin d'expliquer le mode interactif.
 
 
 ### Difficultés rencontrées
@@ -980,6 +987,11 @@ Définition des règles de gestion des évolutions (unicité via le HashSet) pou
 
     Mise à jour du README : section Livrable 5 complétée avec les contributions
     de tous les membres (Serhii, Yassin) et journal de bord semaine 11.
+
+
+    Habiba :
+    - Finalisation du diagramme UML avec les derniers changements sur les signatures des méthodes.
+    - Rédaction de la partie "Choix de modélisation" pour le Livrable 5 dans le README.
 
 ### Difficultés rencontrées
 
