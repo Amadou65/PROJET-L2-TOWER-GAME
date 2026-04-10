@@ -27,6 +27,7 @@ public class TargetingBalloon {
     public static List<Balloon> getAllTargets(List<Balloon> balloons, Tower t) {
         List<Balloon> inRange = new ArrayList<>();
         for (Balloon b : balloons) {
+            if (b.isPopped()) continue;
             double dist = calculateDistance(t, b);
             if (dist <= t.getScope()) {
                 inRange.add(b);

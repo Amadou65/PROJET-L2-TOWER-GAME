@@ -23,7 +23,7 @@ public abstract class ProjectileTower extends Tower{
     public void shot(List<Balloon> balloons){
         Balloon target = TargetingBalloon.getBestTarget(balloons, this);
         if (target != null) {
-            target.takeDamage(this.projectile.giveDamage());
+            target.takeDamage(this.projectile.giveDamage() + this.power);
             this.resetCadence();
         }
 

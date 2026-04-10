@@ -29,6 +29,7 @@ public class GameEngineTest {
         reserve.add(new Balloon(2, path));
 
         engine = new GameEngine(reserve, board);
+        engine.setTickDelay(0);
     }
 
     @Test
@@ -74,6 +75,7 @@ public class GameEngineTest {
     public void testPlayerLosesLifeWhenBalloonEscapes() {
         Player player = new Player();
         GameEngine engineWithPlayer = new GameEngine(reserve, board, player);
+        engineWithPlayer.setTickDelay(0);
         engineWithPlayer.game();
         // Sans tour, les ballons s'échappent → le joueur perd des vies
         assertTrue(player.getHealth() < 20,
@@ -106,6 +108,7 @@ public class GameEngineTest {
         }
 
         GameEngine engineWithPlayer = new GameEngine(reserve, board, player);
+        engineWithPlayer.setTickDelay(0);
         engineWithPlayer.game();
 
         assertTrue(player.getCredits() >= 0,

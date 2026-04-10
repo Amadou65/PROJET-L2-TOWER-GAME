@@ -75,6 +75,12 @@ public class Player {
             return;
         }
 
+        // Safety check: cannot place on a cell that already has a tower
+        if (!targetCell.getTowers().isEmpty()) {
+            System.out.println("Impossible : Une tour est déjà placée sur cette case !");
+            return;
+        }
+
         if (this.credits >= t.cost) {
             b.addTower(t, targetCell); // adds to both Cell and board.tower_list
             this.credits -= t.cost;

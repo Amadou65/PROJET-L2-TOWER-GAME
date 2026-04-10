@@ -19,6 +19,7 @@ public class Balloon {
     private boolean frozen;
     private int frozenTicksRemaining;
     private boolean slowed;
+    private int slowedTicksRemaining;
 
     /**
      * Creates a balloon at the start of the given path.
@@ -37,6 +38,7 @@ public class Balloon {
         this.frozen = false;
         this.frozenTicksRemaining = 0;
         this.slowed = false;
+        this.slowedTicksRemaining = 0;
         if (path != null && !path.isEmpty()) {
             this.x = path.get(0).getX();
             this.y = path.get(0).getY();
@@ -66,6 +68,13 @@ public class Balloon {
                 this.unfreeze();
             }
             return;
+        }
+
+        if (this.slowed) {
+            this.slowedTicksRemaining--;
+            if (this.slowedTicksRemaining <= 0) {
+                this.unSlowDown();
+            }
         }
 
         Position target = path.get(currentTargetIndex);
@@ -218,13 +227,23 @@ public class Balloon {
     }
 
     /**
-     * Slows down the balloon by halving its speed.
+     * Slows down the balloon by halving its speed for a default duration.
      */
     public void slowDown() {
+        slowDown(60);
+    }
+
+    /**
+     * Slows down the balloon by halving its speed for a given number of ticks.
+     *
+     * @param durationTicks number of move() calls the slow lasts
+     */
+    public void slowDown(int durationTicks) {
         if (!this.slowed) {
             this.speed *= 0.5;
             this.slowed = true;
         }
+        this.slowedTicksRemaining = Math.max(this.slowedTicksRemaining, durationTicks);
     }
 
     /**
@@ -234,6 +253,7 @@ public class Balloon {
         if (this.slowed) {
             this.speed = this.baseSpeed;
             this.slowed = false;
+            this.slowedTicksRemaining = 0;
         }
     }
 

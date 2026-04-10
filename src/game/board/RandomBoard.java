@@ -34,14 +34,23 @@ public class RandomBoard extends Board {
         ArrayList<Position> liste_depart = this.creerListeDepart();
         Position pos_depart = liste_depart.get(randomNumber.nextInt(liste_depart.size()));
 
+        // Minimum path length adapts to grid size (cannot exceed total cells)
+        int minPathLength = Math.min(12, (this.height * this.width) / 2);
+        int maxRetries = 1000;
+        int retries = 0;
+
         ArrayList<Position> path = new ArrayList<>();
         path.add(pos_depart);
 
         boolean found = false;
         while (!found) {
+            if (retries++ > maxRetries) {
+                // Fallback: return best path found so far
+                break;
+            }
             Position current = path.get(path.size() - 1);
 
-            if (path.size() >= 12 && isEdge(current) && !isSameSide(current, pos_depart)) {
+            if (path.size() >= minPathLength && isEdge(current) && !isSameSide(current, pos_depart)) {
                 found = true;
             } else {
                 ArrayList<Position> possible_path = this.nextPositions(current);

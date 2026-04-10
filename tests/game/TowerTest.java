@@ -38,7 +38,7 @@ public class TowerTest {
         path3.add(new Position(0, 1));
 
             
-        Balloon b1 = new Balloon(0, path1); // within scope
+        Balloon b1 = new Balloon(1, path1); // within scope
         Balloon b2 = new Balloon(2, path2); // outside scope
         Balloon b3 = new Balloon(1, path3); // within scope
     

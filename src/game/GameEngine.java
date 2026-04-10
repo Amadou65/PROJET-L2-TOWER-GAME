@@ -14,6 +14,7 @@ public class GameEngine {
     private Board board;
     private Player player;
     private Journal journal;
+    private int tickDelay = 50; // ms between ticks, 0 for tests
 
     /**
      * Creates a new GameEngine.
@@ -57,6 +58,13 @@ public class GameEngine {
     }
 
     /**
+     * Sets the delay between ticks in milliseconds. Use 0 for tests.
+     */
+    public void setTickDelay(int ms) {
+        this.tickDelay = ms;
+    }
+
+    /**
      * Runs the main game loop.
      * Balloons spawn every 20 ticks, move each tick, and towers fire according to
      * their cadence.
@@ -75,7 +83,7 @@ public class GameEngine {
 
             // 1. PHASE DE SPAWN : Un ballon sort tous les 20 tics
             if (time % 20 == 0 && !reserve.isEmpty()) {
-                Balloon b = reserve.remove(reserve.size() - 1);
+                Balloon b = reserve.remove(0);
                 this.actif.add(b);
                 board.getCell(new Position(b.getGridX(), b.getGridY())).putBallon(b);
                 System.out.println("[t=" + time + "] Ballon spawné (niveau " + b.getLevel() + ")");
@@ -164,9 +172,9 @@ public class GameEngine {
                 }
             }
 
-            // 4. PAUSE (50ms = 20 FPS)
+            // 4. PAUSE (configurable, 0 for tests)
             try {
-                Thread.sleep(50);
+                if (tickDelay > 0) Thread.sleep(tickDelay);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

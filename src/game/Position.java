@@ -30,4 +30,9 @@ public class Position{
             return false;
         }
     }
+
+    @Override
+    public int hashCode(){
+        return 31 * this.x + this.y;
+    }
 }
