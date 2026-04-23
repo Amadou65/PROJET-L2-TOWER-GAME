@@ -98,6 +98,7 @@ public final class Livrable6 {
         if (boardMode == BoardMode.B) {
             System.out.println("Nb chemins     : " + allPaths.size());
         }
+        printPathSummary(allPaths, boardMode);
         System.out.println("Crédits init   : " + player.getCredits());
         System.out.println("Vies initiales : " + player.getHealth());
         System.out.println(board.display());
@@ -226,5 +227,20 @@ public final class Livrable6 {
         }
 
         return paths;
+    }
+
+    private static void printPathSummary(List<List<Position>> allPaths, BoardMode boardMode) {
+        if (boardMode == BoardMode.A && !allPaths.isEmpty()) {
+            List<Position> p = allPaths.get(0);
+            System.out.println("Chemin A       : " + p.get(0) + " -> " + p.get(p.size() - 1)
+                    + " (" + p.size() + " cases)");
+            return;
+        }
+
+        for (int i = 0; i < allPaths.size(); i++) {
+            List<Position> p = allPaths.get(i);
+            System.out.println("Chemin B-" + (i + 1) + "     : " + p.get(0) + " -> "
+                    + p.get(p.size() - 1) + " (" + p.size() + " cases)");
+        }
     }
 }
