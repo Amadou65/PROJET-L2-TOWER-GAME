@@ -25,6 +25,8 @@ import java.util.Random;
  */
 public final class Livrable6 {
     private static final int MIN_BALLOONS_PER_ROUND = 15;
+    private static final int MAX_BALLOONS_PER_ROUND = 45;
+    private static final int BALLOON_GROWTH_STEP = 2;
     private static final int MAX_PATH_GENERATION_ATTEMPTS = 500;
 
     private Livrable6() {
@@ -189,7 +191,8 @@ public final class Livrable6 {
     }
 
     private static int computeBalloonCount(int manche) {
-        return MIN_BALLOONS_PER_ROUND + Math.max(0, manche - 1);
+        int extra = Math.max(0, (manche - 1) / BALLOON_GROWTH_STEP);
+        return Math.min(MAX_BALLOONS_PER_ROUND, MIN_BALLOONS_PER_ROUND + extra);
     }
 
     private static List<Balloon> buildReserve(List<List<Position>> allPaths, int count, int manche, Random random) {
@@ -204,12 +207,12 @@ public final class Livrable6 {
 
     private static int pickBalloonLevel(int manche, Random random) {
         int[] levelPool;
-        if (manche <= 3) {
+        if (manche <= 4) {
             levelPool = new int[] {1, 1, 1, 2};
-        } else if (manche <= 8) {
+        } else if (manche <= 10) {
             levelPool = new int[] {1, 2, 2, 4};
         } else {
-            levelPool = new int[] {2, 2, 4, 4};
+            levelPool = new int[] {2, 4, 4, 4};
         }
         return levelPool[random.nextInt(levelPool.length)];
     }
