@@ -103,7 +103,7 @@ public final class Livrable6 {
         Random random = new Random();
 
         System.out.println("========================================");
-        System.out.println("          LIVRABLE 6 - START           ");
+        System.out.println("         LIVRABLE 6 - DEBUT JEU        ");
         System.out.println("========================================");
         System.out.println("Mode plateau   : " + boardMode);
         System.out.println("Mode choix     : " + choiceMode);
