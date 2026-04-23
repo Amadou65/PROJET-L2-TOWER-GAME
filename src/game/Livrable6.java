@@ -88,6 +88,7 @@ public final class Livrable6 {
 
         ListChooser<Object> chooser = buildChooser(choiceMode);
         Player player = new Player();
+        Journal journal = player.getJournal();
         Random random = new Random();
 
         System.out.println("========================================");
@@ -105,6 +106,7 @@ public final class Livrable6 {
         System.out.println(board.display());
 
         int manche = 1;
+        int manchesJouees = 0;
         while (player.isAlife()) {
             System.out.println("\n========================================");
             System.out.println("              MANCHE " + manche);
@@ -119,6 +121,7 @@ public final class Livrable6 {
             System.out.println("[MANCHE " + manche + "] Ballons lancés : " + balloonsThisRound);
             GameEngine engine = new GameEngine(reserve, board, player);
             engine.game();
+            manchesJouees++;
 
             if (!player.isAlife()) {
                 break;
@@ -132,9 +135,13 @@ public final class Livrable6 {
         System.out.println("\n========================================");
         System.out.println("             GAME OVER");
         System.out.println("========================================");
-        System.out.println("Dernière manche jouée : " + manche);
+        System.out.println("Manches jouées        : " + manchesJouees);
         System.out.println("Vies restantes        : " + player.getHealth());
         System.out.println("Crédits finaux        : " + player.getCredits());
+        System.out.println("Ballons détruits      : " + journal.getBalloonsDestroyed());
+        System.out.println("Crédits gagnés        : " + journal.getTotalCreditsGained());
+        System.out.println("Crédits dépensés      : " + journal.getTotalCreditsSpent());
+        System.out.println("Évolutions achetées   : " + journal.getUpgradesPurchased());
     }
 
     private static boolean isValidArgCount(BoardMode boardMode, String[] args) {
