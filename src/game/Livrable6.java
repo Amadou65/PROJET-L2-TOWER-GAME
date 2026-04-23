@@ -62,10 +62,19 @@ public final class Livrable6 {
             return;
         }
 
-        int width = parseStrictPositive(args[0], "largeur");
-        int height = parseStrictPositive(args[1], "hauteur");
-        int nbChemins = boardMode == BoardMode.B ? parseStrictPositive(args[2], "nbChemins") : 1;
-        validateRequestedPaths(boardMode, width, height, nbChemins);
+        int width;
+        int height;
+        int nbChemins;
+        try {
+            width = parseStrictPositive(args[0], "largeur");
+            height = parseStrictPositive(args[1], "hauteur");
+            nbChemins = boardMode == BoardMode.B ? parseStrictPositive(args[2], "nbChemins") : 1;
+            validateRequestedPaths(boardMode, width, height, nbChemins);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            printUsage(launcherName, boardMode);
+            return;
+        }
 
         Board board;
         List<List<Position>> allPaths;
