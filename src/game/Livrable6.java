@@ -65,6 +65,7 @@ public final class Livrable6 {
         int width = parseStrictPositive(args[0], "largeur");
         int height = parseStrictPositive(args[1], "hauteur");
         int nbChemins = boardMode == BoardMode.B ? parseStrictPositive(args[2], "nbChemins") : 1;
+        validateRequestedPaths(boardMode, width, height, nbChemins);
 
         Board board;
         List<List<Position>> allPaths;
@@ -241,6 +242,18 @@ public final class Livrable6 {
             List<Position> p = allPaths.get(i);
             System.out.println("Chemin B-" + (i + 1) + "     : " + p.get(0) + " -> "
                     + p.get(p.size() - 1) + " (" + p.size() + " cases)");
+        }
+    }
+
+    private static void validateRequestedPaths(BoardMode boardMode, int width, int height, int nbChemins) {
+        if (boardMode != BoardMode.B) {
+            return;
+        }
+
+        int maxDistinctStarts = 2 * (width + height) - 4;
+        if (nbChemins > maxDistinctStarts) {
+            throw new IllegalArgumentException(
+                    "nbChemins trop grand: maximum possible sur ce plateau = " + maxDistinctStarts + ".");
         }
     }
 }
