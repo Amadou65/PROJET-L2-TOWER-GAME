@@ -6,6 +6,7 @@ JAVADOC = javadoc
 SRC_DIR = src
 BIN_DIR = bin
 TEST_DIR = tests
+JAR_DIR = jar
 DOCS_DIR = docs
 JUNIT = junit-console.jar
 
@@ -28,14 +29,15 @@ classes:
 	$(JAVAC) -d $(BIN_DIR) -sourcepath $(SRC_DIR) $(SRC_FILES)
 
 # ─────────────────────────────────────────────
-# jar : crée les JARs des livrables 3, 4 et 5
+# jar : crée les JARs des towerdefense interactive a,b et random a,b
 # ─────────────────────────────────────────────
 jar: classes
-	$(JAR) cfe livrable3a.jar game.Livrable3a -C $(BIN_DIR) .
-	$(JAR) cfe livrable3b.jar game.Livrable3b -C $(BIN_DIR) .
-	$(JAR) cfe livrable4a.jar game.Livrable4a -C $(BIN_DIR) .
-	$(JAR) cfe livrable4b.jar game.Livrable4b -C $(BIN_DIR) .
-	$(JAR) cfe livrable5.jar game.Livrable5 -C $(BIN_DIR) .
+	mkdir -p $(JAR_DIR)
+
+	$(JAR) cfe $(JAR_DIR)/towerdefense-a-interactive.jar game.TowerDefenseAInteractive -C $(BIN_DIR) .
+	$(JAR) cfe $(JAR_DIR)/towerdefense-a-random.jar game.TowerDefenseARandom -C $(BIN_DIR) .
+	$(JAR) cfe $(JAR_DIR)/towerdefense-b-interactive.jar game.TowerDefenseBInteractive -C $(BIN_DIR) .
+	$(JAR) cfe $(JAR_DIR)/towerdefense-b-random.jar game.TowerDefenseBRandom -C $(BIN_DIR) .
 
 # ─────────────────────────────────────────────
 # tests : compile les classes de tests
