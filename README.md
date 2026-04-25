@@ -573,16 +573,6 @@ Serhii :
 Habiba : 
     Finalisation du `README.md` (section Livrable 6 et mode d'emploi des JARs). Vérification stricte de la structure du dépôt (absence de .class, présence des bons dossiers). Nettoyage final demandé (suppression des fichiers de configuration IDE et dossiers temporaires). Passage de la checklist de conformité avant le rendu final.
 
-**Mode d'emploi des 4 exécutables :**
-
-1. **Plateau A - Interactif** (Chemin unique à gauche, placement manuel)
-   `java -jar jar/towerdefense-a-interactive.jar <largeur> <hauteur>`
-2. **Plateau A - Aléatoire** (Chemin unique à gauche, 100% automatique)
-   `java -jar jar/towerdefense-a-random.jar <largeur> <hauteur>`
-3. **Plateau B - Interactif** (Plusieurs chemins linéaires, placement manuel)
-   `java -jar jar/towerdefense-b-interactive.jar <largeur> <hauteur> <nbChemins>`
-4. **Plateau B - Aléatoire** (Plusieurs chemins linéaires, 100% automatique)
-   `java -jar jar/towerdefense-b-random.jar <largeur> <hauteur> <nbChemins>`
 
 ### Difficultés rencontrées
 
