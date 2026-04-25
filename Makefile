@@ -14,8 +14,9 @@ SRC_FILES = $(shell find $(SRC_DIR) -name "*.java")
 TEST_FILES = $(shell find $(TEST_DIR) -name "*.java")
 
 # ─────────────────────────────────────────────
-# docs : génère la javadoc
+# doc / docs : génère la javadoc
 # ─────────────────────────────────────────────
+doc: docs
 docs:
 	mkdir -p $(DOCS_DIR)
 	$(JAVADOC) -d $(DOCS_DIR) -sourcepath $(SRC_DIR) \
@@ -29,11 +30,10 @@ classes:
 	$(JAVAC) -d $(BIN_DIR) -sourcepath $(SRC_DIR) $(SRC_FILES)
 
 # ─────────────────────────────────────────────
-# jar : crée les JARs des towerdefense interactive a,b et random a,b
+# jar : crée les 4 JARs obligatoires du rendu final
 # ─────────────────────────────────────────────
 jar: classes
 	mkdir -p $(JAR_DIR)
-
 	$(JAR) cfe $(JAR_DIR)/towerdefense-a-interactive.jar game.TowerDefenseAInteractive -C $(BIN_DIR) .
 	$(JAR) cfe $(JAR_DIR)/towerdefense-a-random.jar game.TowerDefenseARandom -C $(BIN_DIR) .
 	$(JAR) cfe $(JAR_DIR)/towerdefense-b-interactive.jar game.TowerDefenseBInteractive -C $(BIN_DIR) .
@@ -56,6 +56,6 @@ runtests: tests
 # clean : supprime les fichiers compilés
 # ─────────────────────────────────────────────
 clean:
-	rm -rf $(BIN_DIR)/* $(DOCS_DIR)/*
+	rm -rf $(BIN_DIR)/* $(DOCS_DIR)/* $(JAR_DIR)/*
 
-.PHONY: docs classes jar tests runtests clean
+.PHONY: doc docs classes jar tests runtests clean
