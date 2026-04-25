@@ -562,16 +562,16 @@ Pour compiler et lancer les tests :
 ### Atteinte des objectifs
 
 Amadou : 
-    Implémentation de la boucle finale complète tant que le joueur est en vie (`while player.isAlife()`). Connexion de la phase d’actions entre les manches. Gestion de l'augmentation de la difficulté (15 ballons minimum par manche avec vitesses aléatoires). Création des 4 classes Main (TowerDefenseAInteractive, TowerDefenseARandom, TowerDefenseBInteractive, TowerDefenseBRandom).
+    Implémentation de la boucle finale complète tant que le joueur est en vie (`while player.isAlife()`). Connexion de la phase d’actions entre les manches. Garantie de générer au minimum 15 ballons par manche avec une progression de la difficulté. Gestion des deux modes de plateau (a/b) dans une logique centrale et fourniture des 4 wrappers main (`TowerDefenseAInteractive`, etc.).
 
 Yassin : 
-    Sécurisation du `InteractiveListChooser` (robustesse). Le système reboucle automatiquement en cas de saisie invalide pour garantir qu'aucune erreur utilisateur n'interrompe la partie. Ajout des tests de non-régression sur la boucle finale.
+    Rendre le `InteractiveListChooser` totalement robuste en gérant le rebouclage jusqu’à une entrée valide. Correction des tests cassés (`ChoiceTest`) et ajout de tests de non-régression sur la boucle finale. Vérification globale qu'aucune saisie invalide n'interrompt le jeu, comme exigé.
 
 Serhii : 
-    Production des schémas UML finaux (`UML.png` à la racine et les Livrables 1 à 5 dans le dossier `uml/`). Mise à jour du Makefile pour inclure les cibles `doc` et `docs`, et générer les 4 fichiers jars obligatoires dans le répertoire `jar/`.
+    Production de la modélisation complète (`UML.png` à la racine, et `Livrable1.png` à `Livrable5.png` dans le dossier `uml/`). Mise à jour du Makefile pour supporter les cibles `doc` et `docs`, et générer les 4 JARs obligatoires dans le dossier spécifié `jar/`. Validation de l'exécution sur les machines M5.
 
 Habiba : 
-    Finalisation du `README.md` (instructions d'exécution des 4 JARs et vérification de la structure demandée). Nettoyage global du dépôt (suppression des fichiers compilés `.class` et dossiers inutiles). Contrôle de conformité de l'ensemble du projet avant la remise finale.
+    Finalisation du `README.md` (section Livrable 6 et mode d'emploi des JARs). Vérification stricte de la structure du dépôt (absence de .class, présence des bons dossiers). Nettoyage final demandé (suppression des fichiers de configuration IDE et dossiers temporaires). Passage de la checklist de conformité avant le rendu final.
 
 **Mode d'emploi des 4 exécutables (Générés dans le dossier `jar/` avec `make jar`) :**
 
