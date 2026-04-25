@@ -536,8 +536,33 @@ de `NonProjectileTower` et ne disposent pas de ce mécanisme.
 
 ### Atteinte des objectifs
 
+Amadou : 
+    Implémentation de la boucle finale complète tant que le joueur est en vie (`while player.isAlife()`). Connexion de la phase d’actions entre les manches. Gestion de l'augmentation de la difficulté (15 ballons minimum par manche avec vitesses aléatoires). Création des 4 classes Main (TowerDefenseAInteractive, TowerDefenseARandom, TowerDefenseBInteractive, TowerDefenseBRandom).
+
+Yassin : 
+    Sécurisation du `InteractiveListChooser` (robustesse). Le système reboucle automatiquement en cas de saisie invalide pour garantir qu'aucune erreur utilisateur n'interrompe la partie. Ajout des tests de non-régression sur la boucle finale.
+
+Serhii : 
+    Production des schémas UML finaux (`UML.png` à la racine et les Livrables 1 à 5 dans le dossier `uml/`). Mise à jour du Makefile pour inclure les cibles `doc` et `docs`, et générer les 4 fichiers jars obligatoires dans le répertoire `jar/`.
+
+Habiba : 
+    Finalisation du `README.md` (instructions d'exécution des 4 JARs et vérification de la structure demandée). Nettoyage global du dépôt (suppression des fichiers compilés `.class` et dossiers inutiles). Contrôle de conformité de l'ensemble du projet avant la remise finale.
+
+**Mode d'emploi des 4 exécutables (Générés dans le dossier `jar/` avec `make jar`) :**
+
+1. **Plateau A - Interactif** (Chemin unique à gauche, placement manuel)
+   `java -jar jar/towerdefense-a-interactive.jar <largeur> <hauteur>`
+2. **Plateau A - Aléatoire** (Chemin unique à gauche, 100% automatique)
+   `java -jar jar/towerdefense-a-random.jar <largeur> <hauteur>`
+3. **Plateau B - Interactif** (Plusieurs chemins linéaires, placement manuel)
+   `java -jar jar/towerdefense-b-interactive.jar <largeur> <hauteur> <nbChemins>`
+4. **Plateau B - Aléatoire** (Plusieurs chemins linéaires, 100% automatique)
+   `java -jar jar/towerdefense-b-random.jar <largeur> <hauteur> <nbChemins>`
+
 ### Difficultés restant à résoudre
 
+- Équilibrage à long terme : La difficulté augmente à chaque manche (ajout de ballons), mais si le joueur survit au-delà de la manche 50, la gestion de la mémoire avec l'affichage de centaines de logs horodatés pourrait ralentir la console.
+- Surcharge visuelle : Bien que l'affichage événementiel (`[t=X] Ballon touché`) soit beaucoup plus lisible que d'afficher la grille, une version graphique (UI) serait nécessaire pour rendre les manches avancées plus digestes pour le joueur.
 # Journal de bord
 
 Le journal de bord doit être rempli à la fin de chaque séance encadrée, et **avant** de quitter la salle. 
