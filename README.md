@@ -534,6 +534,31 @@ de `NonProjectileTower` et ne disposent pas de ce mécanisme.
 
 ## Livrable 6
 
+Commandes de compilation et d'exécution :
+
+    make classes
+
+Pour générer les JARs exécutables :
+
+    make jar
+
+Pour exécuter les livrables finaux :
+
+    - java -jar jar/towerdefense-a-interactive.jar <largeur> <hauteur>
+    - java -jar jar/towerdefense-a-random.jar <largeur> <hauteur>
+    - java -jar jar/towerdefense-b-interactive.jar <largeur> <hauteur> <nbChemins>
+    - java -jar jar/towerdefense-b-random.jar <largeur> <hauteur> <nbChemins>
+
+Pour générer la javadoc :
+
+    make doc
+    make docs
+
+Pour compiler et lancer les tests :
+
+    make tests
+    make runtests
+
 ### Atteinte des objectifs
 
 Amadou : 
