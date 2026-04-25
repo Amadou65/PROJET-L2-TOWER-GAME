@@ -573,7 +573,7 @@ Serhii :
 Habiba : 
     Finalisation du `README.md` (section Livrable 6 et mode d'emploi des JARs). Vérification stricte de la structure du dépôt (absence de .class, présence des bons dossiers). Nettoyage final demandé (suppression des fichiers de configuration IDE et dossiers temporaires). Passage de la checklist de conformité avant le rendu final.
 
-**Mode d'emploi des 4 exécutables (Générés dans le dossier `jar/` avec `make jar`) :**
+**Mode d'emploi des 4 exécutables :**
 
 1. **Plateau A - Interactif** (Chemin unique à gauche, placement manuel)
    `java -jar jar/towerdefense-a-interactive.jar <largeur> <hauteur>`
@@ -584,10 +584,37 @@ Habiba :
 4. **Plateau B - Aléatoire** (Plusieurs chemins linéaires, 100% automatique)
    `java -jar jar/towerdefense-b-random.jar <largeur> <hauteur> <nbChemins>`
 
-### Difficultés restant à résoudre
+### Difficultés rencontrées
 
-- Équilibrage à long terme : La difficulté augmente à chaque manche (ajout de ballons), mais si le joueur survit au-delà de la manche 50, la gestion de la mémoire avec l'affichage de centaines de logs horodatés pourrait ralentir la console.
-- Surcharge visuelle : Bien que l'affichage événementiel (`[t=X] Ballon touché`) soit beaucoup plus lisible que d'afficher la grille, une version graphique (UI) serait nécessaire pour rendre les manches avancées plus digestes pour le joueur.
+Amadou :
+    Coordonner les deux modes de plateau (A et B) et les deux types d'interfaces (Interactive et Aléatoire) au sein d'une seule boucle de jeu sans créer de duplication de code massive. La création de 4 "wrappers" distincts a résolu ce problème.
+
+Yassin :
+    Gérer toutes les exceptions possibles lors de la saisie utilisateur (InputMismatchException, entrées vides) pour empêcher le jeu de planter, ce qui nécessitait de bien vider le buffer du scanner à chaque erreur.
+
+Serhii :
+    Adapter le Makefile pour répondre très précisément aux exigences de nommage du professeur, notamment la création automatique du répertoire `jar/` avant la génération des exécutables.
+
+Habiba :
+    S'assurer de la conformité stricte de l'arborescence (absence totale de fichiers `.class` cachés) et compiler le travail de tout le groupe dans le README en respectant la structure des livrables précédents.
+
+### Choix de modélisation
+
+- **Architecture des Wrappers :** Pour générer les 4 exécutables distincts demandés, nous avons créé 4 classes Main (`TowerDefenseAInteractive`, etc.). Ces classes se contentent de configurer le bon type de plateau et le bon `ListChooser`, puis délèguent l'exécution à un moteur central.
+- **Boucle de jeu infinie :** Contrairement au Livrable 5 (limité à 10 manches), le jeu boucle désormais sur l'état de santé du joueur (`player.isAlife()`).
+- **Difficulté adaptative :** Le nombre de ballons est instancié à un minimum de 15 par manche, avec une incrémentation à chaque tour pour augmenter la difficulté de survie.
+
+### État du développement
+
+| Fonctionnalité | État |
+|---|---|
+| Création des 4 archives JAR conformes | Implémenté (Makefile) |
+| Boucle de jeu infinie (jusqu'à Game Over) | Implémenté |
+| Augmentation de la difficulté et base de 15 ballons | Implémenté |
+| Robustesse des saisies clavier | Implémenté (InteractiveListChooser) |
+| Nettoyage du Git (.class exclus, UML présent) | Implémenté |
+
+
 # Journal de bord
 
 Le journal de bord doit être rempli à la fin de chaque séance encadrée, et **avant** de quitter la salle. 
