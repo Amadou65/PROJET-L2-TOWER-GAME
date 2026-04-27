@@ -1,6 +1,7 @@
 package game.listchooser;
 
 import java.util.List;
+import java.io.EOFException;
 
 import game.listchooser.util.Input;
 
@@ -35,6 +36,9 @@ public class InteractiveListChooser<T> implements ListChooser<T> {
 			System.out.println("            choice ?");
 			try {
 				choice = Input.readInt();
+			} catch (EOFException e) {
+				System.out.println("No input available, choice cancelled.");
+				return null;
 			} catch (java.io.IOException e) {
 				System.out.println("Please, enter a number between 0 and " + (index-1));
 			}

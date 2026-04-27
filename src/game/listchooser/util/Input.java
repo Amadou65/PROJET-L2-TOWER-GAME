@@ -1,6 +1,7 @@
 package game.listchooser.util;
 
 
+import java.io.EOFException;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -37,6 +38,8 @@ public class Input {
 		} catch (Exception e) {
 			if (sharedScanner().hasNext()) {
 				sharedScanner().next();
+			} else {
+				throw new EOFException();
 			}
 			throw new java.io.IOException();
 		}
