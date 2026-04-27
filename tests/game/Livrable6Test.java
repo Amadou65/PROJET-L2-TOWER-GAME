@@ -8,9 +8,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import game.board.ClassicalBoard;
+import game.choice.PlayerAction;
+import game.listchooser.ListChooser;
 
 public class Livrable6Test {
 
@@ -52,6 +57,37 @@ public class Livrable6Test {
                 "game.TowerDefenseBInteractive", "<largeur> <hauteur> <nbChemins>");
         assertUsageContains(() -> TowerDefenseBRandom.main(new String[] {}),
                 "game.TowerDefenseBRandom", "<largeur> <hauteur> <nbChemins>");
+    }
+
+    @Test
+    @DisplayName("Livrable 6 : les arguments invalides affichent l'usage")
+    public void testInvalidArgumentsShowUsage() {
+        assertUsageContains(() -> TowerDefenseARandom.main(new String[] {"abc", "8"}),
+                "game.TowerDefenseARandom", "<largeur> <hauteur>");
+        assertUsageContains(() -> TowerDefenseARandom.main(new String[] {"1", "8"}),
+                "game.TowerDefenseARandom", "<largeur> <hauteur>");
+        assertUsageContains(() -> TowerDefenseBRandom.main(new String[] {"4", "4", "20"}),
+                "game.TowerDefenseBRandom", "<largeur> <hauteur> <nbChemins>");
+    }
+
+    @Test
+    @DisplayName("Livrable 6 : la phase d'actions aleatoire peut etre bornee")
+    public void testPlayerActionPhaseCanBeLimited() throws Exception {
+        Board board = new ClassicalBoard(5, 5);
+        Player player = new Player();
+        ListChooser<Object> chooser = new ListChooser<Object>() {
+            @Override
+            public Object choose(String msg, List<? extends Object> list) {
+                for (Object choice : list) {
+                    if (choice == PlayerAction.SELL_TOWER) {
+                        return choice;
+                    }
+                }
+                return null;
+            }
+        };
+
+        assertDoesNotThrow(() -> Livrable5.playerActionPhase(board, player, chooser, 5, 5, 3));
     }
 
     private static void assertUsageContains(ThrowingRunnable runnable, String className, String args) {

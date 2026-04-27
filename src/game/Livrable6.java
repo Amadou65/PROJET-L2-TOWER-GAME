@@ -7,8 +7,10 @@ import game.listchooser.ListChooser;
 import game.listchooser.RandomListChooser;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Livrable 6: complete game loop.
@@ -28,6 +30,7 @@ public final class Livrable6 {
     private static final int MAX_BALLOONS_PER_ROUND = 45;
     private static final int BALLOON_GROWTH_STEP = 2;
     private static final int MAX_PATH_GENERATION_ATTEMPTS = 500;
+    private static final int MAX_RANDOM_ACTIONS_PER_ROUND = 12;
 
     private Livrable6() {
     }
@@ -71,6 +74,7 @@ public final class Livrable6 {
             width = parseStrictPositive(args[0], "largeur");
             height = parseStrictPositive(args[1], "hauteur");
             nbChemins = boardMode == BoardMode.B ? parseStrictPositive(args[2], "nbChemins") : 1;
+            validateDimensions(width, height);
             validateRequestedPaths(boardMode, width, height, nbChemins);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
@@ -81,20 +85,24 @@ public final class Livrable6 {
         Board board;
         List<List<Position>> allPaths;
 
-        if (boardMode == BoardMode.A) {
-            LeftStartRandomBoard leftBoard = new LeftStartRandomBoard(height, width);
-            List<Position> path = leftBoard.path();
-            leftBoard.applyPathToGrid(path);
-            board = leftBoard;
-            allPaths = new ArrayList<>();
-            allPaths.add(path);
-        } else {
-            ClassicalBoard classicalBoard = new ClassicalBoard(height, width);
-            allPaths = generateDistinctStraightPaths(classicalBoard, nbChemins);
-            for (List<Position> p : allPaths) {
-                classicalBoard.applyPathToGrid(p);
+        try {
+            if (boardMode == BoardMode.A) {
+                BoardWithPath generated = generateValidLeftStartBoard(height, width);
+                board = generated.board;
+                allPaths = new ArrayList<>();
+                allPaths.add(generated.path);
+            } else {
+                ClassicalBoard classicalBoard = new ClassicalBoard(height, width);
+                allPaths = generateDistinctStraightPaths(classicalBoard, nbChemins);
+                for (List<Position> p : allPaths) {
+                    classicalBoard.applyPathToGrid(p);
+                }
+                board = classicalBoard;
             }
-            board = classicalBoard;
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            printUsage(launcherName, boardMode);
+            return;
         }
 
         ListChooser<Object> chooser = buildChooser(choiceMode);
@@ -124,7 +132,8 @@ public final class Livrable6 {
             System.out.println("========================================");
 
             Livrable5.displayTowerEvolutions(board);
-            Livrable5.playerActionPhase(board, player, chooser, height, width);
+            int maxActions = choiceMode == ChoiceMode.RANDOM ? MAX_RANDOM_ACTIONS_PER_ROUND : Integer.MAX_VALUE;
+            Livrable5.playerActionPhase(board, player, chooser, height, width, maxActions);
 
             int balloonsThisRound = computeBalloonCount(manche);
             List<Balloon> reserve = buildReserve(allPaths, balloonsThisRound, manche, random);
@@ -219,6 +228,7 @@ public final class Livrable6 {
 
     private static List<List<Position>> generateDistinctStraightPaths(ClassicalBoard board, int nbChemins) {
         List<List<Position>> paths = new ArrayList<>();
+        Set<String> pathKeys = new HashSet<>();
         int attempts = 0;
 
         while (paths.size() < nbChemins && attempts < MAX_PATH_GENERATION_ATTEMPTS) {
@@ -228,16 +238,11 @@ public final class Livrable6 {
                 continue;
             }
 
-            boolean duplicateStart = false;
-            for (List<Position> existing : paths) {
-                if (existing.get(0).equals(candidate.get(0))) {
-                    duplicateStart = true;
-                    break;
-                }
-            }
+            String pathKey = canonicalPathKey(candidate);
 
-            if (!duplicateStart) {
+            if (!pathKeys.contains(pathKey)) {
                 paths.add(candidate);
+                pathKeys.add(pathKey);
             }
         }
 
@@ -247,6 +252,44 @@ public final class Livrable6 {
         }
 
         return paths;
+    }
+
+    private static BoardWithPath generateValidLeftStartBoard(int height, int width) throws Exception {
+        for (int attempts = 0; attempts < MAX_PATH_GENERATION_ATTEMPTS; attempts++) {
+            LeftStartRandomBoard leftBoard = new LeftStartRandomBoard(height, width);
+            List<Position> path = leftBoard.path();
+            if (isValidLeftStartPath(path, height, width)) {
+                leftBoard.applyPathToGrid(path);
+                return new BoardWithPath(leftBoard, path);
+            }
+        }
+
+        throw new IllegalArgumentException("Impossible de générer un chemin valide pour le plateau A.");
+    }
+
+    private static boolean isValidLeftStartPath(List<Position> path, int height, int width) {
+        if (path == null || path.size() < 2) {
+            return false;
+        }
+
+        Position start = path.get(0);
+        Position end = path.get(path.size() - 1);
+        boolean startsOnLeft = start.getY() == 0;
+        boolean endsOnEdge = end.getX() == 0 || end.getX() == height - 1
+                || end.getY() == 0 || end.getY() == width - 1;
+        boolean leavesLeftSide = end.getY() != 0;
+        return startsOnLeft && endsOnEdge && leavesLeftSide;
+    }
+
+    private static String canonicalPathKey(List<Position> path) {
+        Position first = path.get(0);
+        Position last = path.get(path.size() - 1);
+        String firstKey = first.getX() + "," + first.getY();
+        String lastKey = last.getX() + "," + last.getY();
+        if (firstKey.compareTo(lastKey) <= 0) {
+            return firstKey + "-" + lastKey;
+        }
+        return lastKey + "-" + firstKey;
     }
 
     private static void printPathSummary(List<List<Position>> allPaths, BoardMode boardMode) {
@@ -269,10 +312,26 @@ public final class Livrable6 {
             return;
         }
 
-        int maxDistinctStarts = 2 * (width + height) - 4;
-        if (nbChemins > maxDistinctStarts) {
+        int maxDistinctPaths = width + height;
+        if (nbChemins > maxDistinctPaths) {
             throw new IllegalArgumentException(
-                    "nbChemins trop grand: maximum possible sur ce plateau = " + maxDistinctStarts + ".");
+                    "nbChemins trop grand: maximum possible sur ce plateau = " + maxDistinctPaths + ".");
+        }
+    }
+
+    private static void validateDimensions(int width, int height) {
+        if (width < 2 || height < 2) {
+            throw new IllegalArgumentException("Dimensions invalides: largeur et hauteur doivent être >= 2.");
+        }
+    }
+
+    private static final class BoardWithPath {
+        private final Board board;
+        private final List<Position> path;
+
+        private BoardWithPath(Board board, List<Position> path) {
+            this.board = board;
+            this.path = path;
         }
     }
 }

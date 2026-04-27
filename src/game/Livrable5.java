@@ -140,16 +140,22 @@ public class Livrable5 {
      * @param height  hauteur du plateau
      * @param width   largeur du plateau
      */
-        public static void playerActionPhase(Board board, Player player,
+    public static void playerActionPhase(Board board, Player player,
             ListChooser<Object> chooser, int height, int width) {
+        playerActionPhase(board, player, chooser, height, width, Integer.MAX_VALUE);
+    }
+
+    public static void playerActionPhase(Board board, Player player,
+            ListChooser<Object> chooser, int height, int width, int maxActions) {
 
         System.out.println("\n========================================");
         System.out.println("   PHASE D'ACTIONS DU JOUEUR");
         System.out.println("========================================");
 
         boolean continueActions = true;
+        int actionsDone = 0;
 
-        while (continueActions && player.getCredits() > 0) {
+        while (continueActions && player.getCredits() > 0 && actionsDone < maxActions) {
             // Afficher l'état actuel
             System.out.println("\n--- État actuel ---");
             System.out.println("Crédits : " + player.getCredits());
@@ -165,6 +171,7 @@ public class Livrable5 {
                 continueActions = false;
                 System.out.println("[ACTION] Fin de la phase d'actions.");
             } else {
+                actionsDone++;
                 switch (chosen) {
                     case BUY_TOWER:
                         handleBuyTower(board, player, chooser, height, width);
@@ -186,6 +193,10 @@ public class Livrable5 {
 
         if (player.getCredits() <= 0) {
             System.out.println("[ACTION] Plus de crédits — fin automatique de la phase d'actions.");
+        }
+
+        if (actionsDone >= maxActions) {
+            System.out.println("[ACTION] Limite d'actions atteinte — fin automatique de la phase d'actions.");
         }
     }
 
