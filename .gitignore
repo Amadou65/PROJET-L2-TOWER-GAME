@@ -199,8 +199,10 @@ fabric.properties
 
 # Package Files #
 *.jar
+!junit-console.jar
 !jar/
 !jar/*.jar
+Sujet de projet*.pdf
 *.war
 *.nar
 *.ear
