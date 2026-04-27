@@ -26,6 +26,7 @@ docs:
 # classes : compile toutes les classes sources
 # ─────────────────────────────────────────────
 classes:
+	rm -rf $(BIN_DIR)
 	mkdir -p $(BIN_DIR)
 	$(JAVAC) -d $(BIN_DIR) -sourcepath $(SRC_DIR) $(SRC_FILES)
 
