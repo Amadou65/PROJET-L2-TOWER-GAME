@@ -1,6 +1,7 @@
 package game.listchooser.util;
 
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -9,10 +10,10 @@ import java.util.Scanner;
 
 public class Input {
 	
-	private Scanner scanner; 
+	private static InputStream currentInput = System.in;
+	private static Scanner scanner = new Scanner(System.in);
 
 	public Input() {
-	   this.scanner = new Scanner(System.in);
 	}
 	
 	/**
@@ -21,11 +22,7 @@ public class Input {
 	 * @return the string entered
 	 */
 	public static String readString() {
-      return new Input().localReadString();
-	}
-	
-	private String localReadString() {
-		return this.scanner.next();
+		return sharedScanner().next();
 	}
 
 	
@@ -35,17 +32,23 @@ public class Input {
 	 * @return the int entered
 	 */
 	public static int readInt() throws java.io.IOException {
-	   return new Input().localReadInt();
-	}
-	
-	private int localReadInt() throws java.io.IOException {
 		try {
-			return this.scanner.nextInt();
+			return sharedScanner().nextInt();
 		} catch (Exception e) {
-			this.scanner.skip(".*");
+			if (sharedScanner().hasNext()) {
+				sharedScanner().next();
+			}
 			throw new java.io.IOException();
 		}
-	}	
+	}
+	
+	private static Scanner sharedScanner() {
+		if (currentInput != System.in) {
+			currentInput = System.in;
+			scanner = new Scanner(System.in);
+		}
+		return scanner;
+	}
 	
 } // Input
 
