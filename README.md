@@ -534,7 +534,30 @@ de `NonProjectileTower` et ne disposent pas de ce mécanisme.
 
 ## Livrable 6
 
-Commandes de compilation et d'exécution :
+Le Livrable 6 correspond à la version finale du jeu. Le programme lance des
+manches successives tant que le joueur est en vie, avec une phase d'actions
+avant chaque manche et au moins 15 ballons lancés par manche.
+
+### Structure du rendu final
+
+Le dépôt contient les éléments demandés pour le rendu :
+
+- `README.md` : description des livrables, mode d'emploi et journal de bord.
+- `UML.png` : modélisation complète du projet.
+- `uml/` : diagrammes des livrables précédents (`Livrable1.png` à
+  `Livrable5.png`).
+- `src/` : code source Java.
+- `tests/` : tests JUnit.
+- `jar/` : JARs exécutables du rendu final.
+- `Makefile` : cibles `clean`, `doc`, `docs`, `classes`, `tests`,
+  `runtests` et `jar`.
+
+Les fichiers `.class`, la Javadoc générée et les fichiers de configuration IDE
+ne doivent pas être versionnés.
+
+### Compilation et exécution
+
+Pour compiler les classes :
 
     make classes
 
@@ -548,6 +571,13 @@ Pour exécuter les livrables finaux :
     - java -jar jar/towerdefense-a-random.jar <largeur> <hauteur>
     - java -jar jar/towerdefense-b-interactive.jar <largeur> <hauteur> <nbChemins>
     - java -jar jar/towerdefense-b-random.jar <largeur> <hauteur> <nbChemins>
+
+Les versions `a` utilisent un plateau aléatoire avec un chemin unique partant
+du bord gauche. Les versions `b` utilisent plusieurs chemins rectilignes, dont
+le nombre est fourni avec l'argument `<nbChemins>`.
+
+Les versions `interactive` laissent tous les choix au joueur. Les versions
+`random` effectuent les choix automatiquement avec un `RandomListChooser`.
 
 Pour générer la javadoc :
 
@@ -592,7 +622,7 @@ Habiba :
 
 - **Architecture des Wrappers :** Pour générer les 4 exécutables distincts demandés, nous avons créé 4 classes Main (`TowerDefenseAInteractive`, etc.). Ces classes se contentent de configurer le bon type de plateau et le bon `ListChooser`, puis délèguent l'exécution à un moteur central.
 - **Boucle de jeu infinie :** Contrairement au Livrable 5 (limité à 10 manches), le jeu boucle désormais sur l'état de santé du joueur (`player.isAlife()`).
-- **Difficulté adaptative :** Le nombre de ballons est instancié à un minimum de 15 par manche, avec une incrémentation à chaque tour pour augmenter la difficulté de survie.
+- **Difficulté adaptative :** Le nombre de ballons est instancié à un minimum de 15 par manche, avec une progression régulière au fil des manches pour augmenter la difficulté de survie.
 
 ### État du développement
 
