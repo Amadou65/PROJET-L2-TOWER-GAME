@@ -593,8 +593,6 @@ Pour compiler et lancer les tests :
 
 Amadou : 
     Implémentation de la boucle finale complète tant que le joueur est en vie (`while player.isAlife()`). Connexion de la phase d’actions entre les manches. Garantie de générer au minimum 15 ballons par manche avec une progression de la difficulté. Gestion des deux modes de plateau (a/b) dans une logique centrale et fourniture des 4 wrappers main (`TowerDefenseAInteractive`, etc.).
-
-Yassin : 
     Rendre le `InteractiveListChooser` totalement robuste en gérant le rebouclage jusqu’à une entrée valide. Correction des tests cassés (`ChoiceTest`) et ajout de tests de non-régression sur la boucle finale. Vérification globale qu'aucune saisie invalide n'interrompt le jeu, comme exigé.
 
 Serhii : 
@@ -608,8 +606,6 @@ Habiba :
 
 Amadou :
     Coordonner les deux modes de plateau (A et B) et les deux types d'interfaces (Interactive et Aléatoire) au sein d'une seule boucle de jeu sans créer de duplication de code massive. La création de 4 "wrappers" distincts a résolu ce problème.
-
-Yassin :
     Gérer toutes les exceptions possibles lors de la saisie utilisateur (InputMismatchException, entrées vides) pour empêcher le jeu de planter, ce qui nécessitait de bien vider le buffer du scanner à chaque erreur.
 
 Serhii :
@@ -1187,6 +1183,7 @@ Habiba :
 
     Amadou : Finalisation et soumission du Livrable 5 — vérification finale de
     la compilation, des tests et de la documentation.
+
 
 
 ### Lien vers le diapo de présentation : 
