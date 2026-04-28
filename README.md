@@ -1187,3 +1187,8 @@ Habiba :
 
     Amadou : Finalisation et soumission du Livrable 5 — vérification finale de
     la compilation, des tests et de la documentation.
+
+
+### Lien vers le diapo de présentation : 
+    
+    https://docs.google.com/presentation/d/1n9s8Xo2l3m5v6w7x8y9z0a1b2c3d4e5f6g7h8i9j0k/edit?usp=sharing
